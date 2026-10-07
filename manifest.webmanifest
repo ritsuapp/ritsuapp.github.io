@@ -1,0 +1,16 @@
+{
+  "name": "Daywell",
+  "short_name": "Daywell",
+  "description": "A shared to-do, habit and health tracker. Routines, body logs, episodes, fasting and the things you're cutting down — each scored the way it deserves.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E0C13",
+  "theme_color": "#0E0C13",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
