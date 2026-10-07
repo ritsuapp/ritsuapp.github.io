@@ -1,14 +1,20 @@
 /* Daywell service worker.
    Cache-first for the app shell so it opens instantly and works offline.
    Bump CACHE when you deploy, or people keep the old version. */
-const CACHE = "daywell-v65";
+const CACHE = "daywell-v66";
 const SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
-  "./icons/apple-touch-icon.png"
+  "./icons/apple-touch-icon.png",
+  "./fonts/pixelify-sans.woff2",
+  "./fonts/doto.woff2",
+  "./fonts/inter.woff2",
+  "./fonts/nunito.woff2",
+  "./fonts/jetbrains-mono.woff2",
+  "./fonts/newsreader.woff2"
 ];
 
 self.addEventListener("install", (e) => {
