@@ -1621,6 +1621,35 @@ try{var _t=localStorage.getItem("ritsu_theme")||"dark";if(_t==="auto")_t=matchMe
   .nb-ring{width:34px;height:34px;flex:none;transform:rotate(-90deg)}.nb-ring circle{fill:none;stroke-width:3;stroke-linecap:round}.nb-ring .tr{stroke:var(--line)}
   .nb-d{flex:none;width:44px;height:44px;border-radius:50%;border:1.6px solid var(--accent);background:transparent;color:var(--accent);display:grid;place-items:center;padding:0}.nb-d svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}.nb-d:active{transform:scale(.94)}
   @media(prefers-reduced-transparency:reduce){.nb{background:var(--panel);-webkit-backdrop-filter:none;backdrop-filter:none}}
+  :root{--h0:#21252a;--h1:#0f4a2c;--h2:#17803f;--h3:#28b85a;--h4:#5fe58c}
+  :root[data-theme="warm"]{--h0:#e6dfd2;--h1:#bfe3c8;--h2:#7cc796;--h3:#3a9a5c;--h4:#1e6b3d}
+  .ghm{padding:14px 16px}.ghm-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.ghm-h b{font-size:1rem}.ghm-h span{font-size:0.8125rem;color:var(--muted)}
+  .ghm-t{display:flex;align-items:center;gap:8px;font-size:0.8125rem;color:var(--muted)}
+  .ghm-b{display:flex;gap:6px}.ghm-dl{display:grid;gap:3px;font-size:0.6875rem;color:var(--muted);padding-top:18px;flex:none;width:26px}.ghm-dl span{display:flex;align-items:center}
+  .ghm-sc{overflow-x:auto;scrollbar-width:none;min-width:0}.ghm-sc::-webkit-scrollbar{display:none}
+  .ghm-mo{position:relative;height:16px;font-size:0.75rem;color:var(--muted)}.ghm-mo span{position:absolute;top:0;white-space:nowrap}
+  .ghm-g{display:grid;grid-auto-flow:column;gap:3px;justify-content:start}
+  .ghm-g button,.ghm-g i{border:0;padding:0;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.6875rem;font-weight:600;font-style:normal;color:rgba(0,0,0,.6)}
+  .ghm-g .l0,.ghm-g .l1{color:rgba(255,255,255,.55)}:root[data-theme="warm"] .ghm-g .l0,:root[data-theme="warm"] .ghm-g .l1{color:rgba(0,0,0,.5)}
+  .ghm-g .f{background:transparent;box-shadow:inset 0 0 0 1px var(--line)}.ghm-g .hm-today{outline:1.5px solid var(--ink);outline-offset:1px}
+  .l0{background:var(--h0)}.l1{background:var(--h1)}.l2{background:var(--h2)}.l3{background:var(--h3)}.l4{background:var(--h4)}
+  .ghm-f{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:0.75rem;color:var(--muted)}.ghm-k{display:flex;align-items:center;gap:3px}.ghm-k i{width:10px;height:10px;border-radius:2px;display:inline-block}
+  .ghm-pick{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 2px 8px}.ghm-pick span{font-size:0.9375rem;font-weight:600}
+  .ghm-pick select{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:0.875rem;max-width:60%}
+  .pbox{padding:14px 16px}.pb-r{margin:8px 2px 6px;font-size:0.8125rem;color:var(--muted)}
+  .pb{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:10px;background:var(--panel-2);border:1px solid var(--line);border-radius:16px}
+  .pb-c{display:flex;flex-direction:column;align-items:center;gap:5px;border:0;background:transparent;padding:0;color:inherit;font:inherit}
+  .pb-lid{width:100%;height:36px;border-radius:9px 9px 5px 5px;background:color-mix(in srgb,var(--ink) 12%,var(--panel));border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);display:grid;place-items:center;font-size:0.8125rem;font-weight:700;transition:transform .3s var(--ease-out),background-color .2s ease}
+  .pb-lid.open{background:transparent;border-style:dashed;transform:perspective(120px) rotateX(38deg);transform-origin:bottom}
+  .pb-w{width:100%;height:26px;border-radius:5px 5px 9px 9px;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center}
+  .pb-w .pill{width:15px;height:8px;border-radius:999px;background:var(--ink);opacity:.85}.pb-w .ok{color:var(--accent);display:grid}.pb-w .ok svg{width:14px;height:14px}
+  .pb-d{font-size:0.75rem;color:var(--muted)}.pb-c.pb-today .pb-d{color:var(--ink);font-weight:700}
+  .pb-c.pb-today .pb-lid{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 22%,var(--panel))}.pb-c.pb-today .pb-w{border-color:var(--accent)}
+  button.pb-c{cursor:pointer}button.pb-c:active .pb-lid{transform:scale(.94)}
+  .pb-c.rest .pb-lid,.pb-c.rest .pb-w{opacity:.35}
+  .pb-n{margin:12px 2px 0;font-size:0.8125rem;color:var(--muted)}.pb-n b{color:var(--ink)}
+  .pb-mini{margin:-2px 0 10px}.pb.mini{padding:7px;gap:5px}.pb.mini .pb-lid{height:24px;font-size:0.6875rem}.pb.mini .pb-w{height:16px}.pb.mini .pill{width:11px;height:6px}
+  @media(prefers-reduced-motion:reduce){.pb-lid{transition:none}.pb-lid.open{transform:none}}
   .qc-lead{display:flex;align-items:flex-start;gap:14px;margin:12px 0 4px}.qc-lead .qc-say{margin:0;flex:1;max-width:none}
   .qc-tick{flex:none;width:44px;height:44px;border-radius:50%;border:1.6px solid var(--accent);background:transparent;color:var(--accent);display:grid;place-items:center;padding:0;transition:transform .16s var(--ease-out),background-color .16s ease}
   .qc-tick svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.qc-tick:active{transform:scale(.94)}@media(hover:hover) and (pointer:fine){.qc-tick:hover{background:var(--accent-soft)}}
@@ -4015,6 +4044,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     navTrack();navBackBtn(v);
     if(state.view==="home"&&hmDay()===today()){var hero=v.querySelector("#hmHero");if(hero)hero.insertAdjacentHTML("afterend",logStrip()+packAsk())}
     if(state.view==="home"&&!visibleItems().some(function(i){return !i.archived})){var hmT=v.querySelector(".hm-top");if(hmT)hmT.insertAdjacentHTML("afterend",blankHome())}
+    [].forEach.call(document.querySelectorAll(".ghm-sc"),function(e){e.scrollLeft=e.scrollWidth});
     if(state.view==="home"){homeMount();Buddy.mount($("#buddySlot"));Pull.mount();}
     if(state.view==="day")swWrap(v);   /* You is a short list now, it needs no pages */
     if(!_wnTried)setTimeout(newsMaybe,1200);
@@ -4535,7 +4565,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     else if(!its.length&&!extra.length)h+='<div class="cat-empty">'+(off===0?"Nothing planned yet. Tap + whenever you\'re ready.":off>0?"Nothing planned for this day yet.":"Nothing was on the list this day.")+'</div>';
     if(its.length){h+='<div class="hm-sort" role="group" aria-label="Sort the list"><button data-hmsort="topic" aria-pressed="'+(state.hmSort!=="time")+'">By topic</button><button data-hmsort="time" aria-pressed="'+(state.hmSort==="time")+'">By time</button></div>';
       h+=state.hmSort==="time"?qcByTime(show,ds):qcGrouped(show,ds);}
-    if(!short&&extra.length){h+='<div class="qc-lh qc-xh"><h3 aria-level="2">'+(extra.every(function(i){return i.kind==="med"})?"Medicine":"Also today")+'</h3><span>not counted in your day</span></div><div class="card">';extra.forEach(function(i){h+=itemRow(i,{ds:ds})});h+='</div>';}
+    if(!short&&extra.length){h+='<div class="qc-lh qc-xh"><h3 aria-level="2">'+(extra.every(function(i){return i.kind==="med"})?"Medicine":"Also today")+'</h3><span>not counted in your day</span></div><div class="card">';extra.forEach(function(i){h+=itemRow(i,{ds:ds})+(off===0&&isMedItem(i)?pillBoxHtml(i,true):"")});h+='</div>';}
     if(phone)h+='<button class="td-all" data-tdall>'+(short?"See all "+(its.length+extra.length)+" things":"Show fewer")+'</button>';
     var wkh=off===0?weekAheadHtml()+leftoverHtml():"",ph=!el0&&window.innerWidth<=820,wp=$("#hmWeek"),w3=$("#hmWeekSide"),three=!ph&&w3&&window.innerWidth>=HM_THREE;
     el.innerHTML=h+(ph||three?"":wkh);if(wp)wp.innerHTML=ph?wkh:"";if(w3)w3.innerHTML=three?(wkh?wkh:'<div class="qc-lh"><h3 aria-level="2">This week</h3><span></span></div><div class="cat-empty">Nothing else planned this week.</div>'):"";
@@ -5295,15 +5325,12 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
         ? '<span><i></i>nothing logged</span><span><i style="background:var(--good)"></i>in usual range</span><span><i style="background:var(--gold)"></i>outside it</span><span><i style="background:var(--rust)"></i>flagged</span>'
         : '<span><i></i>missed</span><span><i style="background:var(--accent)"></i>done</span>';
 
-    h+='<div class="panel"><h4 aria-level="2">This week</h4><div class="dots7">';
+    if(!isMedItem(i)){h+='<div class="panel"><h4 aria-level="2">This week</h4><div class="dots7">';
     for(var w=6;w>=0;w--){var ds2=addDaysStr(today(),-w);var dd3=new Date(ds2+"T00:00:00");var cl2=cell(ds2);var c3=countOn(i,ds2);
       h+='<div class="dot7" '+(bf?'data-backfill="'+i.id+'|'+ds2+'"':'')+'><span class="d '+cl2+'">'+(c3>0?(c3>1?c3:(isLimit(i)?"1":"✓")):"")+'</span><small>'+DOW[dd3.getDay()].slice(0,2)+'</small></div>';}
-    h+='</div>'+(bf?'<p class="kicker" style="color:var(--muted);margin-top:10px">Tap a day to fix a missed log.</p>':'')+'</div>';
+    h+='</div>'+(bf?'<p class="kicker" style="color:var(--muted);margin-top:10px">Tap a day to fix a missed log.</p>':'')+'</div>';}   /* medicine shows its pill box instead */
 
-    h+='<details class="it-more"><summary><span><b>History</b>'+("The last 10 weeks"?'<small>'+"The last 10 weeks"+'</small>':'')+'</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary>'+'<div class="panel"><div class="heat">';var start=new Date(today()+"T00:00:00");var back=start.getDay()+70;
-    for(var col=0;col<11;col++){h+='<div class="heatcol">';for(var row=0;row<7;row++){var idx=col*7+row;var dd4=new Date(start);dd4.setDate(dd4.getDate()-back+idx);var s3=fmt(dd4);var fut=dCount(s3)>0;
-      h+='<div class="heatcell '+cell(s3)+(fut?" fut":"")+'" '+(!fut&&bf?'data-backfill="'+i.id+'|'+s3+'"':'')+' title="'+s3+(countOn(i,s3)?" · "+countOn(i,s3)+"×":"")+'"></div>';}h+='</div>';}
-    h+='</div><div class="heatlbl"><span>~10 weeks ago</span><span>today</span></div><div class="heatlegend">'+legend+'</div></div></details>';
+    h+=isMedItem(i)?pillBoxHtml(i):heatHtml(i,"The last 6 months");
 
     /* ---- what you noticed: grouped by marker, not scattered by date.
        This is the whole point, "blood, blood, blood" in a list tells you nothing. ---- */
@@ -5325,6 +5352,52 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     h+=assignPanel(i);return h;
   }
   function itemSubtitle(i){if(isFast(i))return "Fasting \u00b7 "+protoLabel(targetOf(i));if(isEpisode(i))return "Episode, starts, runs, ends";if(isLimit(i))return "Holding off, "+esc(rangeLabel(i));if(isBody(i))return "Body, "+esc(rangeLabel(i));if(i.kind==="measure")return "Goal "+(i.target||0)+" "+esc(i.unit||"")+" · daily";if(i.kind==="med")return "Medicine · "+(i.dosesPerDay||1)+"/day";if(i.kind==="upkeep")return (i.mode==="rebuy"?"Rebuy":"Replace")+" every "+(i.intervalDays||30)+" days";if(i.kind==="todo")return isRepeat(i)?(esc(planLabel(i))+(perDayOf(i)>1?" · "+perDayOf(i)+"×/day":"")):"One-off task";return ""}
+  /* ===== Heat map and pill box (start) =====
+     Plain data first: the level of a day (0 nothing, 4 fully done) and the doses of a week. Screens below. */
+  function heatLevel(i,ds){var c=creditOn(i,ds);return c<=0?0:c<.34?1:c<.67?2:c<1?3:4}
+  /** the last n weeks, Monday first, ending this week: [[{ds,lv,fut}...7]...] */
+  function heatWeeks(i,n){var t=today(),d=new Date(t+"T00:00:00"),mon=addDaysStr(t,-((d.getDay()+6)%7)),out=[];
+    for(var w=n-1;w>=0;w--){var col=[];for(var k=0;k<7;k++){var ds=addDaysStr(mon,k-w*7),fut=ds>t;col.push({ds:ds,fut:fut,lv:fut?0:heatLevel(i,ds)})}out.push(col)}return out}
+  /** doses taken on a day, out of how many (1, or the times a day) */
+  function pillN(i){return Math.max(1,i.timesADay||1)}
+  function pillTaken(i,ds){var n=pillN(i);return n>1?Math.min(n,countOn(i,ds)):(creditOn(i,ds)>=1?1:0)}
+  function pillWeek(i){var t=today(),d=new Date(t+"T00:00:00"),mon=addDaysStr(t,-((d.getDay()+6)%7)),out=[];
+    for(var k=0;k<7;k++){var ds=addDaysStr(mon,k);out.push({ds:ds,fut:ds>t,today:ds===t,rest:hasRhythm(i)&&!planOn(i,ds),taken:pillTaken(i,ds)})}return out}
+  /** days fully taken in the last n days, counting only planned days since it started */
+  function pillDays(i,n){var ok=0,of=0,run=0;for(var k=n-1;k>=0;k--){var ds=addDaysStr(today(),-k),got=pillTaken(i,ds)>=pillN(i);if(!of&&!run&&!got)continue;run=1;if(hasRhythm(i)&&!planOn(i,ds))continue;of++;if(got)ok++}return {ok:ok,of:of}}
+  /* ===== Heat map and pill box (end) ===== */
+  function heatDatesOn(){try{return localStorage.getItem("ritsu_hmdates")==="1"}catch(e){return false}}
+  var HEAT_SAY=["nothing","a little","about half","most of it","done"];
+  function heatHtml(i,title){var on=heatDatesOn(),W=on?14:26,sz=on?20:10,wk=heatWeeks(i,W),mo="",last=-1,MN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],g="";
+    wk.forEach(function(col,w){var m=new Date(col[0].ds+"T00:00:00").getMonth();if(m!==last){if(w>0||+col[0].ds.slice(8)<=7)mo+='<span style="left:'+(w*(sz+3))+'px">'+MN[m]+'</span>';last=m}
+      col.forEach(function(x){var dd=+x.ds.slice(8);g+=x.fut?'<i class="f" style="width:'+sz+'px;height:'+sz+'px"></i>':'<button class="l'+x.lv+(x.ds===today()?" hm-today":"")+'" style="width:'+sz+'px;height:'+sz+'px" data-hday="'+i.id+'|'+x.ds+'" aria-label="'+x.ds+', '+HEAT_SAY[x.lv]+'">'+(on?dd:"")+'</button>'})});
+    var dl='<div class="ghm-dl" style="grid-template-rows:repeat(7,'+sz+'px)"><span>Mon</span><span></span><span>Wed</span><span></span><span>Fri</span><span></span><span></span></div>';
+    return '<div class="panel ghm"><div class="ghm-h"><b>'+esc(title||"Your rhythm")+'</b><label class="ghm-t">Dates <span class="lp-sw"><input type="checkbox" data-hmdates'+(on?" checked":"")+'><i></i></span></label></div>'+
+      '<div class="ghm-b">'+dl+'<div class="ghm-sc"><div class="ghm-mo">'+mo+'</div><div class="ghm-g" style="grid-template-rows:repeat(7,'+sz+'px)">'+g+'</div></div></div>'+
+      '<div class="ghm-f"><span>'+(on?"Swipe for earlier weeks":"Last 6 months")+'</span><span class="ghm-k">less <i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i> more</span></div></div>'}
+  /* Patterns: one habit at a time */
+  function rhythmItems(){return visibleItems().filter(function(i){return !i.archived&&isRoutine(i)&&trackable(i)&&!isMedItem(i)&&!isTracker(i)&&!isFast(i)})}
+  function rhythmCard(){var its=rhythmItems();if(!its.length)return "";var sel=null;try{sel=localStorage.getItem("ritsu_rhythm")}catch(e){}
+    var i=its.filter(function(x){return x.id===sel})[0]||its.slice().sort(function(a,b){return totalOf(b)-totalOf(a)})[0];
+    return '<div class="ghm-pick"><span>Your rhythm</span><select data-rhythm aria-label="Pick a habit">'+its.map(function(x){return '<option value="'+x.id+'"'+(x===i?" selected":"")+'>'+esc(x.title)+'</option>'}).join("")+'</select></div>'+heatHtml(i," ")}
+  /* the pill box: one lid and one well per day, Monday first; a well holds its tablet until taken */
+  function pillBoxHtml(i,mini){var wk=pillWeek(i),n=pillN(i),names=n===2?["Morning","Night"]:n===3?["Morning","Midday","Night"]:[""],rows=n<=3?n:1,D="MTWTFSS",h="",tk=0;
+    wk.forEach(function(x){if(!x.fut&&!x.rest)tk+=Math.min(1,x.taken/n)});
+    for(var r=0;r<rows;r++){if(names[r])h+='<p class="pb-r">'+names[r]+'</p>';h+='<div class="pb'+(mini?" mini":"")+'">';
+      wk.forEach(function(x,k){var got=rows>1?x.taken>r:x.taken>=n,cls="pb-c"+(x.today?" pb-today":"")+(x.rest?" rest":"");
+        var inner='<span class="pb-lid'+(got?" open":"")+'">'+(got||x.rest?"":D[k])+'</span><span class="pb-w">'+(x.rest?"":got?'<i class="ok">'+CHECK_SVG+'</i>':'<i class="pill"></i>')+'</span>'+(mini?"":'<span class="pb-d">'+DOW[new Date(x.ds+"T00:00:00").getDay()]+'</span>');
+        h+=x.today&&!got&&!x.rest?'<button class="'+cls+'" data-toggle="'+i.id+'" aria-label="Take today\u2019s '+esc(i.title)+'">'+inner+'</button>':'<span class="'+cls+'">'+inner+'</span>'});
+      h+='</div>'}
+    if(mini)return '<div class="pb-mini">'+h+'</div>';
+    var pd=pillDays(i,91);
+    return '<div class="panel pbox"><div class="ghm-h"><b>This week</b><span>'+Math.round(tk)+' of '+wk.filter(function(x){return !x.rest}).length+' taken</span></div>'+h+
+      '<p class="pb-n">'+(pd.of?'<b>'+pd.ok+' of '+pd.of+'</b> days taken'+(pd.of>=91?' in the last 3 months.':' so far.'):'Your first week starts today.')+' Tap today\u2019s lid to take it.</p></div>'}
+  document.addEventListener("change",function(e){
+    if(e.target.matches&&e.target.matches("[data-hmdates]")){try{localStorage.setItem("ritsu_hmdates",e.target.checked?"1":"0")}catch(x){}render();}
+    else if(e.target.matches&&e.target.matches("[data-rhythm]")){try{localStorage.setItem("ritsu_rhythm",e.target.value)}catch(x){}render();}});
+  document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-hday]");if(!b)return;e.stopPropagation();
+    var p=b.getAttribute("data-hday").split("|"),i=Store.get("items",p[0]);if(!i)return;var d=new Date(p[1]+"T00:00:00");
+    toast(DOW[d.getDay()]+" "+d.getDate()+" "+MON[d.getMonth()]+" \u00b7 "+HEAT_SAY[heatLevel(i,p[1])])},true);
   function assignPanel(i){if(!(i.assignees&&i.assignees.length))return"";var h='<div class="panel" style="display:flex;align-items:center;gap:12px"><b style="font-size:0.8125rem">Assigned</b>';i.assignees.forEach(function(id){var p=personById(id);if(p)h+='<span style="display:inline-flex;align-items:center;gap:6px">'+avatar(p,"sm")+esc(p.name)+'</span>';});return h+'</div>'}
 
   /* ===== Medication report (per med item) ===== */
@@ -5537,7 +5610,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(conR==null&&!total)h+='<p class="rep-new">Patterns fill in as you use Daywell. Give it a few days and this page starts to show your week.</p>';
     if(!M)h+='<div class="hm-hero rep-hero"><div class="hm-hero-h"><h3 aria-level="2">Consistency</h3><span>'+(per==="week"?"last 7 days":per==="year"?"last 12 months":"last 30 days")+'</span></div><div class="hm-gauge">'+hmArc(conR==null?0:conR/100,HM_ROWS_HERO,200,112,100,100)+'<div class="mid"><b>'+(conR==null?"-":conR+"%")+'</b><small>of the daily routine</small></div></div><div class="hm-facts f2"><div><b>'+total+'</b><small>things logged</small></div><div><b>'+(adh!=null?adh+"%":(avgSleep!=null?avgSleep+"h":"-"))+'</b><small>'+(adh!=null?"meds taken":"avg sleep")+'</small></div></div></div>';
     var _wpos=h.length;
-    if(!M){h+=weekShape(days,per);h+=pkStack(days,per);h+=patternsExtra();}
+    if(!M){h+=rhythmCard();h+=weekShape(days,per);h+=pkStack(days,per);h+=patternsExtra();}
     else h+=numsPanel(days,per);
     var _meds=all.filter(function(mi){return mi.kind==="med"});
     if(M&&_meds.length){h+='<div class="sec-h"><h2>Medicine</h2><span class="line"></span><span class="meta">'+_meds.length+'</span></div><div class="panel" style="padding:2px 16px">';
@@ -7051,11 +7124,17 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     LN.schedule({notifications:[remShape(n)]}).then(function(){var a=remSnz();a.push({id:id,at:at});try{localStorage.setItem("ritsu_snz",JSON.stringify(a))}catch(e){}
       toast("Okay. Again at "+fmtTime(p2(new Date(at).getHours())+":"+p2(new Date(at).getMinutes()))+".")}).catch(function(){})}
   /* what the buttons do; the app may still be starting, so wait for the data */
+  /* a button pressed on a notification brings the app forward (Android does that); when the app was not open,
+     it does its job and steps back out of the way, so you stay where you were */
+  var _remWake=0;try{document.addEventListener("visibilitychange",function(){if(!document.hidden)_remWake=Date.now()})}catch(e){}
+  function remFromOutside(){return (typeof document!=="undefined"&&document.hidden)||Date.now()-_remWake<3000||(window.performance&&performance.now()<10000)}
+  function remAway(){setTimeout(function(){try{var A=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.App;if(A&&A.minimizeApp)A.minimizeApp()}catch(e){}},900)}
   function remAct(a){if(!Store.ready){setTimeout(function(){remAct(a)},300);return}
     var x=(a&&a.notification&&a.notification.extra)||{},i=x.item&&Store.get("items",x.item);if(!i)return;
-    if(a.actionId==="done"){if(!doneForNow(i))toggleItem(i.id);else toast("Already done. Lovely.")}
-    else if(a.actionId==="later")remSnooze(i,!!x.med);
-    else{state._navRoot=true;go("item",i.id)}}
+    var out=remFromOutside();
+    if(a.actionId==="done"){if(!doneForNow(i))toggleItem(i.id);else toast("Already done. Lovely.");if(out)remAway()}
+    else if(a.actionId==="later"){remSnooze(i,!!x.med);if(out)remAway()}
+    else{var id=i.id;setTimeout(function(){if(!Store.get("items",id))return;state._navRoot=true;go("item",id)},450)}}   /* after start-up has drawn Home, so it does not draw over the thing */
   try{var _LN0=remLN();if(_LN0&&_LN0.addListener)_LN0.addListener("localNotificationActionPerformed",remAct)}catch(e){}
   function remSync(){clearTimeout(_remT);_remT=setTimeout(remRun,1500)}
   function remRun(){
