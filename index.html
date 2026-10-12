@@ -2668,6 +2668,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   .yp-t{flex:1;min-width:0}.yp-t b{display:block;font-size:1.0625rem;font-weight:600}.yp-t small{display:block;font-size:0.8125rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .yp-e{font-size:0.9375rem;font-weight:600;color:var(--accent)}
   .ylbl{margin:18px 4px 7px;font-size:0.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .bk-b{display:flex;gap:8px;flex:none}
   .ylist{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
   .yr{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:13px 14px;color:var(--ink);font-size:0.9375rem}
   .yr:first-child{border-top:0}.yr-t{flex:1}.yr em{font-style:normal;font-size:0.9375rem;color:var(--muted)}.yr .chev{color:var(--muted)}
@@ -2726,7 +2727,6 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     .sw-p{display:block;flex:0 0 100%;min-width:0;box-sizing:border-box;padding:0 15px;scroll-snap-align:start;scroll-snap-stop:always;overflow-x:hidden;overflow-y:auto;overscroll-behavior-x:auto;overscroll-behavior-y:contain;scrollbar-width:none}   /* sideways swipes must reach the pages: contain only up and down */
     .sw-dots{display:flex;justify-content:center;align-items:center;gap:7px;height:24px}
     .sw .hm-top{margin-bottom:0}.sw .hm-mhead{margin-bottom:4px}.sw .hm-top .blob-host{width:72px}
-    .td-all{display:block;margin:10px auto 4px;padding:8px 14px;background:none;border:0;color:var(--accent);font-size:0.9375rem;font-weight:600}
     .sw-dots i{width:7px;height:7px;border-radius:50%;background:color-mix(in srgb,var(--ink) 22%,transparent);transition:width .25s,background .25s}
     .sw-dots i.on{width:20px;border-radius:8px;background:var(--accent)}
     body[data-view="home"] .main,body[data-view="home"] #view,body[data-view="day"] .main,body[data-view="day"] #view{padding-bottom:0}
@@ -4578,9 +4578,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var restSet=[];if(off===0&&isLowDay(ds))doms.forEach(function(d){hmItems0(d,ds).forEach(function(i){if(!lowKeep(i)&&restSet.indexOf(i)<0)restSet.push(i)})});
     var extra=visibleItems().filter(function(i){return its.indexOf(i)<0&&restSet.indexOf(i)<0&&dueOnDate(i,ds,off)&&!isFast(i)&&(!isTracker(i)||i.mark)&&!isLeftover(i)&&(!state.qcDom||areaDomain(i.catId)===state.qcDom)}).sort(hmListSort);
     var left=its.filter(function(i){return !hmDone(i,ds)}).length;
-    /* phones: the Today page shows the next 3 things; "See all" opens the rest so the page never scrolls long */
-    var phone=!el0&&window.innerWidth<=820&&its.length+extra.length>3,short=phone&&!state.tdAll,show=its;
-    if(short){var nx=its.filter(function(i){return !hmDone(i,ds)}).slice(0,3);show=nx.length?nx:its.slice(0,3)}
+    /* the whole list, phones too (user, 2026-10-12: no "See all" tap); a long list scrolls inside its page */
+    var short=false,show=its;
     var dn=state.qcDom?HM_DOMS.filter(function(d){return d[0]===state.qcDom})[0][1]:"";var h='<div class="qc-lh"><h3 aria-level="2">'+(off===0?"Today":hmLabel(ds))+(dn?' <em class="qc-only qb-'+state.qcDom+'">'+dn+' only</em><button class="qc-all" data-qcall>Show All</button>':'')+'</h3><span>'+(off===0?'<button class="low-t'+(isLowDay(ds)?" on":"")+'" data-low aria-pressed="'+isLowDay(ds)+'">'+PI("moon")+'Low day</button>':'')+(its.length?(left?left+" left":"All done"):"")+'</span></div>';
     var resting=restSet.length;
     if(resting)h+='<div class="low-rest">'+PI("moon")+'<span><b>'+qcWord(resting,1)+(resting===1?" thing is":" things are")+' resting today.</b> '+(resting===1?"It is":"They are")+' back tomorrow. Nothing counts against a low day. High priority things, and ones with a small version, stay.</span></div>';
@@ -4589,7 +4588,6 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(its.length){h+='<div class="hm-sort" role="group" aria-label="Sort the list"><button data-hmsort="topic" aria-pressed="'+(state.hmSort!=="time")+'">By topic</button><button data-hmsort="time" aria-pressed="'+(state.hmSort==="time")+'">By time</button></div>';
       h+=state.hmSort==="time"?qcByTime(show,ds):qcGrouped(show,ds);}
     if(!short&&extra.length){h+='<div class="qc-lh qc-xh"><h3 aria-level="2">'+(extra.every(function(i){return i.kind==="med"})?"Medicine":"Also today")+'</h3><span>not counted in your day</span></div><div class="card">';extra.forEach(function(i){h+=itemRow(i,{ds:ds})+(off===0&&isMedItem(i)?pillBoxHtml(i,true):"")});h+='</div>';}
-    if(phone)h+='<button class="td-all" data-tdall>'+(short?"See all "+(its.length+extra.length)+" things":"Show fewer")+'</button>';
     var wkh=off===0?weekAheadHtml()+leftoverHtml():"",ph=!el0&&window.innerWidth<=820,wp=$("#hmWeek"),w3=$("#hmWeekSide"),three=!ph&&w3&&window.innerWidth>=HM_THREE;
     el.innerHTML=h+(ph||three?"":wkh);if(wp)wp.innerHTML=ph?wkh:"";if(w3)w3.innerHTML=three?(wkh?wkh:'<div class="qc-lh"><h3 aria-level="2">This week</h3><span></span></div><div class="cat-empty">Nothing else planned this week.</div>'):"";
   }
@@ -5409,7 +5407,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     for(var r=0;r<rows;r++){if(names[r])h+='<p class="pb-r">'+names[r]+'</p>';h+='<div class="pb'+(mini?" mini":"")+'">';
       wk.forEach(function(x,k){var got=rows>1?x.taken>r:x.taken>=n,cls="pb-c"+(x.today?" pb-today":"")+(x.rest?" rest":"");
         var inner='<span class="pb-lid'+(got?" open":"")+'">'+(got||x.rest?"":D[k])+'</span><span class="pb-w">'+(x.rest?"":got?'<i class="ok">'+CHECK_SVG+'</i>':'<i class="pill"></i>')+'</span>'+(mini?"":'<span class="pb-d">'+DOW[new Date(x.ds+"T00:00:00").getDay()]+'</span>');
-        h+=x.today&&!got&&!x.rest?'<button class="'+cls+'" data-toggle="'+i.id+'" aria-label="Take today\u2019s '+esc(i.title)+'">'+inner+'</button>':'<span class="'+cls+'">'+inner+'</span>'});
+        h+=x.today&&!got&&!x.rest?'<button class="'+cls+'" data-toggle="'+i.id+'" aria-label="Take today\u2019s '+esc(i.title)+'">'+inner+'</button>':
+          x.today&&got?'<button class="'+cls+'" data-pbtaken="'+i.id+'" aria-label="'+esc(i.title)+', taken today">'+inner+'</button>':'<span class="'+cls+'">'+inner+'</span>'});
       h+='</div>'}
     if(mini)return '<div class="pb-mini">'+h+'</div>';
     var pd=pillDays(i,91);
@@ -5418,6 +5417,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   document.addEventListener("change",function(e){
     if(e.target.matches&&e.target.matches("[data-hmdates]")){try{localStorage.setItem("ritsu_hmdates",e.target.checked?"1":"0")}catch(x){}render();}
     else if(e.target.matches&&e.target.matches("[data-rhythm]")){try{localStorage.setItem("ritsu_rhythm",e.target.value)}catch(x){}render();}});
+  function pbTakenSay(id){var i=Store.get("items",id);if(!i)return;var ct=null;try{ct=completionTime(i,today())}catch(x){}
+    toast((ct?"Taken at "+fmtTime(ct):"Taken today")+": "+i.title,function(){var fi=Store.get("items",i.id);if(fi&&countOn(fi,today())>0)toggleItem(fi.id)})}
   document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-hday]");if(!b)return;e.stopPropagation();
     var p=b.getAttribute("data-hday").split("|"),i=Store.get("items",p[0]);if(!i)return;var d=new Date(p[1]+"T00:00:00");
     toast(DOW[d.getDay()]+" "+d.getDate()+" "+MON[d.getMonth()]+" \u00b7 "+HEAT_SAY[heatLevel(i,p[1])])},true);
@@ -5804,12 +5805,22 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
 
   /* backup to a file, restore from a file, one step back */
   function backupData(){return {app:"ritsu",version:1,exportedAt:new Date().toISOString(),me:state.me||null,cache:{cats:Store.cache.cats||{},items:Store.cache.items||{},people:Store.cache.people||{},tags:Store.cache.tags||{},markers:Store.cache.markers||{}},priv:Store._priv||{}}}
+  function backupName(){return "daywell-backup-"+today()+".json"}
+  function backupMarked(msg){try{localStorage.setItem("ritsu_last_backup",today())}catch(e){}
+    var bl=document.getElementById("bk-last");if(bl)bl.textContent="Last backup: "+today()+". A backup file keeps everything safe.";toast(msg,null,"love");Buddy.react("love");}
   function downloadBackup(){
     var blob=new Blob([JSON.stringify(backupData(),null,1)],{type:"application/json"});
-    var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="hiyori-backup-"+today()+".json";
+    var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=backupName();
     document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500);
-    try{localStorage.setItem("ritsu_last_backup",today())}catch(e){}
-    var bl=document.getElementById("bk-last");if(bl)bl.textContent="Last backup: "+today()+". A backup file keeps everything safe.";toast("Backup saved to your downloads",null,"love");Buddy.react("love");
+    backupMarked("Backup saved to your downloads");
+  }
+  /* Share: the phone app uses its own FileShare plugin (Android WebView has no navigator.share); browsers use the Web Share API */
+  function shareFilePlugin(){return window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.FileShare}
+  function canShareBackup(){if(shareFilePlugin())return true;try{return !!(navigator.canShare&&navigator.canShare({files:[new File(["{}"],"x.json",{type:"application/json"})]}))}catch(e){return false}}
+  function shareBackup(){var text=JSON.stringify(backupData(),null,1),name=backupName(),P=shareFilePlugin();
+    var fail=function(e){if(e&&e.name==="AbortError")return;toast("Sharing didn\u2019t work. Try Save instead.")};
+    if(P){P.share({name:name,text:text,title:"Share your Daywell backup"}).then(function(){backupMarked("Backup ready to share")}).catch(fail);return}
+    try{navigator.share({files:[new File([text],name,{type:"application/json"})],title:"Daywell backup"}).then(function(){backupMarked("Backup shared")}).catch(fail)}catch(e){fail(e)}
   }
   function restoreBackup(text,skipConfirm){
     var bad=function(){var ws=document.getElementById("wStatus");if(ws)ws.textContent="Sorry, that file couldn\'t be read. Nothing has changed.";toast("Sorry, that file isn\'t a Daywell backup")};
@@ -5847,7 +5858,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       if(b)b.hidden=!!p;
     });
     var h='<div class="sec-h"><h2>Your data</h2><span class="line"></span></div><div class="panel">';
-    h+='<div class="setrow"><div class="info"><b>Back up to a file</b><small id="bk-last">'+(last?"Last backup: "+esc(last)+". ":"No backup yet. ")+'A backup file keeps everything safe.</small></div><button class="btn primary sm" data-backup-now>Download</button></div>';
+    h+='<div class="setrow"><div class="info"><b>Back up to a file</b><small id="bk-last">'+(last?"Last backup: "+esc(last)+". ":"No backup yet. ")+'A backup file keeps everything safe.</small></div><div class="bk-b"><button class="btn primary sm" data-backup-now>Save</button>'+(canShareBackup()?'<button class="btn sm" data-backup-share>Share</button>':'')+'</div></div>';
     h+='<div class="setrow"><div class="info"><b>Restore from a backup</b><small>Replaces what\'s on this device. You can undo it once.</small></div><label class="btn sm" for="restore-file">Choose file</label><input type="file" id="restore-file" accept=".json,application/json" hidden></div>';
     if(prev)h+='<div class="setrow"><div class="info"><b>Undo the last restore</b><small>Bring back what was here before.</small></div><button class="btn sm" data-restore-undo>Undo</button></div>';
     h+='<div class="setrow"><div class="info"><b>Protected from browser cleanup</b><small id="persist-note">Checking...</small></div><button class="btn sm" id="persist-ask" data-persist-ask hidden>Ask</button></div></div>';
@@ -7569,11 +7580,14 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /* the Log row: trackers are logged in one tap from the add sheet, so "+" goes straight to typing */
   function qaLogShort(i){var ds=today(),c=countOn(i,ds);if(i.kind==="measure"){var v=(i.values||{})[ds];return v!=null?v+(i.unit?" "+i.unit:""):"Log"}return c?c+" today":"Log"}
   /* quick logs: the things you log (body logs, trackers, episodes), one tap, the time kept. On Home and in the + sheet. */
+  function logTyped(i){return i.kind==="measure"&&!tapCount(i)?1:0}   /* chips that open a box go after the one-tap ones */
   function logItems(){return visibleItems().filter(function(i){return !i.archived&&!isFast(i)&&(isTracker(i)||isEpisode(i))})}
   function logChip(i,cls){
     var sub,attr;
     if(isEpisode(i)){var a=activeEp(i);sub=a?"day "+epDays(a)+" \u00b7 end it":"start";attr='data-ep="'+i.id+'"';cls+=a?" ep on":" ep"}
-    else if(i.kind==="measure"){var v=(i.values||{})[today()];sub=v!=null&&v!==""?numRound(+v)+(i.unit?" "+i.unit:""):"type it";attr='data-measure="'+i.id+'"'}
+    else if(i.kind==="measure"){var v=(i.values||{})[today()],has=v!=null&&v!=="",val=has?numRound(+v)+(i.unit?" "+i.unit:""):"";
+      if(tapCount(i)){sub=has?val+" today":"tap adds "+tapAmount(i)+(i.unit?" "+i.unit:"");attr='data-mplus="'+i.id+'"'}
+      else{sub=has?val+" \u00b7 type it":"type it";attr='data-measure="'+i.id+'"'}}
     else{sub=countOn(i,today())+" today";attr='data-qlog="'+i.id+'"'}
     return '<button type="button" class="'+cls+'" '+attr+' aria-label="Log '+esc(i.title)+', '+esc(sub)+'">'+qcTIcon(i)+'<span><b>'+esc(i.title)+'</b><small>'+esc(sub)+'</small></span></button>';
   }
@@ -7583,7 +7597,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function logFastChip(){var i=fastItem(),a=i&&activeFast(i);
     if(a)return '<button type="button" class="lg-c fs on" data-nav="fasting" aria-label="Fasting, running">'+phicon("timer")+'<span><b>Fasting</b><small>running</small></span></button>';
     return '<button type="button" class="lg-c fs" data-fastpick aria-label="Start a fast">'+phicon("timer")+'<span><b>Start a fast</b><small>pick hours</small></span></button>';}
-  function logStrip(){var hid=logHidden(),its=logItems().filter(function(i){return hid.indexOf(i.id)<0}),fc=hid.indexOf("fast")<0?logFastChip():"";if(!its.length&&!fc)return "";
+  function logStrip(){var hid=logHidden(),its=logItems().filter(function(i){return hid.indexOf(i.id)<0}).sort(function(a,b){return logTyped(a)-logTyped(b)}),fc=hid.indexOf("fast")<0?logFastChip():"";if(!its.length&&!fc)return "";
     /* phones: Home's first page is one screen, so only the first few show; the rest are one tap away in the + sheet */
     var busy=window.innerWidth<=820&&!!nowPick(),cap=window.innerWidth<=820?(busy?2:5):99,chips=its.map(function(i){return logChip(i,"lg-c")});if(fc)chips.push(fc);
     var more=chips.length-cap,shown=more>0?chips.slice(0,cap):chips;
@@ -8546,7 +8560,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(!isRepeat(i)&&!isLimit(i)&&!isBody(i)){var was={done:!!i.done,completedAt:i.completedAt||null},nowDone=!i.done;_justDone=nowDone?i.id:null;setTimeout(jdClear,1400);if(nowDone)Buddy.react("done");Store.update("items",i.id,{done:nowDone,completedAt:nowDone?fmt(new Date())+"T"+nowHM()+":00":null});var fin=nowDone&&dayFinished();toast(nowDone?"Done: "+i.title:"Marked as not done",function(){Store.update("items",i.id,was)},nowDone?(fin?"joy":"happy"):null,nowDone?winLine(fin):"");return;}
     if(isLimit(i)||isBody(i)||i.mark==="count"){addEvent(i,today());openStrip(i.id);return;}   /* always adds, undo lives in the strip */
     var pd=Math.max(1,normOf(i).max||perDayOf(i));var c=countOn(i,today());
-    if(c<pd){if(c+1>=pd){_justDone=i.id;setTimeout(jdClear,1400);}addEvent(i,today());openStrip(i.id);}else setDayCount(i,today(),0);
+    var back=function(){var fi=Store.get("items",i.id);if(fi)setDayCount(fi,today(),c)};
+    if(c<pd){var fin1=c+1>=pd;if(fin1){_justDone=i.id;setTimeout(jdClear,1400);Buddy.react("done");}addEvent(i,today());openStrip(i.id);
+      var fin=fin1&&dayFinished();toast(fin1?"Done: "+i.title:(c+1)+" of "+pd+": "+i.title,back,fin1?(fin?"joy":"happy"):null,fin1?winLine(fin):"");}
+    else{setDayCount(i,today(),0);toast("Marked as not done",back);}
   }
   function backfillDate(i,ds){
     if(!scannable(i))return;
@@ -8622,7 +8639,6 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if((el=e.target.closest("[data-hmopen]"))){var ho=el.getAttribute("data-hmopen");openDayList(ho==="all"?null:ho,hmDay());return;}
     if((el=e.target.closest("[data-hmweek]"))){hmSnap(hmCur()+parseInt(el.getAttribute("data-hmweek"),10));return;}
     if((el=e.target.closest("[data-hmtoday]"))){hmSnap(HM_BACK);return;}
-    if((el=e.target.closest("[data-tdall]"))){state.tdAll=!state.tdAll;hmBody();return;}
     if((el=e.target.closest("[data-goback]"))){navBack();return;}
     if((el=e.target.closest("[data-mvto]"))){var mv=el.getAttribute("data-mvto").split("|");mvTo(mv[0],mv[1]);return;}
     if((el=e.target.closest("[data-move]"))){openMove(el.getAttribute("data-move"));return;}
@@ -8638,6 +8654,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if((el=e.target.closest("[data-qpick]"))){syncItem();ms.qOpen=true;ms.dateTouched=true;renderTaskModal();var dp2=$("#i-due");if(dp2){dp2.focus();try{if(dp2.showPicker)dp2.showPicker()}catch(e4){}}return;}
     if((el=e.target.closest("[data-qmore]"))){syncItem();ms.qOpen=!ms.qOpen;renderTaskModal();return;}
     if((el=e.target.closest("[data-backup-now]"))){downloadBackup();if(state.view==="home")render();return;}
+    if((el=e.target.closest("[data-backup-share]"))){shareBackup();return;}
     if((el=e.target.closest("[data-backup-later]"))){try{localStorage.setItem("ritsu_backup_snooze",addDaysStr(today(),14))}catch(e5){}render();return;}
     if((el=e.target.closest("[data-restore-undo]"))){undoRestore();return;}
     if((el=e.target.closest("[data-persist-ask]"))){if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().then(function(ok){toast(ok?"Daywell's data is now protected":"Not yet. Do try again later.");render();});return;}
@@ -8679,6 +8696,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if((el=e.target.closest("[data-hmsort]"))){state.hmSort=el.getAttribute("data-hmsort");try{localStorage.setItem("ritsu_hmsort",state.hmSort)}catch(x){}qcListsFill(hmDay());return;}
     if((el=e.target.closest("#i-when button"))){syncItem();ms.data.everyH=el.getAttribute("data-v")==="every"?(ms.data.everyH||6):null;renderItemModal();return;}
     if((el=e.target.closest("[data-low]"))){var lo=!isLowDay(today());setLowDay(today(),lo);render();toast(lo?"A low day. Only what matters stays.":"The day is back as planned.");return;}
+    if((el=e.target.closest("[data-pbtaken]"))){e.stopPropagation();pbTakenSay(el.getAttribute("data-pbtaken"));return;}
     if((el=e.target.closest("[data-toggle]"))){e.stopPropagation();toggleItem(el.getAttribute("data-toggle"));return;}
     if((el=e.target.closest("[data-measure]"))){e.stopPropagation();openMeasure(el.getAttribute("data-measure"));return;}
     if((el=e.target.closest("[data-reset]"))){e.stopPropagation();var rid=el.getAttribute("data-reset"),ri=Store.get("items",rid),prevLd=ri?(ri.lastDone||null):null;Store.update("items",rid,{lastDone:today()});toast("Done",function(){Store.update("items",rid,{lastDone:prevLd})});return;}
