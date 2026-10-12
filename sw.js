@@ -1,7 +1,7 @@
 /* Daywell service worker.
    Cache-first for the app shell so it opens instantly and works offline.
    Bump CACHE when you deploy, or people keep the old version. */
-const CACHE = "daywell-v75";
+const CACHE = "daywell-v76";
 const SHELL = [
   "./",
   "./index.html",
@@ -9,6 +9,7 @@ const SHELL = [
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./icons/apple-touch-icon.png",
+  "./fonts/albert-sans.woff2",
   "./fonts/pixelify-sans.woff2",
   "./fonts/doto.woff2",
   "./fonts/inter.woff2",
