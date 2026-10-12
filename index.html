@@ -2851,10 +2851,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   html:root .lg-box{position:relative;display:block!important}
   html:root .lg-more{position:absolute!important;top:-40px;right:0;background:transparent!important;border:0!important;color:var(--faint)}
   html:root .lg-row{display:grid!important;grid-template-columns:1fr 1fr;gap:10px!important;flex-wrap:nowrap}
-  html:root .lg-c{display:grid!important;grid-template-columns:34px 1fr;grid-template-rows:auto auto;column-gap:10px;row-gap:14px;align-items:center;text-align:left;padding:14px!important;min-height:0;width:auto!important;border-radius:24px!important}
+  html:root .lg-c{display:grid!important;grid-template-columns:22px 1fr;grid-template-rows:auto auto;column-gap:9px;row-gap:14px;align-items:center;text-align:left;padding:14px!important;min-height:0;width:auto!important;border-radius:24px!important}
   html:root .lg-c>span{display:contents}
-  html:root .lg-c>:first-child:not(span){width:34px;height:34px;border-radius:50%;border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);display:grid;place-items:center;background:transparent!important;color:var(--ink)!important}
-  html:root .lg-c>svg:first-child{padding:9px;box-sizing:border-box;color:var(--muted)!important;fill:currentColor}
+  html:root .lg-c>:first-child:not(span){width:22px;height:22px;border:0;display:grid;place-items:center;background:transparent!important;color:var(--muted)!important}
+  html:root .lg-c>svg:first-child{padding:2px;box-sizing:border-box;color:var(--muted)!important;fill:currentColor}
   html:root .lg-c>:first-child:not(span) svg{width:15px;height:15px;color:var(--muted);fill:currentColor}
   html:root .hm-scroll{padding-top:6px!important}
   html:root .lg-c b{grid-column:2;font-weight:500!important;font-size:.9375rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -2995,6 +2995,24 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   html:root :has(>b.qf-time)>small,html:root :has(>b.qf-time)>span{font-size:min(.8125rem,3.4vw)!important}
   html:root .setrow.dial-row{flex-wrap:wrap;row-gap:10px}
   html:root .setrow.dial-row .info{flex:1 1 100%}
+  /* Home top card: no page dots (tap the card to flip it) */
+  html:root .qc-dots{display:none!important}
+  /* You page like the mock */
+  html:root .you-h{display:flex!important;align-items:flex-start!important;justify-content:space-between}
+  html:root .you-h .you-kick{margin-top:4px!important}
+  html:root .you-h .buddy-slot{flex:none;width:60px;margin-top:4px}
+  html:root .you-h .blob-host{width:56px!important}
+  html:root .you-safe{display:flex;align-items:center;gap:14px;width:100%;text-align:left;margin:4px 0 12px;padding:16px 16px 16px 18px;border-radius:24px;background:var(--glass);border:1px solid var(--glass-b);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);color:var(--ink);font:inherit;cursor:pointer;transition:transform 160ms var(--ease-out)}
+  html:root .you-safe:active{transform:scale(.98)}
+  html:root .you-safe span{flex:1;min-width:0}html:root .you-safe b{display:block;font-size:1.0625rem;font-weight:500}
+  html:root .you-safe small{display:block;color:var(--muted);font-size:.9375rem;margin-top:2px}
+  html:root .you-safe i{flex:none;width:46px;height:46px;border-radius:50%;background:var(--btn);color:var(--btn-ink);display:grid;place-items:center}
+  html:root .you-safe i .yr-i{border:0;width:auto;height:auto;color:var(--btn-ink)}
+  html:root .ylist{margin-bottom:12px!important;padding:4px 14px!important;border-radius:24px!important}
+  html:root .yr{gap:12px!important;padding-top:12px!important;padding-bottom:12px!important}
+  html:root .yr-i{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid color-mix(in srgb,var(--ink) 15%,transparent);display:grid;place-items:center;color:var(--ink)}
+  html:root .yr-i svg{width:16px;height:16px}
+  html:root .yr-t{font-size:1rem}html:root .yr em{color:var(--muted)!important;font-style:normal}
   /* the bottom menu: one dark pill, the + is the only light button */
   html body .bottomnav.fnav{background:var(--dock)!important;border:0!important;box-shadow:0 14px 30px -14px rgba(0,0,0,.55)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
   html body .bottomnav.fnav .fn-t,html body .bottomnav.fnav .fn-t.on{color:#E8E6E1!important;border-radius:999px!important}
@@ -4321,6 +4339,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(state.view==="home"&&!visibleItems().some(function(i){return !i.archived})){var hmT=v.querySelector(".hm-top");if(hmT)hmT.insertAdjacentHTML("afterend",blankHome())}
     [].forEach.call(document.querySelectorAll(".ghm-sc"),function(e){e.scrollLeft=e.scrollWidth});
     if(state.view==="home"){homeMount();Buddy.mount($("#buddySlot"));Pull.mount();}
+    if(state.view==="settings")Buddy.mount($("#buddySlot"));   /* v6: the companion sits on You too (hold it: day and night) */
     if(state.view==="day")swWrap(v);   /* You is a short list now, it needs no pages */
     if(!_wnTried)setTimeout(newsMaybe,1200);
   }
@@ -6041,17 +6060,26 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     _wnTried=true;openNews()}
   /* You: one short list like the iPhone's Settings; each row opens its own small page (view "yousub", state.youSub) */
   var YOU_SUBS={name:"Your name",rem:"Reminders",areas:"Your areas",family:"Family",look:"Appearance",buddy:"Companion",data:"Backup and privacy",flags:"Your flags"};
-  function youRow(attr,label,val){return '<button class="yr" '+attr+'><span class="yr-t">'+label+'</span>'+(val!=null&&val!==""?'<em>'+esc(String(val))+'</em>':'')+'<span class="chev" aria-hidden="true">&rsaquo;</span></button>'}
+  /* v6: thin line icons for the You list */
+  var YOUI={user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>',
+    bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20h4"/>',list:'<path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/>',timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4M9 2h6"/>',
+    grid:'<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>',
+    copy:'<rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',people:'<circle cx="9" cy="9" r="3.5"/><path d="M3 20c1-3.5 3.5-5 6-5s5 1.5 6 5M16 5.5a3 3 0 0 1 0 6M17.5 15c2 .7 3 2.3 3.5 5"/>',
+    home:'<path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-5h4v5"/>',smile:'<circle cx="12" cy="12" r="8"/><path d="M9 10h.01M15 10h.01M8.5 14c1.8 2 5.2 2 7 0"/>',key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/>',
+    lock:'<rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',star:'<path d="M12 4l2.4 5 5.6.6-4.2 3.8 1.2 5.6L12 16.3 7 19l1.2-5.6L4 9.6 9.6 9z"/>'};
+  function youIcon(k){return YOUI[k]?'<span class="yr-i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+YOUI[k]+'</svg></span>':''}
+  function youRow(attr,label,val,ic){return '<button class="yr" '+attr+'>'+youIcon(ic)+'<span class="yr-t">'+label+'</span>'+(val!=null&&val!==""?'<em>'+esc(String(val))+'</em>':'')+'<span class="chev" aria-hidden="true">&rsaquo;</span></button>'}
   function youStrip(x){return String(x||"").replace(/^<div class="sec-h">((?!<div|<button)[\s\S])*?<\/div>/,"")}   /* the page title already says it */
   function viewSettings(){
     var me=state.me?personById(state.me):null,h;
     if(state.view==="yousub")return youSub(state.youSub,me);
-    h='<div class="day-h"><div class="d"><h1 class="title" style="font-size:2rem">You</h1></div></div>';
-    h+='<button class="yprof" data-yous="name"><span class="yp-av" aria-hidden="true">'+(me?esc(me.name.trim().charAt(0).toUpperCase()):"?")+'</span><span class="yp-t"><b>'+(me?esc(me.name):"Add your name")+'</b><small>'+(acct.user?"Signed in as "+esc(acct.user.email||""):"Tap to change your name")+'</small></span><span class="yp-e">Edit</span></button>';
-    h+='<p class="ylbl">Your day</p><div class="ylist">'+youRow('data-yous="rem"',"Reminders",remNative()?(remOn()?"On":"Off"):"")+youRow('data-yous="areas"',"Your areas",cats().filter(function(c){return c.id!==TODO_CAT}).length)+
-      youRow('data-action="library"',"Templates")+youRow('data-nav="fasting"',"Fasting")+youRow('data-logpick',"Your logs")+youRow('data-nav="people"',"People")+youRow('data-yous="family"',"Family",familyOn()?"On":"Off")+'</div>';
-    h+='<p class="ylbl">Settings</p><div class="ylist">'+youRow('data-yous="look"',"Appearance",{warm:"Light",dark:"Dark",auto:"Auto"}[theme]||"")+youRow('data-yous="buddy"',"Companion",Buddy.cfg.show?"On":"Off")+
-      (remNative()?'':acct.user?youRow('data-acct="manage"',"Account","Signed in"):youRow('data-acct="open"',"Sign in"))+youRow('data-yous="data"',"Backup and privacy")+youRow('data-yous="flags"',"Your flags")+youRow('data-news',"What\u2019s new",APP_VER)+'</div>';
+    h='<div class="day-h you-h"><div class="d"><h1 class="title" style="font-size:2rem">You</h1><p class="kicker you-kick">'+(acct.user?"Backed up, locked":"Kept on this phone")+'</p></div><span class="buddy-slot" id="buddySlot"></span></div>';
+    if(!acct.user)h+=remNative()?'<button class="you-safe" data-yous="data"><span><b>Keep your day safe</b><small>Save a backup of your diary to keep somewhere safe.</small></span><i aria-hidden="true">'+youIcon("lock")+'</i></button>':'<button class="you-safe" data-acct="open"><span><b>Keep your day safe</b><small>Sign in, and your diary is backed up locked.</small></span><i aria-hidden="true">'+youIcon("key")+'</i></button>';
+    h+='<div class="ylist">'+youRow('data-yous="name"',"Your name",me?me.name.split(" ")[0]:"Tap to set","user")+youRow('data-yous="look"',"Appearance",{warm:"Light",dark:"Dark",auto:"Auto"}[theme]||"","sun")+youRow('data-yous="rem"',"Reminders",remNative()?(remOn()?"On":"Off"):"","bell")+
+      youRow('data-logpick',"Your logs","","list")+youRow('data-nav="fasting"',"Fasting","","timer")+'</div>';
+    h+='<div class="ylist">'+youRow('data-yous="areas"',"Your areas",cats().filter(function(c){return c.id!==TODO_CAT}).length,"grid")+youRow('data-action="library"',"Templates","","copy")+youRow('data-nav="people"',"People","","people")+youRow('data-yous="family"',"Family",familyOn()?"On":"Off","home")+'</div>';
+    h+='<div class="ylist">'+youRow('data-yous="buddy"',"Companion",Buddy.cfg.show?"On":"Off","smile")+
+      (remNative()?'':acct.user?youRow('data-acct="manage"',"Account","Signed in","key"):youRow('data-acct="open"',"Sign in","","key"))+youRow('data-yous="data"',"Backup and privacy","","lock")+youRow('data-yous="flags"',"Your flags","","flag")+youRow('data-news',"What\u2019s new",APP_VER,"star")+'</div>';
     h+='<p style="color:var(--faint);font-size:0.75rem;text-align:center;margin-top:22px">Daywell'+(Store.local?' · prototype, saved on this device':'')+'</p>';return h;
   }
   function youSub(k,me){
