@@ -2732,6 +2732,22 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     body[data-view="home"] .main,body[data-view="home"] #view,body[data-view="day"] .main,body[data-view="day"] #view{padding-bottom:0}
     .sw-b{display:flow-root;padding-bottom:6px}
   }
+  /* ===== posh pass (2026-10-12): quieter mascot, one slim bar, thin arrows, fewer outlines ===== */
+  .blob-host{--jb-top:#DCEFE2;--jb-mid:#9FCCAB;--jb-deep:#6F9F7C;--jb-rim:#B7D9C0;--jb-out:#5E8C6B;--jb-out-l:#9FCCAB;--jb-arm-l:#C9E4D0;--jb-arm-m:#94C3A0;--jb-arm-d:#6A9876;--jb-spark:#B7D9C0;--jb-belly:#CFE7D6;--jb-eye-l:#3B4A40;--jb-eye:#1E2822;--jb-eye-d:#111813}
+  :root[data-theme="warm"] .blob-host{--jb-top:#E3F0E6;--jb-mid:#A9CFB3;--jb-deep:#6F9F7C;--jb-rim:#C3DFCA;--jb-out:#5A8A67;--jb-out-l:#A9CFB3;--jb-arm-l:#D2E8D8;--jb-arm-m:#9CC7A8;--jb-arm-d:#6A9876;--jb-spark:#C3DFCA;--jb-belly:#DCEEE1;--jb-eye-l:#3B4A40;--jb-eye:#1E2822;--jb-eye-d:#111813}
+  .hm-top .blob-host,.sw .hm-top .blob-host{width:60px}
+  body .bottomnav.fnav{padding:6px 10px;gap:6px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 94%,transparent);box-shadow:0 8px 24px -14px rgba(0,0,0,.5)}
+  body .fnav .fn-t,body .fnav .fn-t.on{width:calc(46px * var(--s));height:calc(40px * var(--s));background:transparent;border-color:transparent;box-shadow:none;color:var(--faint)}
+  body .fnav .fn-t.on{color:var(--ink)}
+  body .fnav .fn-plus{width:calc(46px * var(--s));height:calc(40px * var(--s));border-radius:999px;border:0;box-shadow:none}
+  body .fnav .fn-t svg,body .fnav .fn-plus svg{width:calc(21px * var(--s));height:calc(21px * var(--s))}
+  .nb{padding:6px 12px 6px 8px;border-radius:999px;box-shadow:none}
+  .nb small{display:none}.nb svg{width:22px;height:22px}.nb,.nb *{font-size:0.9375rem;line-height:1.2}.nb>*{padding-top:0;padding-bottom:0;min-height:0}
+  .hm-arrow,.day-h .nav button{background:transparent;border-color:transparent;box-shadow:none;color:var(--muted)}
+  .yr .chev{font-size:0;width:8px;height:8px;border-right:1.6px solid var(--faint);border-top:1.6px solid var(--faint);transform:rotate(45deg);margin:0 4px 0 2px}
+  .qb i,.qb.full i,:root[data-theme="warm"] .qb i,:root[data-theme="warm"] .qb.full i{background:var(--c);box-shadow:none}   /* flat bars, no glow */
+  .ylist,.lg-box{border-color:transparent}.lg-c{border-color:transparent;box-shadow:none}
+  .yr{border-top-color:color-mix(in srgb,var(--line) 70%,transparent)}
   @media(max-width:820px){
     .qc-fr>.qc-kick{display:none}.qc-face{padding:16px 18px 14px}.qc-lead{margin:2px 0 2px}
     .qc-fr .qc-split{margin-bottom:6px;gap:18px}.qc-fr .qc-split .qc-num{margin-top:4px}.qc-fr .qc-split .qc-num b{font-size:3.5rem}
@@ -4567,6 +4583,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   }
   /* the day's list: under the card on phones, beside Home on wide screens */
   var HM_THREE=1400;   /* wide screens: Right now, Today and This week side by side */
+  /* "Medicine", "Supplements", or both, from what is in the list (both are kind med) */
+  var SUPP_RE=/\b(vitamins?|supplements?|multivitamin|omega|fish oil|magnesium|zinc|iron|calcium|probiotics?|b12|d3|creatine|collagen|protein|electrolytes?|ashwagandha|melatonin)\b/i;
+  function isSupp(i){var c=Store.get("cats",i.catId);return SUPP_RE.test(i.title||"")||SUPP_RE.test((c&&c.name)||"")}
+  function medsTitle(list){var sp=list.filter(isSupp).length;return sp===0?"Medicine":sp===list.length?"Supplements":"Medicine and supplements"}
   function qcListsFill(ds){qcListFill(ds);hmSideFill(ds);swSync()}
   function qcListFill(ds,el0){
     var el=el0||$("#hmList");if(!el)return;
@@ -4586,7 +4606,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(resting)h+='<div class="low-rest">'+PI("moon")+'<span><b>'+qcWord(resting,1)+(resting===1?" thing is":" things are")+' resting today.</b> '+(resting===1?"It is":"They are")+' back tomorrow. Nothing counts against a low day. High priority things, and ones with a small version, stay.</span></div>';
     if(off===0&&!visibleItems().some(function(i){return !i.archived}));   /* an empty app gets blankHome under the greeting instead */
     else if(!its.length&&!extra.length)h+='<div class="cat-empty">'+(off===0?"Nothing planned yet. Tap + whenever you\'re ready.":off>0?"Nothing planned for this day yet.":"Nothing was on the list this day.")+'</div>';
-    if(meds.length)h+=xBlock(meds,"Medicine");   /* medicine first: time matters most there */
+    if(meds.length)h+=xBlock(meds,medsTitle(meds));   /* medicine first: time matters most there */
     if(its.length){h+='<div class="hm-sort" role="group" aria-label="Sort the list"><button data-hmsort="topic" aria-pressed="'+(state.hmSort!=="time")+'">By topic</button><button data-hmsort="time" aria-pressed="'+(state.hmSort==="time")+'">By time</button></div>';
       h+=state.hmSort==="time"?qcByTime(show,ds):qcGrouped(show,ds);}
     if(also.length)h+=xBlock(also,"Also today");
@@ -5209,7 +5229,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var due=all.filter(function(i){return dueOnDate(i,ds,off)});
     var loose=due.filter(function(i){return i.catId===TODO_CAT});var rest=due.filter(function(i){return i.catId!==TODO_CAT});
     var hsD=off===0?hmStats(ds):null,hsSel=hsD?(state.dayDomain?[hsD[state.dayDomain]]:[hsD.body,hsD.mind,hsD.todo]):[],poolTot=0,doneCount=0;hsSel.forEach(function(x){if(x){poolTot+=x.tot;doneCount+=x.done}});
-    var h='<div class="day-h"><div class="nav"><button data-day="-1" aria-label="Previous day">'+phicon("caretl")+'</button><button data-day="1" aria-label="Next day">'+phicon("caretr")+'</button></div><div class="d"><p class="kicker">'+(off===0?"Today":off===1?"Tomorrow":off===-1?"Yesterday":DOW[d.getDay()])+'</p><h1 class="title" style="font-size:2rem">'+MON[d.getMonth()]+' '+d.getDate()+'</h1></div>'+(off===0?(poolTot?'<div class="prog"><b>'+Math.round(doneCount/poolTot*100)+'%</b><small>done</small></div>':''):'<button class="today-btn" data-day="0">Today</button>')+'</div>';
+    var h='<div class="day-h"><div class="nav"><button data-day="-1" aria-label="Previous day">'+phicon("caretl")+'</button><button data-day="1" aria-label="Next day">'+phicon("caretr")+'</button></div><div class="d"><p class="kicker">'+(off===0?"Today":off===1?"Tomorrow":off===-1?"Yesterday":DOW[d.getDay()])+'</p><h1 class="title" style="font-size:2rem">'+MON[d.getMonth()]+' '+d.getDate()+'</h1></div>'+(off===0?(poolTot?'<div class="prog"><b>'+doneCount+' of '+poolTot+'</b><small>done</small></div>':''):'<button class="today-btn" data-day="0">Today</button>')+'</div>';
     if(state.dayDomain){
       var _dl=(HM_DOMS.filter(function(x){return x[0]===state.dayDomain})[0]||["",""])[1];
       h+='<div class="dayfilter"><button class="df-back" data-hmback>&larr; Home</button><span>Showing <b>'+_dl+'</b></span><button class="df-add" data-action="add-day" data-date="'+ds+'">+ Add</button><button class="df-all" data-hmall>Show All</button></div>';
