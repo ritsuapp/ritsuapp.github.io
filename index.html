@@ -4579,15 +4579,17 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var extra=visibleItems().filter(function(i){return its.indexOf(i)<0&&restSet.indexOf(i)<0&&dueOnDate(i,ds,off)&&!isFast(i)&&(!isTracker(i)||i.mark)&&!isLeftover(i)&&(!state.qcDom||areaDomain(i.catId)===state.qcDom)}).sort(hmListSort);
     var left=its.filter(function(i){return !hmDone(i,ds)}).length;
     /* the whole list, phones too (user, 2026-10-12: no "See all" tap); a long list scrolls inside its page */
-    var short=false,show=its;
+    var show=its,meds=extra.filter(function(i){return i.kind==="med"}),also=extra.filter(function(i){return i.kind!=="med"});
+    var xBlock=function(list,title){var b='<div class="qc-lh qc-xh"><h3 aria-level="2">'+title+'</h3><span>not counted in your day</span></div><div class="card">';list.forEach(function(i){b+=itemRow(i,{ds:ds})+(off===0&&isMedItem(i)?pillBoxHtml(i,true):"")});return b+'</div>'};
     var dn=state.qcDom?HM_DOMS.filter(function(d){return d[0]===state.qcDom})[0][1]:"";var h='<div class="qc-lh"><h3 aria-level="2">'+(off===0?"Today":hmLabel(ds))+(dn?' <em class="qc-only qb-'+state.qcDom+'">'+dn+' only</em><button class="qc-all" data-qcall>Show All</button>':'')+'</h3><span>'+(off===0?'<button class="low-t'+(isLowDay(ds)?" on":"")+'" data-low aria-pressed="'+isLowDay(ds)+'">'+PI("moon")+'Low day</button>':'')+(its.length?(left?left+" left":"All done"):"")+'</span></div>';
     var resting=restSet.length;
     if(resting)h+='<div class="low-rest">'+PI("moon")+'<span><b>'+qcWord(resting,1)+(resting===1?" thing is":" things are")+' resting today.</b> '+(resting===1?"It is":"They are")+' back tomorrow. Nothing counts against a low day. High priority things, and ones with a small version, stay.</span></div>';
     if(off===0&&!visibleItems().some(function(i){return !i.archived}));   /* an empty app gets blankHome under the greeting instead */
     else if(!its.length&&!extra.length)h+='<div class="cat-empty">'+(off===0?"Nothing planned yet. Tap + whenever you\'re ready.":off>0?"Nothing planned for this day yet.":"Nothing was on the list this day.")+'</div>';
+    if(meds.length)h+=xBlock(meds,"Medicine");   /* medicine first: time matters most there */
     if(its.length){h+='<div class="hm-sort" role="group" aria-label="Sort the list"><button data-hmsort="topic" aria-pressed="'+(state.hmSort!=="time")+'">By topic</button><button data-hmsort="time" aria-pressed="'+(state.hmSort==="time")+'">By time</button></div>';
       h+=state.hmSort==="time"?qcByTime(show,ds):qcGrouped(show,ds);}
-    if(!short&&extra.length){h+='<div class="qc-lh qc-xh"><h3 aria-level="2">'+(extra.every(function(i){return i.kind==="med"})?"Medicine":"Also today")+'</h3><span>not counted in your day</span></div><div class="card">';extra.forEach(function(i){h+=itemRow(i,{ds:ds})+(off===0&&isMedItem(i)?pillBoxHtml(i,true):"")});h+='</div>';}
+    if(also.length)h+=xBlock(also,"Also today");
     var wkh=off===0?weekAheadHtml()+leftoverHtml():"",ph=!el0&&window.innerWidth<=820,wp=$("#hmWeek"),w3=$("#hmWeekSide"),three=!ph&&w3&&window.innerWidth>=HM_THREE;
     el.innerHTML=h+(ph||three?"":wkh);if(wp)wp.innerHTML=ph?wkh:"";if(w3)w3.innerHTML=three?(wkh?wkh:'<div class="qc-lh"><h3 aria-level="2">This week</h3><span></span></div><div class="cat-empty">Nothing else planned this week.</div>'):"";
   }
