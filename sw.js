@@ -1,7 +1,7 @@
 /* Daywell service worker.
    Cache-first for the app shell so it opens instantly and works offline.
    Bump CACHE when you deploy, or people keep the old version. */
-const CACHE = "daywell-v74";
+const CACHE = "daywell-v75";
 const SHELL = [
   "./",
   "./index.html",
