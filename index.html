@@ -3069,6 +3069,35 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   html:root .ar-empty{border-radius:24px;background:var(--panel);padding:28px 20px;text-align:center}
   html:root .ar-empty b{display:block;font-weight:400;font-size:1.125rem;color:var(--ink)}html:root .ar-empty p{margin:6px 0 16px;color:var(--muted);font-size:.9375rem}
   html:root .ar-first{border:0;border-radius:999px;min-height:44px;padding:0 20px;background:var(--btn);color:var(--btn-ink);font:inherit;font-size:.9375rem;cursor:pointer}
+  /* + sheet: where it goes, one line */
+  html:root .qa-place{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:2px 0 6px}
+  html:root .qa-pk{font-size:.9375rem;color:var(--muted)}html:root .qa-pg{flex-basis:100%;font-size:.8125rem;color:var(--faint)}
+  html:root .qa-pick{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}html:root .qa-pick[hidden]{display:none}
+  /* setup: the tree and the things that come back */
+  html:root .yd-pd{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:8px;vertical-align:1px}
+  html:root .su-chip.yd-ownc{border-style:dashed;color:var(--muted)}
+  html:root .su-chip.yd-cb{display:inline-flex!important;flex-direction:column!important;align-items:flex-start;justify-content:center;gap:0;min-height:52px;padding:6px 14px;border-radius:18px;text-align:left}
+  html:root .su-chip.yd-cb span,html:root .su-chip.yd-cb small{display:block}html:root .su-chip.yd-cb small{font-size:.8125rem;font-weight:400;opacity:.75}
+  /* the prototype look the user chose: big thin headings, calm group names, roomy chips */
+  html:root .yd .su-title{font:200 2.125rem/1.08 var(--sans)!important;letter-spacing:-.02em;text-wrap:balance;margin-top:20px}
+  html:root .yd .su-sub{font-size:1rem;line-height:1.5}
+  html:root .yd .yd-gl{display:flex;align-items:center;font-size:1.375rem;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink);margin:6px 0 10px}
+  html:root .yd .su-chip{min-height:42px;padding:0 15px;font-size:.9375rem;font-weight:400}
+  html:root .yd .su-chip.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+  html:root .yd .yd-grp{margin-top:22px}
+  html:root .yd .su-next{border-radius:999px;min-height:48px}
+  html:root .yd-ownf{display:flex;flex-direction:column;gap:8px;margin-top:8px;padding:12px;border-radius:18px;background:var(--panel)}html:root .yd-ownf .btn{align-self:flex-start}
+  html:root .yd-cc{display:flex;align-items:center;gap:8px;font-size:.9375rem;color:var(--muted);margin:4px 0 6px}
+  html:root .yd-cc select{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:999px;min-height:40px;padding:0 12px}
+  html:root .yd-demo{background:var(--panel);border-radius:20px;padding:2px 14px;margin:6px 0 10px}
+  html:root .yd-dr{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}html:root .yd-dr:first-child{border:0}
+  html:root .yd-dr .yd-dt{flex:none;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--faint)}
+  html:root .yd-dr>span:nth-child(2){flex:1}html:root .yd-dr b{display:block;font-weight:500}html:root .yd-dr small{font-size:.875rem;color:var(--muted)}html:root .yd-dr small.yd-mine{color:var(--ink);font-weight:600}
+  html:root .yd-dr em{font-style:normal;font-size:.8125rem;color:var(--faint)}
+  html:root .yd-pts{margin:0 0 6px;padding-left:20px;display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:.9375rem;line-height:1.5}html:root .yd-pts b{color:var(--ink);font-weight:500}
+  /* At the shop */
+  html:root .dp-shop{display:flex;align-items:center;gap:12px;width:100%;border:0;border-radius:20px;background:var(--panel);color:var(--ink);padding:12px 16px;margin:4px 0 12px;text-align:left;font:inherit;cursor:pointer;min-height:56px}
+  html:root .dp-shop .phi{width:20px;height:20px;color:var(--muted)}html:root .dp-shop span{flex:1}html:root .dp-shop b{display:block;font-weight:500;font-size:.9375rem}html:root .dp-shop small{font-size:.875rem;color:var(--muted)}html:root .dp-shop em{font-style:normal;color:var(--faint);font-size:1.25rem}
   /* ===== v6 look (end) ===== */
 </style>
 </head>
@@ -3280,7 +3309,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
      {t:"School fees",s:"routine",k:"upkeep",mode:"replace",int:180,cb:{o:27,key:"sfees",name:"School fees",act:"Pay the school fees",kind:"simple",every:6,rule:"fixed",lead:14,icon:"bookopen",q:"When are the next school fees due?"}}
    ]},
    {g:"Hygiene", items:[
-     {t:"Brush teeth",s:"routine",rep:1,per:2,f:["gums","sensitive","toothache"]},
+     {t:"Brushing",s:"routine",rep:1,per:2,f:["gums","sensitive","toothache"]},
      {t:"Floss",s:"routine",rep:1,f:["gums"]},
      {t:"Mouthwash",s:"routine",rep:1},
      {t:"Shower",s:"routine",rep:1},
@@ -3317,6 +3346,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
      {t:"Smoke alarm battery",s:"routine",k:"upkeep",mode:"replace",int:365},
      {t:"Mattress flip",s:"routine",k:"upkeep",mode:"replace",int:180},
      {t:"Descale the kettle",s:"routine",k:"upkeep",mode:"replace",int:60},
+     {t:"Toothpaste",G:"c_hygiene",s:"routine",k:"upkeep",mode:"rebuy",int:42},
+     {t:"Dish soap",s:"routine",k:"upkeep",mode:"rebuy",int:30},
      {t:"Hand soap",s:"routine",k:"upkeep",mode:"rebuy",int:21},
      {t:"Shampoo",s:"routine",k:"upkeep",mode:"rebuy",int:45},
      {t:"Washing powder",s:"routine",k:"upkeep",mode:"rebuy",int:45},
@@ -3412,10 +3443,18 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
      there, still found by search. Sharing with friends (Phase C) is fixed by the group, never a switch; p:1 = always private.
      An entry with cb is also one of the things that come back (CB_LIB is built from these). Check: node docs/tools/test-lib.js */
   var LIB_GRP={"Body, the everyday ones":"c_health","Numbers to track":"c_health","Episodes, things that run for days":"c_health","Movement":"c_fitness",
-    "Food & kitchen":"c_sleepfood","Mind & learning":"c_learning","Faith & practice":"c_calm","Work":"todo:work","People":"todo:personal","Hygiene":"c_hygiene",
-    "Medication":"c_medicine","Checkups, the once-a-year ones":"c_checkups","Upkeep, replace or rebuy":"todo:home","Home":"todo:home","Pets":"todo:home",
-    "Car & getting about":"todo:home","Admin & digital":"todo:personal","Holding off":"c_health"};
-  var SHARE_GRPS=["c_fitness","c_sleepfood","c_reading","c_learning","c_calm","c_creative"];
+    "Food & kitchen":"c_food","Mind & learning":"c_learning","Faith & practice":"c_calm","Work":"todo:work","People":"todo:personal","Hygiene":"c_hygiene",
+    "Medication":"c_medicine","Checkups, the once-a-year ones":"c_health","Upkeep, replace or rebuy":"todo:home","Home":"todo:home","Pets":"todo:home",
+    "Car & getting about":"todo:money","Admin & digital":"todo:money","Holding off":"c_health"};
+  /* the tree (2026-10-14): food ideas leave Sleep for Food and water, checkups live in Health, bills and renewals in Money and admin */
+  var FOOD_RE=/\b(water|meals?|breakfast|lunch|dinner|last meal|protein|calories|fruit|veg|junk food|takeaway|sugary|energy drinks|snack\w*|skipping breakfast|cook\w*|fasting|diet)\b/i;
+  var MONEY_RE=/\b(bills?|rent|mortgage|bank|card payment|credit card|tax\w*|insurance|passport|visa|licen[cs]e|subscriptions?|pension|fees|premium|mot|puc|fastag|car|fuel|tyre|registration|medicare)\b/i;
+  LIBRARY.forEach(function(g){g.items.forEach(function(t){
+    if((t.G==="c_sleepfood"||(!t.G&&LIB_GRP[g.g]==="c_health"))&&FOOD_RE.test(t.t))t.G="c_food";
+    if(t.G==="c_checkups")t.G="c_health";
+    if(t.G==="todo:personal"&&MONEY_RE.test(t.t))t.G="todo:money";
+})});
+  var SHARE_GRPS=["c_fitness","c_sleepfood","c_food","c_reading","c_learning","c_calm","c_creative"];
   function tplGroup(t,g){return t.G||LIB_GRP[g.g]}
   function tplShared(t,g){return !t.p&&SHARE_GRPS.indexOf(tplGroup(t,g))>-1}
   function tplFits(t,cc,search){return !(t.in&&t.in.indexOf(cc)<0)&&(search||!(t.hide&&t.hide.indexOf(cc)>-1))}
@@ -4098,7 +4137,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     _emit(){this.ready=true;this.onChange();},
     _initDb(){var self=this;["cats","items","people","tags","markers"].forEach(function(c){try{self.db.collection(c).onSnapshot(function(snap){var m={};snap.docs.forEach(function(d){if(d.exists){var v=Object.assign({},d.data()||{});v.id=d.id;if(c==="items")normalizeItem(v);m[d.id]=v;}});self.cache[c]=m;self._emit();},function(err){if(err&&err.code!=="unavailable")console.warn("db",c,err.code);self._emit();});}catch(e){console.warn(e);}});setTimeout(function(){if(!self.ready)self._emit();},1200);},
     _lsKey:"ritsu_local",
-    _initLocal(){try{var raw=localStorage.getItem(this._lsKey);if(raw)this.cache=JSON.parse(raw);else this.fresh=true;}catch(e){}var self=this;Object.keys(this.cache.items||{}).forEach(function(k){normalizeItem(self.cache.items[k])});if(!this.cache.tags)this.cache.tags={};if(!this.cache.markers)this.cache.markers={};if(Object.keys(this.cache.cats||{}).length>0){GROUP_CATS.forEach(function(c){if(!self.cache.cats[c[0]])self.cache.cats[c[0]]=groupCat(c);});migrateAreas1(this);}if(Object.keys(this.cache.cats||{}).length===0){if(this.fresh)this.welcome=true;else seedLocal(this);}this._emit();},
+    _initLocal(){try{var raw=localStorage.getItem(this._lsKey);if(raw)this.cache=JSON.parse(raw);else this.fresh=true;}catch(e){}var self=this;Object.keys(this.cache.items||{}).forEach(function(k){normalizeItem(self.cache.items[k])});if(!this.cache.tags)this.cache.tags={};if(!this.cache.markers)this.cache.markers={};if(Object.keys(this.cache.cats||{}).length>0){GROUP_CATS.forEach(function(c){if(!self.cache.cats[c[0]])self.cache.cats[c[0]]=groupCat(c);});migrateAreas1(this);migrateTree1(this);}if(Object.keys(this.cache.cats||{}).length===0){if(this.fresh)this.welcome=true;else seedLocal(this);}this._emit();},
     _save(){if(this.local){try{localStorage.setItem(this._lsKey,JSON.stringify(this.cache))}catch(e){}}},
     /* ---- device-only items never touch the shared database. Not hidden from friends -
        genuinely absent from the data they can reach. Retires once real logins exist. ---- */
@@ -4199,7 +4238,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       it("c_medicine","Meds","Morning meds","todo",{repeatEvery:1,perDay:1,priority:"high",reminder:"08:00",expect:{at:"08:00",slack:60,dir:"late"},assignees:["p_me"],counts:mc,logTimes:timesFor(mc,8)}),
       it("c_medicine","Meds","Vitamin B12","med",{dosesPerDay:1,stock:22,reorderTablets:10,reorderAt:7,courseDays:30,courseStart:ago(8),reminder:"08:00",assignees:["p_me"],log:Object.keys(cntBack(8,0,1)),logTimes:timesFor(cntBack(8,0,1),8),notes:"See doctor after the course"}),
       it("c_sleepfood","Sleep","Sleep hours","measure",{repeatEvery:1,target:7,unit:"hrs",values:valsBack(115,7,1.4)}),
-      it("c_health","Sleep","Water","measure",{repeatEvery:1,target:2,unit:"L",glass:0.25,values:valsBack(112,1.8,0.5)}),
+      it("c_food","","Water","measure",{repeatEvery:1,target:2,unit:"L",glass:0.25,values:valsBack(112,1.8,0.5)}),
       it("c_fitness","Workout","Hit the gym","todo",{repeatEvery:1,perDay:1,expect:{at:"18:00",slack:150,dir:"either"},counts:gc,logTimes:timesFor(gc,18)}),
       it("c_health","Body","Bowel movement","todo",Object.assign({stance:"body",repeatEvery:1,perDay:1,private:true,
         normal:{min:1,max:2,maxGapDays:2,maxPerWeek:null},
@@ -4210,7 +4249,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
         normal:{min:4,max:9,maxGapDays:1,maxPerWeek:null},
         markers:["ublood","burning","cloudy","smell","urgency"],
         notes:"A wide normal range. It's here to notice any change."},evMirror(pee))),
-      it("c_sleepfood","Fasting","Intermittent fasting","todo",{stance:"fast",repeatEvery:0,priority:"low",
+      it("c_food","","Intermittent fasting","todo",{stance:"fast",repeatEvery:0,priority:"low",
         protocol:{fast:16,eat:8},fasts:fastLog,
         notes:"Start it when you finish eating, end it when you eat again."}),
       it("c_sleepfood","Sleep","Bedtime","todo",Object.assign({stance:"body",repeatEvery:1,perDay:1,
@@ -4218,11 +4257,11 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
         expect:{at:"23:00",slack:60,dir:"late"},
         markers:["sleepless","stress","social","lowmood","fatigue"],
         notes:"Log it as you turn in. I'll learn your rhythm."},evMirror(bed))),
-      it("c_sleepfood","Holding off","Smoking","todo",Object.assign({stance:"limit",repeatEvery:1,perDay:1,private:true,priority:"low",
+      it("c_health","","Smoking","todo",Object.assign({stance:"limit",repeatEvery:1,perDay:1,private:true,priority:"low",
         normal:{min:null,max:0,maxGapDays:null,maxPerWeek:null},
         markers:["stress","bored","social","afterdrink","sleepless"],
         notes:"Logging takes a moment and keeps your pattern true."},evMirror(smoke))),
-      it("c_hygiene","Brushing","Brush teeth","todo",Object.assign({repeatEvery:1,perDay:2,
+      it("c_hygiene","","Brushing","todo",Object.assign({repeatEvery:1,perDay:2,
         normal:{min:2,max:2,maxGapDays:1,maxPerWeek:null},
         markers:["gums","sensitive","toothache"]},evMirror(brush))),
       it("c_hygiene","Upkeep","Toothbrush","upkeep",{mode:"replace",intervalDays:90,lastDone:ago(72),notes:"Every 3 months"}),
@@ -4259,7 +4298,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
 
   /* ---- home metrics for the Progress card ---- */
   /* ===== Domains: every area rolls up into Body / Mind / To-do ===== */
-  var AREA_DOMAIN_DEFAULT={c_todo:"todo",c_health:"body",c_medicine:"body",c_checkups:"body",c_fitness:"body",c_hygiene:"body",c_sleepfood:"body",c_reading:"mind",c_learning:"mind",c_calm:"mind",c_creative:"mind",c_home:"todo",c_mind:"mind"};
+  var AREA_DOMAIN_DEFAULT={c_todo:"todo",c_health:"body",c_medicine:"body",c_checkups:"body",c_fitness:"body",c_hygiene:"body",c_sleepfood:"body",c_food:"body",c_reading:"mind",c_learning:"mind",c_calm:"mind",c_creative:"mind",c_home:"todo",c_mind:"mind"};
   function areaDomain(catId){var c=Store.get("cats",catId);var d=c&&c.domain;if(d)return d;return AREA_DOMAIN_DEFAULT[catId]||(catId===TODO_CAT?"todo":"body");}
   function schedToday(i){
     if(isFast(i)||isEpisode(i)||isLimit(i))return false;
@@ -4341,7 +4380,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /* icons: Phosphor Fill (MIT, phosphoricons.com), 256 grid, coloured by currentColor */
   var PHI={wallet:'<path d="M216 64H56a8 8 0 0 1 0-16h136a8 8 0 0 0 0-16H56a24 24 0 0 0-24 24v128a24 24 0 0 0 24 24h160a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16m-36 80a12 12 0 1 1 12-12a12 12 0 0 1-12 12"/>',users:'<path d="M164.47 195.63a8 8 0 0 1-6.7 12.37H10.23a8 8 0 0 1-6.7-12.37a95.83 95.83 0 0 1 47.22-37.71a60 60 0 1 1 66.5 0a95.83 95.83 0 0 1 47.22 37.71m87.91-.15a95.87 95.87 0 0 0-47.13-37.56A60 60 0 0 0 144.7 54.59a4 4 0 0 0-1.33 6a75.83 75.83 0 0 1 3.63 89.94a4 4 0 0 0 1.07 5.53a112.3 112.3 0 0 1 29.85 30.83a23.92 23.92 0 0 1 3.65 16.47a4 4 0 0 0 3.95 4.64h60.3a8 8 0 0 0 7.73-5.93a8.22 8.22 0 0 0-1.17-6.59"/>',baby:'<path d="M134.16 24.1a4 4 0 0 0-3.56 1.81C120.3 41.48 120 55.79 120 56a8 8 0 0 0 9.68 7.79a8.24 8.24 0 0 0 6.32-8.11a8 8 0 0 1 8.8-7.68a8.14 8.14 0 0 1 7.2 8.23a24 24 0 0 1-48-.27c0-.63.09-10.78 5.44-24a4 4 0 0 0-4.59-5.39a104.16 104.16 0 0 0-80.78 105.09C26 186.72 71.23 231 126.32 231.9a104 104 0 0 0 7.84-207.8M80 127.91a12 12 0 1 1 12 12a12 12 0 0 1-12-12m80.27 54.77a61 61 0 0 1-64.54 0a8 8 0 0 1 8.54-13.54a45 45 0 0 0 47.46 0a8 8 0 0 1 8.54 13.54m3.73-42.77a12 12 0 1 1 12-12a12 12 0 0 1-12 12"/>',paw:'<path d="M240 108a28 28 0 1 1-28-28a28 28 0 0 1 28 28m-168 0a28 28 0 1 0-28 28a28 28 0 0 0 28-28m20-20a28 28 0 1 0-28-28a28 28 0 0 0 28 28m72 0a28 28 0 1 0-28-28a28 28 0 0 0 28 28m23.12 60.86a35.3 35.3 0 0 1-16.87-21.14a44 44 0 0 0-84.5 0A35.25 35.25 0 0 1 69 148.82A40 40 0 0 0 88 224a39.5 39.5 0 0 0 15.52-3.13a64.1 64.1 0 0 1 48.87 0a40 40 0 0 0 34.73-72Z"/>',plane:'<path d="M215.52 197.26a8 8 0 0 1-1.86 8.39l-24 24A8 8 0 0 1 184 232a7 7 0 0 1-.79 0a8 8 0 0 1-5.87-3.52l-44.07-66.12L112 183.59V208a8 8 0 0 1-2.34 5.65s-14 14.06-15.88 15.88a7.9 7.9 0 0 1-2.78 1.88a8 8 0 0 1-10.41-4.35l-.06-.15l-14.7-36.76L29 175.42a8 8 0 0 1-2.69-13.08l16-16A8 8 0 0 1 48 144h24.4l21.27-21.27l-66.11-44.08a8 8 0 0 1-1.22-12.32l24-24a8 8 0 0 1 8.39-1.86l85.94 31.25l31.53-31.53a28 28 0 0 1 39.6 39.6l-31.53 31.53Z"/>',sunrise:'<path d="M248 160a8 8 0 0 1-8 8H16a8 8 0 0 1 0-16h40.45a74 74 0 0 1-.45-8a72 72 0 0 1 144 0a74 74 0 0 1-.45 8H240a8 8 0 0 1 8 8m-40 32H48a8 8 0 0 0 0 16h160a8 8 0 0 0 0-16M80.84 59.58a8 8 0 0 0 14.32-7.16l-8-16a8 8 0 0 0-14.32 7.16Zm-60.42 43.58l16 8a8 8 0 1 0 7.16-14.31l-16-8a8 8 0 1 0-7.16 14.31M216 112a8 8 0 0 0 3.57-.84l16-8a8 8 0 1 0-7.16-14.31l-16 8A8 8 0 0 0 216 112m-51.58-48.84a8 8 0 0 0 10.74-3.58l8-16a8 8 0 0 0-14.32-7.16l-8 16a8 8 0 0 0 3.58 10.74"/>',pencil:'<path d="m227.31 73.37l-44.68-44.69a16 16 0 0 0-22.63 0L36.69 152A15.86 15.86 0 0 0 32 163.31V208a16 16 0 0 0 16 16h44.69a15.86 15.86 0 0 0 11.31-4.69L227.31 96a16 16 0 0 0 0-22.63M192 108.68L147.31 64l24-24L216 84.68Z"/>',caretl:'<path d="M168 48v160a8 8 0 0 1-13.66 5.66l-80-80a8 8 0 0 1 0-11.32l80-80A8 8 0 0 1 168 48"/>',caretr:'<path d="m181.66 133.66l-80 80A8 8 0 0 1 88 208V48a8 8 0 0 1 13.66-5.66l80 80a8 8 0 0 1 0 11.32"/>',alarm:'<path d="m61.66 37.66l-32 32a8 8 0 0 1-11.32-11.32l32-32a8 8 0 0 1 11.32 11.32m176 20.68l-32-32a8 8 0 0 0-11.32 11.32l32 32a8 8 0 0 0 11.32-11.32M224 136a96 96 0 1 1-96-96a96.11 96.11 0 0 1 96 96m-32 0a8 8 0 0 0-8-8h-48V80a8 8 0 0 0-16 0v56a8 8 0 0 0 8 8h56a8 8 0 0 0 8-8"/>',tooth:'<path d="M168 24H88a56 56 0 0 0-56 55.75c0 42.72 8 75.4 14.7 95.28c8.72 25.8 20.62 45.49 32.64 54a15.67 15.67 0 0 0 9.13 2.97a16.09 16.09 0 0 0 16-14.9c.85-11.52 5-49.11 23.53-49.11s22.68 37.59 23.53 49.11a16.09 16.09 0 0 0 9.18 13.36a15.69 15.69 0 0 0 15.95-1.41c12-8.53 23.92-28.22 32.64-54c6.7-19.9 14.7-52.58 14.7-95.3A56 56 0 0 0 168 24m3 56.57a8 8 0 1 1-6 14.85l-37-14.81l-37 14.81a8 8 0 1 1-6-14.85L106.46 72L85 63.42a8 8 0 1 1 6-14.85l37 14.81l37-14.81a8 8 0 1 1 6 14.85L149.54 72Z"/>',eye:'<path d="M247.31 124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57 61.26 162.88 48 128 48S61.43 61.26 36.34 86.35C17.51 105.18 9 124 8.69 124.76a8 8 0 0 0 0 6.5c.35.79 8.82 19.57 27.65 38.4C61.43 194.74 93.12 208 128 208s66.57-13.26 91.66-38.34c18.83-18.83 27.3-37.61 27.65-38.4a8 8 0 0 0 0-6.5M128 168a40 40 0 1 1 40-40a40 40 0 0 1-40 40"/>',car:'<path d="M240 104h-10.8l-27.78-62.5A16 16 0 0 0 186.8 32H69.2a16 16 0 0 0-14.62 9.5L26.8 104H16a8 8 0 0 0 0 16h8v80a16 16 0 0 0 16 16h24a16 16 0 0 0 16-16v-8h96v8a16 16 0 0 0 16 16h24a16 16 0 0 0 16-16v-80h8a8 8 0 0 0 0-16M80 152H56a8 8 0 0 1 0-16h24a8 8 0 0 1 0 16m120 0h-24a8 8 0 0 1 0-16h24a8 8 0 0 1 0 16M44.31 104L69.2 48h117.6l24.89 56Z"/>',receipt:'<path d="M216 40H40a16 16 0 0 0-16 16v152a8 8 0 0 0 11.58 7.15L64 200.94l28.42 14.21a8 8 0 0 0 7.16 0L128 200.94l28.42 14.21a8 8 0 0 0 7.16 0L192 200.94l28.42 14.21A8 8 0 0 0 232 208V56a16 16 0 0 0-16-16m-40 104H80a8 8 0 0 1 0-16h96a8 8 0 0 1 0 16m0-32H80a8 8 0 0 1 0-16h96a8 8 0 0 1 0 16"/>',arrows:'<path d="M224 48v48a8 8 0 0 1-8 8h-48a8 8 0 0 1-5.66-13.66L180.65 72a79.48 79.48 0 0 0-54.72-22.09h-.45a79.52 79.52 0 0 0-55.89 22.8a8 8 0 0 1-11.18-11.44A96 96 0 0 1 192 60.7l18.36-18.36A8 8 0 0 1 224 48m-37.59 135.29a80 80 0 0 1-111.06.71l18.31-18.31A8 8 0 0 0 88 152H40a8 8 0 0 0-8 8v48a8 8 0 0 0 13.66 5.66L64 195.3a95.42 95.42 0 0 0 66 26.76h.53a95.36 95.36 0 0 0 67.07-27.33a8 8 0 0 0-11.18-11.44Z"/>',heartbeat:'<path d="M240 102c0 70-103.79 126.66-108.21 129a8 8 0 0 1-7.58 0c-3.35-1.8-63.55-34.69-92.68-80.89a4 4 0 0 1 3.39-6.11H72a8 8 0 0 0 6.66-3.56l9.34-14l25.34 38a8 8 0 0 0 9.16 3.16a8.23 8.23 0 0 0 4.28-3.34l13.5-20.26H160a8 8 0 0 0 8-8.53a8.18 8.18 0 0 0-8.25-7.47H136a8 8 0 0 0-6.66 3.56l-9.34 14l-25.34-38a8 8 0 0 0-9.17-3.16a8.25 8.25 0 0 0-4.27 3.34L67.72 128H23.53a4 4 0 0 1-3.83-2.81A77 77 0 0 1 16 102a62.07 62.07 0 0 1 62-62c20.65 0 38.73 8.88 50 23.89C139.27 48.88 157.35 40 178 40a62.07 62.07 0 0 1 62 62"/>',moon:'<path d="M235.54 150.21a104.84 104.84 0 0 1-37 52.91A104 104 0 0 1 32 120a103.1 103.1 0 0 1 20.88-62.52a104.84 104.84 0 0 1 52.91-37a8 8 0 0 1 10 10a88.08 88.08 0 0 0 109.8 109.8a8 8 0 0 1 10 10Z"/>',walk:'<path d="M120 48a32 32 0 1 1 32 32a32 32 0 0 1-32-32m88 88c-28.64 0-41.81-13.3-55.75-27.37c-3.53-3.57-7.18-7.26-11-10.58c-37-32.14-96.22 22.73-98.72 25.08a8 8 0 0 0 10.95 11.66A164 164 0 0 1 84 113c13.78-7.38 25.39-10.23 34.7-8.58L64.66 228.81a8 8 0 0 0 4.15 10.52A7.8 7.8 0 0 0 72 240a8 8 0 0 0 7.34-4.81l33.59-77.27l31.07 22.2V232a8 8 0 0 0 16 0v-56a8 8 0 0 0-3.35-6.51l-37.2-26.57L132.88 112c2.64 2.44 5.26 5.07 8 7.84C155.05 134.19 172.69 152 208 152a8 8 0 0 0 0-16"/>',bookopen:'<path d="M240 56v144a8 8 0 0 1-8 8h-72a24 24 0 0 0-24 23.94a7.9 7.9 0 0 1-5.12 7.55A8 8 0 0 1 120 232a24 24 0 0 0-24-24H24a8 8 0 0 1-8-8V56a8 8 0 0 1 8-8h64a32 32 0 0 1 32 32v87.73a8.17 8.17 0 0 0 7.47 8.25a8 8 0 0 0 8.53-8V80a32 32 0 0 1 32-32h64a8 8 0 0 1 8 8"/>',phoneoff:'<path d="M236.28 177.85a16 16 0 0 1-18.38 5.07l-24.76-19a3.4 3.4 0 0 1-.53-.48l-83.43-91.82a4 4 0 0 1 2.55-6.68c43-4.62 87.74 9.12 119.86 41.24c19.99 19.99 21.92 49.46 4.69 71.67M53.93 34.62a8 8 0 1 0-11.84 10.76l27.62 30.39a142 142 0 0 0-45.3 30.41c-20 20-21.92 49.46-4.69 71.67a16 16 0 0 0 18.38 5.07l49-17.37l.29-.11a16 16 0 0 0 9.75-11.72l5.9-29.51a74 74 0 0 1 8.57-2.39l90.5 99.56a8 8 0 1 0 11.84-10.76Z"/>',flame:'<path d="M173.79 51.48a221.3 221.3 0 0 0-41.67-34.34a8 8 0 0 0-8.24 0a221.3 221.3 0 0 0-41.67 34.34C54.59 80.48 40 112.47 40 144a88 88 0 0 0 176 0c0-31.53-14.59-63.52-42.21-92.52M96 184c0-27.67 22.53-47.28 32-54.3c9.48 7 32 26.63 32 54.3a32 32 0 0 1-64 0"/>',target:'<path d="M221.87 83.16A104.1 104.1 0 1 1 195.67 49l22.67-22.68a8 8 0 0 1 11.32 11.32L167.6 99.71l-37.71 37.71l-23.95 23.95a40 40 0 0 0 62-35.67a8 8 0 1 1 16-.9a56 56 0 0 1-95.5 42.79a56 56 0 0 1 73.13-84.43l22.73-22.77a87.88 87.88 0 1 0 23.13 29.67a8 8 0 0 1 14.44-6.9"/>',repeat:'<path d="M24 128a72.08 72.08 0 0 1 72-72h96V40a8 8 0 0 1 13.66-5.66l24 24a8 8 0 0 1 0 11.32l-24 24A8 8 0 0 1 192 88V72H96a56.06 56.06 0 0 0-56 56a8 8 0 0 1-16 0m200-8a8 8 0 0 0-8 8a56.06 56.06 0 0 1-56 56H64v-16a8 8 0 0 0-13.66-5.66l-24 24a8 8 0 0 0 0 11.32l24 24A8 8 0 0 0 64 216v-16h96a72.08 72.08 0 0 0 72-72a8 8 0 0 0-8-8"/>',bell:'<path d="M221.8 175.94c-5.55-9.56-13.8-36.61-13.8-71.94a80 80 0 1 0-160 0c0 35.34-8.26 62.38-13.81 71.94A16 16 0 0 0 48 200h40.81a40 40 0 0 0 78.38 0H208a16 16 0 0 0 13.8-24.06M128 216a24 24 0 0 1-22.62-16h45.24A24 24 0 0 1 128 216"/>',checklist:'<path d="M208 32H48a16 16 0 0 0-16 16v160a16 16 0 0 0 16 16h160a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16m-90.34 117.66l-32 32a8 8 0 0 1-11.32 0l-16-16a8 8 0 0 1 11.32-11.32L80 164.69l26.34-26.35a8 8 0 0 1 11.32 11.32m0-64l-32 32a8 8 0 0 1-11.32 0l-16-16a8 8 0 0 1 11.32-11.32L80 100.69l26.34-26.35a8 8 0 0 1 11.32 11.32M192 168h-48a8 8 0 0 1 0-16h48a8 8 0 0 1 0 16m0-64h-48a8 8 0 0 1 0-16h48a8 8 0 0 1 0 16"/>',barbell:'<path d="M200 64v128a16 16 0 0 1-16 16h-16a16 16 0 0 1-16-16v-56h-48v56a16 16 0 0 1-16 16H72a16 16 0 0 1-16-16V64a16 16 0 0 1 16-16h16a16 16 0 0 1 16 16v56h48V64a16 16 0 0 1 16-16h16a16 16 0 0 1 16 16M36 72h-4a16 16 0 0 0-16 16v32H8.27A8.18 8.18 0 0 0 0 127.47A8 8 0 0 0 8 136h8v32a16 16 0 0 0 16 16h4a4 4 0 0 0 4-4V76a4 4 0 0 0-4-4m220 55.47a8.18 8.18 0 0 0-8.25-7.47H240V88a16 16 0 0 0-16-16h-4a4 4 0 0 0-4 4v104a4 4 0 0 0 4 4h4a16 16 0 0 0 16-16v-32h8a8 8 0 0 0 8-8.53"/>',drop:'<path d="M174 47.75a254.2 254.2 0 0 0-41.45-38.3a8 8 0 0 0-9.18 0A254.2 254.2 0 0 0 82 47.75C54.51 79.32 40 112.6 40 144a88 88 0 0 0 176 0c0-31.4-14.51-64.68-42-96.25m9.85 105.59a57.6 57.6 0 0 1-46.56 46.55a9 9 0 0 1-1.29.11a8 8 0 0 1-1.32-15.89c16.57-2.79 30.63-16.85 33.44-33.45a8 8 0 0 1 15.78 2.68Z"/>',house:'<path d="M224 120v96a8 8 0 0 1-8 8h-56a8 8 0 0 1-8-8v-52a4 4 0 0 0-4-4h-40a4 4 0 0 0-4 4v52a8 8 0 0 1-8 8H40a8 8 0 0 1-8-8v-96a16 16 0 0 1 4.69-11.31l80-80a16 16 0 0 1 22.62 0l80 80A16 16 0 0 1 224 120"/>',brain:'<path d="M212 76v-4a44 44 0 0 0-74.86-31.31a3.93 3.93 0 0 0-1.14 2.8v88.72a4 4 0 0 0 6.2 3.33a47.67 47.67 0 0 1 25.48-7.54a8.18 8.18 0 0 1 8.31 7.58a8 8 0 0 1-8 8.42a32 32 0 0 0-32 32v33.88a4 4 0 0 0 1.49 3.12a47.92 47.92 0 0 0 74.21-17.16a4 4 0 0 0-4.49-5.56A68 68 0 0 1 192 192h-7.73a8.18 8.18 0 0 1-8.25-7.47a8 8 0 0 1 8-8.53h8a51.6 51.6 0 0 0 24-5.88A52 52 0 0 0 212 76m-12 36h-4a36 36 0 0 1-36-36v-4a8 8 0 0 1 16 0v4a20 20 0 0 0 20 20h4a8 8 0 0 1 0 16M88 28a44.05 44.05 0 0 0-44 44v4a52 52 0 0 0-4 94.12A51.6 51.6 0 0 0 64 176h7.73a8.18 8.18 0 0 1 8.27 7.47a8 8 0 0 1-8 8.53h-8a67.5 67.5 0 0 1-15.21-1.73a4 4 0 0 0-4.5 5.55A47.93 47.93 0 0 0 118.51 213a4 4 0 0 0 1.49-3.12V176a32 32 0 0 0-32-32a8 8 0 0 1-8-8.42a8.18 8.18 0 0 1 8.32-7.58a47.67 47.67 0 0 1 25.48 7.54a4 4 0 0 0 6.2-3.33V43.49a4 4 0 0 0-1.14-2.81A43.85 43.85 0 0 0 88 28m8 48a36 36 0 0 1-36 36h-4a8 8 0 0 1 0-16h4a20 20 0 0 0 20-20v-4a8 8 0 0 1 16 0Z"/>',pill:'<path d="M216.43 39.6a53.27 53.27 0 0 0-75.33 0L39.6 141.09a53.26 53.26 0 0 0 75.32 75.31l101.51-101.49a53.32 53.32 0 0 0 0-75.31m-11.32 64l-50.75 50.74l-52.69-52.68l50.75-50.75a37.26 37.26 0 0 1 52.69 52.69m-15.43-21.26a8 8 0 0 1 0 11.32l-24 24a8 8 0 1 1-11.31-11.32l24-24a8 8 0 0 1 11.31 0"/>',book:'<path d="M216 32v160a8 8 0 0 1-8 8H72a16 16 0 0 0-16 16h136a8 8 0 0 1 0 16H48a8 8 0 0 1-8-8V56a32 32 0 0 1 32-32h136a8 8 0 0 1 8 8"/>',lotus:'<path d="M245.83 121.63a15.53 15.53 0 0 0-9.52-7.33a73.6 73.6 0 0 0-22.17-2.22c4-19.85 1-35.55-2-44.86a16.17 16.17 0 0 0-18.8-10.88a85.5 85.5 0 0 0-28.55 12.12a94.6 94.6 0 0 0-27.11-33.25a16.05 16.05 0 0 0-19.26 0a94.6 94.6 0 0 0-27.16 33.25a85.5 85.5 0 0 0-28.55-12.12a16.14 16.14 0 0 0-18.79 10.88c-3 9.31-6 25-2.06 44.86a73.6 73.6 0 0 0-22.17 2.22a15.53 15.53 0 0 0-9.52 7.33a16 16 0 0 0-1.6 12.26c3.39 12.58 13.8 36.49 45.33 55.33S113.13 208 128.05 208s42.67 0 74-18.78c31.53-18.84 41.94-42.75 45.33-55.33a16 16 0 0 0-1.55-12.26M62.1 175.49C35.47 159.57 26.82 140.05 24 129.7a59.6 59.6 0 0 1 22.5-1.17a129 129 0 0 0 9.15 19.41a142.3 142.3 0 0 0 34 39.56a115 115 0 0 1-27.55-12.01M128 190.4c-9.33-6.94-32-28.23-32-71.23C96 76.7 118.38 55.24 128 48c9.62 7.26 32 28.72 32 71.19c0 42.98-22.67 64.27-32 71.21m104-60.68c-2.77 10.24-11.4 29.81-38.09 45.77a115 115 0 0 1-27.55 12a142.3 142.3 0 0 0 34-39.56a129 129 0 0 0 9.15-19.41a59.7 59.7 0 0 1 22.49 1.19Z"/>',briefcase:'<path d="M152 112a8 8 0 0 1-8 8h-32a8 8 0 0 1 0-16h32a8 8 0 0 1 8 8m80-40v128a16 16 0 0 1-16 16H40a16 16 0 0 1-16-16V72a16 16 0 0 1 16-16h40v-8a24 24 0 0 1 24-24h48a24 24 0 0 1 24 24v8h40a16 16 0 0 1 16 16M96 56h64v-8a8 8 0 0 0-8-8h-48a8 8 0 0 0-8 8Zm120 57.61V72H40v41.61A184 184 0 0 0 128 136a184 184 0 0 0 88-22.39"/>',user:'<path d="M230.93 220a8 8 0 0 1-6.93 4H32a8 8 0 0 1-6.92-12c15.23-26.33 38.7-45.21 66.09-54.16a72 72 0 1 1 73.66 0c27.39 8.95 50.86 27.83 66.09 54.16a8 8 0 0 1 .01 8"/>',pulse:'<path d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16m-8 96h-19.36L159 188a8 8 0 0 1-6.95 4h-.46a8 8 0 0 1-6.89-4.84L103 89.92L79 132a8 8 0 0 1-7 4H48a8 8 0 0 1 0-16h19.36l29.69-52a8 8 0 0 1 14.3.82L153 166.08l24-42.05a8 8 0 0 1 6.95-4h24a8 8 0 0 1 0 16Z"/>',broom:'<path d="M235.29 216.7C212.86 205.69 200 182.12 200 152v-17.31a15.94 15.94 0 0 0-10.09-14.87l-28.65-11.46A8 8 0 0 1 156.79 98l22.32-56.67C184 28.79 178 14.21 165.34 9.51a24 24 0 0 0-30.7 13.71l-22.39 56.86a8 8 0 0 1-10.41 4.5l-28.73-11.5a15.91 15.91 0 0 0-17.38 3.66C34.68 98.4 24 123.71 24 152a111.53 111.53 0 0 0 31.15 77.53A8.06 8.06 0 0 0 61 232h171a8 8 0 0 0 8-7.51a8.21 8.21 0 0 0-4.71-7.79m-120.18-.7a87.5 87.5 0 0 1-24.26-41.71a8.21 8.21 0 0 0-9.25-6.18a8 8 0 0 0-6.32 9.89a105.3 105.3 0 0 0 18.36 38h-29.2A95.62 95.62 0 0 1 40 152a85.9 85.9 0 0 1 7.73-36.3l137.8 55.13c3 18.06 10.55 33.5 21.89 45.19Z"/>'};
   PHI.timer='<path d="M128,40a96,96,0,1,0,96,96A96.11,96.11,0,0,0,128,40Zm45.66,61.66-40,40a8,8,0,0,1-11.32-11.32l40-40a8,8,0,0,1,11.32,11.32ZM96,16a8,8,0,0,1,8-8h48a8,8,0,0,1,0,16H104A8,8,0,0,1,96,16Z"/>';   /* Phosphor Fill timer (MIT) */
-  var CAT_ICON_DEFAULT={c_todo:"checklist",c_health:"heartbeat",c_medicine:"pill",c_checkups:"tooth",c_fitness:"barbell",c_hygiene:"drop",c_sleepfood:"moon",c_reading:"bookopen",c_learning:"brain",c_calm:"lotus",c_creative:"pencil",c_home:"house",c_mind:"brain"};
+  var CAT_ICON_DEFAULT={c_todo:"checklist",c_health:"heartbeat",c_medicine:"pill",c_checkups:"tooth",c_fitness:"barbell",c_hygiene:"tooth",c_sleepfood:"moon",c_food:"drop",c_reading:"bookopen",c_learning:"brain",c_calm:"lotus",c_creative:"pencil",c_home:"house",c_mind:"brain"};
   var CAT_ICONS=["checklist","barbell","drop","house","brain","pill","book","lotus","briefcase","user","pulse","broom"];
   function PI(n){return phicon(n,"pi")}
   function phicon(n,cls){var p=PHI[n];if(!p)return"";return '<svg class="phi'+(cls?" "+cls:"")+'" viewBox="0 0 256 256" aria-hidden="true">'+p+'</svg>';}
@@ -4374,7 +4413,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   setTimeout(acctInit,0);
   var navOpen=null;function navOpenState(){if(!navOpen){try{navOpen=JSON.parse(localStorage.getItem("ritsu_navopen")||"{}")}catch(e){navOpen={}}}return navOpen}
   function familyOn(){try{return localStorage.getItem("ritsu_family")==="1"}catch(e){return false}}
-  function todoLists(){var a=[["work","Work"],["home","Home"],["personal","Personal"]];if(familyOn())a.push(["family","Family"]);return a}
+  function todoLists(){var a=[["work","Work"],["home","Home"],["money","Money and admin"],["personal","People"]];if(familyOn())a.push(["family","Family"]);return a}
 
   function render(){if(!Store.ready)return;capFix();document.body.classList.toggle("welcome",!!Store.welcome);Buddy.apply();if(Store.welcome){$("#view").innerHTML=viewWelcome();var wbEl=$("#welcomeBlob");if(wbEl)Buddy.temp(wbEl,"wave",true);return;}renderNav();document.body.setAttribute("data-view",state.view);var v=$("#view");
     if(state.view==="day")v.innerHTML=viewDay();else if(state.view==="fasting")v.innerHTML=viewFasting();else if(state.view==="medreport")v.innerHTML=viewMedReport(state.medId);else if(state.view==="reports"||state.view==="patmore"||state.view==="patarea")v.innerHTML=viewReports();else if(state.view==="people")v.innerHTML=viewPeople();else if(state.view==="settings"||state.view==="yousub")v.innerHTML=viewSettings();
@@ -4899,8 +4938,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   }
   function dayCols(v){var dps=[].slice.call(v.querySelectorAll(":scope > .dp"));if(dps.length<2)return;
     var L=document.createElement("div"),R=document.createElement("div"),W=document.createElement("div");W.className="dp-cols";L.className="dp-col";R.className="dp-col";
-    dps[0].parentNode.insertBefore(W,dps[0]);dps.forEach(function(d){var k=d.getAttribute("data-part");(k==="todo"||k==="body"?L:R).appendChild(d)});
-    W.appendChild(L);if(R.children.length)W.appendChild(R);else W.classList.add("one")}
+    dps[0].parentNode.insertBefore(W,dps[0]);W.appendChild(L);W.appendChild(R);   /* each part goes to the shorter column */
+    dps.forEach(function(d){(L.offsetHeight<=R.offsetHeight?L:R).appendChild(d)});if(!R.children.length){W.removeChild(R);W.classList.add("one")}}
   function swWrap(v){
     if(window.innerWidth>820){if(window.innerWidth>=1100&&state.view==="day")dayCols(v);return}
     var dps=v.querySelectorAll(":scope > .dp");
@@ -5115,7 +5154,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /* card, then group: Body (Medicine, Fitness ...), Mind, To-do (Work, Home, Personal). Empty groups are not drawn. */
   function qcGroupOf(i){
     var d=areaDomain(i.catId);
-    if(d==="todo"){var l=i.catId==="c_home"?"home":(i.list||"work");return [{work:0,home:1,personal:2,family:3}[l]||0,{work:"Work",home:"Home",personal:"Personal",family:"Family"}[l]||"Work"];}
+    if(d==="todo"){var l=i.catId==="c_home"?"home":(i.list||"work");return [{work:0,home:1,money:2,personal:3,family:4}[l]||0,{work:"Work",home:"Home",money:"Money and admin",personal:"People",family:"Family"}[l]||"Work"];}
     var c=Store.get("cats",i.catId);return [(c&&c.order)||0,(c&&c.name)||"Other"];
   }
   /* By time: one list from morning to night (the next time for things done several times a day), untimed ones after, done ones last */
@@ -5401,7 +5440,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var lists=todoLists().map(function(l){
       var its=Store.all("items").filter(function(i){return canSee(i)&&!i.archived&&((i.catId===TODO_CAT&&(i.list||"work")===l[0])||(l[0]==="home"&&i.catId==="c_home"))}),
         td=its.filter(schedToday);
-      return {key:"todo:"+l[0],name:l[1],icon:{work:"briefcase",home:"house",personal:"user",family:"users"}[l[0]]||"checklist",n:its.length,today:td,done:td.filter(doneT2),subs:[],open:l[0]==="home"&&Store.get("cats","c_home")?'data-area="c_home"':'data-nav="day"'};});
+      return {key:"todo:"+l[0],name:l[1],icon:{work:"briefcase",home:"house",money:"wallet",personal:"users",family:"users"}[l[0]]||"checklist",n:its.length,today:td,done:td.filter(doneT2),subs:[],open:l[0]==="home"&&Store.get("cats","c_home")?'data-area="c_home"':'data-nav="day"'};});
     return lists.concat(out);
   }
   function wlCard(c){
@@ -5565,15 +5604,9 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var filtered=state.filterTag?its.filter(function(i){return (i.tags||[]).indexOf(state.filterTag)>-1}):its;
     if(!its.length){h+='<div class="ar-empty"><b>Nothing here yet</b><p>Add a habit, a to-do or something to keep track of.</p><button class="ar-first" data-action="add-item" data-cat="'+c.id+'">+ Add the first one</button></div>';return h;}
     if(!filtered.length){h+='<div class="cat-empty">Nothing matches that tag.</div>';return h;}
-    /* stance is a property of the item, not a new place to put it, so we group by it here */
-    var GRP=[["routine","Routine"],["body","Body"],["fast","Fasting"],["episode","Episodes"],["limit","Holding off"]];
-    GRP.forEach(function(g){
-      var mine=filtered.filter(function(i){return stanceOf(i)===g[0]});
-      if(!mine.length)return;
-      if(filtered.length!==mine.length)h+='<div class="sec-h" style="margin-top:24px"><h2 style="font-size:1.0625rem">'+g[1]+'</h2><span class="stance-chip '+g[0]+'">'+g[0]+'</span><span class="line"></span></div>';
-      var subs={},order=[];mine.forEach(function(i){var sb=i.sub||"General";if(!subs[sb]){subs[sb]=[];order.push(sb);}subs[sb].push(i);});
-      order.forEach(function(sb){var list=subs[sb].slice().sort(itemSort);h+='<div class="sub"><p class="sub-label">'+esc(sb)+'</p><div class="card">';list.forEach(function(i){h+=itemRow(i);});h+='</div></div>';});
-    });
+    /* the tree (2026-10-14): a sub is about WHAT it is, so an area page is one list, no headings by how it works */
+    var ord={routine:0,body:1,fast:1,episode:2,limit:3};
+    h+='<div class="card">'+filtered.slice().sort(function(a,b){return (ord[stanceOf(a)]||0)-(ord[stanceOf(b)]||0)||itemSort(a,b)}).map(function(i){return itemRow(i)}).join("")+'</div>';
     return h;
   }
   function viewDay(){
@@ -5591,7 +5624,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       return h;
     }
     /* the day in parts, like Home: To-do, Body, Mind, then Logs (things you record; they never count). Phones: one swipe page per part */
-    var partOf=function(i){return isTracker(i)?"logs":i.catId===TODO_CAT?"todo":areaDomain(i.catId)},P={todo:[],body:[],mind:[],logs:[]};
+    var partOf=function(i){return i.catId===TODO_CAT?"todo":areaDomain(i.catId)},P={todo:[],body:[],mind:[],logs:[]};
     due.forEach(function(i){(P[partOf(i)]||P.todo).push(i)});
     var cnt=function(k){var x=hsD&&hsD[k];return x&&x.tot?x.done+"/"+x.tot:""};
     var rows=function(list){var b='<div class="card">';list.forEach(function(i){b+=itemRow(i,{ds:ds})});return b+'</div>'};
@@ -5604,6 +5637,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(due.length){
       h+='<div class="dtabs" role="tablist" aria-label="Parts of the day">'+parts.map(function(p,k){var n=p[0]!=="logs"?cnt(p[0]):"";return '<button role="tab" aria-selected="'+(k===0)+'" data-dtab="'+k+'"'+(k===0?' class="on"':'')+(n?' aria-label="'+p[1]+', '+n+' done"':'')+(p[0]==="logs"?' data-logs':'')+'>'+(p[0]==="body"||p[0]==="mind"?'<i class="dt-'+p[0]+'"></i>':'')+p[1]+(n?'<span class="dt-f" aria-hidden="true" style="--f:'+(function(a){return a[1]>0?(a[0]/a[1]).toFixed(3):0})(n.split("/").map(Number))+'"></span>':'')+'</button>'}).join("")+'</div>';
       parts.forEach(function(p){var k=p[0],n=cnt(k);h+='<section class="dp" data-part="'+k+'"><div class="dp-h"><h2>'+p[1]+'</h2><span>'+(k==="logs"?"for your patterns, never counted":n?n+" done":"")+'</span></div>';
+        if(k==="todo"&&off===0)h+=shopChip();
         if(k==="todo"){h+='<div class="dp-t"><span>'+(off===0?"Today":"This day")+'</span><button class="dp-add" data-action="add-day" data-date="'+ds+'">+ add</button></div>'+(now.length?rows(now.slice().sort(itemSort)):'<div class="cat-empty">Nothing due '+(off===0?"today":"this day")+'.</div>');
           if(earlier.length)h+='<div class="dp-t"><span>From earlier</span><small>not counted</small></div>'+rows(earlier.slice().sort(itemSort));}
         else if(k==="logs")h+='<p class="dp-note">For your patterns. These never count toward your day.</p>'+topics(P.logs);
@@ -5613,6 +5647,14 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(!due.length)h+='<div class="empty"><h3>'+(off<0?"Nothing was planned":"A clear day")+'</h3><p>'+(off<0?"Nothing was on the list for this day.":"Tap + to add something, or type a line like \u201ccall mum tomorrow at 5\u201d.")+'</p></div>';
     return h;
   }
+  /* ===== At the shop (2026-10-14): things you rebuy, soonest first; Bought resets each one ===== */
+  function shopItems(){return visibleItems().filter(function(i){return i.kind==="upkeep"&&i.mode==="rebuy"&&!i.archived}).sort(function(a,b){return dCount(nextDue(a))-dCount(nextDue(b))})}
+  function shopChip(){var its=shopItems();if(!its.length)return "";var low=its.filter(function(i){return dCount(nextDue(i))<=7}).length;
+    return '<button class="dp-shop" data-shop>'+PI("receipt")+'<span><b>At the shop</b><small>'+(low?low+" running low":its.length+(its.length===1?" thing":" things")+" to restock")+'</small></span><em aria-hidden="true">\u203a</em></button>'}
+  function openShop(){var its=shopItems();ms={type:"shop"};
+    openModal('<div class="modal-h"><h3>At the shop</h3><button class="x" data-close aria-label="Close">\u00d7</button></div><div class="modal-b"><p class="tp-sub">Everything you restock, soonest first. Tap Bought as you pick it up.</p>'+
+      (its.length?'<div class="card">'+its.map(function(i){return itemRow(i)}).join("")+'</div>':'<p class="tp-none">Nothing to restock. Add soap, toothpaste and more from Ideas.</p>')+'</div>')}
+  /* ===== At the shop (end) ===== */
   function dueOnDate(i,ds,off){
     if(isLimit(i)||isEpisode(i)||isFast(i))return false; /* nothing is "due", it lives in its own strip */
     if(hasRhythm(i))return planOn(i,ds);
@@ -6101,6 +6143,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   var APP_VER="0.3.0";
   var WHATS_NEW=[
     ["star","A calmer, more polished look","Soft glass cards on quiet paper. A warm glow behind your number grows as your day fills."],
+    ["grid","Everything in its place","Body, Mind and To-do, each with clear parts like Sleep, Food and water, Money and admin. Your things moved for you."],
+    ["receipt","At the shop","Everything you restock in one list. Tap Bought as you go."],
     ["checklist","Calmer lists","Each thing shows one short line, like “3 more · next at 12pm”. The details live on its own page."],
     ["caretr","A new date dial","Glide through your days. Pick Lens, Watch or Card under You, Appearance."],
     ["timer","Fasting and medicine on Home","Your fasting clock sits with your logs, and medicine due soon shows there too."],
@@ -6140,7 +6184,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(!acct.user)h+=remNative()?'<button class="you-safe" data-yous="data"><span><b>Keep your day safe</b><small>Save a backup of your diary to keep somewhere safe.</small></span><i aria-hidden="true">'+youIcon("lock")+'</i></button>':'<button class="you-safe" data-acct="open"><span><b>Keep your day safe</b><small>Sign in, and your diary is backed up locked.</small></span><i aria-hidden="true">'+youIcon("key")+'</i></button>';
     h+='<div class="ylist">'+youRow('data-yous="name"',"Your name",me?me.name.split(" ")[0]:"Tap to set","user")+youRow('data-yous="look"',"Appearance",{warm:"Light",dark:"Dark",auto:"Auto"}[theme]||"","sun")+youRow('data-yous="rem"',"Reminders",remNative()?(remOn()?"On":"Off"):"","bell")+
       youRow('data-logpick',"Your logs","","list")+youRow('data-nav="fasting"',"Fasting","","timer")+'</div>';
-    h+='<div class="ylist">'+youRow('data-yous="areas"',"Your areas",cats().filter(function(c){return c.id!==TODO_CAT}).length,"grid")+youRow('data-action="library"',"Templates","","copy")+youRow('data-nav="people"',"People","","people")+youRow('data-yous="family"',"Family",familyOn()?"On":"Off","home")+'</div>';
+    h+='<div class="ylist">'+youRow('data-yous="areas"',"Your areas",cats().filter(function(c){return c.id!==TODO_CAT}).length,"grid")+youRow('data-action="library"',"Ideas","","copy")+youRow('data-nav="people"',"People","","people")+youRow('data-yous="family"',"Family",familyOn()?"On":"Off","home")+'</div>';
     h+='<div class="ylist">'+youRow('data-yous="buddy"',"Companion",Buddy.cfg.show?"On":"Off","smile")+
       (remNative()?'':acct.user?youRow('data-acct="manage"',"Account","Signed in","key"):youRow('data-acct="open"',"Sign in","","key"))+youRow('data-yous="data"',"Backup and privacy","","lock")+youRow('data-yous="flags"',"Your flags","","flag")+youRow('data-news',"What\u2019s new",APP_VER,"star")+'</div>';
     h+='<p style="color:var(--faint);font-size:0.75rem;text-align:center;margin-top:22px">Daywell'+(Store.local?' · prototype, saved on this device':'')+'</p>';return h;
@@ -6282,10 +6326,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     ["c_todo","To-do","🗒️","#8E97A3",0,"todo","checklist"],
     ["c_health","Health","💪","#34D399",1,"body","heartbeat"],
     ["c_medicine","Medicine","💊","#34D399",2,"body","pill"],
-    ["c_checkups","Checkups","🩺","#34D399",3,"body","tooth"],
-    ["c_fitness","Fitness","🏃","#34D399",4,"body","barbell"],
-    ["c_hygiene","Hygiene and care","🧼","#34D399",5,"body","drop"],
-    ["c_sleepfood","Sleep and food","🌙","#34D399",6,"body","moon"],
+    ["c_fitness","Movement","🏃","#34D399",3,"body","barbell"],
+    ["c_sleepfood","Sleep","🌙","#34D399",4,"body","moon"],
+    ["c_food","Food and water","🥗","#34D399",5,"body","drop"],
+    ["c_hygiene","Hygiene and care","🧼","#34D399",6,"body","tooth"],
     ["c_reading","Reading","📚","#A78BFA",7,"mind","bookopen"],
     ["c_learning","Learning","🎓","#A78BFA",8,"mind","brain"],
     ["c_calm","Calm","🧘","#A78BFA",9,"mind","lotus"],
@@ -6419,6 +6463,25 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     try{localStorage.setItem("ritsu_backup_before_areas",snap);}catch(e){}
     S._save();S._savePriv();
     setTimeout(function(){toast("Your areas are tidied into the new groups."+(moved?" "+moved+(moved===1?" thing moved.":" things moved."):""),cbUndo(snap));},900);
+  }
+  /* One time (2026-10-14): the tree. Fitness becomes Movement, Sleep and food splits into Sleep and Food and water,
+     Checkups joins Health, money things in the People (was Personal) list move to Money and admin. Nothing is deleted except the empty Checkups area. */
+  function migrateTree1(S){
+    try{if(localStorage.getItem("ritsu_mig_tree1"))return;}catch(e){return}
+    var snap=JSON.stringify({cache:S.cache,priv:S._priv}),moved=0,C=S.cache.cats;
+    if(C.c_fitness&&C.c_fitness.name==="Fitness")C.c_fitness.name="Movement";
+    if(C.c_sleepfood&&C.c_sleepfood.name==="Sleep and food")C.c_sleepfood.name="Sleep";
+    if(C.c_hygiene&&C.c_hygiene.icon==="drop")C.c_hygiene.icon="tooth";
+    if(!C.c_food)C.c_food=groupCat(GROUP_CATS.filter(function(c){return c[0]==="c_food"})[0]);
+    [S.cache.items||{},S._priv||{}].forEach(function(m){Object.keys(m).forEach(function(k){var i=m[k];
+      if(i.catId==="c_sleepfood"&&FOOD_RE.test(i.title||"")&&!/sleep|bed/i.test(i.title||"")){i.catId="c_food";moved++;}
+      else if(i.catId==="c_checkups"){i.catId="c_health";moved++;}
+      else if(i.catId===TODO_CAT&&(i.list||"personal")==="personal"&&MONEY_RE.test(i.title||"")){i.list="money";moved++;}})});
+    if(C.c_checkups)delete C.c_checkups;
+    try{localStorage.setItem("ritsu_mig_tree1",today());}catch(e){}
+    try{localStorage.setItem("ritsu_backup_before_tree",snap);}catch(e){}
+    S._save();S._savePriv();
+    if(moved)setTimeout(function(){toast("Your areas follow the new tree. "+moved+(moved===1?" thing moved.":" things moved."),cbUndo(snap));},1100);
   }
   function cbSnap(){return JSON.stringify({cache:Store.cache,priv:Store._priv,me:state.me})}
   function cbUndo(snap){return function(){var p=JSON.parse(snap);Store.cache=p.cache;Store._priv=p.priv||{};Store._save();Store._savePriv();Store._emit();}}
@@ -6637,7 +6700,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   document.addEventListener("toggle",function(e){var g=e.target&&e.target.getAttribute&&e.target.getAttribute("data-rm");if(g)_rmOpen[g]=e.target.open},true);
   function cbPanel(){
     var h='<div class="sec-h"><h2>Reminders</h2><span class="line"></span></div><div class="panel">',cc=userCountry();
-    h+='<div class="su-sw"><span class="su-ic">'+phicon("checklist")+'</span><span class="tx"><b>Templates</b><small>Ready-made ideas, sorted by topic</small></span><button class="cb-b" data-action="library">Browse</button></div>'+
+    h+='<div class="su-sw"><span class="su-ic">'+phicon("checklist")+'</span><span class="tx"><b>Ideas</b><small>Ready-made ideas for Body, Mind and To-do</small></span><button class="cb-b" data-action="library">Browse</button></div>'+
        '<div class="su-sw"><span class="su-ic">'+phicon("alarm")+'</span><span class="tx"><b>Import a Calendar</b><small>From Google, Outlook or Apple Calendar</small></span><button class="cb-b" data-cal="open">Choose File</button></div>'+
        '<div class="su-sw"><span class="su-ic">'+phicon("house")+'</span><span class="tx"><b>Your Country</b><small>'+esc(countryName(cc))+'</small></span><button class="cb-b" data-tp="country">Change</button></div>';
     var by={};CB_LIB.filter(function(d){return tplFits(d.tpl,cc,false)}).forEach(function(d){var g=d.cat||("todo:"+(d.list||"personal"));(by[g]=by[g]||[]).push(d)});
@@ -6720,8 +6783,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function packMake(x,ix){if(x.cb){cbCreate(x.cb,"unsure",ix);return}var d=packData(x,ix);if(d){d.tpl=1;Store.add("items",d);}}
   function packData(x,ix){
     var d;
-    if(x.lib){var L=packLib(x.lib);if(!L)return;d=libToData(L.t,tplGroup(L.t,L.g));}
-    else d=libToData(x,x.G||"c_medicine");
+    var gg=x.lib?null:(x.G||"c_medicine");
+    if(x.lib){var L=packLib(x.lib);if(!L)return;gg=tplGroup(L.t,L.g);d=libToData(L.t,gg.indexOf("todo:")===0?TODO_CAT:gg);}
+    else d=libToData(x,gg.indexOf("todo:")===0?TODO_CAT:gg);
+    if(gg.indexOf("todo:")===0)d.list=gg.slice(5);
     if(x.med){d.kind="todo";d.repeatEvery=0;d.dueDate=today();d.addMed=1;d.count=false;d.notes="Tap to add the name, time and pills.";}
     if(x.steps){d.steps=x.steps.slice();d.perDay=x.steps.length;}
     if(x.rem)d.reminder=x.rem;if(x.perWeek)d.perWeek=x.perWeek;if(x.quiet){d.count=false;d.private=true;}
@@ -6734,7 +6799,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     return {catId:TODO_CAT,sub:"",title:cap1(t.title),kind:"todo",notes:"",priority:"med",tags:[],assignees:[],private:false,done:false,dueDate:t.date,repeatEvery:0,perDay:1,reminder:t.time||null,duration:null,
       stance:"routine",list:"personal",markers:[],expect:null,normal:{min:1,max:1,maxGapDays:null,maxPerWeek:null},createdAt:new Date().toISOString(),createdDate:today(),order:Date.now()+ix,owner:state.me||null};
   }
-  function setupStart(){setupS={step:1,name:"",pat:"",picked:{},at:{},often:{},own:[],ci:null,open:""};}
+  function setupStart(){setupS={step:1,name:"",pat:"s",picked:{},at:{},often:{},own:[],ci:null,open:"",ownOpen:"",back:{},backOwn:[],backOpen:"",backM:3};}
   /* ===== setup, "your day": you pick what to keep up with, Daywell makes a first guess at when (from your day pattern),
      you change anything. Parts of the day: m morning, d day, e evening; no part = Anytime; at:null = on call (never placed).
      Saved: ritsu_checkins {m,d,e} "HH:MM", ritsu_daypat; each item keeps parts[] for the check-ins later. ===== */
@@ -6742,17 +6807,20 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   var DAY_PATTERNS=[["m","Morning first","I usually have more time early.","sun","07:30","13:00","21:00"],["s","Spread through the day","My day has little pockets of time.","half","08:00","13:00","21:00"],
     ["e","Evening first","That\u2019s when I have more space.","moon","09:00","14:00","21:30"],["v","My days vary","I don\u2019t really follow one pattern.","shuffle","08:00","13:00","21:00"],["own","Build it myself","I\u2019ll place things myself.","plus","08:00","13:00","21:00"]];
   var DAY_CHIPS=[
-    {k:"brush",n:"Brush",g:"Body",at:["m","e"],x:{t:"Brush",G:"c_hygiene"}},{k:"floss",n:"Floss",g:"Body",at:["e"],x:{t:"Floss",G:"c_hygiene"}},
+    {k:"brush",n:"Brushing",g:"Body",at:["m","e"],x:{t:"Brushing",G:"c_hygiene"}},{k:"floss",n:"Floss",g:"Body",at:["e"],x:{t:"Floss",G:"c_hygiene"}},
     {k:"skin",n:"Skincare",g:"Body",at:["m","e"],x:{t:"Skincare",G:"c_hygiene"}},{k:"gym",n:"Gym",g:"Body",at:{m:["m"],s:["e"],e:["e"]},x:{t:"Gym",G:"c_fitness",perWeek:3}},
     {k:"stretch",n:"Stretch",g:"Body",at:{m:["m"],s:["m"],e:["e"]},x:{t:"Stretch",G:"c_fitness"}},{k:"walk",n:"Walk",g:"Body",at:{m:["m"],s:["d"],e:["e"]},x:{t:"Walk",G:"c_fitness"}},
     {k:"water",n:"Water",g:"Body",at:["d"],x:{lib:"Water"}},
-    {k:"sleep",n:"Sleep hours",g:"Sleep",at:["m"],x:{lib:"Sleep hours"}},{k:"bed",n:"Bed by 11",g:"Sleep",at:["e"],x:{t:"Bedtime",G:"c_sleepfood",rem:"23:00"}},
-    {k:"wake",n:"Up by 7",g:"Sleep",at:["m"],x:{t:"Wake up",G:"c_sleepfood",rem:"07:00"}},
+    {k:"sleep",n:"Sleep hours",g:"Body",at:["m"],x:{lib:"Sleep hours"}},{k:"bed",n:"Bed by 11",g:"Body",at:["e"],x:{t:"Bedtime",G:"c_sleepfood",rem:"23:00"}},
+    {k:"wake",n:"Up by 7",g:"Body",at:["m"],x:{t:"Wake up",G:"c_sleepfood",rem:"07:00"}},
     {k:"read",n:"Read",g:"Mind",at:{m:["m"],s:["e"],e:["e"]},x:{t:"Read a little",G:"c_reading"}},{k:"calm",n:"Meditate",g:"Mind",at:{m:["m"],s:["m"],e:["e"]},x:{lib:"Meditation"}},
     {k:"journal",n:"Journal",g:"Mind",at:["e"],x:{lib:"Journaling"}},{k:"pray",n:"Pray",g:"Mind",at:["m"],x:{t:"Daily prayer",G:"c_calm",quiet:1}},
-    {k:"meds",n:"Medicine",g:"Health",x:{med:1,t:"My medicine"}},{k:"checkups",n:"Checkups",g:"Health",xs:[{cb:"checkup"},{cb:"dentist"}]},
-    {k:"unwell",n:"When unwell",g:"Health",xs:[{lib:"Fever"},{lib:"Cold"}]},{k:"logs",n:"Body logs",g:"Health",xs:[{lib:"Bowel movement"},{lib:"Weight"}]},
-    {k:"period",n:"Period",g:"Health",x:{lib:"Period"}}
+    {k:"meds",n:"Medicine",g:"Body",x:{med:1,t:"My medicine"}},
+    {k:"unwell",n:"When unwell",g:"Body",xs:[{lib:"Fever"},{lib:"Cold"}]},{k:"logs",n:"Body logs",g:"Body",xs:[{lib:"Bowel movement"},{lib:"Weight"}]},
+    {k:"period",n:"Period",g:"Body",x:{lib:"Period"}},
+    {k:"bedmade",n:"Make the bed",g:"To-do",at:["m"],x:{t:"Make the bed",G:"todo:home"}},{k:"tidy",n:"10-minute tidy",g:"To-do",at:["e"],x:{t:"10-minute tidy",G:"todo:home"}},
+    {k:"dishes",n:"Dishes after dinner",g:"To-do",at:["e"],x:{t:"Dishes after dinner",G:"todo:home"}},{k:"plan",n:"Plan tomorrow",g:"To-do",at:["e"],x:{t:"Plan tomorrow",G:"todo:work"}},
+    {k:"groc",n:"Groceries",g:"To-do",at:[],x:{t:"Groceries",G:"todo:home",rep:7}},{k:"callp",n:"Call parents",g:"To-do",at:["e"],x:{t:"Call parents",G:"todo:personal",rep:7}}
   ];
   function dayChip(k){return DAY_CHIPS.concat(setupS?setupS.own:[]).filter(function(c){return c.k===k})[0]}
   function dayAt(k){var S=setupS,c=dayChip(k);if(!c||!c.at)return null;if(S.at[k])return S.at[k];if(S.pat==="own")return [];
@@ -6760,8 +6828,9 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function dayCi(){var S=setupS;if(S.ci)return S.ci;var p=DAY_PATTERNS.filter(function(x){return x[0]===S.pat})[0]||DAY_PATTERNS[1];return {m:p[4],d:p[5],e:p[6]}}
   function ydOften(k){var c=dayChip(k);return setupS.often[k]||(c&&c.x&&c.x.perWeek?String(c.x.perWeek):"1")}
   function ydKeep(){var n=$("#su-name");if(n)setupS.name=n.value.trim()}
-  function ydOwn(txt){txt=(txt||"").trim();if(!txt)return;var g=tyGroup(txt,false),k="own"+Date.now(),n=cap1(txt);
-    setupS.own.push(g&&g.card==="todo"?{k:k,n:n,own:1,g:"Yours"}:{k:k,n:n,own:1,g:"Yours",at:[],x:{t:n,G:(g&&g.cat)||"c_fitness"}});setupS.picked[k]=true;}
+  function ydOwn(txt,part){txt=(txt||"").trim();if(!txt)return;var g=tyGroup(txt,false),k="own"+Date.now(),n=cap1(txt);part=part||(g?{todo:"To-do",body:"Body",mind:"Mind"}[g.card]:"To-do");
+    var fit=g&&{todo:"To-do",body:"Body",mind:"Mind"}[g.card]===part;
+    setupS.own.push(part==="To-do"?{k:k,n:n,own:1,g:part}:{k:k,n:n,own:1,g:part,at:[],x:{t:n,G:fit?g.cat:(part==="Mind"?"c_calm":"c_health")}});setupS.picked[k]=true;setupS.ownOpen="";}
   var YDI={sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/>',
     half:'<circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" class="yd-fill"/>',moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
     shuffle:'<path d="M3 7h4l10 10h4M3 17h4l3-3M14 10l3-3h4M18 4l3 3-3 3M18 14l3 3-3 3"/>',plus:'<path d="M12 5v14M5 12h14"/>',
@@ -6770,33 +6839,49 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function ydI(n,cls){return '<svg class="yd-i'+(cls?" "+cls:"")+'" viewBox="0 0 24 24" aria-hidden="true">'+YDI[n]+'</svg>'}
   function ydTop(n){var d="";for(var i=1;i<=5;i++)d+='<i class="'+(i<=n?"on":"")+'"></i>';
     return '<div class="yd-top"><button class="su-skip" data-setup="ydback">Back</button><div class="su-steps" aria-hidden="true">'+d+'</div><span>'+n+' of 5</span></div>'}
-  function ydAbout(){
-    var rows=[[ydI("check"),"Everything in one place","Body, mind and to-dos, all yours.",""],
-      [ydI("clock"),"On your timing","You choose what goes when. We never decide for you.",""],
-      [ydI("chat"),"A gentle check-in","At your times, one short message.",'<div class="yd-bub"><span class="yd-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="yd-msg">Good time to check in?</span></div>'],
-      ['<span class="yd-fr" aria-hidden="true"><i></i><i></i><i></i></span>','Grow together <em class="yd-soon">Coming soon</em>',"Bring a few friends along, set a shared goal and cheer each other on. No scores, no comparing.",""]];
-    return '<div class="welcome-card su yd yd-about">'+ydTop(1)+'<div class="yd-glow" aria-hidden="true"></div><h1 class="su-title yd-in" style="--i:0">Daywell works around you.</h1><p class="su-sub yd-in" style="--i:1">A calm home for your whole day.</p><div class="yd-rows">'+
-      rows.map(function(r,i){return '<div class="yd-row" style="--i:'+(i+2)+'"><span class="yd-ri">'+r[0]+'</span><div><b>'+r[1]+'</b><small>'+r[2]+'</small>'+r[3]+'</div></div>'}).join("")+
-      '</div><p class="yd-promise yd-in" style="--i:6">No streaks. No guilt. Miss a day? Perfectly fine.</p><div class="su-foot"><span></span><button class="btn primary su-next" data-setup="ydnext">Let\u2019s make your day</button></div></div>';
-  }
   function ydName(){var S=setupS;
-    return '<div class="welcome-card su yd">'+ydTop(2)+'<h1 class="su-title" id="ydHi">'+(S.name?"Hi, "+esc(S.name)+".":"Hi there.")+'</h1><p class="su-sub">What should we call you?</p>'+
+    return '<div class="welcome-card su yd">'+ydTop(1)+'<h1 class="su-title" id="ydHi">'+(S.name?"Hi, "+esc(S.name)+".":"Hi there.")+'</h1><p class="su-sub">What should we call you?</p>'+
       '<input id="su-name" class="su-inp yd-name" type="text" placeholder="Your name" value="'+esc(S.name)+'" autocomplete="given-name" enterkeyhint="next">'+
       '<div class="su-foot"><button class="su-skip" data-setup="ydskipname">Skip</button><button class="btn primary su-next" data-setup="ydnext">Continue</button></div></div>';
   }
-  function ydPattern(){var S=setupS;
-    return '<div class="welcome-card su yd">'+ydTop(3)+'<h1 class="su-title">When do you like to do things?</h1><p class="su-sub">This tells Daywell where to make its first guess. You can move anything later.</p><div class="yd-opts">'+
-      DAY_PATTERNS.map(function(p){var on=S.pat===p[0];return '<button class="yd-opt'+(on?" on":"")+'" data-setup="ydpat|'+p[0]+'" aria-pressed="'+on+'">'+ydI(p[3])+'<span><b>'+p[1]+'</b><small>'+p[2]+'</small></span><i class="yd-radio"></i></button>'}).join("")+
-      '</div>'+(S.pat?'<div class="su-foot"><span></span><button class="btn primary su-next" data-setup="ydnext">Next</button></div>':'')+'</div>';
-  }
   function ydPick(){var S=setupS,n=0;Object.keys(S.picked).forEach(function(k){if(S.picked[k]&&dayChip(k))n++});
-    var grp=function(g,note){var cs=DAY_CHIPS.concat(S.own).filter(function(c){return c.g===g});if(!cs.length)return "";
-      return '<div class="yd-grp"><div class="yd-gl">'+g+'</div><div class="su-chips">'+cs.map(function(c){var on=!!S.picked[c.k];return '<button class="su-chip'+(on?" on":"")+'" data-setup="ydchip|'+c.k+'" aria-pressed="'+on+'">'+(on?CHECK_SVG:"")+esc(c.n)+'</button>'}).join("")+'</div>'+(note?'<p class="yd-hint">'+note+'</p>':'')+'</div>'};
-    return '<div class="welcome-card su yd">'+ydTop(4)+'<h1 class="su-title">What do you want to keep up with?</h1><p class="su-sub">Tap what you want. Leave the rest. You can add more any time.</p>'+
-      grp("Body")+grp("Sleep")+grp("Mind")+grp("Health","Health things wait on call. They never count toward your day.")+grp("Yours")+
-      '<div class="sp-inrow"><input id="yd-own" class="su-inp" type="text" placeholder="Add your own, like cold shower" autocomplete="off" enterkeyhint="done"><button class="btn primary sm" data-setup="ydown">Add</button></div>'+
-      '<div class="su-foot"><span></span><button class="btn primary su-next" data-setup="ydnext">'+(n?"Next: see my day":"Skip for now")+'</button></div></div>';
+    var grp=function(g){var cs=DAY_CHIPS.concat(S.own).filter(function(c){return c.g===g});
+      return '<div class="yd-grp"><div class="yd-gl"><i class="yd-pd" style="background:var(--c-'+{Body:"body",Mind:"mind","To-do":"todo"}[g]+')"></i>'+g+'</div><div class="su-chips">'+cs.map(function(c){var on=!!S.picked[c.k];return '<button class="su-chip'+(on?" on":"")+'" data-setup="ydchip|'+c.k+'" aria-pressed="'+on+'">'+(on?CHECK_SVG:"")+esc(c.n)+'</button>'}).join("")+
+        (S.ownOpen===g?'':'<button class="su-chip yd-ownc" data-setup="ydownopen|'+g+'">+ Add your own</button>')+'</div>'+
+        (S.ownOpen===g?'<div class="sp-inrow"><input id="yd-own" class="su-inp" type="text" placeholder="'+{Body:"Like cold shower",Mind:"Like call a friend",["To-do"]:"Like clean the car"}[g]+'" autocomplete="off" enterkeyhint="done"><button class="btn primary sm" data-setup="ydown|'+g+'">Add</button></div>':'')+'</div>'};
+    return '<div class="welcome-card su yd">'+ydTop(2)+'<h1 class="su-title">What do you want to keep up with?</h1><p class="su-sub">Tap a few. You can add anything else later.</p>'+
+      grp("Body")+grp("Mind")+grp("To-do")+
+      '<div class="su-foot"><span></span><button class="btn primary su-next" data-setup="ydnext">'+(n?"Next, "+n+" picked":"Next")+'</button></div></div>';
   }
+  /* ===== things that come back, in setup (2026-10-14): four groups of the same shape, worded for your country ===== */
+  var CB_SAY={dentist:{US:"Dental cleaning",_:"Dental check-up"},eye:{IN:"Eye check-up",_:"Eye exam"},checkup:{IN:"Full-body check-up",US:"Annual physical",_:"Yearly check-up"},blood:{US:"Blood work",_:"Blood test"},
+    insurance:{_:"Car insurance"},service:{IN:"Car servicing",_:"Car service"},vtax:{_:"Car tax"},reg:{_:"Vehicle registration"},subs:{_:"Subscriptions review"},gas:{IN:"LPG cylinder"},ro:{IN:"Water purifier filter"},
+    "Washing powder":{IN:"Detergent",US:"Laundry detergent",_:"Washing powder"},"Bin bags":{IN:"Garbage bags",US:"Trash bags",_:"Bin bags"},"Dish soap":{IN:"Dishwash liquid",GB:"Washing-up liquid",IE:"Washing-up liquid",_:"Dish soap"},
+    "Smoke alarm battery":{US:"Smoke detector battery",_:"Smoke alarm battery"},"Air filter":{US:"HVAC air filter",_:"Air filter"},"Water filter":{_:"Water filter cartridge"}};
+  function cbSay(k,cc,dflt){var m=CB_SAY[k];return (m&&(m[cc]||m._))||dflt}
+  function evDays(n){return n%365===0?(n===365?"Every year":"Every "+(n/365)+" years"):n%30===0?(n===30?"Every month":"Every "+(n/30)+" months"):n>=14?"Every "+Math.round(n/7)+" weeks":"Every "+n+" days"}
+  function ydBackGroups(cc){var cbs=CB_LIB.filter(function(d){return tplFits(d.tpl,cc,false)});
+    var cbx=function(d){return {k:"cb:"+d.key,n:cbSay(d.key,cc,d.name),ev:rhythmLabel({every:d.every},1)}},cbk=function(k){return cbs.filter(function(d){return d.key===k}).map(cbx)};
+    var up=function(ts){return ts.map(function(t){var f=packLib(t);return f&&tplFits(f.t,cc,false)?{k:"up:"+t,n:cbSay(t,cc,t),ev:evDays(f.t.int||30)}:null}).filter(Boolean)};
+    return [{id:"appt",n:"Check-ups to book",say:"We remind you when the next one is due, so you can book it.",xs:cbs.filter(function(d){return d.cat==="c_health"&&d.kind==="visit"}).map(cbx)},
+      {id:"renew",n:"Renewals",say:"A reminder a few weeks before the date.",xs:cbs.filter(function(d){return d.list==="money"}).slice(0,6).map(cbx)},
+      {id:"low",n:"Running low",say:"A nudge before you run out.",xs:cbk("gas").concat(up(["Toothpaste","Dish soap","Washing powder","Shampoo","Hand soap","Bin bags"]))},
+      {id:"repl",n:"Time to replace",say:"Mark it once when it\u2019s new. We tell you when it\u2019s worn out.",xs:up(["Toothbrush","Razor blades","Contact lenses"]).concat(cc==="IN"?cbk("ro"):up(["Water filter"])).concat(cc==="US"?up(["Air filter"]):[]).concat(cc==="IN"?[]:up(["Smoke alarm battery"]))}]}
+  function ydBackAll(){var S=setupS,cc=userCountry(),all=[];ydBackGroups(cc).forEach(function(g){all=all.concat(g.xs)});return all.concat(S.backOwn.map(function(o,j){return {k:"own:"+j,n:o.n,ev:rhythmLabel({every:o.m},1),grp:o.grp}}))}
+  function ydIntro(){
+    return '<div class="welcome-card su yd">'+ydTop(3)+'<p class="su-sub" style="margin:0">Next</p><h1 class="su-title">Some things come back every few weeks or months.</h1><p class="su-sub">A dental check-up, a car insurance renewal, toothpaste running low. On the next page we\u2019ve filled in typical timings that suit most homes, as a starting point.</p>'+
+      '<div class="yd-demo"><div class="yd-dr"><span class="yd-dt"></span><span><b>Toothpaste</b><small>Every 6 weeks</small></span><em>typical</em></div><div class="yd-dr"><span class="yd-dt"></span><span><b>Toothpaste</b><small class="yd-mine">Every 25 days</small></span><em>yours</em></div></div>'+
+      '<ul class="yd-pts"><li><b>Pick what fits you.</b> Skip anything that doesn\u2019t.</li><li><b>Change any timing later</b>, down to the day.</li><li><b>Add your own</b> now or any time.</li><li><b>Then leave it to Daywell.</b> It keeps track and reminds you when each one is due.</li></ul>'+
+      '<div class="su-foot"><span></span><button class="btn primary su-next" data-setup="ydnext">Show me</button></div></div>'}
+  function ydBack(){var S=setupS,cc=userCountry(),n=Object.keys(S.back).filter(function(k){return S.back[k]}).length;
+    var h='<div class="welcome-card su yd">'+ydTop(4)+'<h1 class="su-title">And the things that come back.</h1><p class="su-sub">Typical timings for most homes. Pick any; you can change every timing later.</p>'+
+      '<label class="yd-cc">Ideas for <select id="yd-cc" aria-label="Your country">'+COUNTRIES.concat([["XX","Somewhere else"]]).map(function(c){return '<option value="'+c[0]+'"'+(c[0]===cc||(c[0]==="XX"&&!COUNTRIES.some(function(x){return x[0]===cc}))?' selected':'')+'>'+c[1]+'</option>'}).join('')+'</select></label>';
+    ydBackGroups(cc).forEach(function(g){var xs=g.xs.concat(S.backOwn.map(function(o,j){return o.grp===g.id?{k:"own:"+j,n:o.n,ev:rhythmLabel({every:o.m},1)}:null}).filter(Boolean));if(!xs.length&&S.backOpen!==g.id)return;
+      h+='<div class="yd-grp"><div class="yd-gl">'+g.n+'</div><p class="yd-hint" style="margin:0 0 8px">'+g.say+'</p><div class="su-chips">'+xs.map(function(x){var on=!!S.back[x.k];return '<button class="su-chip yd-cb'+(on?" on":"")+'" data-setup="ydback1|'+esc(x.k)+'" aria-pressed="'+on+'"><span>'+esc(x.n)+'</span><small>'+esc(x.ev)+'</small></button>'}).join("")+
+        (S.backOpen===g.id?'':'<button class="su-chip yd-ownc" data-setup="ydbackopen|'+g.id+'">+ Add your own</button>')+'</div>'+
+        (S.backOpen===g.id?'<div class="yd-ownf"><input id="yd-bown" class="su-inp" type="text" placeholder="Like boiler service" autocomplete="off"><div class="su-chips">'+[[1,"Every month"],[3,"Every 3 months"],[6,"Every 6 months"],[12,"Every year"]].map(function(o){var on=(S.backM||3)===o[0];return '<button class="su-chip'+(on?" on":"")+'" data-setup="ydbackm|'+o[0]+'" aria-pressed="'+on+'">'+o[1]+'</button>'}).join("")+'</div><button class="btn primary sm" data-setup="ydbackadd|'+g.id+'">Add</button></div>':'')+'</div>'});
+    return h+'<div class="su-foot"><span></span><button class="btn primary su-next" data-setup="ydnext">'+(n?"Next, "+n+" picked":"Next")+'</button></div></div>'}
+  /* ===== things that come back, in setup (end) ===== */
   function ydSub(c,k){var at=dayAt(k)||[],o=ydOften(k);if(c.own&&!c.x)return "To-do for today";
     return (o!=="1"?o+" times a week":at.length>1?"Twice a day":"Every day")+(c.x&&c.x.rem?", "+fmtTime(c.x.rem):"")}
   function ydEd(c,k){var S=setupS,at=dayAt(k),h='<div class="yd-ed">';
@@ -6812,6 +6897,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       '<div class="yd-box">'+(by[p].length?by[p].map(function(c){return ydLine(c,p)}).join(""):'<p class="yd-free">Free time.</p>')+'</div></div>'};
     return '<div class="welcome-card su yd">'+ydTop(5)+'<h1 class="su-title">Here\u2019s your first day</h1><p class="su-sub">A starting point, made from what you picked. Make it feel like your day: tap anything to change it.</p>'+
       DAYPARTS.map(function(p){return sec(p[0],p[1],p[2],ci[p[0]])}).join("")+(by.any.length?sec("any","Anytime"):"")+(by.todo.length?sec("todo","To-do today"):"")+
+      (function(){var bx=ydBackAll().filter(function(x){return S.back[x.k]});return bx.length?'<div class="yd-call"><b>Comes back</b><span>'+bx.map(function(x){return esc(x.n)}).join(", ")+'</span><small>Daywell reminds you when each one is due. Change any timing later.</small></div>':''})()+
       (call.length?'<div class="yd-call"><b>On call</b><span>'+call.map(function(c){return esc(c.n)}).join(", ")+'</span><small>There when you need them. Never counted toward your day.</small></div>':'')+
       '<button class="yd-add" data-setup="ydaddmore">+ Add something</button><p class="yd-hint">Check-in times are when Daywell asks how that part of your day went. Check-ins on WhatsApp are coming soon.</p>'+
       '<div class="su-foot"><span></span><button class="btn primary su-next" data-setup="finish">This looks right</button></div></div>';
@@ -6934,7 +7020,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(Date.now()-last>6*3600*1000)lbPush().catch(function(){})}
   document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")lbAuto()});
   /* locked backup (end) */
-  function setupHtml(){var s=setupS.step;return s<=1?ydAbout():s===2?ydName():s===3?ydPattern():s===4?ydPick():ydDay()}
+  function setupHtml(){var s=setupS.step;return s<=1?ydName():s===2?ydPick():s===3?ydIntro():s===4?ydBack():ydDay()}
   function suItem(x,ix){
     var t=today(),tag=[];
     var it={catId:x.cat,sub:"",title:x.it,akind:"activity",kind:"todo",notes:"",priority:"none",tags:tag,assignees:[],private:false,done:false,dueDate:null,repeatEvery:1,perDay:1,reminder:x.rem||null,duration:null,stance:"routine",markers:[],expect:null,
@@ -6943,6 +7029,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     return it;
   }
   function setupFinish(){
+    var BX=ydBackAll().filter(function(x){return setupS.back[x.k]}),BO=setupS.backOwn;
     var S=setupS,ci=dayCi(),plan=Object.keys(S.picked).filter(function(k){return S.picked[k]&&dayChip(k)}).map(function(k){return {c:dayChip(k),at:dayAt(k),often:ydOften(k)}});
     setupS=null;
     var nm0=(S.name||"").trim();
@@ -6952,7 +7039,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     Store.welcome=false;
     try{localStorage.setItem("ritsu_checkins",JSON.stringify(ci));if(S.pat)localStorage.setItem("ritsu_daypat",S.pat)}catch(e){}
     var ix=0;plan.forEach(function(p){var c=p.c;
-      if(c.own&&!c.x){Store.add("items",packTodo({title:c.n,date:today(),time:null},ix++));return}
+      if(c.own&&!c.x){var td=packTodo({title:c.n,date:today(),time:null},ix++),gq=tyGroup(c.n,false);if(gq&&gq.card==="todo")td.list=gq.list;Store.add("items",td);return}
       (c.xs||[c.x]).forEach(function(x){if(x.cb){cbCreate(x.cb,"unsure",ix++);return}var d=packData(x,ix++);if(!d)return;
         if(p.at&&p.at.length){var tm=p.at.map(function(q){return ci[q]}).sort();d.parts=p.at.slice();
           if(!x.rem){d.reminder=tm[0];if(tm.length>1&&d.kind==="todo"){d.times=tm;d.perDay=tm.length;}}}
@@ -6960,6 +7047,11 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
         if(d.stance==="routine"&&d.kind==="todo"&&d.repeatEvery>0)d.normal={min:d.perDay,max:d.perDay,maxGapDays:d.repeatEvery,maxPerWeek:null};
         d.tpl=1;Store.add("items",d);});
     });
+    /* the things that come back you picked */
+    BX.forEach(function(x){var p=x.k.split(":");
+      if(p[0]==="cb"){var d=cbDef(p[1]);if(d&&!cbFind(p[1])){var it=cbNewItem(cbBuild(Object.assign({},d,{name:x.n}),"unsure",ix++),[]);it.catId=d.cat||TODO_CAT;it.list=d.list||"personal";Store.add("items",it);}}
+      else if(p[0]==="up"){var dd=packData({lib:p.slice(1).join(":")},ix++);if(dd){dd.title=x.n;dd.tpl=1;Store.add("items",dd);}}
+      else if(p[0]==="own"){var o=BO[+p[1]];if(o){var at={appt:{catId:"c_health"},renew:{list:"money"},low:{list:"home"},repl:{list:"home"}}[o.grp];Promise.resolve(cbAddTyped(o.n,o.m)).then(function(id){if(id&&at)Store.update("items",id,at)})}}});
     finishWelcome();
     toast(nm0?"All set, "+nm0+". Lovely to have you here.":"All set. Lovely to have you here.",null,"happy");
     try{if(!remNative()&&!localStorage.getItem("ritsu_signin_asked")){localStorage.setItem("ritsu_signin_asked","1");setTimeout(function(){acctOpen("")},1400)}}catch(e){}
@@ -6986,12 +7078,17 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       if(!setupS)return true;
       var S=setupS,go=function(n){S.step=n;S.open="";render();window.scrollTo(0,0)};
       if(a==="ydnext"){ydKeep();go(S.step+1);return true;}
-      if(a==="ydskipname"){S.name="";go(3);return true;}
-      if(a==="ydback"){ydKeep();if(S.step<=1||(S.keepWho&&S.step<=3)){setupS=null;render();}else go(S.step-1);return true;}
+      if(a==="ydskipname"){S.name="";go(2);return true;}
+      if(a==="ydback"){ydKeep();if(S.step<=1||(S.keepWho&&S.step<=2)){setupS=null;render();}else go(S.step-1);return true;}
       if(a==="ydpat"){if(S.pat!==v[1]){S.pat=v[1];S.at={};S.ci=null;}render();setTimeout(function(){if(setupS===S&&S.step===3)go(4)},280);return true;}
       if(a==="ydchip"){S.picked[v[1]]=!S.picked[v[1]];render();return true;}
-      if(a==="ydown"){var o=$("#yd-own");ydOwn(o?o.value:"");render();var o2=$("#yd-own");if(o2)o2.focus();return true;}
-      if(a==="ydaddmore"){go(4);return true;}
+      if(a==="ydown"){var o=$("#yd-own");ydOwn(o?o.value:"",v[1]);render();return true;}
+      if(a==="ydownopen"){S.ownOpen=v[1];render();setTimeout(function(){var o3=$("#yd-own");if(o3)o3.focus()},40);return true;}
+      if(a==="ydback1"){S.back[v[1]]=!S.back[v[1]];render();return true;}
+      if(a==="ydbackopen"){S.backOpen=v[1];S.backM=3;render();setTimeout(function(){var o4=$("#yd-bown");if(o4)o4.focus()},40);return true;}
+      if(a==="ydbackm"){S.backM=+v[1];var keep=($("#yd-bown")||{}).value||"";render();var o5=$("#yd-bown");if(o5){o5.value=keep;o5.focus()}return true;}
+      if(a==="ydbackadd"){var nb=(($("#yd-bown")||{}).value||"").trim();if(nb){S.backOwn.push({n:cap1(nb),m:S.backM||3,grp:v[1]});S.back["own:"+(S.backOwn.length-1)]=true;}S.backOpen="";render();return true;}
+      if(a==="ydaddmore"){go(2);return true;}
       if(a==="ydopen"){var key=v[1]+"|"+v[2];S.open=S.open===key?"":key;render();return true;}
       if(a==="ydpart"){var at=(dayAt(v[1])||[]).slice(),ai=at.indexOf(v[2]),cur=S.open.split("|")[1];if(ai<0)at.push(v[2]);else at.splice(ai,1);
         S.at[v[1]]=at;S.open=v[1]+"|"+(at.indexOf(cur)>=0?cur:(at[0]||"any"));render();return true;}
@@ -7004,12 +7101,13 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   }
   document.addEventListener("input",function(e){
     var t=e.target;if(!t)return;
+    if(t.id==="yd-cc"){try{localStorage.setItem("ritsu_country",t.value)}catch(x){}if(setupS){setupS.back={};render();}}
     if(t.id==="you-sex"){try{localStorage.setItem("ritsu_sex",t.value)}catch(x){}}
     if(t.id==="su-name"){var hi=$("#ydHi"),nm=t.value.trim();if(hi)hi.textContent=nm?"Hi, "+nm+".":"Hi there.";}
     if(t.getAttribute&&t.getAttribute("data-ci")&&setupS&&t.value){var c0=dayCi(),cc={m:c0.m,d:c0.d,e:c0.e};cc[t.getAttribute("data-ci")]=t.value;setupS.ci=cc;}
     if(t.id==="cb-when"){var P=parseTyped(t.value,new Date()),r=$("#cb-read");if(r)r.textContent=P.date?"Read as: "+dayShort(P.date)+(P.time?", "+fmtTime(P.time):""):"Friday 10am, tomorrow at 5, 25 sep...";}
   });
-  document.addEventListener("keydown",function(e){var id=e.key==="Enter"&&e.target&&e.target.id,to={"yd-own":"ydown","su-name":"ydnext"}[id];if(to){e.preventDefault();var sb=document.querySelector('[data-setup="'+to+'"]');if(sb)sb.click();}});
+  document.addEventListener("keydown",function(e){var id=e.key==="Enter"&&e.target&&e.target.id,to={"yd-own":"ydown","yd-bown":"ydbackadd","su-name":"ydnext"}[id];if(to){e.preventDefault();var sb=document.querySelector('[data-setup^="'+to+'"]');if(sb)sb.click();}});
   document.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target&&e.target.id==="cb-when"){e.preventDefault();var b=document.querySelector("[data-cbsave]");if(b)b.click();}});
   /* typed: "renew passport every 2 years" makes one that comes back */
   var CB_EVERY_RE=/\bevery\s+(\d+|a|one|two|three|four|six|twelve)?\s*(months?|years?)\b/i;
@@ -7859,19 +7957,21 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
      tyGroup reads only the text (and whether the Family list is on). First rule that matches wins. */
   var TY_GROUPS=[
     ["family","todo","family","Family",/\b(school|parents? teacher|pta|kids?|child|children|homework|tuition)\b/],
-    ["","body","c_checkups","Checkups",/\b(dentist|dental|doctor|dr|check-?ups?|physio|optician|eye test|blood tests?|blood work|scan|vaccin\w*|flu shot|screening)\b/,1],
+    ["","body","c_health","Health",/\b(dentist|dental|doctor|dr|check-?ups?|physio|optician|eye test|blood tests?|blood work|scan|vaccin\w*|flu shot|screening)\b/,1],
     ["","body","c_medicine","Medicine",/\b(meds?|medicine|medication|tablets?|pills?|vitamins?|supplements?|inhaler|insulin|refill)\b/],
     ["","body","c_hygiene","Hygiene and care",/\b(brush\w*|floss\w*|shower|bath|skincare|shave|haircut|hair cut|nails?|moisturi[sz]e|toothbrush)\b/],
-    ["","body","c_fitness","Fitness",/\b(gym|workout|run|running|jog|jogging|walk|walking|yoga|swim\w*|cycling|cycle|stretch\w*|pilates|exercise|hike|hiking)\b/],
-    ["","body","c_sleepfood","Sleep and food",/\b(sleep|bedtime|nap|fast|fasting|diet|sugar|calories|protein)\b/],
-    ["","body","c_health","Health",/\b(water|hydrate|bowel|cough|cold|fever|headache|migraine|stomach|nausea|pain|blood pressure|weigh|weight|temperature|symptoms?)\b/],
+    ["","body","c_fitness","Movement",/\b(gym|workout|run|running|jog|jogging|walk|walking|yoga|swim\w*|cycling|cycle|stretch\w*|pilates|exercise|hike|hiking)\b/],
+    ["","body","c_sleepfood","Sleep",/\b(sleep|bedtime|nap|naps|wake up|wake time)\b/],
+    ["","body","c_food","Food and water",/\b(water|hydrate|eat|meals?|breakfast|lunch|dinner|cook\w*|fast|fasting|diet|sugar|calories|protein|snacks?|fruit|veg)\b/],
+    ["","body","c_health","Health",/\b(bowel|cough|cold|fever|headache|migraine|stomach|nausea|pain|blood pressure|weigh|weight|temperature|symptoms?)\b/],
     ["","mind","c_learning","Learning",/\b(learn\w*|course|lessons?|study|studying|tutorial|lecture|flashcards?|duolingo)\b/],
     ["","mind","c_creative","Creative",/\b(guitar|piano|violin|draw\w*|paint\w*|sketch\w*|write|writing|poem|song|photograph\w*|knit\w*)\b/],
     ["","mind","c_calm","Calm",/\b(meditat\w*|journal\w*|mindful\w*|breath\w*|gratitude|mood|phone-free|prayer|pray)\b/],
     ["","mind","c_reading","Reading",/\b(read|reading|chapter|pages|novel|kindle)\b/],
     ["","todo","work","Work",/\b(report|meeting|emails?|client|invoice|timesheet|standup|stand-up|sync|boss|presentation|deadline|proposal|slides|sprint|office)\b/],
-    ["","todo","home","Home",/\b(rent|bills?|electricity|internet|wifi|vacuum\w*|clean\w*|groceries|grocery|repair\w*|plumber|electrician|laundry|trash|garbage|filter|insurance|car|service|mow|dishes|tidy|landlord)\b/],
-    ["","todo","personal","Personal",/\b(passport|tax|taxes|bank|gift|birthday|subscriptions?|visa|licen[cs]e|wedding|anniversary)\b/]
+    ["","todo","money","Money and admin",/\b(rent|bills?|electricity|internet|wifi|insurance|car service|car tax|mot|puc|passport|tax|taxes|bank|subscriptions?|visa|licen[cs]e|landlord|pay|payment|renew\w*)\b/],
+    ["","todo","home","Home",/\b(vacuum\w*|clean\w*|groceries|grocery|repair\w*|plumber|electrician|laundry|trash|bins?|garbage|filter|mow|dishes|tidy|make the bed|plants?)\b/],
+    ["","todo","personal","People",/\b(call|text|message|mum|mom|dad|parents|friend|gift|birthday|wedding|anniversary|visit)\b/]
   ];
   function tyGroup(text,family){
     var t=" "+String(text||"").toLowerCase()+" ";
@@ -7983,7 +8083,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function renderAdd(){
     var h='<div class="qa-top"><input type="text" class="qa-title" id="q-title" autocomplete="off" enterkeyhint="done" aria-label="What are you adding?"><button type="button" class="qa-x" data-close aria-label="Close">'+qi("x")+'</button></div>'+
       '<p class="qa-hint" id="qa-hint" aria-live="polite" hidden></p><p class="qa-sg" id="qa-sg" hidden></p>'+'<div class="qa-log" id="qa-log">'+qaLogRow()+'</div>'+
-      '<div class="modal-b qa-b"><p class="qa-k">Add to</p><div class="qa-seg" id="qa-seg" role="group" aria-label="Add to"></div><div class="qa-where" id="qa-where"></div><div class="qa-acts" id="qa-acts"></div><div id="qa-panel"></div></div>'+
+      '<div class="modal-b qa-b"><div class="qa-place" id="qa-place"></div><div class="qa-pick" id="qa-pick" hidden><div class="qa-seg" id="qa-seg" role="group" aria-label="Add to"></div><div class="qa-where" id="qa-where"></div></div><div class="qa-acts" id="qa-acts"></div><div id="qa-panel"></div></div>'+
       '<div class="qa-foot"><button type="button" class="qa-more" data-qa="more">More Details</button><span class="spacer"></span><button type="button" class="qa-go" id="qa-go" data-qa="go"></button></div>';
     openModal(h);$("#modal").classList.add("qa");paintAdd();paintPanel();
     var dr=_qaDraft;_qaDraft=null;if(dr&&Date.now()-dr.at<6e5){var t0=$("#q-title");if(t0){t0.value=dr.v;if(qaSuggest())paintAdd();else paintActs()}}
@@ -8056,6 +8156,11 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(qa.card==="todo")w=todoLists().map(function(o){return '<button type="button" class="qa-chip'+(qa.list===o[0]?" on":"")+'" data-qa="list" data-v="'+o[0]+'" aria-pressed="'+(qa.list===o[0])+'">'+o[1]+'</button>'}).join("");
     else{var ar=qaAreas();w=ar.length?ar.map(function(c){var on=qa.cat===c.id;return '<button type="button" class="qa-chip'+(on?" on":"")+'" data-qa="cat" data-v="'+esc(c.id)+'" aria-pressed="'+on+'"><span class="qa-dot" style="background:'+esc(c.color||"var(--accent)")+'"></span>'+esc(c.name)+'</button>'}).join(""):'<span class="qa-none">No '+(qa.card==="body"?"body":"mind")+' areas yet. Make one from the menu first.</span>'}
     $("#qa-where").innerHTML=w;
+    /* the tree (2026-10-14): one line says where it goes; the full choice opens only when tapped */
+    var subN=qa.card==="todo"?((todoLists().filter(function(o){return o[0]===qa.list})[0]||["","To-do"])[1]):((Store.get("cats",qa.cat)||{}).name||"Choose");
+    $("#qa-place").innerHTML='<span class="qa-pk">Goes to</span><button type="button" class="qa-chip on" data-qa="place" aria-expanded="'+!!qa.pickOpen+'">'+{todo:"To-do",body:"Body",mind:"Mind"}[qa.card]+'</button><span class="qa-pk" aria-hidden="true">\u203a</span><button type="button" class="qa-chip on" data-qa="place" aria-expanded="'+!!qa.pickOpen+'">'+esc(subN)+'</button>'+
+      (qa.autoLabel&&!qa.pickOpen?'<span class="qa-pg">Guessed from your words</span>':'');
+    $("#qa-pick").hidden=!qa.pickOpen;
     var t=$("#q-title");if(t)t.placeholder=qa.card==="todo"?"What needs doing?":qa.card==="body"?"e.g. Brush teeth":"e.g. Read 20 pages";
     paintActs();
   }
@@ -8078,7 +8183,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(e.use.dur&&!qa.durTouched)bits.push(durLabel(e.dur));
     if(e.every)bits.unshift("Reminder every "+cbEveryLabel(e.every));
     if(e.rh)bits.push(planLabel(rhythmPlan(e.rh)));
-    if(qa.autoLabel)bits.unshift(qa.autoLabel);
+    /* the place has its own line now (Goes to), so Read as only says when */
     if(e.who)bits.push("For "+e.who.charAt(0).toUpperCase()+e.who.slice(1)+", on this phone");
     var sgEl=$("#qa-sg");
     if(sg&&qa.sgOn===sg.key)bits.unshift("Reminder "+rhythmLabel(qa.sgR||{every:sg.every}));
@@ -8302,8 +8407,9 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if((el=e.target.closest("[data-qa]"))&&ms&&ms.type==="quick"&&qa){
       var k=el.getAttribute("data-qa"),val2=el.getAttribute("data-v");qaRead();
       if(k==="card"){qa.whereTouched=true;qa.autoLabel="";qa.card=val2;if(val2==="todo"){if(qa.rep>0&&!qa.repTouched)qa.rep=0}else if(!qa.repTouched&&qa.rep===0)qa.rep=1;qaFixCat();paintAdd()}
-      else if(k==="list"){qa.whereTouched=true;qa.autoLabel="";qa.list=val2;paintAdd()}
-      else if(k==="cat"){qa.whereTouched=true;qa.autoLabel="";qa.cat=val2;paintAdd()}
+      else if(k==="list"){qa.whereTouched=true;qa.autoLabel="";qa.list=val2;qa.pickOpen=false;paintAdd()}
+      else if(k==="cat"){qa.whereTouched=true;qa.autoLabel="";qa.cat=val2;qa.pickOpen=false;paintAdd()}
+      else if(k==="place"){qa.pickOpen=!qa.pickOpen;paintAdd()}
       else if(k==="date")qpDate();
       else if(k==="time")qpTime(qaEff().time||"",function(v){qa.time=v||null;qa.timeTouched=true;paintActs()});
       else if(k==="dur")qpList("dur","Length",QA_DUR,qaEff().dur||"none");
@@ -8633,8 +8739,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /* ===== Templates: the one list, sorted by topic, for your country. Search sits at the bottom, as on iPhone. ===== */
   var COUNTRIES=[["IN","India"],["GB","United Kingdom"],["US","United States"],["CA","Canada"],["AU","Australia"],["NZ","New Zealand"],["IE","Ireland"],["SG","Singapore"],["PH","Philippines"],["MY","Malaysia"]];
   function countryName(cc){var c=COUNTRIES.filter(function(x){return x[0]===cc})[0];return c?c[1]:"everywhere"}
-  var TP_ORDER=GROUP_CATS.filter(function(c){return c[0]!=="c_todo"}).map(function(c){return c[0]}).concat(["todo:work","todo:home","todo:personal"]);
-  function tpGroupName(g){if(g.indexOf("todo:")===0)return {work:"Work",home:"Home",personal:"Personal"}[g.slice(5)];var c=Store.get("cats",g)||GROUP_CATS.filter(function(x){return x[0]===g})[0];return c?(c.name||c[1]):g}
+  var TP_ORDER=GROUP_CATS.filter(function(c){return c[0]!=="c_todo"}).map(function(c){return c[0]}).concat(["todo:work","todo:home","todo:money","todo:personal"]);
+  function tpGroupName(g){if(g.indexOf("todo:")===0)return {work:"Work",home:"Home",money:"Money and admin",personal:"People",family:"Family"}[g.slice(5)];var c=Store.get("cats",g)||GROUP_CATS.filter(function(x){return x[0]===g})[0];return c?(c.name||c[1]):g}
   function tpDomain(g){return g.indexOf("todo:")===0?"todo":areaDomain(g)}
   function tpKind(t){
     if(t.cb)return "Reminder, "+rhythmLabel({every:t.cb.every});
@@ -8647,7 +8753,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function openLibrary(catId){ms={type:"library",cat:catId||null,q:"",dom:""};renderLibrary();}
   function renderLibrary(){
     var cc=userCountry();
-    var h='<div class="modal-h"><h3>Templates</h3><button class="x" data-close aria-label="Close">\u00d7</button></div><div class="modal-b tp-b">'+
+    var h='<div class="modal-h"><h3>Ideas</h3><button class="x" data-close aria-label="Close">\u00d7</button></div><div class="modal-b tp-b">'+
       '<p class="tp-sub">Ready-made ideas for '+esc(countryName(cc))+'. <button type="button" class="tp-link" data-tp="country">Change</button></p>'+
       '<div class="qa-seg tp-seg" role="group" aria-label="Show">'+[["","All"],["body","Body"],["mind","Mind"],["todo","To-do"]].map(function(o){var on=ms.dom===o[0];return '<button type="button" data-tp="dom|'+o[0]+'" aria-pressed="'+on+'" class="'+(on?"on":"")+'">'+o[1]+'</button>'}).join("")+'</div>'+
       '<div id="tp-list"></div></div><div class="tp-foot"><input type="search" id="lib-q" value="'+esc(ms.q||"")+'" placeholder="Search dentist, reading, rent\u2026" autocomplete="off" enterkeyhint="search" aria-label="Search templates"></div>';
@@ -9094,7 +9200,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if((el=e.target.closest("[data-exclear]"))){exClear();return;}
     if((el=e.target.closest("[data-qlog]"))){e.stopPropagation();quickLog(el.getAttribute("data-qlog"));return;}
     if((el=e.target.closest("[data-packq]"))){packQAct(el.getAttribute("data-packq"));return;}
-    if((el=e.target.closest("[data-emptypack]"))){setupStart();setupS.step=3;setupS.keepWho=true;Store.welcome=true;render();window.scrollTo(0,0);return;}
+    if((el=e.target.closest("[data-emptypack]"))){setupStart();setupS.step=2;setupS.keepWho=true;Store.welcome=true;render();window.scrollTo(0,0);return;}
     if((el=e.target.closest("[data-watchall]"))){state.watchAll=true;render();return;}
     if((el=e.target.closest("[data-exok]"))){try{localStorage.setItem("ritsu_ex_ok","1")}catch(x){}render();return;}
     if((el=e.target.closest("[data-welcome]"))){var wv=el.getAttribute("data-welcome"),wb=el.querySelector("b");if(wb)wb.textContent=wv==="back"?"Bringing it back…":"Setting up…";el.setAttribute("aria-busy","true");setTimeout(function(){if(wv==="clean")startClean();else if(wv==="back")bringBack();else startExamples();},60);return;}
@@ -9134,7 +9240,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if((el=e.target.closest("[data-pbtaken]"))){e.stopPropagation();pbTakenSay(el.getAttribute("data-pbtaken"));return;}
     if((el=e.target.closest("[data-toggle]"))){e.stopPropagation();toggleItem(el.getAttribute("data-toggle"));return;}
     if((el=e.target.closest("[data-measure]"))){e.stopPropagation();openMeasure(el.getAttribute("data-measure"));return;}
-    if((el=e.target.closest("[data-reset]"))){e.stopPropagation();var rid=el.getAttribute("data-reset"),ri=Store.get("items",rid),prevLd=ri?(ri.lastDone||null):null;Store.update("items",rid,{lastDone:today()});toast("Done",function(){Store.update("items",rid,{lastDone:prevLd})});return;}
+    if((el=e.target.closest("[data-shop]"))){openShop();return;}
+    if((el=e.target.closest("[data-reset]"))){e.stopPropagation();if(ms&&ms.type==="shop")setTimeout(function(){if(ms&&ms.type==="shop")openShop()},60);var rid=el.getAttribute("data-reset"),ri=Store.get("items",rid),prevLd=ri?(ri.lastDone||null):null;Store.update("items",rid,{lastDone:today()});toast("Done",function(){Store.update("items",rid,{lastDone:prevLd})});return;}
     if((el=e.target.closest("[data-restock]"))){e.stopPropagation();openRestock(el.getAttribute("data-restock"));return;}
     if((el=e.target.closest("[data-backfill]"))){e.stopPropagation();var p=el.getAttribute("data-backfill").split("|");backfillDate(Store.get("items",p[0]),p[1]);return;}
     if((el=e.target.closest("[data-ep]"))){e.stopPropagation();var epi=Store.get("items",el.getAttribute("data-ep"));if(epi){if(activeEp(epi)){var dd0=epDays(activeEp(epi));endEpisode(epi);state.mstrip=null;toast("Ended after "+dd0+" days");}else{startEpisode(epi);openStrip(epi.id);}}return;}
