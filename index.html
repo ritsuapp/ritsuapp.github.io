@@ -3127,6 +3127,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   html:root .yd-ccl{display:flex;flex-direction:column;gap:8px;margin-top:14px}
   html:root .yd-cco{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 16px;border-radius:16px;border:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-size:1rem;text-align:left;cursor:pointer}
   html:root .yd-cco small{font-size:.8125rem;color:var(--muted)}html:root .yd-cco.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}html:root .yd-cco.on small{color:inherit;opacity:.7}
+  html:root .yd .yd-sub{flex-basis:100%;margin:6px 0 0;font-size:.875rem;color:var(--muted)}
   /* ===== v6 look (end) ===== */
 </style>
 </head>
@@ -6943,7 +6944,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     {k:"brush",n:"Brushing teeth",d:"morning and night",g:"Body",at:["m","e"],x:{t:"Brushing teeth",G:"c_hygiene"}},{k:"floss",n:"Flossing",d:"once a day",g:"Body",at:["e"],x:{t:"Flossing",G:"c_hygiene"}},
     {k:"skin",n:"Skincare",d:"morning and night",g:"Body",at:["m","e"],x:{t:"Skincare",G:"c_hygiene"}},{k:"gym",n:"Workout",d:"3 times a week",g:"Body",at:{m:["m"],s:["e"],e:["e"]},x:{t:"Workout",G:"c_fitness",perWeek:3}},
     {k:"walk",n:"Walking",d:"a walk a day",g:"Body",at:{m:["m"],s:["d"],e:["e"]},x:{t:"Walking",G:"c_fitness"}},{k:"stretch",n:"Stretching",d:"a few minutes a day",g:"Body",at:{m:["m"],s:["m"],e:["e"]},x:{t:"Stretching",G:"c_fitness"}},
-    {k:"water",n:"Water intake",d:"litres a day",g:"Body",at:["d"],x:{lib:"Water"}},
+    {k:"water",n:"Water intake",d:"a daily goal you set",g:"Body",at:["d"],x:{lib:"Water"}},
     {k:"sleep",n:"Sleep",d:"hours a night",g:"Body",at:["m"],x:{lib:"Sleep hours"}},{k:"bed",n:"Bedtime",d:"in bed by 11",g:"Body",at:["e"],x:{t:"Bedtime",G:"c_sleepfood",rem:"23:00"}},
     {k:"wake",n:"Wake-up time",d:"up by 7",g:"Body",at:["m"],x:{t:"Wake-up time",G:"c_sleepfood",rem:"07:00"}},
     {k:"meds",n:"Medicine and supplements",d:"doses on time, pills left",g:"Body",x:{med:1,t:"My medicine"}},
@@ -6957,7 +6958,32 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     {k:"laundry",n:"Laundry",d:"once a week",g:"To-do",at:[],x:{t:"Laundry",G:"todo:home",rep:7}},{k:"groc",n:"Grocery shopping",d:"once a week",g:"To-do",at:[],x:{t:"Grocery shopping",G:"todo:home",rep:7}},
     {k:"plan",n:"Plan the week",d:"Sunday evening",g:"To-do",at:["e"],x:{t:"Plan the week",G:"todo:work",rep:7}},{k:"callp",n:"Call family",d:"a reminder each week",g:"To-do",at:["e"],x:{t:"Call family",G:"todo:personal",rep:7}}
   ];
-  function dayChip(k){return DAY_CHIPS.concat(setupS?setupS.own:[]).filter(function(c){return c.k===k})[0]}
+  /* ===== country packs (start): words and timings from docs/research/country-packs.md. Timings are conventions people can change ===== */
+  function packCC(){var c=userCountry();return ["IN","US","GB","CA","AU","NZ","IE"].indexOf(c)>-1?c:"XX"}
+  /* T(name, what it means, every N days, parts of the day, sub) */
+  function T(n,d,rep,at,sub){var G=sub==="Money"?"todo:money":sub==="People"?"todo:personal":"todo:home",x={t:n,G:G};if(rep>1)x.rep=rep;return {n:n,d:d,at:at||[],sub:sub||"Home",x:x}}
+  var TODO_PACK={
+    IN:{home:[T("Make the bed","every morning",1,["m"]),T("Hand over the garbage","every day",1,["m"]),T("Sweep and mop","every day",1,["m"]),T("Tidy the house","a quick reset each evening",1,["e"]),T("Laundry","every 3 days",3),T("Change the bedsheets","weekly",7),T("Clean the bathroom","weekly",7),T("Vegetables","every 3 days",3),T("Monthly ration","once a month",30),T("Water the plants","every day",1,["m"])],
+      money:[T("Mobile recharge","every 28 days",28,[],"Money"),T("Credit card bill","monthly",30,[],"Money"),T("Rent","monthly",30,[],"Money"),T("Budget check","weekly",7,[],"Money")]},
+    US:{home:[T("Make the bed","every morning",1,["m"]),T("Tidy the house","a quick reset each evening",1,["e"]),T("Trash day","weekly",7),T("Vacuum","weekly",7),T("Mop the floors","weekly",7),T("Laundry","weekly",7),T("Change the sheets","weekly",7),T("Clean the bathroom","weekly",7),T("Grocery run","weekly",7),T("Mow the lawn","weekly, spring to fall",7)],
+      money:[T("Rent or mortgage","monthly",30,[],"Money"),T("Credit card payment","monthly",30,[],"Money"),T("Budget check","weekly",7,[],"Money")]},
+    GB:{home:[T("Make the bed","every morning",1,["m"]),T("Tidy the house","a quick reset each evening",1,["e"]),T("Bin day","weekly",7),T("Hoover","weekly",7),T("Mop the floors","weekly",7),T("Do a wash","every 3 days",3),T("Change the bedding","weekly",7),T("Clean the bathroom","weekly",7),T("Food shop","weekly",7),T("Mow the lawn","every 2 weeks, spring to autumn",14)],
+      money:[T("Council Tax","monthly",30,[],"Money"),T("Rent or mortgage","monthly",30,[],"Money"),T("Credit card payment","monthly",30,[],"Money"),T("Budget check","weekly",7,[],"Money")]},
+    CA:{home:[T("Make the bed","every morning",1,["m"]),T("Tidy the house","a quick reset each evening",1,["e"]),T("Garbage day","weekly",7),T("Vacuum","weekly",7),T("Laundry","weekly",7),T("Change the sheets","weekly",7),T("Clean the bathroom","weekly",7),T("Groceries","weekly",7),T("Mow the lawn","weekly, May to September",7)],
+      money:[T("Rent or mortgage","monthly",30,[],"Money"),T("Credit card payment","monthly",30,[],"Money"),T("Budget check","weekly",7,[],"Money")]},
+    AU:{home:[T("Make the bed","every morning",1,["m"]),T("Tidy the house","a quick reset each evening",1,["e"]),T("Bin night","weekly",7),T("Vacuum","weekly",7),T("Mop the floors","weekly",7),T("Do the washing","every 3 days",3),T("Change the sheets","weekly",7),T("Clean the bathroom","weekly",7),T("Grocery shop","weekly",7),T("Mow the lawn","weekly in summer",7)],
+      money:[T("Rent or mortgage","monthly",30,[],"Money"),T("Credit card payment","monthly",30,[],"Money"),T("Council rates","every 3 months",91,[],"Money"),T("Budget check","weekly",7,[],"Money")]},
+    NZ:{home:[T("Make the bed","every morning",1,["m"]),T("Tidy the house","a quick reset each evening",1,["e"]),T("Rubbish day","weekly",7),T("Vacuum","weekly",7),T("Do the washing","every 3 days",3),T("Change the sheets","weekly",7),T("Clean the bathroom","weekly",7),T("Supermarket shop","weekly",7),T("Mow the lawns","weekly in summer",7)],
+      money:[T("Rent or mortgage","monthly",30,[],"Money"),T("Credit card payment","monthly",30,[],"Money"),T("Council rates","every 3 months",91,[],"Money"),T("Budget check","weekly",7,[],"Money")]},
+    IE:{home:[T("Make the bed","every morning",1,["m"]),T("Tidy the house","a quick reset each evening",1,["e"]),T("Bin day","weekly",7),T("Hoover","weekly",7),T("Do a wash","every 3 days",3),T("Change the bed","weekly",7),T("Clean the bathroom","weekly",7),T("Big shop","weekly",7),T("Cut the grass","every 2 weeks, spring to autumn",14)],
+      money:[T("Rent or mortgage","monthly",30,[],"Money"),T("Credit card payment","monthly",30,[],"Money"),T("Budget check","weekly",7,[],"Money")]},
+    XX:{home:[T("Make the bed","every morning",1,["m"]),T("Tidy the house","a quick reset each evening",1,["e"]),T("Take out the rubbish","every 3 days",3),T("Vacuum or sweep","weekly",7),T("Mop the floors","weekly",7),T("Laundry","every 3 days",3),T("Change the bedsheets","weekly",7),T("Clean the bathroom","weekly",7),T("Grocery shopping","weekly",7),T("Water the plants","every 3 days",3)],
+      money:[T("Rent","monthly",30,[],"Money"),T("Card bill","monthly",30,[],"Money"),T("Budget check","weekly",7,[],"Money")]}};
+  var PEOPLE_PACK=[T("Call family","a reminder each week",7,["e"],"People"),T("Catch up with a friend","every 2 weeks",14,[],"People")];
+  function todoChips(){var p=TODO_PACK[packCC()],l=p.home.concat(p.money,PEOPLE_PACK);return l.map(function(c,j){return Object.assign({k:"td"+j,g:"To-do"},c)})}
+  function allChips(){return DAY_CHIPS.filter(function(c){return c.g!=="To-do"}).concat(todoChips())}
+  /* ===== country packs: To-do (end) ===== */
+  function dayChip(k){return allChips().concat(setupS?setupS.own:[]).filter(function(c){return c.k===k})[0]}
   function dayAt(k){var S=setupS,c=dayChip(k);if(!c||!c.at)return null;if(S.at[k])return S.at[k];if(S.pat==="own")return [];
     if(Array.isArray(c.at))return c.at.slice();return S.pat==="v"?[]:(c.at[S.pat]||c.at.s).slice()}
   function dayCi(){var S=setupS;if(S.ci)return S.ci;var p=DAY_PATTERNS.filter(function(x){return x[0]===S.pat})[0]||DAY_PATTERNS[1];return {m:p[4],d:p[5],e:p[6]}}
@@ -7004,8 +7030,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       '<div class="su-foot"><button class="su-skip" data-setup="ydskipname">Skip</button><button class="btn primary su-next" data-setup="ydnext">Continue</button></div></div>';
   }
   function ydPick(){var S=setupS,n=0;Object.keys(S.picked).forEach(function(k){if(S.picked[k]&&dayChip(k))n++});
-    var grp=function(g){var cs=DAY_CHIPS.concat(S.own).filter(function(c){return c.g===g});
-      return '<div class="yd-grp"><div class="yd-gl"><i class="yd-pd" style="background:var(--c-'+{Body:"body",Mind:"mind","To-do":"todo"}[g]+')"></i>'+g+'</div><div class="su-chips">'+cs.map(function(c){var on=!!S.picked[c.k];return '<button class="su-chip'+(c.d?" yd-cb":"")+(on?" on":"")+'" data-setup="ydchip|'+c.k+'" aria-pressed="'+on+'">'+(c.d?'<span>'+esc(c.n)+'</span><small>'+esc(c.d)+'</small>':(on?CHECK_SVG:"")+esc(c.n))+'</button>'}).join("")+
+    var grp=function(g){var cs=allChips().concat(S.own).filter(function(c){return c.g===g});
+      return '<div class="yd-grp"><div class="yd-gl"><i class="yd-pd" style="background:var(--c-'+{Body:"body",Mind:"mind","To-do":"todo"}[g]+')"></i>'+g+'</div><div class="su-chips">'+cs.map(function(c,ix){var on=!!S.picked[c.k],hd=g==="To-do"&&c.sub&&(ix===0||cs[ix-1].sub!==c.sub)?'<p class="yd-sub">'+{Home:"Home",Money:"Money and admin",People:"People"}[c.sub]+'</p>':'';return hd+'<button class="su-chip'+(c.d?" yd-cb":"")+(on?" on":"")+'" data-setup="ydchip|'+c.k+'" aria-pressed="'+on+'">'+(c.d?'<span>'+esc(c.n)+'</span><small>'+esc(c.d)+'</small>':(on?CHECK_SVG:"")+esc(c.n))+'</button>'}).join("")+
         (S.ownOpen===g?'':'<button class="su-chip yd-ownc" data-setup="ydownopen|'+g+'">+ Add your own</button>')+'</div>'+
         (S.ownOpen===g?'<div class="sp-inrow"><input id="yd-own" class="su-inp" type="text" placeholder="'+{Body:"Like cold shower",Mind:"Like call a friend",["To-do"]:"Like clean the car"}[g]+'" autocomplete="off" enterkeyhint="done"><button class="btn primary sm" data-setup="ydown|'+g+'">Add</button></div>':'')+'</div>'};
     return '<div class="welcome-card su yd">'+ydTop(3)+'<h1 class="su-title">What do you want to keep up with?</h1><p class="su-sub">Pick what matters to you. You can change anything later in the app.</p>'+
@@ -7019,13 +7045,53 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     "Smoke alarm battery":{US:"Smoke detector battery",_:"Smoke alarm battery"},"Air filter":{US:"HVAC air filter",_:"Air filter"},"Water filter":{_:"Water filter cartridge"}};
   function cbSay(k,cc,dflt){var m=CB_SAY[k];return (m&&(m[cc]||m._))||dflt}
   function evDays(n){return n%365===0?(n===365?"Every year":"Every "+(n/365)+" years"):n%30===0?(n===30?"Every month":"Every "+(n/30)+" months"):n>=14?"Every "+Math.round(n/7)+" weeks":"Every "+n+" days"}
-  function ydBackGroups(cc){var cbs=CB_LIB.filter(function(d){return tplFits(d.tpl,cc,false)});
-    var cbx=function(d){return {k:"cb:"+d.key,n:cbSay(d.key,cc,d.name),ev:rhythmLabel({every:d.every},1)}},cbk=function(k){return cbs.filter(function(d){return d.key===k}).map(cbx)};
-    var up=function(ts){return ts.map(function(t){var f=packLib(t);return f&&tplFits(f.t,cc,false)?{k:"up:"+t,n:cbSay(t,cc,t),ev:evDays(f.t.int||30)}:null}).filter(Boolean)};
-    return [{id:"appt",n:"Check-ups to book",say:"We remind you when the next one is due, so you can book it.",xs:cbs.filter(function(d){return d.cat==="c_health"&&d.kind==="visit"}).map(cbx)},
-      {id:"renew",n:"Renewals",say:"A reminder a few weeks before the date.",xs:cbs.filter(function(d){return d.list==="money"}).slice(0,6).map(cbx)},
-      {id:"low",n:"Running low",say:"A nudge before you run out.",xs:cbk("gas").concat(up(["Toothpaste","Dish soap","Washing powder","Shampoo","Hand soap","Bin bags"]))},
-      {id:"repl",n:"Time to replace",say:"Mark it once when it\u2019s new. We tell you when it\u2019s worn out.",xs:up(["Toothbrush","Razor blades","Contact lenses"]).concat(cc==="IN"?cbk("ro"):up(["Water filter"])).concat(cc==="US"?up(["Air filter"]):[]).concat(cc==="IN"?[]:up(["Smoke alarm battery"]))}]}
+  /* the things that come back. c = a known come-back (CB_LIB key, name, every N months, "MM-DD" date), u = a library idea (title, name),
+     r = something to rebuy (name, every N days), p = your own kind of reminder (name, every N months, "MM-DD", where it lives) */
+  var BACK_PACK={
+    IN:{appt:[["c","dentist","Dental check-up",6],["c","eye","Eye check-up",12],["c","checkup","Full-body check-up",12]],
+      renew:[["c","insurance","Car insurance"],["c","puc","PUC certificate",6],["c","service","Car servicing",12],["p","Health insurance",12,null,"money"],["c","taxes","Income tax return (ITR)",12,"07-31"],["c","rentagr","Rent agreement"],["c","passport","Passport"]],
+      low:[["c","gas","LPG cylinder"],["u","Dish soap","Dishwash liquid"],["u","Washing powder","Detergent"],["u","Toothpaste","Toothpaste"],["u","Shampoo","Shampoo"],["u","Bin bags","Garbage bags"]],
+      repl:[["u","Toothbrush","Toothbrush"],["u","Razor blades","Razor blades"],["u","Contact lenses","Contact lenses"],["c","ro","RO purifier service"],["p","AC service",12,"03-01","home"]]},
+    US:{appt:[["c","dentist","Dental cleaning",6],["c","eye","Eye exam",24],["c","checkup","Annual physical",12],["p","Flu shot",12,"10-01","health"]],
+      renew:[["c","insurance","Car insurance",6],["c","reg","Vehicle registration"],["p","Smog check or inspection (if your state needs one)",24,null,"money"],["p","Oil change",6,null,"money"],["c","taxes","Taxes",12,"04-15"],["c","passport","Passport"]],
+      low:[["u","Dish soap","Dish soap"],["u","Washing powder","Laundry detergent"],["u","Bin bags","Trash bags"],["r","Paper towels",21],["r","Toilet paper",21],["u","Toothpaste","Toothpaste"]],
+      repl:[["u","Toothbrush","Toothbrush"],["u","Air filter","HVAC filter"],["p","Test the smoke alarms",1,null,"home"],["u","Contact lenses","Contact lenses"],["u","Razor blades","Razor blades"]]},
+    GB:{appt:[["c","dentist","Dental check-up",12],["c","eye","Eye test",24],["p","NHS Health Check (ages 40 to 74)",60,null,"health"],["p","Flu jab",12,"10-01","health"]],
+      renew:[["c","insurance","Car insurance"],["c","mot","MOT"],["c","vtax","Car tax"],["c","tvl","TV Licence"],["c","taxes","Self Assessment (if you file one)",12,"01-31"],["p","Driving licence photocard",120,null,"money"],["c","passport","Passport"]],
+      low:[["u","Dish soap","Washing-up liquid"],["u","Washing powder","Washing powder"],["u","Bin bags","Bin bags"],["r","Kitchen roll",21],["r","Loo roll",21],["u","Toothpaste","Toothpaste"]],
+      repl:[["u","Toothbrush","Toothbrush"],["p","Boiler service",12,null,"home"],["p","Test the smoke alarms",1,null,"home"],["u","Contact lenses","Contact lenses"],["u","Razor blades","Razor blades"]]},
+    CA:{appt:[["c","dentist","Dental check-up",12],["c","eye","Eye exam",24],["p","Flu shot",12,"10-15","health"]],
+      renew:[["p","Winter tires on",12,"11-01","money"],["p","Winter tires off",12,"04-15","money"],["c","insurance","Car insurance"],["p","Licence plate renewal",12,null,"money"],["c","taxes","Income tax return",12,"04-30"],["c","passport","Passport"]],
+      low:[["u","Dish soap","Dish soap"],["u","Washing powder","Laundry detergent"],["u","Bin bags","Garbage bags"],["r","Paper towels",21],["r","Toilet paper",21],["u","Toothpaste","Toothpaste"]],
+      repl:[["u","Toothbrush","Toothbrush"],["u","Air filter","Furnace filter"],["p","Test the smoke alarms",1,null,"home"],["u","Contact lenses","Contact lenses"],["u","Razor blades","Razor blades"]]},
+    AU:{appt:[["c","dentist","Dental check-up",12],["c","eye","Eye test",24],["p","Heart health check (ages 45 to 79)",24,null,"health"],["p","Flu vaccine",12,"04-01","health"]],
+      renew:[["p","Rego",12,null,"money"],["c","insurance","Car insurance"],["c","service","Car service",12],["c","taxes","Tax return",12,"10-31"],["c","homeins","Home and contents insurance"],["c","passport","Passport"]],
+      low:[["u","Dish soap","Dishwashing liquid"],["u","Washing powder","Laundry powder"],["u","Bin bags","Bin liners"],["r","Paper towel",21],["r","Toilet paper",21],["u","Toothpaste","Toothpaste"]],
+      repl:[["u","Toothbrush","Toothbrush"],["p","Test the smoke alarms",1,null,"home"],["p","Check the sunscreen use-by date",12,null,"health"],["u","Contact lenses","Contact lenses"],["u","Razor blades","Razor blades"]]},
+    NZ:{appt:[["c","dentist","Dental check-up",12],["c","eye","Eye test",24],["p","Heart and diabetes check",60,null,"health"],["p","Flu jab",12,"04-01","health"]],
+      renew:[["p","WoF",12,null,"money"],["p","Rego (vehicle licence)",12,null,"money"],["c","insurance","Car insurance"],["c","taxes","IR3 tax return (if you file one)",12,"07-07"],["c","passport","Passport"]],
+      low:[["u","Dish soap","Dishwashing liquid"],["u","Washing powder","Washing powder"],["u","Bin bags","Rubbish bags"],["r","Paper towels",21],["r","Toilet paper",21],["u","Toothpaste","Toothpaste"]],
+      repl:[["u","Toothbrush","Toothbrush"],["p","Test the smoke alarms",1,null,"home"],["p","Check the sunscreen use-by date",12,null,"health"],["u","Contact lenses","Contact lenses"],["u","Razor blades","Razor blades"]]},
+    IE:{appt:[["c","dentist","Dental check-up",12],["c","eye","Eye test",24],["p","Flu vaccine",12,"10-01","health"]],
+      renew:[["p","NCT",24,null,"money"],["p","Motor tax",12,null,"money"],["c","insurance","Car insurance"],["c","tvl","TV licence"],["p","Local Property Tax",12,null,"money"],["c","taxes","Form 11 (if you file one)",12,"10-31"],["c","passport","Passport"]],
+      low:[["u","Dish soap","Washing-up liquid"],["u","Washing powder","Washing powder"],["u","Bin bags","Bin bags"],["r","Kitchen roll",21],["r","Toilet roll",21],["u","Toothpaste","Toothpaste"]],
+      repl:[["u","Toothbrush","Toothbrush"],["p","Boiler service",12,null,"home"],["p","Test the smoke alarms",1,null,"home"],["u","Contact lenses","Contact lenses"],["u","Razor blades","Razor blades"]]},
+    XX:{appt:[["c","dentist","Dental check-up",12],["c","eye","Eye test",24],["p","Flu vaccine",12,null,"health"]],
+      renew:[["c","insurance","Car insurance"],["c","service","Car service",12],["c","taxes","Tax return",12],["c","passport","Passport"]],
+      low:[["u","Dish soap","Dish soap"],["u","Washing powder","Laundry detergent"],["u","Bin bags","Bin bags"],["r","Toilet paper",21],["u","Toothpaste","Toothpaste"]],
+      repl:[["u","Toothbrush","Toothbrush"],["p","Test the smoke alarm",1,null,"home"],["u","Contact lenses","Contact lenses"],["u","Razor blades","Razor blades"]]}};
+  function ydBackGroups(cc0){var cc=packCC(),P=BACK_PACK[cc];
+    var one=function(e){var t=e[0];
+      if(t==="c"){var d=cbDef(e[1]);if(!d)return null;var ev=e[3]||d.every;return {k:"cb:"+e[1],n:e[2]||d.name,ev:e[4]?"By "+new Date("2026-"+e[4]+"T00:00:00").toLocaleDateString(cc==="US"?"en-US":"en-GB",{day:"numeric",month:"long"}):rhythmLabel({every:ev},1),every:ev,md:e[4]||null}}
+      if(t==="u"){var f=packLib(e[1]);return f?{k:"up:"+e[1],n:e[2],ev:evDays(f.t.int||30)}:null}
+      if(t==="r")return {k:"rb:"+e[1],n:e[1],ev:evDays(e[2]),days:e[2]};
+      return {k:"tp:"+e[1],n:e[1],ev:e[3]?"Every year, from "+new Date("2026-"+e[3]+"T00:00:00").toLocaleDateString(cc==="US"?"en-US":"en-GB",{day:"numeric",month:"long"}):rhythmLabel({every:e[2]},1),months:e[2],md:e[3]||null,place:e[4]||"home"}};
+    var xs=function(l){return l.map(one).filter(Boolean)};
+    return [{id:"appt",n:"Check-ups to book",say:"A reminder when the next one is due, so you can book it. Your doctor or dentist may suggest a different gap.",xs:xs(P.appt)},
+      {id:"renew",n:"Renewals and deadlines",say:"A reminder a few weeks before the date.",xs:xs(P.renew)},
+      {id:"low",n:"Running low",say:"A nudge before you run out.",xs:xs(P.low)},
+      {id:"repl",n:"Time to replace or service",say:"Mark it once when it\u2019s new or done. Daywell tells you when it\u2019s time again.",xs:xs(P.repl)}]}
+  function ydNextMd(md){var t=today(),d=t.slice(0,4)+"-"+md;return d<t?(+t.slice(0,4)+1)+"-"+md:d}
   function ydBackAll(){var S=setupS,cc=userCountry(),all=[];ydBackGroups(cc).forEach(function(g){all=all.concat(g.xs)});return all.concat(S.backOwn.map(function(o,j){return {k:"own:"+j,n:o.n,ev:rhythmLabel({every:o.m},1),grp:o.grp}}))}
   function ydIntro(){
     return '<div class="welcome-card su yd">'+ydTop(4)+'<p class="su-sub" style="margin:0">Next</p><h1 class="su-title">Some things come back every few weeks or months.</h1><p class="su-sub">A dental check-up, a car insurance renewal, toothpaste running low. On the next page we\u2019ve filled in typical timings that suit most homes, as a starting point.</p>'+
@@ -7208,7 +7274,11 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     });
     /* the things that come back you picked */
     BX.forEach(function(x){var p=x.k.split(":");
-      if(p[0]==="cb"){var d=cbDef(p[1]);if(d&&!cbFind(p[1])){var it=cbNewItem(cbBuild(Object.assign({},d,{name:x.n}),"unsure",ix++),[]);it.catId=d.cat||TODO_CAT;it.list=d.list||"personal";Store.add("items",it);}}
+      if(p[0]==="cb"){var d=cbDef(p[1]);if(d&&!cbFind(p[1])){var d2=Object.assign({},d,{name:x.n});if(x.every)d2.every=x.every;if(x.md)d2.md=x.md;
+          /* the title in the country's own words */
+          if(d.kind==="visit")d2.book="Book the "+x.n.charAt(0).toLowerCase()+x.n.slice(1);else if(p[1]==="taxes")d2.act=x.n;else if(d.act)d2.act=d.act.replace(/vehicle (tax|insurance)/,"car $1").replace(/the vehicle$/,"the car");var it=cbNewItem(cbBuild(d2,"unsure",(ix++)%6),[]);   /* first reminders spread over a few weeks, not months */it.catId=d.cat||TODO_CAT;it.list=d.list||"personal";Store.add("items",it);}}
+      else if(p[0]==="rb"){var rb=packData({t:x.n,k:"upkeep",mode:"rebuy",int:x.days,s:"routine",G:"todo:home"},ix++);if(rb){rb.tpl=1;Store.add("items",rb);}}
+      else if(p[0]==="tp"){var pl={health:{catId:"c_health"},money:{list:"money"},home:{list:"home"}}[x.place]||{list:"home"};Promise.resolve(cbAddTyped(x.n,x.months,x.md?ydNextMd(x.md):(x.months<=1?null:addDaysStr(today(),21+(ix++%8)*7)))).then(function(id){if(id)Store.update("items",id,pl)});}
       else if(p[0]==="up"){var dd=packData({lib:p.slice(1).join(":")},ix++);if(dd){dd.title=x.n;dd.tpl=1;Store.add("items",dd);}}
       else if(p[0]==="own"){var o=BO[+p[1]];if(o){var at={appt:{catId:"c_health"},renew:{list:"money"},low:{list:"home"},repl:{list:"home"}}[o.grp];Promise.resolve(cbAddTyped(o.n,o.m)).then(function(id){if(id&&at)Store.update("items",id,at)})}}});
     finishWelcome();
