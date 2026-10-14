@@ -3098,6 +3098,35 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /* At the shop */
   html:root .dp-shop{display:flex;align-items:center;gap:12px;width:100%;border:0;border-radius:20px;background:var(--panel);color:var(--ink);padding:12px 16px;margin:4px 0 12px;text-align:left;font:inherit;cursor:pointer;min-height:56px}
   html:root .dp-shop .phi{width:20px;height:20px;color:var(--muted)}html:root .dp-shop span{flex:1}html:root .dp-shop b{display:block;font-weight:500;font-size:.9375rem}html:root .dp-shop small{font-size:.875rem;color:var(--muted)}html:root .dp-shop em{font-style:normal;color:var(--faint);font-size:1.25rem}
+  /* voice: the mic beside the + sheet's box */
+  html:root .qa-mic{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:transform .16s var(--ease-out,ease-out)}
+  html:root .qa-mic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+  html:root .qa-mic:active{transform:scale(.95)}html:root .qa-mic.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn);animation:micpulse 1.2s ease-in-out infinite}
+  @keyframes micpulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--ink) 12%,transparent)}}
+  @media(prefers-reduced-motion:reduce){html:root .qa-mic.on{animation:none}}
+  /* Your week: the small Sunday card on Home */
+  html:root .wk-card{background:var(--panel);border-radius:22px;padding:14px 16px 16px;margin:12px 0}
+  html:root .wk-h{display:flex;align-items:center;justify-content:space-between;font-size:.875rem;color:var(--muted)}
+  html:root .wk-x{width:44px;height:44px;margin:-10px -10px -10px 0;border:0;background:none;color:var(--muted);font-size:1.25rem;cursor:pointer}
+  html:root .wk-t{margin:2px 0 6px;font-weight:300!important;font-size:1.5rem;letter-spacing:-.01em;line-height:1.15}
+  html:root .wk-l{display:flex;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:.9375rem;line-height:1.4}html:root .wk-l:first-of-type{border-top:0}
+  html:root .wk-l i{flex:none;width:8px;height:8px;border-radius:50%;margin-top:7px}html:root .wk-l i.ok{background:var(--c-body)}html:root .wk-l i.dr{background:var(--gold,#D6AE78)}
+  html:root .wk-l small{display:block;font-size:.875rem;color:var(--muted)}
+  html:root .wk-ask{margin-top:8px;background:var(--panel-2);border-radius:16px;padding:12px 14px}html:root .wk-ask p{margin:0 0 10px;font-size:.9375rem}
+  html:root .wk-ask div{display:flex;gap:8px;flex-wrap:wrap}
+  html:root .wk-k{margin:10px 0 0;font-size:.8125rem;color:var(--muted)}html:root .wk-i{flex-basis:100%;font-size:.875rem;color:var(--muted)}html:root .wk-b.wk-no{border-color:transparent;color:var(--muted)}
+  html:root .wk-b{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-size:.9375rem;cursor:pointer}
+  html:root .wk-b.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+  /* opening cards and the country step */
+  html:root .yd-ok{margin:18px 0 0;font-size:.875rem;color:var(--muted)}
+  html:root .yd-op{list-style:none;margin:18px 0 6px;padding:0;display:flex;flex-direction:column;gap:16px}
+  html:root .yd-op li{display:flex;gap:12px;font-size:.9375rem;line-height:1.45;color:var(--muted)}html:root .yd-op b{display:block;color:var(--ink);font-weight:500;font-size:1rem}
+  html:root .yd-oi{flex:none;width:36px;height:36px;border-radius:50%;background:var(--panel);display:grid;place-items:center}
+  html:root .yd-oi svg{width:18px;height:18px;fill:none;stroke:currentColor;color:var(--ink);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  html:root .yd-rest{opacity:.45}
+  html:root .yd-ccl{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  html:root .yd-cco{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 16px;border-radius:16px;border:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-size:1rem;text-align:left;cursor:pointer}
+  html:root .yd-cco small{font-size:.8125rem;color:var(--muted)}html:root .yd-cco.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}html:root .yd-cco.on small{color:inherit;opacity:.7}
   /* ===== v6 look (end) ===== */
 </style>
 </head>
@@ -4423,7 +4452,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     else v.innerHTML=viewHome();
     if(state.view==="home"||state.view==="day"||state.view==="reports"){var ex=exStrip();if(ex)v.insertAdjacentHTML("afterbegin",ex);}
     navTrack();navBackBtn(v);
-    if(state.view==="home"&&hmDay()===today()){var hero=v.querySelector("#hmHero");if(hero)hero.insertAdjacentHTML("afterend",logStrip()+packAsk())}
+    if(state.view==="home"&&hmDay()===today()){var hero=v.querySelector("#hmHero");if(hero)hero.insertAdjacentHTML("afterend",weekCard()+logStrip()+packAsk())}
     if(state.view==="home"&&!visibleItems().some(function(i){return !i.archived})){var hmT=v.querySelector(".hm-top");if(hmT)hmT.insertAdjacentHTML("afterend",blankHome())}
     [].forEach.call(document.querySelectorAll(".ghm-sc"),function(e){e.scrollLeft=e.scrollWidth});
     if(state.view==="home"){homeMount();Buddy.mount($("#buddySlot"));Pull.mount();}
@@ -4734,6 +4763,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   }
   function qcOpenLog(){openModal(qcLogHtml());$("#modal").classList.add("qcl-modal");}
   document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("[data-qcplus],[data-qcnew],[data-qclclose]");if(!t)return;e.stopPropagation();
+    if(_holdVoice&&t.hasAttribute("data-qcplus")){_holdVoice=false;return}
     if(t.hasAttribute("data-qcplus"))openAdd(addDay());else if(t.hasAttribute("data-qcnew")){closeModal();openAdd(addDay());}else closeModal();},true);
   /* after a one-tap log the sheet stays open with fresh lines */
   document.addEventListener("click",function(e){var r=e.target.closest&&e.target.closest(".qcl-row[data-toggle]");if(!r)return;setTimeout(function(){var m=$("#modal");if(m&&m.classList.contains("qcl-modal")&&$("#overlay").classList.contains("show"))m.innerHTML=qcLogHtml();else qcOpenLog();},60);});
@@ -5829,6 +5859,107 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       '<div class="ghm-b">'+dl+'<div class="ghm-sc"><div class="ghm-mo">'+mo+'</div><div class="ghm-g" style="grid-template-rows:repeat(7,'+sz+'px)">'+g+'</div></div></div>'+
       '<div class="ghm-f"><span>'+(on?"Swipe for earlier weeks":"Last 6 months")+'</span><span class="ghm-k">less <i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i> more</span></div></div>'}
   /* Patterns: one habit at a time */
+  /* ===== Your week (start): the Sunday report. Kept apart from screen code; wkMedian and wkDrift are pure (docs/tools/test-week.js) ===== */
+  function wkMedian(a){if(!a.length)return null;var b=a.slice().sort(function(x,y){return x-y}),m=Math.floor(b.length/2);return b.length%2?b[m]:(b[m-1]+b[m])/2}
+  /** this week's average against your usual (the middle of the 4 weeks before); needs 3 days this week and 10 before. A drift is 20% under or 25% over */
+  function wkDrift(week,past){if(week.length<3||past.length<10)return null;var u=wkMedian(past);if(!(u>0))return null;
+    var avg=week.reduce(function(a,b){return a+b},0)/week.length,r=avg/u;return r<=.8?{dir:-1,avg:avg,usual:u,r:r}:r>=1.25?{dir:1,avg:avg,usual:u,r:r}:null}
+  function wkEnd(){var d=new Date(today()+"T00:00:00");return addDaysStr(today(),-d.getDay())}   /* the Sunday that closes the week (today, on a Sunday) */
+  function wkDays(end,back){var out=[];for(var k=6+(back||0)*7;k>=(back||0)*7;k--)out.push(addDaysStr(end,-k));return out}
+  var WD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],WDS=["Sundays","Mondays","Tuesdays","Wednesdays","Thursdays","Fridays","Saturdays"];
+  /* the memory, on this phone only: what you said to each idea, what you tried, what you made your new normal */
+  function wkMem(){try{return JSON.parse(localStorage.getItem("ritsu_wk_mem")||"{}")}catch(e){return {}}}
+  function wkMemSet(m){try{localStorage.setItem("ritsu_wk_mem",JSON.stringify(m))}catch(e){}}
+  function wkMine(id){var m=wkMem();return m[id]||{no:{},tried:null}}
+  /* a planned day that counts: not before it started, not a Low day, not a rest day */
+  function wkPlanned(i,ds){var st=startedOn(i);if(st&&ds<st)return false;if(isLowDay(ds))return false;if(ds>=today()&&creditOn(i,ds)<1)return false;return !hasRhythm(i)||!!i.perWeek||planOn(i,ds)}
+  function wkHabit(i,days){var pl=days.filter(function(ds){return wkPlanned(i,ds)});
+    var done=days.filter(function(ds){return creditOn(i,ds)>=1}).length,of=i.perWeek?Math.min(7,i.perWeek):(i.repeatEvery||1)>1&&!hasRhythm(i)?Math.max(1,Math.round(pl.length/i.repeatEvery)):pl.length;return {done:of?Math.min(done,of):done,of:of,r:of?Math.min(1,done/of):null}}
+  function wkRound(v){return v>=10?Math.round(v):Math.round(v*10)/10}
+  function wkHM(m){m=((Math.round(m/15)*15)%1440+1440)%1440;return p2(Math.floor(m/60))+":"+p2(m%60)}
+  function wkMin(hm){var p=String(hm||"").split(":");return p.length<2?null:+p[0]*60+ +p[1]}
+  /* a cold or a fever during the week: workouts and the like are not "slipped" */
+  function wkUnwell(days){return visibleItems().some(function(i){return isEpisode(i)&&(i.episodes||[]).some(function(e){return e.start<=days[6]&&(e.end||today())>=days[0]})})}
+  /* what kind of thing, so the ideas fit */
+  function wkKind(i){if(isMedItem(i))return "med";if(i.kind==="measure")return "goal";if(i.catId==="c_fitness")return "move";if(i.catId==="c_sleepfood"||/\bbed|sleep/i.test(i.title||""))return "sleep";
+    if(i.catId===TODO_CAT)return "chore";if(areaDomain(i.catId)==="mind")return "mind";return "habit"}
+  /* the action library: the right ideas for each kind. Medicine is never told to catch up. */
+  function wkIdeas(i,slip){var k=wkKind(i),o=[],wd=slip.wd;
+    if(k==="med"){if(slip.late)o.push({k:"remat",label:"Move the reminder to "+fmtTime(slip.late),act:"rem|"+i.id+"|"+slip.late});
+      o.push({k:"info",label:"Unsure about a missed dose? Ask your pharmacist.",info:1});return o}
+    if(wd!=null){var days=(i.days&&i.days.length?i.days.slice():[0,1,2,3,4,5,6]),free=[6,0,1,2,3,4,5].filter(function(d){return days.indexOf(d)<0});
+      if(i.days&&i.days.length&&free.length){var to=free[0];o.push({k:"move",label:"Move "+WDS[wd]+" to "+WD[to],act:"days|"+i.id+"|"+days.filter(function(d){return d!==wd}).concat(to).sort().join(".")})}
+      o.push({k:"leave",label:"Leave "+WDS[wd]+" out",act:"days|"+i.id+"|"+days.filter(function(d){return d!==wd}).join(".")});
+      if(k==="move"||k==="mind")o.push({k:"small",label:"Make "+WDS[wd]+" "+(k==="move"?"a 10-minute walk":"a 2-minute version"),act:"small|"+i.id+"|"+(k==="move"?"A 10-minute walk":"Just 2 minutes")});}
+    else if(k==="goal"){if(!i.reminder)o.push({k:"remind",label:"A reminder at 3pm",act:"rem|"+i.id+"|15:00"});
+      if(slip.avg&&i.target)o.push({k:"goal",label:"Make "+wkRound(slip.avg)+(i.unit?" "+i.unit:"")+" my goal",act:"goal|"+i.id+"|"+wkRound(slip.avg)});}
+    else if(k==="sleep"){var at=(i.expect&&i.expect.at)||i.reminder;if(at){var wdn=wkHM(wkMin(at)-30);o.push({k:"wind",label:"A wind-down reminder at "+fmtTime(wdn),act:"rem|"+i.id+"|"+wdn})}}
+    else if(k==="chore"&&isRepeat(i)){o.push({k:"less",label:"Every "+((i.repeatEvery||1)+1)+" days instead",act:"every|"+i.id+"|"+((i.repeatEvery||1)+1)})}
+    else{if(slip.done>=1&&!i.perWeek)o.push({k:"lower",label:Math.max(2,slip.done+1)+" times a week for now",act:"lower|"+i.id+"|"+Math.max(2,slip.done+1)});
+      if(!i.small)o.push({k:"small",label:k==="move"?"A 15-minute version":"A 2-minute version",act:"small|"+i.id+"|"+(k==="move"?"15 minutes":"Just 2 minutes")});}
+    /* learning: an idea you turned down twice rests for 4 weeks; one you tried that did not work is not offered again */
+    var me=wkMine(i.id),t=today();return o.filter(function(x){var n=me.no[x.k];if(n&&n.until&&n.until>t)return false;if(me.tried&&me.tried.k===x.k&&me.tried.failed)return false;return true})}
+  function wkReport(){var end=wkEnd(),days=wkDays(end),prev=wkDays(end,1),past=[];for(var k=7;k<35;k++)past.push(addDaysStr(end,-k));
+    var wins=[],slips=[],ask=null,unwell=wkUnwell(days),mem=wkMem();
+    rhythmItems().filter(function(i){return i.kind==="todo"}).forEach(function(i){var w=wkHabit(i,days);if(w.r==null||w.of<2)return;
+      var pr=[1,2,3].map(function(b){return wkHabit(i,wkDays(end,b)).r}).filter(function(x){return x!=null}),pa=pr.length?pr.reduce(function(a,b){return a+b},0)/pr.length:null;
+      /* learning: did the change you chose work? */
+      var me=mem[i.id];if(me&&me.tried&&me.tried.since<end&&!me.tried.told){if(w.r>=.7){wins.push({sc:3,t:"Your change is working: "+i.title+", "+w.done+" of "+w.of,sub:"Since you chose: "+me.tried.label.toLowerCase()+"."});me.tried.told=1}
+        else if(addDaysStr(me.tried.since,14)<=end){me.tried.failed=1}}
+      if(w.r>=.7&&w.done>=3){var best=pr.length>=3&&w.r>Math.max.apply(null,pr);wins.push({sc:w.r+(best?1:0),t:i.title+", "+w.done+" of "+w.of+" days",sub:best?"Your best week in a month.":w.done===w.of?"Every single one.":"A steady week."})}
+      if(unwell&&wkKind(i)==="move")return;                       /* a sick week never counts against a workout */
+      /* the same weekday missed two weeks running, while the other days went fine */
+      if(!i.perWeek&&((i.repeatEvery||1)===1||(i.days&&i.days.length))){for(var d=0;d<7;d++){var a1=days.filter(function(ds){return new Date(ds+"T00:00:00").getDay()===d})[0],a2=prev.filter(function(ds){return new Date(ds+"T00:00:00").getDay()===d})[0];
+        if(wkPlanned(i,a1)&&wkPlanned(i,a2)&&creditOn(i,a1)<1&&creditOn(i,a2)<1&&w.r>=.5){slips.push({sc:2,i:i,wd:d,t:i.title+": missed both "+WDS[d],sub:"The other days went fine.",done:w.done});break}}}
+      if(pa!=null&&pa>=.6&&w.r<=pa-.3&&!slips.some(function(x){return x.i===i}))slips.push({sc:pa-w.r,i:i,t:i.title+", "+w.done+" of "+w.of+" this week",sub:"Usually about "+Math.round(pa*w.of)+".",done:w.done})});
+    visibleItems().filter(function(i){return !i.archived&&i.kind==="measure"&&i.mark!=="number"&&isRoutine(i)}).forEach(function(i){
+      var vals=function(ds){return dayVal(i,ds)},wv=days.map(vals).filter(function(v){return v!=null}),pv=past.map(vals).filter(function(v){return v!=null});
+      var d=wkDrift(wv,pv);if(!d||d.dir>0)return;var un=i.unit?" "+i.unit:"",me=mem[i.id]||{};
+      if(me.normal&&Math.abs(me.normal-d.avg)/me.normal<.15)return;    /* you said this is your new normal */
+      /* learning: two low weeks in a row? ask once if it is the new normal */
+      var lw=prev.map(vals).filter(function(v){return v!=null}),dl=wkDrift(lw,pv);
+      slips.push({sc:1-d.r+(dl&&dl.dir<0?.5:0),i:i,avg:d.avg,newnorm:!!(dl&&dl.dir<0)&&!me.asked,t:i.title+", about "+wkRound(d.avg)+un+" a day",sub:"Your usual is around "+wkRound(d.usual)+un+"."})});
+    /* learning your real timings: medicine taken well after its reminder */
+    visibleItems().filter(function(i){return !i.archived&&isMedItem(i)&&i.reminder}).forEach(function(i){var ts=[];for(var k=0;k<14;k++){var t=(i.logTimes||{})[addDaysStr(today(),-k)];if(t)ts.push(wkMin(t))}
+      if(ts.length<7)return;var md=wkMedian(ts),r=wkMin(i.reminder);if(md==null||r==null||Math.abs(md-r)<45)return;
+      slips.push({sc:.4,i:i,late:wkHM(md),t:i.title+": usually taken around "+fmtTime(wkHM(md)),sub:"The reminder is at "+fmtTime(i.reminder)+"."})});
+    wkMemSet(mem);
+    wins.sort(function(a,b){return b.sc-a.sc});slips.sort(function(a,b){return b.sc-a.sc});slips=slips.slice(0,3);
+    /* one question per week: the top slip that has ideas left */
+    for(var q=0;q<slips.length&&!ask;q++){var sl=slips[q];
+      if(sl.newnorm)ask={id:sl.i.id,q:"Is about "+wkRound(sl.avg)+(sl.i.unit?" "+sl.i.unit:"")+" your new normal?",opts:[{k:"normal",label:"Yes, make it my goal",act:"normal|"+sl.i.id+"|"+wkRound(sl.avg)},{k:"remind",label:"No, help me get back",act:"rem|"+sl.i.id+"|15:00"}]};
+      else{var op=wkIdeas(sl.i,sl);if(op.length)ask={id:sl.i.id,q:sl.wd!=null?"What would help on "+WDS[sl.wd]+"?":isMedItem(sl.i)?"A better time for the reminder?":"What would help next week?",opts:op}}}
+    return {end:end,win:wins[0]||null,slips:slips,ask:ask}}
+  function wkSeen(){try{return localStorage.getItem("ritsu_week_seen")||""}catch(e){return ""}}
+  function wkShowNow(){var n=new Date(),d=n.getDay();return (d===0&&n.getHours()>=17)||d===1}
+  function weekCard(){if(!wkShowNow())return "";var R=wkReport();if((!R.win&&!R.slips.length)||wkSeen()===R.end)return "";
+    var t=R.slips.length?(R.win?"A good week. A few things to note.":"A few things to note."):"A steady week.";
+    var h='<section class="wk-card" aria-label="Your week"><div class="wk-h"><span>Your week</span><button class="wk-x" data-wk="close|-|'+R.end+'" aria-label="Close your week">\u00d7</button></div><h3 class="wk-t">'+t+'</h3>';
+    if(R.win)h+='<div class="wk-l"><i class="ok"></i><span>'+esc(R.win.t)+'<small>'+esc(R.win.sub)+'</small></span></div>';
+    if(R.slips.length)h+='<p class="wk-k">Slipped this week</p>'+R.slips.map(function(x){return '<div class="wk-l"><i class="dr"></i><span>'+esc(x.t)+'<small>'+esc(x.sub)+'</small></span></div>'}).join("");
+    if(R.ask)h+='<div class="wk-ask"><p>'+esc(R.ask.q)+'</p><div>'+R.ask.opts.map(function(o){return o.info?'<small class="wk-i">'+esc(o.label)+'</small>':'<button class="wk-b" data-wk="'+esc(o.act)+'|'+esc(o.k)+'|'+R.end+'|'+esc(o.label)+'">'+esc(o.label)+'</button>'}).join("")+
+      '<button class="wk-b wk-no" data-wk="no|'+R.ask.id+'|'+R.ask.opts.map(function(o){return o.k}).join(".")+'|'+R.end+'">Not now</button></div></div>';
+    return h+'</section>'}
+  /* what each answer does; every one is remembered */
+  document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-wk]");if(!b)return;var v=b.getAttribute("data-wk").split("|"),a=v[0],id=v[1],m=wkMem(),i=Store.get("items",id),end,me;
+    var say="";
+    if(a==="close"){end=v[2]}
+    else if(a==="no"){end=v[3];me=m[id]=m[id]||{no:{},tried:null};v[2].split(".").forEach(function(k){var n=me.no[k]=me.no[k]||{n:0};n.n++;if(n.n>=2)n.until=addDaysStr(today(),28)})}
+    else{var key=v[v.length-3];end=v[v.length-2];var label=v[v.length-1];
+      if(i){me=m[id]=m[id]||{no:{},tried:null};
+        if(a==="rem"){Store.update("items",id,{reminder:v[2]});say="Reminder for "+i.title+" at "+fmtTime(v[2])+"."}
+        else if(a==="days"){var ds=v[2]?v[2].split(".").map(Number):[];Store.update("items",id,{days:ds,perWeek:null});say=i.title+": "+label.toLowerCase()+"."}
+        else if(a==="small"){Store.update("items",id,{small:v[2]});say="Small version for "+i.title+": "+v[2].toLowerCase()+"."}
+        else if(a==="lower"){Store.update("items",id,{perWeek:+v[2]});say=i.title+": "+v[2]+" times a week for now."}
+        else if(a==="every"){Store.update("items",id,{repeatEvery:+v[2]});say=i.title+": every "+v[2]+" days."}
+        else if(a==="goal"||a==="normal"){Store.update("items",id,{target:+v[2]});say=i.title+": your goal is now "+v[2]+(i.unit?" "+i.unit:"")+".";if(a==="normal"){me.normal=+v[2];me.asked=1}}
+        if(a!=="normal")me.tried={k:key,label:label,since:end};}}
+    wkMemSet(m);try{localStorage.setItem("ritsu_week_seen",end)}catch(x){}if(say)toast(say);render()});
+  /** the Sunday 7pm notification: it says the one thing when it can (planned on a Sunday before 7pm), otherwise a plain hello */
+  function wkNotif(){var n=new Date(),at=new Date(n),sun=(7-n.getDay())%7;at.setDate(n.getDate()+sun);at.setHours(19,0,0,0);if(at.getTime()<=n.getTime()+3000)at.setDate(at.getDate()+7);
+    var body="A quick look at your week. 30 seconds.";if(sun===0&&at.getDate()===n.getDate()){var R=wkReport();if(R.slips.length)body=R.slips.map(function(x){return x.t}).slice(0,2).join(" \u00b7 ");else if(R.win)body=R.win.t+". "+R.win.sub}
+    return {id:1999990001,title:"Your week"+(state.me&&Store.get("people",state.me)?", "+Store.get("people",state.me).name.split(" ")[0]:""),body:body,channelId:REM_CH,smallIcon:"ic_stat_daywell",iconColor:"#34D399",extra:{week:1},schedule:{at:at,allowWhileIdle:true}}}
+  /* ===== Your week (end) ===== */
   function rhythmItems(){return visibleItems().filter(function(i){return !i.archived&&isRoutine(i)&&trackable(i)&&!isMedItem(i)&&!isTracker(i)&&!isFast(i)})}
   function rhythmCard(){var its=rhythmItems();if(!its.length)return "";var sel=null;try{sel=localStorage.getItem("ritsu_rhythm")}catch(e){}
     var i=its.filter(function(x){return x.id===sel})[0]||its.slice().sort(function(a,b){return totalOf(b)-totalOf(a)})[0];
@@ -6143,6 +6274,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   var APP_VER="0.3.0";
   var WHATS_NEW=[
     ["star","A calmer, more polished look","Soft glass cards on quiet paper. A warm glow behind your number grows as your day fills."],
+    ["star","Your week","On Sunday evening, a short note: what went well, what slipped, and an idea or two that fits."],
+    ["user","Speak to add","Tap the mic in the + sheet, or hold the + button, and just say it."],
     ["grid","Everything in its place","Body, Mind and To-do, each with clear parts like Sleep, Food and water, Money and admin. Your things moved for you."],
     ["receipt","At the shop","Everything you restock in one list. Tap Bought as you go."],
     ["checklist","Calmer lists","Each thing shows one short line, like “3 more · next at 12pm”. The details live on its own page."],
@@ -6807,20 +6940,22 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   var DAY_PATTERNS=[["m","Morning first","I usually have more time early.","sun","07:30","13:00","21:00"],["s","Spread through the day","My day has little pockets of time.","half","08:00","13:00","21:00"],
     ["e","Evening first","That\u2019s when I have more space.","moon","09:00","14:00","21:30"],["v","My days vary","I don\u2019t really follow one pattern.","shuffle","08:00","13:00","21:00"],["own","Build it myself","I\u2019ll place things myself.","plus","08:00","13:00","21:00"]];
   var DAY_CHIPS=[
-    {k:"brush",n:"Brushing",g:"Body",at:["m","e"],x:{t:"Brushing",G:"c_hygiene"}},{k:"floss",n:"Floss",g:"Body",at:["e"],x:{t:"Floss",G:"c_hygiene"}},
-    {k:"skin",n:"Skincare",g:"Body",at:["m","e"],x:{t:"Skincare",G:"c_hygiene"}},{k:"gym",n:"Gym",g:"Body",at:{m:["m"],s:["e"],e:["e"]},x:{t:"Gym",G:"c_fitness",perWeek:3}},
-    {k:"stretch",n:"Stretch",g:"Body",at:{m:["m"],s:["m"],e:["e"]},x:{t:"Stretch",G:"c_fitness"}},{k:"walk",n:"Walk",g:"Body",at:{m:["m"],s:["d"],e:["e"]},x:{t:"Walk",G:"c_fitness"}},
-    {k:"water",n:"Water",g:"Body",at:["d"],x:{lib:"Water"}},
-    {k:"sleep",n:"Sleep hours",g:"Body",at:["m"],x:{lib:"Sleep hours"}},{k:"bed",n:"Bed by 11",g:"Body",at:["e"],x:{t:"Bedtime",G:"c_sleepfood",rem:"23:00"}},
-    {k:"wake",n:"Up by 7",g:"Body",at:["m"],x:{t:"Wake up",G:"c_sleepfood",rem:"07:00"}},
-    {k:"read",n:"Read",g:"Mind",at:{m:["m"],s:["e"],e:["e"]},x:{t:"Read a little",G:"c_reading"}},{k:"calm",n:"Meditate",g:"Mind",at:{m:["m"],s:["m"],e:["e"]},x:{lib:"Meditation"}},
-    {k:"journal",n:"Journal",g:"Mind",at:["e"],x:{lib:"Journaling"}},{k:"pray",n:"Pray",g:"Mind",at:["m"],x:{t:"Daily prayer",G:"c_calm",quiet:1}},
-    {k:"meds",n:"Medicine",g:"Body",x:{med:1,t:"My medicine"}},
-    {k:"unwell",n:"When unwell",g:"Body",xs:[{lib:"Fever"},{lib:"Cold"}]},{k:"logs",n:"Body logs",g:"Body",xs:[{lib:"Bowel movement"},{lib:"Weight"}]},
-    {k:"period",n:"Period",g:"Body",x:{lib:"Period"}},
-    {k:"bedmade",n:"Make the bed",g:"To-do",at:["m"],x:{t:"Make the bed",G:"todo:home"}},{k:"tidy",n:"10-minute tidy",g:"To-do",at:["e"],x:{t:"10-minute tidy",G:"todo:home"}},
-    {k:"dishes",n:"Dishes after dinner",g:"To-do",at:["e"],x:{t:"Dishes after dinner",G:"todo:home"}},{k:"plan",n:"Plan tomorrow",g:"To-do",at:["e"],x:{t:"Plan tomorrow",G:"todo:work"}},
-    {k:"groc",n:"Groceries",g:"To-do",at:[],x:{t:"Groceries",G:"todo:home",rep:7}},{k:"callp",n:"Call parents",g:"To-do",at:["e"],x:{t:"Call parents",G:"todo:personal",rep:7}}
+    {k:"brush",n:"Brushing teeth",d:"morning and night",g:"Body",at:["m","e"],x:{t:"Brushing teeth",G:"c_hygiene"}},{k:"floss",n:"Flossing",d:"once a day",g:"Body",at:["e"],x:{t:"Flossing",G:"c_hygiene"}},
+    {k:"skin",n:"Skincare",d:"morning and night",g:"Body",at:["m","e"],x:{t:"Skincare",G:"c_hygiene"}},{k:"gym",n:"Workout",d:"3 times a week",g:"Body",at:{m:["m"],s:["e"],e:["e"]},x:{t:"Workout",G:"c_fitness",perWeek:3}},
+    {k:"walk",n:"Walking",d:"a walk a day",g:"Body",at:{m:["m"],s:["d"],e:["e"]},x:{t:"Walking",G:"c_fitness"}},{k:"stretch",n:"Stretching",d:"a few minutes a day",g:"Body",at:{m:["m"],s:["m"],e:["e"]},x:{t:"Stretching",G:"c_fitness"}},
+    {k:"water",n:"Water intake",d:"litres a day",g:"Body",at:["d"],x:{lib:"Water"}},
+    {k:"sleep",n:"Sleep",d:"hours a night",g:"Body",at:["m"],x:{lib:"Sleep hours"}},{k:"bed",n:"Bedtime",d:"in bed by 11",g:"Body",at:["e"],x:{t:"Bedtime",G:"c_sleepfood",rem:"23:00"}},
+    {k:"wake",n:"Wake-up time",d:"up by 7",g:"Body",at:["m"],x:{t:"Wake-up time",G:"c_sleepfood",rem:"07:00"}},
+    {k:"meds",n:"Medicine and supplements",d:"doses on time, pills left",g:"Body",x:{med:1,t:"My medicine"}},
+    {k:"weight",n:"Weight",d:"a number each week",g:"Body",x:{lib:"Weight"}},
+    {k:"period",n:"Period",d:"start and end",g:"Body",x:{lib:"Period"}},
+    {k:"unwell",n:"Colds and fevers",d:"how long and how often",g:"Body",xs:[{lib:"Fever"},{lib:"Cold"}]},
+    {k:"read",n:"Reading",d:"pages a day",g:"Mind",at:{m:["m"],s:["e"],e:["e"]},x:{lib:"Reading"}},{k:"calm",n:"Meditation",d:"minutes a day",g:"Mind",at:{m:["m"],s:["m"],e:["e"]},x:{lib:"Meditation"}},
+    {k:"journal",n:"Journaling",d:"a few lines a night",g:"Mind",at:["e"],x:{lib:"Journaling"}},{k:"mood",n:"Mood",d:"out of 5",g:"Mind",at:["e"],x:{lib:"Mood out of 5"}},
+    {k:"pray",n:"Prayer",d:"daily",g:"Mind",at:["m"],x:{t:"Prayer",G:"c_calm",quiet:1}},{k:"learn",n:"Learning",d:"a language or a course",g:"Mind",at:["e"],x:{t:"Learning",G:"c_learning"}},
+    {k:"bedmade",n:"Make the bed",d:"every morning",g:"To-do",at:["m"],x:{t:"Make the bed",G:"todo:home"}},{k:"tidy",n:"Tidy the house",d:"a quick reset each evening",g:"To-do",at:["e"],x:{t:"Tidy the house",G:"todo:home"}},
+    {k:"laundry",n:"Laundry",d:"once a week",g:"To-do",at:[],x:{t:"Laundry",G:"todo:home",rep:7}},{k:"groc",n:"Grocery shopping",d:"once a week",g:"To-do",at:[],x:{t:"Grocery shopping",G:"todo:home",rep:7}},
+    {k:"plan",n:"Plan the week",d:"Sunday evening",g:"To-do",at:["e"],x:{t:"Plan the week",G:"todo:work",rep:7}},{k:"callp",n:"Call family",d:"a reminder each week",g:"To-do",at:["e"],x:{t:"Call family",G:"todo:personal",rep:7}}
   ];
   function dayChip(k){return DAY_CHIPS.concat(setupS?setupS.own:[]).filter(function(c){return c.k===k})[0]}
   function dayAt(k){var S=setupS,c=dayChip(k);if(!c||!c.at)return null;if(S.at[k])return S.at[k];if(S.pat==="own")return [];
@@ -6837,8 +6972,32 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     check:'<circle cx="12" cy="12" r="8.5"/><path class="yd-tick" d="m8 12.4 2.7 2.7L16.2 9.5"/>',chat:'<path d="M4 18.5V6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H8z"/>',
     clock:'<circle cx="12" cy="12" r="8.5"/><path class="yd-hand" d="M12 12V7.2"/><path d="M12 12h3.2"/>',chev:'<path d="m9 6 6 6-6 6"/>'};
   function ydI(n,cls){return '<svg class="yd-i'+(cls?" "+cls:"")+'" viewBox="0 0 24 24" aria-hidden="true">'+YDI[n]+'</svg>'}
-  function ydTop(n){var d="";for(var i=1;i<=5;i++)d+='<i class="'+(i<=n?"on":"")+'"></i>';
-    return '<div class="yd-top"><button class="su-skip" data-setup="ydback">Back</button><div class="su-steps" aria-hidden="true">'+d+'</div><span>'+n+' of 5</span></div>'}
+  function ydTop(n){var d="";for(var i=1;i<=6;i++)d+='<i class="'+(i<=n?"on":"")+'"></i>';
+    return '<div class="yd-top"><button class="su-skip" data-setup="ydback">Back</button><div class="su-steps" aria-hidden="true">'+d+'</div><span>'+n+' of 6</span></div>'}
+  /* ===== opening cards (2026-10-15): how it works, privacy, Low day. Every line says what Daywell really does ===== */
+  var YDC={tick:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',week:'<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/>',learn:'<path d="M4 17c3-6 5-9 8-9s5 3 8 9"/>',
+    phone:'<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',no:'<circle cx="12" cy="12" r="8.5"/><path d="m8 8 8 8"/>',
+    heart:'<path d="M12 20s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.7-7 10-7 10z"/>'};
+  function ydPts(l){return '<ul class="yd-op">'+l.map(function(p){return '<li><span class="yd-oi"><svg viewBox="0 0 24 24" aria-hidden="true">'+YDC[p[0]]+'</svg></span><span><b>'+p[1]+'</b>'+p[2]+'</span></li>'}).join("")+'</ul>'}
+  function ydCard(n){var d="";for(var i=1;i<=3;i++)d+='<i class="'+(i<=n?"on":"")+'"></i>';
+    var top='<div class="yd-top"><button class="su-skip" data-setup="ydback">Back</button><div class="su-steps" aria-hidden="true">'+d+'</div><button class="su-skip" data-setup="ydgo|4">Skip</button></div>',h;
+    if(n===1)h='<p class="yd-ok">How it works</p><h1 class="su-title">A calm home for your day.</h1>'+ydPts([["tick","Tick things off as you go","Habits, to-dos, medicine and the things you measure, all in one list."],
+      ["week","Missed a day? That\u2019s okay","Daywell looks at your whole week. On Sunday it sends a short note: what went well, what slipped, and an idea or two."],
+      ["learn","It learns your usual","The longer you use it, the better it knows you, and the more useful it gets."]]);
+    else if(n===2)h='<p class="yd-ok">Privacy</p><h1 class="su-title">Your day stays yours.</h1>'+ydPts([["phone","Kept on your phone","Everything you add lives on this phone."],
+      ["lock","Backups are locked","If you back up, it\u2019s locked with a key only you hold. Not even we can read it."],
+      ["no","Never sold, never used for ads","Your data is yours. We don\u2019t sell it or share it."],["heart","Your health stays private","Your health, medicine and numbers are never shared."]]);
+    else h='<p class="yd-ok">Low days</p><h1 class="su-title">Some days are low days.</h1><p class="su-sub">Tired, unwell, or just too much going on? Tap Low day. Daywell keeps only what matters today, and the rest rests until tomorrow.</p>'+
+      '<div class="yd-demo"><div class="yd-dr"><span class="yd-dt"></span><span><b>Morning meds</b><small>stays: medicine</small></span></div><div class="yd-dr"><span class="yd-dt"></span><span><b>Pay the electricity bill</b><small>stays: high priority</small></span></div>'+
+      '<div class="yd-dr"><span class="yd-dt"></span><span><b>Workout</b><small>stays as its small version, a 10-minute walk</small></span></div><div class="yd-dr yd-rest"><span class="yd-dt"></span><span><b>Vacuum</b><small>resting until tomorrow</small></span></div></div>'+
+      '<p class="su-sub">Nothing counts against you on a low day.</p>';
+    return '<div class="welcome-card su yd">'+top+h+'<div class="su-foot"><span></span><button class="btn primary su-next" data-setup="ydnext">'+(n===3?"Let\u2019s set up":"Next")+'</button></div></div>'}
+  function ydCountry(){var cc=userCountry(),tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}var g=guessCountry(tz,navigator.language),set=false;try{set=!!localStorage.getItem("ritsu_country")}catch(e){}
+    var list=COUNTRIES.concat([["XX","Somewhere else"]]),known=COUNTRIES.some(function(c){return c[0]===cc});
+    return '<div class="welcome-card su yd">'+ydTop(2)+'<h1 class="su-title">Where do you live?</h1><p class="su-sub">Your packs are customised for homes there.</p><div class="yd-ccl">'+
+      list.map(function(c){var on=c[0]===cc||(c[0]==="XX"&&!known);return '<button class="yd-cco'+(on?" on":"")+'" data-setup="ydcc|'+c[0]+'" aria-pressed="'+on+'"><span>'+c[1]+'</span>'+(c[0]===g&&!set?'<small>from your phone</small>':'')+'</button>'}).join("")+
+      '</div><div class="su-foot"><span></span><button class="btn primary su-next" data-setup="ydnext">Next</button></div></div>'}
+  /* ===== opening cards (end) ===== */
   function ydName(){var S=setupS;
     return '<div class="welcome-card su yd">'+ydTop(1)+'<h1 class="su-title" id="ydHi">'+(S.name?"Hi, "+esc(S.name)+".":"Hi there.")+'</h1><p class="su-sub">What should we call you?</p>'+
       '<input id="su-name" class="su-inp yd-name" type="text" placeholder="Your name" value="'+esc(S.name)+'" autocomplete="given-name" enterkeyhint="next">'+
@@ -6846,10 +7005,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   }
   function ydPick(){var S=setupS,n=0;Object.keys(S.picked).forEach(function(k){if(S.picked[k]&&dayChip(k))n++});
     var grp=function(g){var cs=DAY_CHIPS.concat(S.own).filter(function(c){return c.g===g});
-      return '<div class="yd-grp"><div class="yd-gl"><i class="yd-pd" style="background:var(--c-'+{Body:"body",Mind:"mind","To-do":"todo"}[g]+')"></i>'+g+'</div><div class="su-chips">'+cs.map(function(c){var on=!!S.picked[c.k];return '<button class="su-chip'+(on?" on":"")+'" data-setup="ydchip|'+c.k+'" aria-pressed="'+on+'">'+(on?CHECK_SVG:"")+esc(c.n)+'</button>'}).join("")+
+      return '<div class="yd-grp"><div class="yd-gl"><i class="yd-pd" style="background:var(--c-'+{Body:"body",Mind:"mind","To-do":"todo"}[g]+')"></i>'+g+'</div><div class="su-chips">'+cs.map(function(c){var on=!!S.picked[c.k];return '<button class="su-chip'+(c.d?" yd-cb":"")+(on?" on":"")+'" data-setup="ydchip|'+c.k+'" aria-pressed="'+on+'">'+(c.d?'<span>'+esc(c.n)+'</span><small>'+esc(c.d)+'</small>':(on?CHECK_SVG:"")+esc(c.n))+'</button>'}).join("")+
         (S.ownOpen===g?'':'<button class="su-chip yd-ownc" data-setup="ydownopen|'+g+'">+ Add your own</button>')+'</div>'+
         (S.ownOpen===g?'<div class="sp-inrow"><input id="yd-own" class="su-inp" type="text" placeholder="'+{Body:"Like cold shower",Mind:"Like call a friend",["To-do"]:"Like clean the car"}[g]+'" autocomplete="off" enterkeyhint="done"><button class="btn primary sm" data-setup="ydown|'+g+'">Add</button></div>':'')+'</div>'};
-    return '<div class="welcome-card su yd">'+ydTop(2)+'<h1 class="su-title">What do you want to keep up with?</h1><p class="su-sub">Tap a few. You can add anything else later.</p>'+
+    return '<div class="welcome-card su yd">'+ydTop(3)+'<h1 class="su-title">What do you want to keep up with?</h1><p class="su-sub">Pick what matters to you. You can change anything later in the app.</p>'+
       grp("Body")+grp("Mind")+grp("To-do")+
       '<div class="su-foot"><span></span><button class="btn primary su-next" data-setup="ydnext">'+(n?"Next, "+n+" picked":"Next")+'</button></div></div>';
   }
@@ -6869,13 +7028,13 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       {id:"repl",n:"Time to replace",say:"Mark it once when it\u2019s new. We tell you when it\u2019s worn out.",xs:up(["Toothbrush","Razor blades","Contact lenses"]).concat(cc==="IN"?cbk("ro"):up(["Water filter"])).concat(cc==="US"?up(["Air filter"]):[]).concat(cc==="IN"?[]:up(["Smoke alarm battery"]))}]}
   function ydBackAll(){var S=setupS,cc=userCountry(),all=[];ydBackGroups(cc).forEach(function(g){all=all.concat(g.xs)});return all.concat(S.backOwn.map(function(o,j){return {k:"own:"+j,n:o.n,ev:rhythmLabel({every:o.m},1),grp:o.grp}}))}
   function ydIntro(){
-    return '<div class="welcome-card su yd">'+ydTop(3)+'<p class="su-sub" style="margin:0">Next</p><h1 class="su-title">Some things come back every few weeks or months.</h1><p class="su-sub">A dental check-up, a car insurance renewal, toothpaste running low. On the next page we\u2019ve filled in typical timings that suit most homes, as a starting point.</p>'+
+    return '<div class="welcome-card su yd">'+ydTop(4)+'<p class="su-sub" style="margin:0">Next</p><h1 class="su-title">Some things come back every few weeks or months.</h1><p class="su-sub">A dental check-up, a car insurance renewal, toothpaste running low. On the next page we\u2019ve filled in typical timings that suit most homes, as a starting point.</p>'+
       '<div class="yd-demo"><div class="yd-dr"><span class="yd-dt"></span><span><b>Toothpaste</b><small>Every 6 weeks</small></span><em>typical</em></div><div class="yd-dr"><span class="yd-dt"></span><span><b>Toothpaste</b><small class="yd-mine">Every 25 days</small></span><em>yours</em></div></div>'+
       '<ul class="yd-pts"><li><b>Pick what fits you.</b> Skip anything that doesn\u2019t.</li><li><b>Change any timing later</b>, down to the day.</li><li><b>Add your own</b> now or any time.</li><li><b>Then leave it to Daywell.</b> It keeps track and reminds you when each one is due.</li></ul>'+
       '<div class="su-foot"><span></span><button class="btn primary su-next" data-setup="ydnext">Show me</button></div></div>'}
   function ydBack(){var S=setupS,cc=userCountry(),n=Object.keys(S.back).filter(function(k){return S.back[k]}).length;
-    var h='<div class="welcome-card su yd">'+ydTop(4)+'<h1 class="su-title">And the things that come back.</h1><p class="su-sub">Typical timings for most homes. Pick any; you can change every timing later.</p>'+
-      '<label class="yd-cc">Ideas for <select id="yd-cc" aria-label="Your country">'+COUNTRIES.concat([["XX","Somewhere else"]]).map(function(c){return '<option value="'+c[0]+'"'+(c[0]===cc||(c[0]==="XX"&&!COUNTRIES.some(function(x){return x[0]===cc}))?' selected':'')+'>'+c[1]+'</option>'}).join('')+'</select></label>';
+    var h='<div class="welcome-card su yd">'+ydTop(5)+'<h1 class="su-title">And the things that come back.</h1><p class="su-sub">Typical timings for most homes. Pick any; you can change every timing later.</p>'+
+      '<p class="yd-hint">For homes in '+esc(countryName(cc))+'.</p>';
     ydBackGroups(cc).forEach(function(g){var xs=g.xs.concat(S.backOwn.map(function(o,j){return o.grp===g.id?{k:"own:"+j,n:o.n,ev:rhythmLabel({every:o.m},1)}:null}).filter(Boolean));if(!xs.length&&S.backOpen!==g.id)return;
       h+='<div class="yd-grp"><div class="yd-gl">'+g.n+'</div><p class="yd-hint" style="margin:0 0 8px">'+g.say+'</p><div class="su-chips">'+xs.map(function(x){var on=!!S.back[x.k];return '<button class="su-chip yd-cb'+(on?" on":"")+'" data-setup="ydback1|'+esc(x.k)+'" aria-pressed="'+on+'"><span>'+esc(x.n)+'</span><small>'+esc(x.ev)+'</small></button>'}).join("")+
         (S.backOpen===g.id?'':'<button class="su-chip yd-ownc" data-setup="ydbackopen|'+g.id+'">+ Add your own</button>')+'</div>'+
@@ -6895,7 +7054,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       if(at===null){if(c.own)by.todo.push(c);else call.push(c);return}if(!at.length)by.any.push(c);else at.forEach(function(p){by[p].push(c)})});
     var sec=function(p,name,icon,time){return '<div class="yd-sec"><div class="yd-sh">'+(icon?ydI(icon):"")+'<b>'+name+'</b>'+(time?'<label class="yd-ci">Check in <input type="time" data-ci="'+p+'" value="'+time+'" aria-label="'+name+' check-in time"></label>':'')+'</div>'+
       '<div class="yd-box">'+(by[p].length?by[p].map(function(c){return ydLine(c,p)}).join(""):'<p class="yd-free">Free time.</p>')+'</div></div>'};
-    return '<div class="welcome-card su yd">'+ydTop(5)+'<h1 class="su-title">Here\u2019s your first day</h1><p class="su-sub">A starting point, made from what you picked. Make it feel like your day: tap anything to change it.</p>'+
+    return '<div class="welcome-card su yd">'+ydTop(6)+'<h1 class="su-title">Here\u2019s your first day</h1><p class="su-sub">A starting point, made from what you picked. Make it feel like your day: tap anything to change it.</p>'+
       DAYPARTS.map(function(p){return sec(p[0],p[1],p[2],ci[p[0]])}).join("")+(by.any.length?sec("any","Anytime"):"")+(by.todo.length?sec("todo","To-do today"):"")+
       (function(){var bx=ydBackAll().filter(function(x){return S.back[x.k]});return bx.length?'<div class="yd-call"><b>Comes back</b><span>'+bx.map(function(x){return esc(x.n)}).join(", ")+'</span><small>Daywell reminds you when each one is due. Change any timing later.</small></div>':''})()+
       (call.length?'<div class="yd-call"><b>On call</b><span>'+call.map(function(c){return esc(c.n)}).join(", ")+'</span><small>There when you need them. Never counted toward your day.</small></div>':'')+
@@ -7020,7 +7179,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(Date.now()-last>6*3600*1000)lbPush().catch(function(){})}
   document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")lbAuto()});
   /* locked backup (end) */
-  function setupHtml(){var s=setupS.step;return s<=1?ydName():s===2?ydPick():s===3?ydIntro():s===4?ydBack():ydDay()}
+  function setupHtml(){var s=setupS.step;return s<=3?ydCard(Math.max(1,s)):s===4?ydName():s===5?ydCountry():s===6?ydPick():s===7?ydIntro():s===8?ydBack():ydDay()}
   function suItem(x,ix){
     var t=today(),tag=[];
     var it={catId:x.cat,sub:"",title:x.it,akind:"activity",kind:"todo",notes:"",priority:"none",tags:tag,assignees:[],private:false,done:false,dueDate:null,repeatEvery:1,perDay:1,reminder:x.rem||null,duration:null,stance:"routine",markers:[],expect:null,
@@ -7078,8 +7237,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       if(!setupS)return true;
       var S=setupS,go=function(n){S.step=n;S.open="";render();window.scrollTo(0,0)};
       if(a==="ydnext"){ydKeep();go(S.step+1);return true;}
-      if(a==="ydskipname"){S.name="";go(2);return true;}
-      if(a==="ydback"){ydKeep();if(S.step<=1||(S.keepWho&&S.step<=2)){setupS=null;render();}else go(S.step-1);return true;}
+      if(a==="ydskipname"){S.name="";go(5);return true;}
+      if(a==="ydgo"){go(+v[1]);return true;}
+      if(a==="ydcc"){try{localStorage.setItem("ritsu_country",v[1])}catch(x){}S.back={};render();return true;}
+      if(a==="ydback"){ydKeep();if(S.step<=1||(S.keepWho&&S.step<=6)){setupS=null;render();}else go(S.step-1);return true;}
       if(a==="ydpat"){if(S.pat!==v[1]){S.pat=v[1];S.at={};S.ci=null;}render();setTimeout(function(){if(setupS===S&&S.step===3)go(4)},280);return true;}
       if(a==="ydchip"){S.picked[v[1]]=!S.picked[v[1]];render();return true;}
       if(a==="ydown"){var o=$("#yd-own");ydOwn(o?o.value:"",v[1]);render();return true;}
@@ -7088,7 +7249,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       if(a==="ydbackopen"){S.backOpen=v[1];S.backM=3;render();setTimeout(function(){var o4=$("#yd-bown");if(o4)o4.focus()},40);return true;}
       if(a==="ydbackm"){S.backM=+v[1];var keep=($("#yd-bown")||{}).value||"";render();var o5=$("#yd-bown");if(o5){o5.value=keep;o5.focus()}return true;}
       if(a==="ydbackadd"){var nb=(($("#yd-bown")||{}).value||"").trim();if(nb){S.backOwn.push({n:cap1(nb),m:S.backM||3,grp:v[1]});S.back["own:"+(S.backOwn.length-1)]=true;}S.backOpen="";render();return true;}
-      if(a==="ydaddmore"){go(2);return true;}
+      if(a==="ydaddmore"){go(6);return true;}
       if(a==="ydopen"){var key=v[1]+"|"+v[2];S.open=S.open===key?"":key;render();return true;}
       if(a==="ydpart"){var at=(dayAt(v[1])||[]).slice(),ai=at.indexOf(v[2]),cur=S.open.split("|")[1];if(ai<0)at.push(v[2]);else at.splice(ai,1);
         S.at[v[1]]=at;S.open=v[1]+"|"+(at.indexOf(cur)>=0?cur:(at[0]||"any"));render();return true;}
@@ -7697,8 +7858,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
         var keep=remSnz().map(function(x){return x.id}),old=(r.notifications||[]).filter(function(n){return keep.indexOf(n.id)<0}).map(function(n){return {id:n.id}});
         return old.length?LN.cancel({notifications:old}):null;
       }).then(function(){
-        var list=plan;if(!list.length)return;
-        return LN.schedule({notifications:list.map(remShape)});
+        var list=plan.map(remShape);try{list.push(wkNotif())}catch(x){}
+        return LN.schedule({notifications:list});
       });
     }).catch(function(){});
   }
@@ -7907,6 +8068,15 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     return out||String(text).trim();
   }
 
+  /* voice: speech comes as words, so "remind me to" goes and "five thirty pm" becomes "5:30 pm" before the sentence reader sees it */
+  var VNUM={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12},VMIN={fifteen:"15",thirty:"30","forty five":"45"};
+  function voiceClean(t){t=String(t||"").trim();var W="one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve";
+    t=t.replace(/^(please\s+)?(remind me to|remind me|don'?t forget to|i need to|i have to|i must)\s+/i,"");
+    t=t.replace(/\b([ap])\.\s?m\.?/gi,function(m,a){return a.toLowerCase()+"m"});
+    t=t.replace(new RegExp("\\b("+W+")(?:\\s+(fifteen|thirty|forty[ -]five))?(?=\\s*(am|pm|o'?clock|in the (?:morning|afternoon|evening)|at night|tonight)\\b)","gi"),function(m,h,mi){return VNUM[h.toLowerCase()]+(mi?":"+VMIN[mi.toLowerCase().replace("-"," ")]:"")});
+    t=t.replace(new RegExp("\\b(at|by)\\s+("+W+")(?:\\s+(fifteen|thirty|forty[ -]five))?\\b","gi"),function(m,a,h,mi){return a+" "+VNUM[h.toLowerCase()]+(mi?":"+VMIN[mi.toLowerCase().replace("-"," ")]:"")});
+    t=t.replace(/\s*o'?clock\b/gi,"").replace(/[.!]+$/,"").replace(/\s+/g," ").trim();
+    return t?t.charAt(0).toUpperCase()+t.slice(1):""}
   /* ===== v4: one add sheet for everything =====
      The plus button, "+ Add" and every "+ add" open this. It starts as a To-do task, and one tap moves it to Body or Mind.
      Date, time, priority and repeat are always one tap away. Time uses a scroll wheel, not the round clock dial.
@@ -8081,7 +8251,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     qaFixCat();qa.init={card:qa.card,cat:qa.cat,list:qa.list,rep:qa.rep};ms={type:"quick"};renderAdd();
   }
   function renderAdd(){
-    var h='<div class="qa-top"><input type="text" class="qa-title" id="q-title" autocomplete="off" enterkeyhint="done" aria-label="What are you adding?"><button type="button" class="qa-x" data-close aria-label="Close">'+qi("x")+'</button></div>'+
+    var h='<div class="qa-top"><input type="text" class="qa-title" id="q-title" autocomplete="off" enterkeyhint="done" aria-label="What are you adding?">'+(voiceOk()?'<button type="button" class="qa-mic" data-qa="mic" aria-label="Speak instead of typing">'+MIC_SVG+'</button>':'')+'<button type="button" class="qa-x" data-close aria-label="Close">'+qi("x")+'</button></div>'+
       '<p class="qa-hint" id="qa-hint" aria-live="polite" hidden></p><p class="qa-sg" id="qa-sg" hidden></p>'+'<div class="qa-log" id="qa-log">'+qaLogRow()+'</div>'+
       '<div class="modal-b qa-b"><div class="qa-place" id="qa-place"></div><div class="qa-pick" id="qa-pick" hidden><div class="qa-seg" id="qa-seg" role="group" aria-label="Add to"></div><div class="qa-where" id="qa-where"></div></div><div class="qa-acts" id="qa-acts"></div><div id="qa-panel"></div></div>'+
       '<div class="qa-foot"><button type="button" class="qa-more" data-qa="more">More Details</button><span class="spacer"></span><button type="button" class="qa-go" id="qa-go" data-qa="go"></button></div>';
@@ -8149,6 +8319,25 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     return '<span class="qa-logk">Or log</span><div class="qa-logs" role="group" aria-label="Log something">'+its.map(function(i){return logChip(i,"qa-logc")}).join("")+'</div>';
   }
   document.addEventListener("click",function(e){var c=e.target.closest&&e.target.closest(".qa-logc");if(!c)return;setTimeout(function(){var el=$("#qa-log");if(el)el.innerHTML=qaLogRow();},60);});
+  var MIC_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>';
+  function voicePlugin(){return window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.VoiceInput}
+  function voiceOk(){return !!(voicePlugin()||window.SpeechRecognition||window.webkitSpeechRecognition)}
+  /** listen once and put what was heard into the + sheet's box, where it is read like typing */
+  function voiceStart(){var t=$("#q-title"),btn=$(".qa-mic");
+    var put=function(txt){txt=voiceClean(txt);if(!txt||!t)return;t.value=txt;t.dispatchEvent(new Event("input",{bubbles:true}));t.focus();t.setSelectionRange(txt.length,txt.length)};
+    var P=voicePlugin();if(P){P.listen({prompt:"Say what to add"}).then(function(r){put(r&&r.text)}).catch(function(){toast("Voice typing isn\u2019t available on this phone.")});return}
+    var SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;
+    var rec=new SR(),ph=t?t.placeholder:"";rec.lang=navigator.language||"en-US";rec.interimResults=true;rec.maxAlternatives=1;
+    if(btn)btn.classList.add("on");if(t){t.value="";t.placeholder="Listening\u2026"}
+    rec.onresult=function(e){var said="";for(var k=0;k<e.results.length;k++)said+=e.results[k][0].transcript;if(t)t.value=said;if(e.results[e.results.length-1].isFinal)put(said)};
+    rec.onerror=function(e){if(e.error==="not-allowed"||e.error==="service-not-allowed")toast("Allow the microphone to speak to Daywell.");else if(e.error==="no-speech")toast("I didn\u2019t catch that. Tap the mic and try again.")};
+    rec.onend=function(){if(btn)btn.classList.remove("on");if(t)t.placeholder=ph};
+    try{rec.start()}catch(x){if(btn)btn.classList.remove("on")}}
+  /* hold the + button to start talking straight away */
+  var _holdT=null,_holdVoice=false;
+  document.addEventListener("pointerdown",function(e){var b=e.target.closest&&e.target.closest("[data-qcplus]");if(!b||!voiceOk())return;clearTimeout(_holdT);
+    _holdT=setTimeout(function(){_holdVoice=true;openAdd(addDay());setTimeout(voiceStart,320)},450)});
+  ["pointerup","pointercancel","pointerleave"].forEach(function(ev){document.addEventListener(ev,function(){clearTimeout(_holdT)},true)});
   function qaAct(k,icon,label,set,extra){return '<button type="button" class="qa-act'+(set?" set":"")+'" data-qa="'+k+'"'+(extra||"")+'>'+qi(icon)+'<span>'+esc(label)+'</span></button>'}
   function paintAdd(){
     $("#qa-seg").innerHTML=[["todo","To-do"],["body","Body"],["mind","Mind"]].map(function(o){var on=qa.card===o[0];return '<button type="button" data-qa="card" data-v="'+o[0]+'" aria-pressed="'+on+'" class="'+(on?"on":"")+'">'+o[1]+'</button>'}).join("");
@@ -8409,6 +8598,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       if(k==="card"){qa.whereTouched=true;qa.autoLabel="";qa.card=val2;if(val2==="todo"){if(qa.rep>0&&!qa.repTouched)qa.rep=0}else if(!qa.repTouched&&qa.rep===0)qa.rep=1;qaFixCat();paintAdd()}
       else if(k==="list"){qa.whereTouched=true;qa.autoLabel="";qa.list=val2;qa.pickOpen=false;paintAdd()}
       else if(k==="cat"){qa.whereTouched=true;qa.autoLabel="";qa.cat=val2;qa.pickOpen=false;paintAdd()}
+      else if(k==="mic"){voiceStart()}
       else if(k==="place"){qa.pickOpen=!qa.pickOpen;paintAdd()}
       else if(k==="date")qpDate();
       else if(k==="time")qpTime(qaEff().time||"",function(v){qa.time=v||null;qa.timeTouched=true;paintActs()});
@@ -9200,7 +9390,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if((el=e.target.closest("[data-exclear]"))){exClear();return;}
     if((el=e.target.closest("[data-qlog]"))){e.stopPropagation();quickLog(el.getAttribute("data-qlog"));return;}
     if((el=e.target.closest("[data-packq]"))){packQAct(el.getAttribute("data-packq"));return;}
-    if((el=e.target.closest("[data-emptypack]"))){setupStart();setupS.step=2;setupS.keepWho=true;Store.welcome=true;render();window.scrollTo(0,0);return;}
+    if((el=e.target.closest("[data-emptypack]"))){setupStart();setupS.step=6;setupS.keepWho=true;Store.welcome=true;render();window.scrollTo(0,0);return;}
     if((el=e.target.closest("[data-watchall]"))){state.watchAll=true;render();return;}
     if((el=e.target.closest("[data-exok]"))){try{localStorage.setItem("ritsu_ex_ok","1")}catch(x){}render();return;}
     if((el=e.target.closest("[data-welcome]"))){var wv=el.getAttribute("data-welcome"),wb=el.querySelector("b");if(wb)wb.textContent=wv==="back"?"Bringing it back…":"Setting up…";el.setAttribute("aria-busy","true");setTimeout(function(){if(wv==="clean")startClean();else if(wv==="back")bringBack();else startExamples();},60);return;}
