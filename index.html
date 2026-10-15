@@ -4646,13 +4646,15 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     return s+'</svg>';
   }
   /* priority first (high, med, low), then soonest due, then the order you set */
+  /** private things (bowel, urination and the like) go after everything else on every list (user, 2026-10-15) */
+  function bodyLast(a,b){return (a&&a.private?1:0)-(b&&b.private?1:0)}
   function hmPrio(a,b){
-    var pr={high:0,med:1,low:2,none:3},d=(pr[a.priority||"med"])-(pr[b.priority||"med"]);if(d)return d;
+    var pr={high:0,med:1,low:2,none:3},d=bodyLast(a,b)||(pr[a.priority||"med"])-(pr[b.priority||"med"]);if(d)return d;
     var an=dCount(nextDue(a)),bn=dCount(nextDue(b));
     if(an==null&&bn!=null)return 1;if(bn==null&&an!=null)return -1;if(an!=null&&bn!=null&&an!==bn)return an-bn;
     return (a.order||0)-(b.order||0);
   }
-  function hmListSort(a,b){var ac=doneForNow(a)&&a.id!==_justDone?1:0,bc=doneForNow(b)&&b.id!==_justDone?1:0;if(ac!==bc)return ac-bc;return hmPrio(a,b)}
+  function hmListSort(a,b){var bl=bodyLast(a,b);if(bl)return bl;var ac=doneForNow(a)&&a.id!==_justDone?1:0,bc=doneForNow(b)&&b.id!==_justDone?1:0;if(ac!==bc)return ac-bc;return hmPrio(a,b)}
   /* each card has a front (the dots) and a back (what is left, most important first) */
   /* turn one card over (or all back to the front with null) without rebuilding, so the flip can animate */
   function hmHintOn(){if(!visibleItems().length)return true;try{var fs=localStorage.getItem("ritsu_first_seen");return !!fs&&dCount(fs)>-7}catch(e){return false}}
@@ -5202,7 +5204,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /* By time: one list from morning to night (the next time for things done several times a day), untimed ones after, done ones last */
   function qcByTime(its,ds){
     var key=function(i){var t=itemTime(i,ds);return (hmDone(i,ds)&&i.id!==_justDone?3000:0)+(t?minsOf(t):1500)};
-    return '<div class="card">'+its.slice().sort(function(a,b){return key(a)-key(b)||hmPrio(a,b)}).map(function(i){return itemRow(i,{ds:ds,topic:1})}).join("")+'</div>';
+    return '<div class="card">'+its.slice().sort(function(a,b){return bodyLast(a,b)||key(a)-key(b)||hmPrio(a,b)}).map(function(i){return itemRow(i,{ds:ds,topic:1})}).join("")+'</div>';
   }
   function qcGrouped(its,ds){
     var h="";
@@ -5631,7 +5633,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(i.kind==="upkeep"){var d3=dCount(nextDue(i)),w=i.mode==="rebuy"?"Rebuy":"Replace";return d3<=0?G(w+" now"):d3<=7?G(w+" in "+d3+" days"):w+" in "+d3+" days"}
     return when}
   /* ===== Row line (end) ===== */
-  function itemSort(a,b){var ac=doneForNow(a)?1:0,bc=doneForNow(b)?1:0;if(ac!==bc)return ac-bc;var an=dCount(nextDue(a)),bn=dCount(nextDue(b));if(an==null&&bn!=null)return 1;if(bn==null&&an!=null)return -1;if(an!=null&&bn!=null&&an!==bn)return an-bn;var pr={high:0,med:1,low:2,none:3};return (pr[a.priority||"med"])-(pr[b.priority||"med"])||(a.order||0)-(b.order||0)}
+  function itemSort(a,b){var bl=bodyLast(a,b);if(bl)return bl;var ac=doneForNow(a)?1:0,bc=doneForNow(b)?1:0;if(ac!==bc)return ac-bc;var an=dCount(nextDue(a)),bn=dCount(nextDue(b));if(an==null&&bn!=null)return 1;if(bn==null&&an!=null)return -1;if(an!=null&&bn!=null&&an!==bn)return an-bn;var pr={high:0,med:1,low:2,none:3};return (pr[a.priority||"med"])-(pr[b.priority||"med"])||(a.order||0)-(b.order||0)}
 
   function viewArea(c){
     var its=itemsOf(c.id);var s=catToday(c.id);
@@ -5673,6 +5675,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var topics=function(list){var b="",meds=list.filter(function(i){return i.kind==="med"}),by={},order=[];
       if(meds.length)b+='<div class="dp-t"><span>'+medsTitle(meds)+'</span><small>not counted</small></div>'+rows(meds.slice().sort(itemSort));
       list.filter(function(i){return i.kind!=="med"}).forEach(function(i){if(!by[i.catId]){by[i.catId]=[];order.push(i.catId)}by[i.catId].push(i)});
+      var priv=function(cid){return by[cid].some(function(i){return i.private})?1:0};order.sort(function(x,y){return priv(x)-priv(y)});   /* a group holding private logs goes last */
       order.forEach(function(cid){var c=Store.get("cats",cid);b+='<div class="dp-t"><span>'+esc(c?c.name:"Other")+'</span></div>'+rows(by[cid].slice().sort(itemSort))});return b};
     var earlier=P.todo.filter(isLeftover),now=P.todo.filter(function(i){return !isLeftover(i)});
     var parts=[["todo","To-do"],["body","Body"],["mind","Mind"],["logs","Logs"]].filter(function(p){return p[0]==="todo"||P[p[0]].length});
@@ -8356,7 +8359,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function qaLogShort(i){var ds=today(),c=countOn(i,ds);if(i.kind==="measure"){var v=(i.values||{})[ds];return v!=null?v+(i.unit?" "+i.unit:""):"Log"}return c?c+" today":"Log"}
   /* quick logs: the things you log (body logs, trackers, episodes), one tap, the time kept. On Home and in the + sheet. */
   function logTyped(i){return i.kind==="measure"&&!tapCount(i)?1:0}   /* chips that open a box go after the one-tap ones */
-  function logItems(){return visibleItems().filter(function(i){return !i.archived&&!isFast(i)&&(isTracker(i)||isEpisode(i))})}
+  function logItems(){return visibleItems().filter(function(i){return !i.archived&&!isFast(i)&&(isTracker(i)||isEpisode(i))}).sort(bodyLast)}
   function logChip(i,cls){
     var big="",hint="",attr;   /* big: what is logged; hint: what a tap does, small and grey */
     if(isEpisode(i)){var a=activeEp(i);if(a){big="Day "+epDays(a);hint="Tap to end it"}else hint="Tap to start";attr='data-ep="'+i.id+'"';cls+=a?" ep on":" ep"}
@@ -8379,7 +8382,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     visibleItems().forEach(function(i){if(i.kind!=="med"||i.archived||!i.reminder||!dueOnDate(i,t)||hmDone(i,t))return;var m=minsOf(i.reminder)-nowM;if(m>120||m<-180)return;if(Math.abs(m)<bm){bm=Math.abs(m);best=i}});
     if(!best)return "";var at=qcAt(best,t)||"due now";
     return '<button type="button" class="lg-c md" data-toggle="'+best.id+'" aria-label="Take '+esc(best.title)+', '+esc(at)+'">'+qcTIcon(best)+'<span><b>'+esc(best.title)+'</b><small>'+esc(at)+'</small></span></button>'}
-  function logStrip(){var hid=logHidden(),its=logItems().filter(function(i){return hid.indexOf(i.id)<0}).map(function(i){return [i,logUse(i)]}).sort(function(a,b){return ((a[0].private?1:0)-(b[0].private?1:0))||(b[1]-a[1])||(logTyped(a[0])-logTyped(b[0]))}).map(function(x){return x[0]}),fc=hid.indexOf("fast")<0?logFastChip():"";if(!its.length&&!fc&&!medDueChip())return "";
+  function logStrip(){var hid=logHidden(),its=logItems().filter(function(i){return hid.indexOf(i.id)<0}).map(function(i){return [i,logUse(i)]}).sort(function(a,b){return bodyLast(a[0],b[0])||(b[1]-a[1])||(logTyped(a[0])-logTyped(b[0]))}).map(function(x){return x[0]}),fc=hid.indexOf("fast")<0?logFastChip():"";if(!its.length&&!fc&&!medDueChip())return "";
     /* phones: Home's first page is one screen, so only the first few show; the rest are one tap away in the + sheet */
     var busy=window.innerWidth<=820&&!!nowPick(),cap=window.innerWidth<=820?(busy?1:3):99,chips=its.map(function(i){return logChip(i,"lg-c")});var md=medDueChip();if(md)chips.unshift(md);if(fc){if(/ fs on/.test(fc))chips.unshift(fc);else chips.push(fc)}   /* a running fast leads the log, with its live timer */
     var more=chips.length-cap,shown=more>0?chips.slice(0,cap):chips;
@@ -8418,7 +8421,12 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /** listen once and put what was heard into the + sheet's box, where it is read like typing */
   function voiceStart(){var t=$("#q-title"),btn=$(".qa-mic");
     var put=function(txt){txt=voiceClean(txt);if(!txt||!t)return;t.value=txt;t.dispatchEvent(new Event("input",{bubbles:true}));t.focus();t.setSelectionRange(txt.length,txt.length)};
-    var P=voicePlugin();if(P){P.listen({prompt:"Say what to add"}).then(function(r){put(r&&r.text)}).catch(function(){toast("Voice typing isn\u2019t available on this phone.")});return}
+    var P=voicePlugin();if(P){if(btn&&btn.classList.contains("on")){P.stop();return}   /* tap again to finish */
+      var ph0=t?t.placeholder:"",sub=null,end=function(){if(btn)btn.classList.remove("on");if(t)t.placeholder=ph0;if(sub)sub.then(function(h){h.remove()})};
+      if(btn)btn.classList.add("on");if(t){t.value="";t.placeholder="Listening\u2026"}
+      if(P.addListener)sub=Promise.resolve(P.addListener("partial",function(r){if(t&&r&&r.text)t.value=r.text}));
+      P.listen({prompt:"Say what to add"}).then(function(r){end();if(r&&r.text)put(r.text);else toast("I didn\u2019t catch that. Tap the mic and try again.")})
+        .catch(function(e){end();toast(e&&e.code==="NO_MIC"?"Allow the microphone in your phone\u2019s Settings to speak to Daywell.":"Voice typing isn\u2019t available on this phone.")});return}
     var SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;
     var rec=new SR(),ph=t?t.placeholder:"";rec.lang=navigator.language||"en-US";rec.interimResults=true;rec.maxAlternatives=1;
     if(btn)btn.classList.add("on");if(t){t.value="";t.placeholder="Listening\u2026"}
