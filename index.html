@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0D0E11" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)">
-<script>function _tc(t){[].forEach.call(document.querySelectorAll('meta[name="theme-color"]'),function(m){m.content=t==="warm"?"#E6EAEF":"#0D0E11"})}
+<script>function _tc(t){[].forEach.call(document.querySelectorAll('meta[name="theme-color"]'),function(m){m.content=t==="warm"?"#E6EAEF":"#1C1915"})}
 try{var _t=localStorage.getItem("ritsu_theme")||"dark";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: light)").matches?"warm":"dark";document.documentElement.setAttribute("data-theme",_t);_tc(_t);var _l=localStorage.getItem("ritsu_lights");if(_l)document.documentElement.setAttribute("data-lights",_l)}catch(e){}</script>
 <meta name="description" content="Daywell - a shared to-do, habit and health tracker. Routines, body logs, episodes, fasting and things you're cutting down, each scored the way it deserves.">
 <link rel="manifest" href="manifest.webmanifest">
@@ -2792,9 +2792,9 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   @font-face{font-family:"Albert Sans";src:url("fonts/albert-sans.woff2") format("woff2");font-weight:200 700;font-display:swap}
   html:root:not([data-font]){--ui:"Albert Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;--serif:"Albert Sans",system-ui,sans-serif;--sans:var(--ui);--mono:var(--ui)}
   html:root[data-font="grotesk"]{--ui:"Space Grotesk",system-ui,sans-serif;--serif:"Space Grotesk",system-ui,sans-serif}
-  html:root:not([data-theme="warm"]){--bg:#121213;--panel:#1F1F21;--panel-2:#262628;--raise:#2A2A2C;--ink:#F3F1ED;--muted:#BDBBB6;--faint:#8F8D89;--line:#2C2C2E;--line-2:#232325;
-    --btn:#F3F1ED;--btn-ink:#1A1A1C;--dock:#2A2A2C;--dock-on:#444447;--glass:rgba(255,255,255,.055);--glass-b:rgba(255,255,255,.1);--tile:#1F1F21;
-    --accent:#F3F1ED;--accent-ink:#F3F1ED;--on-accent:#1A1A1C;--accent-soft:rgba(243,241,237,.1);--glow1:rgba(150,104,48,.42);--glow2:rgba(64,98,89,.45);--glow3:rgba(95,78,52,.35);--shadow:0 24px 50px -28px rgba(0,0,0,.8);--shadow-soft:none}
+  html:root:not([data-theme="warm"]){--bg:#1C1915;--panel:#2D2924;--panel-2:#332E28;--raise:#37322C;--ink:#F2EDE4;--muted:#C8C0B3;--faint:#998F83;--line:#3A352E;--line-2:#2F2B25;
+    --btn:#F2EDE4;--btn-ink:#1C1915;--dock:#2D2924;--dock-on:#4A443C;--glass:rgba(255,255,255,.055);--glass-b:rgba(255,255,255,.1);--tile:#2D2924;
+    --accent:#F2EDE4;--accent-ink:#F2EDE4;--on-accent:#1C1915;--accent-soft:rgba(243,241,237,.1);--glow1:rgba(150,104,48,.42);--glow2:rgba(64,98,89,.45);--glow3:rgba(95,78,52,.35);--shadow:0 24px 50px -28px rgba(0,0,0,.8);--shadow-soft:none}
   html:root[data-theme="warm"]{--bg:#EFEEEB;--panel:#F9F8F6;--panel-2:#F2F1EE;--raise:#FFFFFF;--ink:#1A1A1C;--muted:#4A4A4E;--faint:#6E6D71;--line:#E2E0DC;--line-2:#EBE9E5;
     --btn:#1C1C1E;--btn-ink:#FFFFFF;--dock:#1C1C1E;--dock-on:#3A3A3D;--glass:rgba(255,255,255,.34);--glass-b:rgba(255,255,255,.6);--tile:#F9F8F6;
     --accent:#1C1C1E;--accent-ink:#1C1C1E;--on-accent:#FFFFFF;--accent-soft:rgba(28,28,30,.07);--glow1:rgba(231,181,110,.62);--glow2:rgba(156,189,179,.62);--glow3:rgba(239,217,180,.55);--shadow:0 18px 40px -24px rgba(40,30,15,.28);--shadow-soft:none}
@@ -8382,15 +8382,22 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     visibleItems().forEach(function(i){if(i.kind!=="med"||i.archived||!i.reminder||!dueOnDate(i,t)||hmDone(i,t))return;var m=minsOf(i.reminder)-nowM;if(m>120||m<-180)return;if(Math.abs(m)<bm){bm=Math.abs(m);best=i}});
     if(!best)return "";var at=qcAt(best,t)||"due now";
     return '<button type="button" class="lg-c md" data-toggle="'+best.id+'" aria-label="Take '+esc(best.title)+', '+esc(at)+'">'+qcTIcon(best)+'<span><b>'+esc(best.title)+'</b><small>'+esc(at)+'</small></span></button>'}
-  function logStrip(){var hid=logHidden(),its=logItems().filter(function(i){return hid.indexOf(i.id)<0}).map(function(i){return [i,logUse(i)]}).sort(function(a,b){return bodyLast(a[0],b[0])||(b[1]-a[1])||(logTyped(a[0])-logTyped(b[0]))}).map(function(x){return x[0]}),fc=hid.indexOf("fast")<0?logFastChip():"";if(!its.length&&!fc&&!medDueChip())return "";
+  function logStrip(){var hid=logHidden(),its=logItems().filter(function(i){return hid.indexOf(i.id)<0}).map(function(i){return [i,logUse(i)]}).sort(function(a,b){return bodyLast(a[0],b[0])||(b[1]-a[1])||(logTyped(a[0])-logTyped(b[0]))}).map(function(x){return x[0]}),fc=(fastShown()||(fastItem()&&activeFast(fastItem())))?logFastChip():"";if(!its.length&&!fc&&!medDueChip())return upNext();
     /* phones: Home's first page is one screen, so only the first few show; the rest are one tap away in the + sheet */
     var busy=window.innerWidth<=820&&!!nowPick(),cap=window.innerWidth<=820?(busy?1:3):99,chips=its.map(function(i){return logChip(i,"lg-c")});var md=medDueChip();if(md)chips.unshift(md);if(fc){if(/ fs on/.test(fc))chips.unshift(fc);else chips.push(fc)}   /* a running fast leads the log, with its live timer */
     var more=chips.length-cap,shown=more>0?chips.slice(0,cap):chips;
     return '<div class="lg-strip'+(busy?" busy":"")+'"><div class="lg-h"><b>Log</b><span>Tap to log. It keeps the time.</span></div><div class="lg-box"><div class="lg-row" role="group" aria-label="Log something">'+shown.join("")+(more>0?'<button type="button" class="lg-c lg-n" data-qcplus aria-label="'+more+' more logs"><span><b>+'+more+'</b><small>more</small></span></button>':'')+'</div><button class="lg-more" data-logpick aria-label="Choose which logs show here">'+phicon("caretr")+'</button></div></div>'}
+  /* Start a fast is off until chosen in Your logs; people who already fasted keep it */
+  function fastShown(){var v=null;try{v=localStorage.getItem("ritsu_logfast")}catch(e){}if(v!=null)return v==="1";return logHidden().indexOf("fast")<0&&!!fastItem()}
+  /* no logs chosen: the spot shows the next few things today instead */
+  function upNext(){var t=today(),p=[];HM_DOMS.forEach(function(d){hmItems(d[0],t).forEach(function(i){if(!hmDone(i,t)&&p.indexOf(i)<0)p.push(i)})});if(!p.length)return "";
+    p.sort(function(a,b){var x=a.reminder?minsOf(a.reminder):1e4,y=b.reminder?minsOf(b.reminder):1e4;return x-y||hmPrio(a,b)});
+    var cap=window.innerWidth<=820?(nowPick()?1:4):6;
+    return '<div class="lg-strip"><div class="lg-h"><b>Up next</b><span>Tap to open.</span></div><div class="lg-box"><div class="lg-row" role="group" aria-label="Up next">'+p.slice(0,cap).map(function(i){return '<button type="button" class="lg-c" data-open="'+i.id+'" aria-label="Open '+esc(i.title)+'">'+qcTIcon(i)+'<span><b>'+esc(i.title)+'</b><small>'+esc(qcAt(i,t)||"any time")+'</small></span></button>'}).join("")+'</div><button class="lg-more" data-logpick aria-label="Choose logs to show here">'+phicon("caretr")+'</button></div></div>'}
   /* Your logs: switch each one on or off for Home */
-  function logPickHtml(){var hid=logHidden(),row=function(id,t,sub){var on=hid.indexOf(id)<0;return '<label class="setrow"><div class="info"><b>'+esc(t)+'</b><small>'+esc(sub)+'</small></div><span class="lp-sw"><input type="checkbox" data-logshow="'+id+'"'+(on?" checked":"")+'><i></i></span></label>'};
+  function logPickHtml(){var hid=logHidden(),row=function(id,t,sub,f){var on=f==null?hid.indexOf(id)<0:f;return '<label class="setrow"><div class="info"><b>'+esc(t)+'</b><small>'+esc(sub)+'</small></div><span class="lp-sw"><input type="checkbox" data-logshow="'+id+'"'+(on?" checked":"")+'><i></i></span></label>'};
     return '<div class="qcl"><div class="qcl-h"><h3>Your logs</h3><button class="qcl-x" data-qclclose aria-label="Close">&times;</button></div><p class="qcl-sub">Choose what shows in the Log box on Home.</p><div class="panel">'+
-      logItems().map(function(i){return row(i.id,i.title,isEpisode(i)?"Start and end":i.kind==="measure"?"Type a number":"Tap to count")}).join("")+row("fast","Fasting","Start a fast from Home")+'</div></div>'}
+      logItems().map(function(i){return row(i.id,i.title,isEpisode(i)?"Start and end":i.kind==="measure"?"Type a number":"Tap to count")}).join("")+row("fast","Fasting","Start a fast from Home",fastShown())+'</div></div>'}
   /* Start a fast: pick the hours and when it began, then the timer runs */
   function fastPickHtml(h0){var o=[[12,"Gentle"],[16,"16:8"],[18,"18:6"]],t=h0||(fastItem()?targetOf(fastItem()):16),n=new Date(),hm=String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0");
     return '<div class="qcl fp"><div class="qcl-h"><h3>Start a fast</h3><button class="qcl-x" data-qclclose aria-label="Close">&times;</button></div><p class="qcl-sub">How long would you like to go?</p>'+
@@ -8408,7 +8415,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     else if(t.hasAttribute("data-fph")){[].forEach.call(document.querySelectorAll(".fp-o [data-fph]"),function(b){b.setAttribute("aria-checked",b===t)});var ow=$("#fp-own");if(ow){ow.value="";ow.parentNode.classList.remove("on")}}
     else fastPickGo();},true);
   document.addEventListener("input",function(e){if(e.target.id==="fp-own"){var on=!!e.target.value;e.target.parentNode.classList.toggle("on",on);if(on)[].forEach.call(document.querySelectorAll(".fp-o [data-fph]"),function(b){b.setAttribute("aria-checked","false")})}});
-  document.addEventListener("change",function(e){var c=e.target.closest&&e.target.closest("[data-logshow]");if(!c)return;logHide(c.getAttribute("data-logshow"),!c.checked);if(state.view==="home")render();});
+  document.addEventListener("change",function(e){var c=e.target.closest&&e.target.closest("[data-logshow]");if(!c)return;if(c.getAttribute("data-logshow")==="fast"){try{localStorage.setItem("ritsu_logfast",c.checked?"1":"0")}catch(x){}}else logHide(c.getAttribute("data-logshow"),!c.checked);if(state.view==="home")render();});
   function quickLog(id){var i=Store.get("items",id);if(!i)return;var undo=storeSnap();addEvent(i,today());toast("Logged "+i.title+" at "+fmtTime(nowHM())+".",undo)}
   function qaLogRow(){
     var its=logItems();if(!its.length)return "";
