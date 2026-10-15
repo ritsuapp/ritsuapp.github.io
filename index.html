@@ -3139,6 +3139,18 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   html:root .yd-cco{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 16px;border-radius:16px;border:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-size:1rem;text-align:left;cursor:pointer}
   html:root .yd-cco small{font-size:.8125rem;color:var(--muted)}html:root .yd-cco.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}html:root .yd-cco.on small{color:inherit;opacity:.7}
   html:root .yd .yd-sub{flex-basis:100%;margin:6px 0 0;font-size:.875rem;color:var(--muted)}
+  /* Home intro: a dimmed screen with one lit spot and the mascot's note */
+  #tour{position:fixed;inset:0;z-index:9000;pointer-events:none}
+  #tour .tr{position:fixed;box-shadow:0 0 0 200vmax rgba(20,17,13,.62);outline:2px solid rgba(255,255,255,.92);pointer-events:none;transition:left .35s var(--ease-out,ease-out),top .35s var(--ease-out,ease-out),width .35s var(--ease-out,ease-out),height .35s var(--ease-out,ease-out)}
+  html:root:not([data-theme="warm"]) #tour .tr{box-shadow:0 0 0 200vmax rgba(8,7,5,.72)}
+  #tour .tk,#tour .tb{pointer-events:auto}#tour .tk{position:fixed}
+  #tour .tb{position:fixed;left:16px;right:16px;max-width:420px;margin:0 auto;z-index:2;background:var(--panel);color:var(--ink);border-radius:24px;padding:16px 18px 10px;display:grid;grid-template-columns:52px 1fr;column-gap:12px;box-shadow:0 20px 50px -20px rgba(0,0,0,.6)}
+  #tour .tb-m{width:52px;height:52px;display:block}#tour .tb-m svg{width:100%;height:100%;overflow:visible}
+  #tour .tb-s{font-size:.75rem;color:var(--faint)}#tour .tb-t{font-size:1.0625rem;font-weight:600;margin:2px 0 4px}#tour .tb-x{font-size:.9375rem;line-height:1.45;color:var(--muted)}
+  #tour .tb-f{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+  #tour .tb-b{background:none;border:0;color:var(--muted);font:500 .875rem var(--sans);min-height:44px;padding:0 4px;cursor:pointer}
+  #tour .tb-n{background:var(--btn);color:var(--btn-ink);border:0;border-radius:999px;padding:0 22px;min-height:44px;font:600 .9375rem var(--sans);cursor:pointer}
+  @media (prefers-reduced-motion:reduce){#tour .tr{transition:none}}
   /* ===== v6 look (end) ===== */
 </style>
 </head>
@@ -4178,7 +4190,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     _emit(){this.ready=true;this.onChange();},
     _initDb(){var self=this;["cats","items","people","tags","markers"].forEach(function(c){try{self.db.collection(c).onSnapshot(function(snap){var m={};snap.docs.forEach(function(d){if(d.exists){var v=Object.assign({},d.data()||{});v.id=d.id;if(c==="items")normalizeItem(v);m[d.id]=v;}});self.cache[c]=m;self._emit();},function(err){if(err&&err.code!=="unavailable")console.warn("db",c,err.code);self._emit();});}catch(e){console.warn(e);}});setTimeout(function(){if(!self.ready)self._emit();},1200);},
     _lsKey:"ritsu_local",
-    _initLocal(){try{var raw=localStorage.getItem(this._lsKey);if(raw)this.cache=JSON.parse(raw);else this.fresh=true;}catch(e){}var self=this;Object.keys(this.cache.items||{}).forEach(function(k){normalizeItem(self.cache.items[k])});if(!this.cache.tags)this.cache.tags={};if(!this.cache.markers)this.cache.markers={};if(Object.keys(this.cache.cats||{}).length>0){GROUP_CATS.forEach(function(c){if(!self.cache.cats[c[0]])self.cache.cats[c[0]]=groupCat(c);});migrateAreas1(this);migrateTree1(this);}if(Object.keys(this.cache.cats||{}).length===0){if(this.fresh)this.welcome=true;else seedLocal(this);}this._emit();},
+    _initLocal(){try{var raw=localStorage.getItem(this._lsKey);if(raw)this.cache=JSON.parse(raw);else this.fresh=true;}catch(e){}var self=this;Object.keys(this.cache.items||{}).forEach(function(k){normalizeItem(self.cache.items[k])});if(!this.cache.tags)this.cache.tags={};if(!this.cache.markers)this.cache.markers={};if(Object.keys(this.cache.cats||{}).length>0){GROUP_CATS.forEach(function(c){if(!self.cache.cats[c[0]])self.cache.cats[c[0]]=groupCat(c);});migrateAreas1(this);migrateTree1(this);}if(Object.keys(this.cache.cats||{}).length===0){this.welcome=true;}this._emit();},
     _save(){if(this.local){try{localStorage.setItem(this._lsKey,JSON.stringify(this.cache))}catch(e){}}},
     /* ---- device-only items never touch the shared database. Not hidden from friends -
        genuinely absent from the data they can reach. Retires once real logins exist. ---- */
@@ -4464,7 +4476,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     else v.innerHTML=viewHome();
     if(state.view==="home"||state.view==="day"||state.view==="reports"){var ex=exStrip();if(ex)v.insertAdjacentHTML("afterbegin",ex);}
     navTrack();navBackBtn(v);
-    if(state.view==="home"&&hmDay()===today()){var hero=v.querySelector("#hmHero");if(hero)hero.insertAdjacentHTML("afterend",weekCard()+logStrip()+packAsk())}
+    if(state.view==="home"&&hmDay()===today()){var hero=v.querySelector("#hmHero");if(hero)hero.insertAdjacentHTML("afterend",weekCard()+logStrip()+packAsk());tourMaybe()}
     if(state.view==="home"&&!visibleItems().some(function(i){return !i.archived})){var hmT=v.querySelector(".hm-top");if(hmT)hmT.insertAdjacentHTML("afterend",blankHome())}
     [].forEach.call(document.querySelectorAll(".ghm-sc"),function(e){e.scrollLeft=e.scrollWidth});
     if(state.view==="home"){homeMount();Buddy.mount($("#buddySlot"));Pull.mount();}
@@ -6343,7 +6355,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       youRow('data-logpick',"Your logs","","list")+youRow('data-nav="fasting"',"Fasting","","timer")+'</div>';
     h+='<div class="ylist">'+youRow('data-yous="areas"',"Your areas",cats().filter(function(c){return c.id!==TODO_CAT}).length,"grid")+youRow('data-action="library"',"Ideas","","copy")+youRow('data-nav="people"',"People","","people")+youRow('data-yous="family"',"Family",familyOn()?"On":"Off","home")+'</div>';
     h+='<div class="ylist">'+youRow('data-yous="buddy"',"Companion",Buddy.cfg.show?"On":"Off","smile")+
-      (remNative()?'':acct.user?youRow('data-acct="manage"',"Account","Signed in","key"):youRow('data-acct="open"',"Sign in","","key"))+youRow('data-yous="data"',"Backup and privacy","","lock")+youRow('data-yous="flags"',"Your flags","","flag")+youRow('data-news',"What\u2019s new",APP_VER,"star")+'</div>';
+      (remNative()?'':acct.user?youRow('data-acct="manage"',"Account","Signed in","key"):youRow('data-acct="open"',"Sign in","","key"))+youRow('data-yous="data"',"Backup and privacy","","lock")+youRow('data-yous="flags"',"Your flags","","flag")+youRow('data-tour',"Home tour","","star")+youRow('data-news',"What\u2019s new",APP_VER,"star")+'</div>';
     h+='<p style="color:var(--faint);font-size:0.75rem;text-align:center;margin-top:22px">Daywell'+(Store.local?' · prototype, saved on this device':'')+'</p>';return h;
   }
   function youSub(k,me){
@@ -6496,14 +6508,14 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function groupCat(c){return {id:c[0],name:c[1],emoji:c[2],color:c[3],order:c[4],domain:c[5],icon:c[6]};}
   var WELCOME_CATS=GROUP_CATS;
   function viewWelcome(){
+    if(!setupS)try{var dr=JSON.parse(localStorage.getItem("ritsu_setup_draft")||"null");if(dr&&dr.step)setupS=dr}catch(e){}
     if(setupS)return setupHtml();
     var prev=false;try{prev=!!localStorage.getItem("ritsu_prev_backup")}catch(e){}
     return '<div class="welcome-card"><div class="blob-host welcome-blob" id="welcomeBlob"></div><h1 class="hm-greet">A well-kept day.</h1><p class="w-sub">Gentle habits for body and mind, and a tidy list for everything else. Never pushy, never preachy. Miss a day? Perfectly fine. Private by default, shared only when you choose.</p><p class="w-status" id="wStatus" role="status"></p>'+
       (prev?'<button class="w-opt" data-welcome="back"><b>Bring back what was here</b><small>You wiped this phone a moment ago. The copy is still here.</small></button>':'')+'<button class="w-opt pri" data-setup="start"><b>Set me up</b><small>About a minute. Pick what matters, and we lay out your day.</small></button>'+
-      '<button class="w-opt" data-welcome="examples"><b>Show me around</b><small>Fills Daywell with example habits so you can see how it works. One tap clears them when you\u2019re ready.</small></button>'+
-      '<button class="w-link" data-welcome="clean">Skip setup and start empty</button><label class="w-link" for="welcome-file">Already use Daywell? <u>Restore a backup</u></label><input type="file" id="welcome-file" accept=".json,application/json" hidden></div>';
+      '<label class="w-link" for="welcome-file">Already use Daywell? <u>Restore a backup</u></label><input type="file" id="welcome-file" accept=".json,application/json" hidden></div>';
   }
-  function finishWelcome(){Store.welcome=false;Store._save();try{localStorage.setItem("ritsu_first_seen",today())}catch(e){}state.view="home";Store._emit();}
+  function finishWelcome(){try{localStorage.removeItem("ritsu_setup_draft")}catch(e){}Store.welcome=false;Store._save();try{localStorage.setItem("ritsu_first_seen",today())}catch(e){}state.view="home";Store._emit();}
   function startClean(){GROUP_CATS.forEach(function(c){Store.cache.cats[c[0]]=groupCat(c);});finishWelcome();}
   function blankHome(){return '<div class="blank-home"><h3>A fresh start.</h3><p>Let\u2019s begin: add one small thing, or set up your day in about a minute.</p><button class="btn primary" data-emptypack>Set up my day</button><button class="btn ghost" data-qcplus>Add your first thing</button><button class="tp-link" data-welcome="examples">Or have a look with examples</button></div>'}
   function startExamples(){seedLocal(Store);finishWelcome();}
@@ -7029,7 +7041,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     heart:'<path d="M12 20s-7-4.3-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.7-7 10-7 10z"/>'};
   function ydPts(l){return '<ul class="yd-op">'+l.map(function(p){return '<li><span class="yd-oi"><svg viewBox="0 0 24 24" aria-hidden="true">'+YDC[p[0]]+'</svg></span><span><b>'+p[1]+'</b>'+p[2]+'</span></li>'}).join("")+'</ul>'}
   function ydCard(n){var d="";for(var i=1;i<=3;i++)d+='<i class="'+(i<=n?"on":"")+'"></i>';
-    var top='<div class="yd-top"><button class="su-skip" data-setup="ydback">Back</button><div class="su-steps" aria-hidden="true">'+d+'</div><button class="su-skip" data-setup="ydgo|4">Skip</button></div>',h;
+    var top='<div class="yd-top"><button class="su-skip" data-setup="ydback">Back</button><div class="su-steps" aria-hidden="true">'+d+'</div><button class="su-skip" data-setup="ydnext">Skip</button></div>',h;
     if(n===1)h='<p class="yd-ok">How it works</p><h1 class="su-title">A calm home for your day.</h1>'+ydPts([["tick","Tick things off as you go","Habits, to-dos, medicine and the things you measure, all in one list."],
       ["week","Missed a day? That\u2019s okay","Daywell looks at your whole week. On Sunday it sends a short note: what went well, what slipped, and an idea or two."],
       ["learn","It learns your usual","The longer you use it, the better it knows you, and the more useful it gets."]]);
@@ -7265,7 +7277,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(Date.now()-last>6*3600*1000)lbPush().catch(function(){})}
   document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")lbAuto()});
   /* locked backup (end) */
-  function setupHtml(){var s=setupS.step;return s<=3?ydCard(Math.max(1,s)):s===4?ydName():s===5?ydCountry():s===6?ydPick():s===8?ydBack():ydDay()}
+  function setupHtml(){var s=setupS.step;try{localStorage.setItem("ritsu_setup_draft",JSON.stringify(setupS))}catch(e){}return s<=3?ydCard(Math.max(1,s)):s===4?ydName():s===5?ydCountry():s===6?ydPick():s===8?ydBack():ydDay()}
   function suItem(x,ix){
     var t=today(),tag=[];
     var it={catId:x.cat,sub:"",title:x.it,akind:"activity",kind:"todo",notes:"",priority:"none",tags:tag,assignees:[],private:false,done:false,dueDate:null,repeatEvery:1,perDay:1,reminder:x.rem||null,duration:null,stance:"routine",markers:[],expect:null,
@@ -7303,8 +7315,14 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       else if(p[0]==="own"){var o=BO[+p[1]];if(o){var at={appt:{catId:"c_health"},renew:{list:"money"},low:{list:"home"},repl:{list:"home"}}[o.grp];Promise.resolve(cbAddTyped(o.n,o.m)).then(function(id){if(id&&at)Store.update("items",id,at)})}}});
     finishWelcome();
     toast(nm0?"All set, "+nm0+". Lovely to have you here.":"All set. Lovely to have you here.",null,"happy");
-    try{if(!remNative()&&!localStorage.getItem("ritsu_signin_asked")){localStorage.setItem("ritsu_signin_asked","1");setTimeout(function(){acctOpen("")},1400)}}catch(e){}
+    if(!S.keepWho){tourDue();render();}
+    else try{if(!remNative()&&!localStorage.getItem("ritsu_signin_asked")){localStorage.setItem("ritsu_signin_asked","1");setTimeout(function(){acctOpen("")},1400)}}catch(e){}
   }
+  /* setup pages swipe like cards: left goes on, right goes back */
+  var _suT=null;
+  document.addEventListener("touchstart",function(e){_suT=null;if(!setupS||!e.target.closest||!e.target.closest(".welcome-card.yd")||e.target.closest("input,textarea"))return;var t=e.touches[0];_suT=[t.clientX,t.clientY]},{passive:true});
+  document.addEventListener("touchend",function(e){if(!_suT||!setupS)return;var t=e.changedTouches[0],dx=t.clientX-_suT[0],dy=t.clientY-_suT[1];_suT=null;if(Math.abs(dx)<70||Math.abs(dx)<2*Math.abs(dy))return;
+    var b=document.querySelector('.welcome-card.yd [data-setup="'+(dx<0?"ydnext":"ydback")+'"]');if(b&&!(dx>0&&setupS.step<=1))b.click()},{passive:true});
   /* one place for every tap and key that belongs to the pieces above */
   function cbClick(e){
     var el;
@@ -7330,7 +7348,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       if(a==="ydskipname"){S.name="";go(5);return true;}
       if(a==="ydgo"){go(+v[1]);return true;}
       if(a==="ydcc"){try{localStorage.setItem("ritsu_country",v[1])}catch(x){}S.back={};render();return true;}
-      if(a==="ydback"){ydKeep();if(S.step<=1||(S.keepWho&&S.step<=6)){setupS=null;render();}else go(S.step===8?6:S.step-1);return true;}
+      if(a==="ydback"){ydKeep();if(S.step<=1||(S.keepWho&&S.step<=6)){setupS=null;try{localStorage.removeItem("ritsu_setup_draft")}catch(x){}render();}else go(S.step===8?6:S.step-1);return true;}
       if(a==="ydpat"){if(S.pat!==v[1]){S.pat=v[1];S.at={};S.ci=null;}render();setTimeout(function(){if(setupS===S&&S.step===3)go(4)},280);return true;}
       if(a==="ydchip"){S.picked[v[1]]=!S.picked[v[1]];render();return true;}
       if(a==="ydown"){var o=$("#yd-own");ydOwn(o?o.value:"",v[1]);render();return true;}
@@ -8387,6 +8405,59 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var busy=window.innerWidth<=820&&!!nowPick(),cap=window.innerWidth<=820?(busy?1:3):99,chips=its.map(function(i){return logChip(i,"lg-c")});var md=medDueChip();if(md)chips.unshift(md);if(fc){if(/ fs on/.test(fc))chips.unshift(fc);else chips.push(fc)}   /* a running fast leads the log, with its live timer */
     var more=chips.length-cap,shown=more>0?chips.slice(0,cap):chips;
     return '<div class="lg-strip'+(busy?" busy":"")+'"><div class="lg-h"><b>Log</b><span>Tap to log. It keeps the time.</span></div><div class="lg-box"><div class="lg-row" role="group" aria-label="Log something">'+shown.join("")+(more>0?'<button type="button" class="lg-c lg-n" data-qcplus aria-label="'+more+' more logs"><span><b>+'+more+'</b><small>more</small></span></button>':'')+'</div><button class="lg-more" data-logpick aria-label="Choose which logs show here">'+phicon("caretr")+'</button></div></div>'}
+  /* ===== Home intro (start): after setup the mascot walks you through Home once, then you tick one real thing.
+     No Skip (user 2026-10-16): Next, Back, swipe. Watch again from You. Flag ritsu_tour: "due" until it ends ===== */
+  var _tour=null;
+  function tourDue(){try{localStorage.setItem("ritsu_tour","due")}catch(e){}}
+  function tourMaybe(){var due=false;try{due=localStorage.getItem("ritsu_tour")==="due"}catch(e){}
+    if(!due||_tour||setupS||Store.welcome||state.view!=="home")return;
+    if($("#overlay").classList.contains("show")){setTimeout(tourMaybe,1200);return}
+    _tour={i:0};setTimeout(tourStart,700)}
+  function tourVis(q){for(var k=0;k<q.length;k++){var el=document.querySelector(q[k]);if(el){var r=el.getBoundingClientRect();if(r.width>0&&r.height>0&&r.bottom>0&&r.top<window.innerHeight)return el}}return null}
+  function tourStart(){if(!_tour||state.view!=="home"){_tour=null;return}
+    window.scrollTo(0,0);var sw=$("#sw");if(sw)sw.scrollLeft=0;
+    var up=/^Up next/.test(($(".lg-strip .lg-h b")||{}).textContent||"");
+    var all=[{q:["#hmHero"],t:"This is your day",x:"How many things today, and what is next. The bars fill as Body, Mind and To-do get done."},
+      {q:[".lg-strip"],t:up?"Up next":"Your logs",x:up?"Your next few things, soonest first. Tap one to see it. Once you pick some logs, like Water, they live here too.":"Tap a log and Daywell keeps the time. The arrow chooses which logs show here."},
+      {q:[".fn-plus",".sb-add"],t:"Add anything",x:"Tap + and type it like a text: “Call mum at 7pm”. Or hold + and just say it."},
+      {q:['.fn-t[data-nav="day"]','.sb [data-nav="day"]','[data-nav="day"]'],t:"Your whole day",x:"Day shows everything by part: To-do, Body, Mind. Tired? Tap Low day there, and only what matters stays."}];
+    _tour.steps=all.filter(function(s){return tourVis(s.q)});
+    _tour.steps.forEach(function(s,ix){s.s=(ix+1)+" of "+_tour.steps.length});
+    var tk=tourVis(["#hmHero .qc-tick"]);
+    if(tk){var nm=(tk.getAttribute("aria-label")||"").replace(/^Mark /,"").replace(/ done$/,"");_tour.steps.push({q:["#hmHero .qc-tick"],s:"Your turn",t:"Tick your first thing",x:"Done "+esc(nm)+" already? Tap the circle. That’s all Daywell needs from you.",tick:1})}
+    else _tour.steps.push({s:"All set",t:"That’s the tour",x:"Add your first thing with +, and Daywell takes it from there. You can watch this again from You.",end:1});
+    var o=document.createElement("div");o.id="tour";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");o.setAttribute("aria-label","Home tour");
+    o.innerHTML='<div class="tr"></div><div class="tk"></div><div class="tk"></div><div class="tk"></div><div class="tk"></div><div class="tb" role="document"><span class="tb-m"></span><div><div class="tb-s"></div><div class="tb-t"></div><div class="tb-x" aria-live="polite"></div><div class="tb-f"></div></div></div>';
+    document.body.appendChild(o);
+    var src=document.querySelector(".hm-top .blob-host svg");if(src)o.querySelector(".tb-m").appendChild(src.cloneNode(true));
+    o.addEventListener("click",function(e){var b=e.target.closest("[data-tg]");if(!b)return;var a=b.getAttribute("data-tg");
+      if(a==="next")tourGo(_tour.i+1);else if(a==="back")tourGo(_tour.i-1);else if(a==="later")tourCheer(false);else tourEnd()});
+    var sx=null;o.addEventListener("touchstart",function(e){var t=e.touches[0];sx=[t.clientX,t.clientY]},{passive:true});
+    o.addEventListener("touchend",function(e){if(!sx||!_tour)return;var t=e.changedTouches[0],dx=t.clientX-sx[0],dy=t.clientY-sx[1];sx=null;if(Math.abs(dx)<60||Math.abs(dx)<2*Math.abs(dy))return;var s=_tour.steps[_tour.i];if(s.tick||s.end||_tour.cheer)return;tourGo(_tour.i+(dx<0?1:-1))},{passive:true});
+    window.addEventListener("resize",tourPlace);
+    document.addEventListener("click",tourTicked,true);
+    tourGo(0)}
+  function tourGo(i){if(!_tour)return;i=Math.max(0,Math.min(_tour.steps.length-1,i));_tour.i=i;var s=_tour.steps[i],o=$("#tour");
+    o.querySelector(".tb-s").textContent=s.s;o.querySelector(".tb-t").innerHTML=s.t;o.querySelector(".tb-x").innerHTML=s.x;
+    o.querySelector(".tb-f").innerHTML=s.tick?'<button class="tb-b" data-tg="later">Not done yet</button><span></span>':
+      (i>0&&!s.end?'<button class="tb-b" data-tg="back">Back</button>':'<span></span>')+'<button class="tb-n" data-tg="'+(s.end?"done":"next")+'">'+(s.end?"Done":"Next")+'</button>';
+    tourPlace();var f=o.querySelector(".tb-n");if(f)f.focus({preventScroll:true})}
+  function tourPlace(){if(!_tour)return;var o=$("#tour"),s=_tour.cheer?{}:_tour.steps[_tour.i],el=s.q&&tourVis(s.q),ring=o.querySelector(".tr"),tk=o.querySelectorAll(".tk"),b=o.querySelector(".tb"),W=window.innerWidth,H=window.innerHeight,p=8;
+    var r=el?el.getBoundingClientRect():{left:W/2,top:H/2,right:W/2,bottom:H/2,width:0,height:0};
+    var x1=r.left-p,y1=r.top-p,x2=r.right+p,y2=r.bottom+p;if(!el){x1=x2=W/2;y1=y2=H/2}
+    ring.style.cssText="left:"+x1+"px;top:"+y1+"px;width:"+(x2-x1)+"px;height:"+(y2-y1)+"px;border-radius:"+Math.min(24,(y2-y1)/2)+"px"+(el?"":";outline:0");
+    /* clicks: only the circle on the last step gets through */
+    var hole=s.tick&&el;[[0,0,W,hole?y1:H],[0,y2,W,H],[0,y1,x1,y2],[x2,y1,W,y2]].forEach(function(q,k){tk[k].style.cssText="left:"+q[0]+"px;top:"+q[1]+"px;width:"+Math.max(0,q[2]-q[0])+"px;height:"+Math.max(0,q[3]-q[1])+"px"+(!hole&&k?";display:none":"")});
+    var bh=b.offsetHeight,below=y2+16+bh<H-12;b.style.top=(el?(below?y2+16:Math.max(12,y1-16-bh)):Math.max(12,(H-bh)/2))+"px"}
+  function tourTicked(e){if(!_tour||_tour.cheer)return;var s=_tour.steps[_tour.i];if(s&&s.tick&&e.target.closest&&e.target.closest("#hmHero .qc-tick"))setTimeout(function(){tourCheer(true)},650)}
+  function tourCheer(did){if(!_tour)return;_tour.cheer=true;var o=$("#tour");
+    o.querySelector(".tb-s").textContent=did?"Done":"No rush";o.querySelector(".tb-t").textContent=did?"That’s it.":"Tick it when it’s done.";
+    o.querySelector(".tb-x").textContent=did?"One tap, and Daywell remembers. See you tomorrow.":"One tap on the circle, and Daywell remembers. You can watch this tour again from You.";
+    o.querySelector(".tb-f").innerHTML='<span></span><button class="tb-n" data-tg="done">Done</button>';o.classList.add("cheer");tourPlace();o.querySelector(".tb-n").focus({preventScroll:true})}
+  function tourEnd(){var o=$("#tour");if(o)o.remove();_tour=null;window.removeEventListener("resize",tourPlace);document.removeEventListener("click",tourTicked,true);
+    try{localStorage.setItem("ritsu_tour","seen")}catch(e){}
+    try{if(!remNative()&&!localStorage.getItem("ritsu_signin_asked")){localStorage.setItem("ritsu_signin_asked","1");setTimeout(function(){acctOpen("")},700)}}catch(e){}}
+  /* ===== Home intro (end) ===== */
   /* Start a fast is off until chosen in Your logs; people who already fasted keep it */
   function fastShown(){var v=null;try{v=localStorage.getItem("ritsu_logfast")}catch(e){}if(v!=null)return v==="1";return logHidden().indexOf("fast")<0&&!!fastItem()}
   /* no logs chosen: the spot shows the next few things today instead */
@@ -9498,6 +9569,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if((el=e.target.closest("[data-exclear]"))){exClear();return;}
     if((el=e.target.closest("[data-qlog]"))){e.stopPropagation();quickLog(el.getAttribute("data-qlog"));return;}
     if((el=e.target.closest("[data-packq]"))){packQAct(el.getAttribute("data-packq"));return;}
+    if((el=e.target.closest("[data-tour]"))){tourDue();state._navRoot=true;go("home");return;}
     if((el=e.target.closest("[data-emptypack]"))){setupStart();setupS.step=6;setupS.keepWho=true;Store.welcome=true;render();window.scrollTo(0,0);return;}
     if((el=e.target.closest("[data-watchall]"))){state.watchAll=true;render();return;}
     if((el=e.target.closest("[data-exok]"))){try{localStorage.setItem("ritsu_ex_ok","1")}catch(x){}render();return;}
