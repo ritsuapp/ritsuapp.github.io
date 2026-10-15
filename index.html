@@ -2753,7 +2753,12 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   .dw-o b{font-weight:600}.dw-o small{color:var(--muted);font-size:0.8125rem}
   .dw-own{flex-wrap:wrap}.dw-own span{display:flex;gap:8px;flex:1 1 100%}.dw-own input{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:8px;font:inherit}
   .pill.hi,.pill.warnflag{color:var(--gold-ink);background:var(--gold-soft)}   /* calm: gold, never red */
-  body:has(#overlay.show) #nowBar{visibility:hidden}   /* a sheet is open: the Now bar would cover its bottom */
+  body:has(#overlay.show) #nowBar{visibility:hidden}
+  @media(max-width:820px){
+    body:has(#toast.show) #nowBar{visibility:hidden}   /* one spot above the menu: the message takes it for a moment */
+    #toast{border-radius:999px}
+    body.has-nb .sw-p{padding-bottom:64px}   /* the last row can scroll up clear of the Now bar */
+  }   /* a sheet is open: the Now bar would cover its bottom */
   /* ===== posh pass (2026-10-12): quieter mascot, one slim bar, thin arrows, fewer outlines ===== */
   .blob-host{--jb-top:#DCEFE2;--jb-mid:#9FCCAB;--jb-deep:#6F9F7C;--jb-rim:#B7D9C0;--jb-out:#5E8C6B;--jb-out-l:#9FCCAB;--jb-arm-l:#C9E4D0;--jb-arm-m:#94C3A0;--jb-arm-d:#6A9876;--jb-spark:#B7D9C0;--jb-belly:#CFE7D6;--jb-eye-l:#3B4A40;--jb-eye:#1E2822;--jb-eye-d:#111813}
   :root[data-theme="warm"] .blob-host{--jb-top:#E3F0E6;--jb-mid:#A9CFB3;--jb-deep:#6F9F7C;--jb-rim:#C3DFCA;--jb-out:#5A8A67;--jb-out-l:#A9CFB3;--jb-arm-l:#D2E8D8;--jb-arm-m:#9CC7A8;--jb-arm-d:#6A9876;--jb-spark:#C3DFCA;--jb-belly:#DCEEE1;--jb-eye-l:#3B4A40;--jb-eye:#1E2822;--jb-eye-d:#111813}
@@ -7508,6 +7513,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     t.innerHTML=(wantBlob?'<span class="blob-host toast-blob"></span>':"")+'<span class="tx"></span>'+(undo?'<button data-toastundo>Undo</button>':"");
     t.querySelector(".tx").textContent=m;if(sub){var sm=document.createElement("small");sm.className="tx-sub";sm.textContent=sub;t.querySelector(".tx").appendChild(sm);}t.classList.toggle("has-undo",!!undo);t.classList.toggle("has-blob",wantBlob);
     if(wantBlob)Buddy.temp(t.querySelector(".toast-blob"),mood,false,true);
+    var ft=document.querySelector(".fn-t");if(ft&&ft.offsetHeight&&innerWidth<=820)t.style.setProperty("bottom",(innerHeight-ft.getBoundingClientRect().top+10)+"px","important");else t.style.removeProperty("bottom");
     t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove("show");_toastUndo=null},undo?5500:2000);}
   /* ===== the companion: a small jelly blob that reacts to what happens ===== */
   /*
