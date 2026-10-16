@@ -727,6 +727,8 @@ try{var _t=localStorage.getItem("ritsu_theme")||"dark";if(_t==="auto")_t=matchMe
   .hm-todaybtn,.hm-add{font-size:0.75rem;font-weight:600;line-height:1.5;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:3px 11px;background:none}
   .hm-add{display:none;color:var(--muted);border-color:var(--line);font-weight:500}
   .hm-todaybtn[hidden]{display:none}
+  .hm-date{white-space:nowrap}.hm-date .hm-tdy{display:inline-block;margin-left:8px;padding:2px 10px;border-radius:999px;background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--ink);font:500 .8125rem var(--sans);cursor:pointer;position:relative}
+  .hm-date .hm-tdy::after{content:"";position:absolute;inset:-10px -6px}
   @media(min-width:821px){.hm-add{display:inline-block}}
 
   /* day scroller: snaps one day at a time, ticks between days */
@@ -3179,9 +3181,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /* Home pages: tabs under the date strip (phones only) and the week card */
   .hm-tabs{display:none}
   @media (max-width:820px){
-    .hm-tabs{display:flex;gap:2px;margin:6px 0 8px;padding:3px;border-radius:999px;background:color-mix(in srgb,var(--ink) 6%,transparent)}
-    .hm-tabs button{flex:1;min-height:36px;border:0;border-radius:999px;background:none;color:var(--muted);font:500 .875rem var(--sans);cursor:pointer}
-    .hm-tabs button.on{background:var(--btn);color:var(--btn-ink)}
+    .hm-tabs{position:relative;display:flex;justify-content:center;gap:22px;margin:0 0 10px}
+    .hm-tabs button{min-height:44px;padding:0 2px;border:0;background:none;color:var(--ink);opacity:.38;font:500 .9375rem var(--sans);cursor:pointer}
+    .hm-tabs button.on{opacity:1}
+    .hm-tdot{position:absolute;bottom:6px;left:0;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--ink);pointer-events:none}
     .home-main>.sw-dots{display:none}
   }
   .wkb{background:var(--tile);border-radius:24px;padding:16px 10px 8px;margin:0 0 12px;color:var(--ink)}
@@ -5063,7 +5066,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var mn=$("#hmMn");if(!mn)return;
     var ds=hmDay(),d=new Date(ds+"T00:00:00");
     mn.textContent=HM_MONTHS[d.getMonth()];$("#hmYr").textContent=d.getFullYear();
-    $("#hmTodayBtn").hidden=(ds===today());
+    var hd=document.querySelector(".hm-date");if(hd){var lab=DOW_LONG[d.getDay()]+", "+d.getDate()+" "+HM_MONTHS[d.getMonth()];
+      hd.innerHTML=esc(lab)+(ds===today()?"":'<span class="hm-tdy" role="button" tabindex="0" data-hmtoday aria-label="Back to today">Today</span>')}
   }
   function hmBody(){
     var hh=$("#hmHero");if(!hh||!_hmCons)return;
@@ -5087,13 +5091,18 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var k=sw.getAttribute("data-k")||"home";if(state._swK!==k){state._swK=k;state.swPage=0}
     var vis=[].filter.call(sw.children,function(p){var e=!p.textContent.trim()&&!p.querySelector("svg,img,button");p.hidden=e;return !e});
     d.innerHTML=vis.length>1?vis.map(function(){return "<i></i>"}).join(""):"";
-    function paint(i){[].forEach.call(d.children,function(x,k){x.classList.toggle("on",k===i)});[].forEach.call(document.querySelectorAll(".dtabs [data-dtab],.hm-tabs [data-swgo]"),function(x,k){x.classList.toggle("on",k===i);x.setAttribute("aria-selected",k===i)})}
+    /* Home's page words follow the finger: the dot glides between them and each word brightens as you arrive */
+    function glide(){var t=document.querySelector(".hm-tabs"),dt=t&&t.querySelector(".hm-tdot");if(!dt||!sw.clientWidth)return;var bs=[].slice.call(t.querySelectorAll("[data-swgo]"));if(bs.length<2)return;
+      var fr=Math.max(0,Math.min(bs.length-1,sw.scrollLeft/sw.clientWidth)),i=Math.min(bs.length-2,Math.floor(fr)),r=fr-i,c=function(b){return b.offsetLeft+b.offsetWidth/2};
+      dt.style.transform="translateX("+(c(bs[i])+(c(bs[i+1])-c(bs[i]))*r)+"px)";bs.forEach(function(b,k){b.style.opacity=String(Math.max(.38,1-Math.abs(fr-k)*.62))})}
+    function paint(i){glide();[].forEach.call(d.children,function(x,k){x.classList.toggle("on",k===i)});[].forEach.call(document.querySelectorAll(".dtabs [data-dtab],.hm-tabs [data-swgo]"),function(x,k){x.classList.toggle("on",k===i);x.setAttribute("aria-selected",k===i)})}
     swFit();
     if(!sw._b){sw._b=1;var want=state.swPage||0,at=function(){sw.scrollLeft=want*sw.clientWidth};
       if(want){at();requestAnimationFrame(at)}   /* coming back to a page you left: go straight to it */
       sw.addEventListener("scroll",function(){var i=Math.round(sw.scrollLeft/(sw.clientWidth||1));state.swPage=i;paint(i)},{passive:true})}
     paint(state.swPage||0)}
   window.addEventListener("resize",swFit);
+  document.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&e.target&&e.target.classList&&e.target.classList.contains("hm-tdy")){e.preventDefault();e.target.click()}});
   document.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target&&e.target.id==="you-name"){e.preventDefault();if(saveMyName(e.target.value))navBack()}});
   /* a block taller than a page: cut its biggest list (panel, card, grid) into several of the same kind; the heading stays on the first part */
   function swSplit(b,H){
@@ -5680,7 +5689,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       '<div class="hm-strip"><span class="hm-lens" aria-hidden="true"></span><span class="hm-needle" aria-hidden="true"></span><button class="hm-arrow" data-hmweek="-1" aria-label="Previous day">'+phicon("caretl")+'</button>'+
       '<div class="hm-scroll" id="hmScroll" aria-label="Pick a day">'+strip+'</div>'+
       '<button class="hm-arrow" data-hmweek="1" aria-label="Next day">'+phicon("caretr")+'</button></div>'+
-      '<div class="hm-tabs" role="tablist" aria-label="Home pages"><button role="tab" data-swgo="0">Glance</button><button role="tab" data-swgo="1">Day</button><button role="tab" data-swgo="2">Week</button></div>';
+      '<div class="hm-tabs" role="tablist" aria-label="Home pages"><button role="tab" data-swgo="0">Glance</button><button role="tab" data-swgo="1">Day</button><button role="tab" data-swgo="2">Week</button><i class="hm-tdot" aria-hidden="true"></i></div>';
     var pg1='<div class="hm-hero qc" id="hmHero"></div>'+'<div id="hmWrap"></div><div id="cbAsk"></div><div id="pwk"></div>';
     /* phones: three pages side by side (Glance, Day, Week) under the date strip; wide screens ignore the wrappers (display:contents) */
     main=main+'<div class="sw" id="sw"><section class="sw-p">'+pg1+'</section><section class="sw-p"><div id="hmList" class="qc-list"></div></section><section class="sw-p"><div id="wk1"></div><div id="hmWeek"></div>'+backupNudge()+'</section></div><div class="sw-dots" id="swDots"></div>';
