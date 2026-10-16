@@ -3128,6 +3128,14 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   html:root .wk-k{margin:10px 0 0;font-size:.8125rem;color:var(--muted)}html:root .wk-i{flex-basis:100%;font-size:.875rem;color:var(--muted)}html:root .wk-b.wk-no{border-color:transparent;color:var(--muted)}
   html:root .wk-b{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-size:.9375rem;cursor:pointer}
   html:root .wk-b.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+  /* Glance: Daywell noticed (or learning, first 7 days) and From earlier, one at a time */
+  html:root .gl-c{background:var(--panel);border-radius:22px;padding:14px 16px 16px;margin:12px 0}
+  html:root .gl-k{display:flex;align-items:center;gap:8px;margin:0 0 4px;font-size:.8125rem;color:var(--muted)}
+  html:root .gl-k i{width:8px;height:8px;border-radius:50%;background:var(--gold,#D6AE78)}
+  html:root .gl-t{margin:0;font-size:1.0625rem;line-height:1.35;color:var(--ink)}
+  html:root .gl-s{margin:2px 0 0;font-size:.875rem;color:var(--muted)}
+  html:root .gl-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  html:root .gl-l{display:flex;gap:4px;margin-top:12px}html:root .gl-l i{flex:1;height:4px;border-radius:2px;background:var(--line)}html:root .gl-l i.on{background:var(--c-body)}
   /* opening cards and the country step */
   html:root .yd-ok{margin:18px 0 0;font-size:.875rem;color:var(--muted)}
   html:root .yd-op{list-style:none;margin:18px 0 6px;padding:0;display:flex;flex-direction:column;gap:16px}
@@ -4509,7 +4517,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     else v.innerHTML=viewHome();
     if(state.view==="home"||state.view==="day"||state.view==="reports"){var ex=exStrip();if(ex)v.insertAdjacentHTML("afterbegin",ex);}
     navTrack();navBackBtn(v);
-    if(state.view==="home"&&hmDay()===today()){var hero=v.querySelector("#hmHero");if(hero)hero.insertAdjacentHTML("afterend",weekCard()+logStrip()+packAsk());tourMaybe()}
+    if(state.view==="home"&&hmDay()===today()){var hero=v.querySelector("#hmHero");if(hero)hero.insertAdjacentHTML("afterend",(function(){var wc=weekCard();return wc+glanceCards(!wc)})()+logStrip()+packAsk());tourMaybe()}
     if(state.view==="home"&&!visibleItems().some(function(i){return !i.archived})){var hmT=v.querySelector(".hm-top");if(hmT)hmT.insertAdjacentHTML("afterend",blankHome())}
     [].forEach.call(document.querySelectorAll(".ghm-sc"),function(e){e.scrollLeft=e.scrollWidth});
     if(state.view==="home"){homeMount();Buddy.mount($("#buddySlot"));Pull.mount();}
@@ -6036,6 +6044,22 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(window.matchMedia&&matchMedia("(max-width:820px)").matches){var sum=[];if(R.win)sum.push("1 win");if(R.slips.length)sum.push(R.slips.length+" slipped");if(R.ask)sum.push("1 idea");
       return '<section class="wk-card wk-mini" aria-label="Your week"><button class="wk-open" data-wkopen><span><b class="wk-t">'+t+'</b><small>Your week \u00b7 '+sum.join(" \u00b7 ")+' <span aria-hidden="true">&rsaquo;</span></small></span></button><button class="wk-x" data-wk="close|-|'+R.end+'" aria-label="Close your week">\u00d7</button></section>'}
     return '<section class="wk-card" aria-label="Your week">'+x+'<h3 class="wk-t">'+t+'</h3>'+wkBody(R)+'</section>'}
+  /* ===== Glance cards (start): Daywell noticed reuses the week report (one question a week, answers go through data-wk and its memory); the first 7 days say it is learning ===== */
+  function glLearn(){if(!visibleItems().length)return "";var fs=null;try{fs=localStorage.getItem("ritsu_first_seen")}catch(e){}if(!fs)return "";var n=1-dCount(fs);if(!(n>=1&&n<=7))return "";
+    var end=addDaysStr(fs,6),by=end===today()?"By tonight":"By "+WD[new Date(end+"T00:00:00").getDay()];
+    return '<section class="gl-c" aria-label="Daywell is learning"><p class="gl-k">Daywell is learning</p><p class="gl-t">Learning your usual. Day '+n+' of 7.</p><p class="gl-s">'+by+' I\u2019ll know your rhythm.</p><div class="gl-l" aria-hidden="true">'+[1,2,3,4,5,6,7].map(function(k){return '<i'+(k<=n?' class="on"':'')+'></i>'}).join("")+'</div></section>'}
+  function glNoticed(){var R=wkReport();if(!R.ask||wkSeen()===R.end)return "";var sl=R.slips.filter(function(x){return x.i.id===R.ask.id})[0];if(!sl)return "";
+    var op=R.ask.opts.filter(function(o){return !o.info})[0],inf=R.ask.opts.filter(function(o){return o.info})[0];
+    var b=op?'<button class="wk-b on" data-wk="'+esc(op.act)+'|'+esc(op.k)+'|'+R.end+'|'+esc(op.label)+'">'+esc(op.label)+'</button>':'';
+    b+='<button class="wk-b" data-wk="no|'+R.ask.id+'|'+R.ask.opts.map(function(o){return o.k}).join(".")+'|'+R.end+'">Leave it</button>';
+    return '<section class="gl-c" aria-label="Daywell noticed"><p class="gl-k"><i></i>Daywell noticed</p><p class="gl-t">'+esc(sl.t)+'</p><p class="gl-s">'+esc(inf?inf.label:sl.sub)+'</p><div class="gl-b">'+b+'</div></section>'}
+  function glEarlier(){var i=leftovers()[0];if(!i)return "";var w=dueLabel(i.dueDate);
+    return '<section class="gl-c" aria-label="From earlier"><p class="gl-k">From earlier, we kept it for you</p><p class="gl-t">'+esc(i.title)+'</p><p class="gl-s">'+esc(w.charAt(0).toUpperCase()+w.slice(1))+'. Still want it?</p><div class="gl-b"><button class="wk-b on" data-glle="today|'+i.id+'">Do it today</button><button class="wk-b" data-glle="go|'+i.id+'">Let it go</button></div></section>'}
+  /* the Sunday card wins when it shows; then no noticed card the same day */
+  function glanceCards(noWk){return (glLearn()||(noWk?glNoticed():""))+glEarlier()}
+  document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-glle]");if(!b)return;var v=b.getAttribute("data-glle").split("|"),i=Store.get("items",v[1]);if(!i)return;var undo=storeSnap();
+    if(v[0]==="today"){Store.update("items",i.id,{dueDate:today()});toast("Today: "+i.title,undo)}else{Store.del("items",i.id);toast("Let go: "+i.title,undo)}render()});
+  /* ===== Glance cards (end) ===== */
   /** the win, the slips and the one question; shown in the card on wide screens and in a sheet on phones */
   function wkBody(R){var h="";
     if(R.win)h+='<div class="wk-l"><i class="ok"></i><span>'+esc(R.win.t)+'<small>'+esc(R.win.sub)+'</small></span></div>';
@@ -6420,7 +6444,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function viewSettings(){
     var me=state.me?personById(state.me):null,h;
     if(state.view==="yousub")return youSub(state.youSub,me);
-    h='<div class="day-h you-h"><div class="d"><h1 class="title" style="font-size:2rem">You</h1><p class="kicker you-kick">'+(acct.user?"Backed up, locked":"Kept on this phone")+'</p></div><span class="buddy-slot" id="buddySlot"></span></div>';
+    h='<div class="day-h you-h"><div class="d"><h1 class="title" style="font-size:2rem">You</h1><p class="kicker you-kick">'+(!acct.user?"Kept on this phone":!lbOn()?"Signed in. Locked backup is off":lbLastTxt()==="not yet"?"Locked backup needs a look":"Backed up, locked. Last "+lbLastTxt())+'</p></div><span class="buddy-slot" id="buddySlot"></span></div>';
     if(!acct.user)h+=remNative()?'<button class="you-safe" data-yous="data"><span><b>Keep your day safe</b><small>Save a backup of your diary to keep somewhere safe.</small></span><i aria-hidden="true">'+youIcon("lock")+'</i></button>':'<button class="you-safe" data-acct="open"><span><b>Keep your day safe</b><small>Sign in, and your diary is backed up locked.</small></span><i aria-hidden="true">'+youIcon("key")+'</i></button>';
     h+='<div class="ylist">'+youRow('data-yous="name"',"Your name",me?me.name.split(" ")[0]:"Tap to set","user")+youRow('data-yous="look"',"Appearance",{warm:"Light",dark:"Dark",auto:"Auto"}[theme]||"","sun")+youRow('data-yous="rem"',"Reminders",remNative()?(remOn()?"On":"Off"):"","bell")+
       youRow('data-logpick',"Your logs","","list")+youRow('data-nav="fasting"',"Fasting","","timer")+'</div>';
