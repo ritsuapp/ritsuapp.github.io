@@ -1977,6 +1977,24 @@ try{var _t=localStorage.getItem("ritsu_theme")||"dark";if(_t==="auto")_t=matchMe
 
   /* ===== v5: the Fasting page. One violet for fasting, cards flat, numbers thin. ===== */
   .fp-live .card.qf{margin-top:4px}
+  .rg{position:relative;background:var(--panel);border-radius:28px;padding:22px 16px 18px;margin:0 0 12px;text-align:center;overflow:hidden}
+  .rg:before{content:"";position:absolute;inset:-40% -20% auto;height:80%;background:radial-gradient(closest-side,color-mix(in srgb,#D6AE78 22%,transparent),transparent);pointer-events:none}
+  .rg-w{position:relative;width:272px;height:272px;margin:0 auto;max-width:100%}.rg-w>svg{position:absolute;inset:0;width:100%;height:100%}.rg-tr{stroke:color-mix(in srgb,var(--ink) 8%,transparent)}
+  .rg-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+  .rg-c small{font-size:.875rem;color:var(--muted)}.rg-c b{font-size:2.75rem;font-weight:300;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--ink)}.rg-c em{font-style:normal;font-size:.9375rem;color:var(--ink)}
+  .rg-k{position:absolute;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;display:grid;place-items:center;background:var(--bg);color:var(--ink);box-shadow:0 4px 14px -4px rgba(0,0,0,.35);transition:left 1s ease,top 1s ease}.rg-k svg{width:20px;height:20px}
+  .rg-t{display:flex;justify-content:space-between;margin:14px 6px 0;font-size:.875rem;color:var(--muted);text-align:left}.rg-t b{display:block;color:var(--ink);font-weight:500;font-size:.9375rem}.rg-t span:last-child{text-align:right}
+  .rg-b{display:flex;gap:8px;justify-content:center;margin-top:14px}.rg .fp-note{margin:10px 0 0;font-size:.875rem;color:var(--muted)}
+  .rg-wk{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:0 0 14px}.rg-wk div{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.8125rem;color:var(--muted)}
+  .rg-wk i{font-style:normal;width:100%;min-height:38px;display:grid;place-items:center;border-radius:12px;background:var(--panel);color:var(--ink);font-size:.875rem}
+  .rg-wk i.on{background:color-mix(in srgb,#D6AE78 34%,var(--panel))}.rg-wk i.t{outline:1.5px solid var(--ink)}.rg-wk i.n{color:var(--muted)}
+  .fd .fd-t{margin:4px 0 12px;font-size:1.25rem;font-weight:400;color:var(--ink)}
+  .fd-g{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.fd-g i,.fd-k i{aspect-ratio:1;border-radius:6px;background:color-mix(in srgb,var(--ink) 6%,transparent)}.fd-g i.f{background:transparent;outline:1px dashed var(--line)}
+  .fd-g i.a,.fd-k i.a{background:color-mix(in srgb,#D6AE78 35%,transparent)}.fd-g i.b,.fd-k i.b{background:color-mix(in srgb,#D6AE78 65%,transparent)}.fd-g i.c,.fd-k i.c{background:#B8864A}
+  .fd-k{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 10px;font-size:.75rem;color:var(--muted)}.fd-k span{display:flex;align-items:center;gap:5px}.fd-k i{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .fd-dl{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:6px;font-size:.6875rem;color:var(--muted);text-align:center}
+  .fb{display:flex;align-items:flex-end;gap:14px;height:120px;margin-top:6px}.fb div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;font-size:.75rem;color:var(--muted)}
+  .fb i{width:100%;border-radius:8px 8px 4px 4px;background:color-mix(in srgb,#D6AE78 55%,transparent)}.fb div.t i{background:#B8864A}.fb b{font-weight:500;color:var(--ink);font-size:.8125rem}
   .fp-hero{padding:22px 22px 18px;border-radius:20px}
   .fp-k{margin:0;font-size:0.75rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
   .fp-big{margin:10px 0 0;font-family:var(--serif);font-weight:200;font-size:4rem;line-height:.9;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
@@ -2349,6 +2367,10 @@ try{var _t=localStorage.getItem("ritsu_theme")||"dark";if(_t==="auto")_t=matchMe
   .fp-o button b{font-size:1.25rem}.fp-o small,.fp-own small{font-size:0.75rem;color:var(--muted)}
   .fp-o button[aria-checked="true"],.fp-own.on{border-color:var(--c-todo);background:color-mix(in srgb,var(--c-todo) 12%,transparent)}
   .fp-own input{width:100%;border:0;background:transparent;text-align:center;font-size:1.0625rem;font-weight:600;color:var(--ink);padding:0}.fp-own input::placeholder{color:var(--ink);font-weight:600}
+  .fp .fp-o{grid-template-columns:repeat(4,1fr)}.fp-mt{margin-top:12px}
+  .fp-step{display:flex;align-items:center;gap:6px}.fp-step button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:1.25rem;cursor:pointer}.fp-step b{min-width:84px;text-align:center;font-weight:500}
+  .fp-d{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.9375rem}
+  .fp-sum{margin:2px 2px 14px;font-size:.9375rem;color:var(--muted)}.fp-sum b{color:var(--ink);font-weight:500}
   .fp-w{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--panel-2);border-radius:14px;padding:10px 14px;margin-bottom:12px}.fp-w input{border:0;background:transparent;color:var(--ink);font-size:1rem}
   .lp-sw{position:relative;flex:none;width:48px;height:28px}.lp-sw input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}.lp-sw i{position:absolute;inset:0;border-radius:999px;background:var(--line);transition:background-color .2s ease;pointer-events:none}.lp-sw i::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s var(--ease-out)}.lp-sw input:checked+i{background:var(--accent)}.lp-sw input:checked+i::after{transform:translateX(20px)}.lp-sw input:focus-visible+i{outline:2px solid var(--ink);outline-offset:2px}
   .lg-c{flex:none;display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 13px;color:var(--ink);text-align:left}
@@ -3089,6 +3111,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   html:root .yd .su-title{font:200 2.125rem/1.08 var(--sans)!important;letter-spacing:-.02em;text-wrap:balance;margin-top:20px}
   html:root .yd .su-sub{font-size:1rem;line-height:1.5}
   html:root .yd .yd-gl{display:flex;align-items:center;font-size:1.375rem;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink);margin:6px 0 10px}
+  html:root .yd-fast{flex-basis:100%;margin:4px 0 6px;padding:12px 14px 14px;border-radius:16px;background:var(--panel)}
+  html:root .yd-fast p{margin:0 0 8px;font-size:.875rem;color:var(--muted)}html:root .yd-fast .su-chips{gap:6px}html:root .yd .yd-fast .su-chip{min-height:44px;padding:0 14px}
+  html:root .yd-fast label{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;font-size:.9375rem;color:var(--ink)}
+  html:root .yd-fast input{width:auto;max-width:9rem;border:0;background:var(--panel-2);border-radius:10px;padding:8px 10px;color:var(--ink);font:inherit}
   html:root .yd .su-chip{min-height:42px;padding:0 15px;font-size:.9375rem;font-weight:400}
   html:root .yd .su-chip.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
   html:root .yd .yd-grp{margin-top:22px}
@@ -3108,7 +3134,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /* voice: the mic beside the + sheet's box */
   html:root .qa-mic{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:transform .16s var(--ease-out,ease-out)}
   html:root .qa-mic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
-  html:root .qa-mic:active{transform:scale(.95)}html:root .qa-mic.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn);animation:micpulse 1.2s ease-in-out infinite}
+  html:root .qa-mic:active{transform:scale(.95)}
+  .talk-box{position:fixed;left:16px;right:16px;bottom:calc(100px + env(safe-area-inset-bottom));z-index:60;background:var(--panel);color:var(--ink);border-radius:18px;padding:12px 16px 14px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);animation:talkin .2s var(--ease-out,ease-out)}
+  .talk-box small{display:block;font-size:.8125rem;color:var(--muted)}.talk-box b{display:block;margin-top:4px;font-size:1.0625rem;font-weight:400}
+  @keyframes talkin{from{opacity:0;transform:translateY(8px)}}@media(prefers-reduced-motion:reduce){.talk-box{animation:none}}html:root .qa-mic.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn);animation:micpulse 1.2s ease-in-out infinite}
   @keyframes micpulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--ink) 12%,transparent)}}
   @media(prefers-reduced-motion:reduce){html:root .qa-mic.on{animation:none}}
   /* Your week: the small Sunday card on Home */
@@ -3173,6 +3202,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   @media (max-width:820px){
     .fab-plus{display:flex;position:fixed;right:16px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:41;width:60px;height:60px;border-radius:50%;border:0;align-items:center;justify-content:center;background:var(--btn);color:var(--btn-ink);box-shadow:0 14px 30px -10px rgba(0,0,0,.45);cursor:pointer;transition:transform .2s var(--ease-out,ease-out),bottom .25s var(--ease-out,ease-out)}
     .fab-plus svg{width:26px;height:26px}.fab-plus:active{transform:scale(.94)}
+    .fab-plus{touch-action:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+    .fab-plus.talk,.fab-plus.talk:active{background:var(--c-body);color:#fff;transform:scale(1.12);box-shadow:0 0 0 10px color-mix(in srgb,var(--c-body) 22%,transparent),0 0 0 22px color-mix(in srgb,var(--c-body) 10%,transparent);animation:talkring 1.4s ease-in-out infinite}
+    @keyframes talkring{50%{box-shadow:0 0 0 14px color-mix(in srgb,var(--c-body) 18%,transparent),0 0 0 28px color-mix(in srgb,var(--c-body) 6%,transparent)}}
+    @media(prefers-reduced-motion:reduce){.fab-plus.talk{animation:none}}
     .bottomnav.fnav{left:50%;right:auto;transform:translateX(-50%);justify-content:center;gap:10px;padding:0 10px}
     .bottomnav.fnav .fn-t{width:64px;flex:none}
     .fab-tip{position:fixed;right:12px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:41;background:var(--panel);color:var(--ink);border-radius:14px;padding:8px 12px;font-size:.8125rem;line-height:1.35;box-shadow:0 10px 24px -12px rgba(0,0,0,.45);pointer-events:none}
@@ -4539,6 +4572,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function beginFast(target){
     target=Math.max(1,Math.min(120,target||16));
     var i=fastItem();
+    if(i&&activeFast(i)){toast("A fast is already running. End it on the Fasting page first.");return false}
     if(i){startFast(i,target);toast("Fast started, "+target+"h");return;}
     var area=(cats().filter(function(c){return c.id!==TODO_CAT})[0]||{}).id||TODO_CAT;
     var base={catId:area,sub:"Fasting",title:"Fast",kind:"todo",stance:"fast",repeatEvery:0,priority:"low",
@@ -4636,16 +4670,54 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
         '<span class="fp-tag'+(ok?" ok":"")+'">'+(ok?"Reached "+(f.target||16)+"h":"Ended early")+'</span></div>'}).join("")+'</div>';
   }
   document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-fprange]");if(!b)return;e.stopPropagation();state.fpRange=+b.getAttribute("data-fprange");var y=window.scrollY;render();window.scrollTo(0,y);},true);
+  /* ===== Fasting screen (start): a round timer on top (a knob where the fast began, a clock knob that travels), this week's row, then the insights ===== */
+  var RG_R=118,RG_C=2*Math.PI*118;
+  function rgPos(p){var a=-Math.PI/2+p*2*Math.PI;return [136+RG_R*Math.cos(a),136+RG_R*Math.sin(a)]}
+  var RG_FORK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 1-3 4-3 7h3v11"/></svg>';
+  var RG_CLOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="7"/><path d="M12 10v3l2 2M5 4 3 6M19 4l2 2"/></svg>';
+  /** what the middle of the ring says, and how far round it is */
+  function rgNow(a){var tgt=a.target||16,h0=fastHours(a),p=Math.min(1,h0/tgt),end=a.s+tgt*3600000;
+    return {p:p,eat:p>=1?"Target reached":"Eat again in "+fmtHM(tgt-h0),stage:FPHASES[phaseAt(h0)][2],end:end}}
+  function fpRing(i){var a=i&&activeFast(i),track='<circle cx="136" cy="136" r="'+RG_R+'" fill="none" class="rg-tr" stroke-width="16"/>';
+    if(!a){var t=i?targetOf(i):16,last=i&&doneFasts(i)[0],k0=rgPos(0);
+      return '<section class="rg" aria-label="Fasting timer"><div class="rg-w"><svg viewBox="0 0 272 272" aria-hidden="true">'+track+'</svg><span class="rg-k" style="left:'+k0[0]+'px;top:'+k0[1]+'px">'+RG_FORK+'</span>'+
+        '<div class="rg-c"><small>Not fasting</small><b>'+t+'h</b><em>'+(last?"Last fast "+esc(fmtHM(fastHours(last)))+", "+qfDay(last.e).toLowerCase():"Your usual length")+'</em></div></div>'+
+        '<div class="rg-b"><button class="wk-b on" data-fastpick>Start a fast</button></div><p class="fp-note">You can end it any time. A short fast still counts.</p></section>'}
+    var n=rgNow(a),k=rgPos(n.p),s0=rgPos(0);
+    return '<section class="rg" aria-label="Fasting timer"><div class="rg-w" data-rg="'+a.s+'|'+(a.target||16)+'"><svg viewBox="0 0 272 272" aria-hidden="true"><defs><linearGradient id="rgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E7C79A"/><stop offset="1" stop-color="#B8864A"/></linearGradient></defs>'+track+
+      '<circle class="rg-pr" cx="136" cy="136" r="'+RG_R+'" fill="none" stroke="url(#rgG)" stroke-width="16" stroke-linecap="round" stroke-dasharray="'+(RG_C*n.p).toFixed(1)+' '+RG_C.toFixed(1)+'" transform="rotate(-90 136 136)"/></svg>'+
+      '<span class="rg-k" style="left:'+s0[0]+'px;top:'+s0[1]+'px">'+RG_FORK+'</span><span class="rg-k rg-kn" style="left:'+k[0]+'px;top:'+k[1]+'px">'+RG_CLOCK+'</span>'+
+      '<div class="rg-c"><small>Fasting for</small><b class="qf-time" data-qfs="'+a.s+'">'+qfClock(Date.now()-a.s)+'</b><em class="rg-eat">'+esc(n.eat)+'</em><small class="rg-st">'+esc(n.stage)+'</small></div></div>'+
+      '<div class="rg-t"><span>Started<b>'+qfDay(a.s)+', '+esc(fastClock(a.s))+'</b></span><span>Ends<b>'+qfDay(n.end)+', '+esc(fastClock(n.end))+'</b></span></div>'+
+      '<div class="rg-b"><button class="wk-b" data-fpedit>Change times</button><button class="wk-b on" data-qfend="'+i.id+'">End fast</button></div></section>'}
+  /* the ring moves on its own; every 20 seconds is plenty */
+  setInterval(function(){if(document.hidden)return;[].forEach.call(document.querySelectorAll("[data-rg]"),function(w){var v=w.getAttribute("data-rg").split("|"),n=rgNow({s:+v[0],target:+v[1]}),k=rgPos(n.p),pr=w.querySelector(".rg-pr"),kn=w.querySelector(".rg-kn");
+    if(pr)pr.setAttribute("stroke-dasharray",(RG_C*n.p).toFixed(1)+" "+RG_C.toFixed(1));if(kn){kn.style.left=k[0]+"px";kn.style.top=k[1]+"px"}
+    var e=w.querySelector(".rg-eat");if(e)e.textContent=n.eat;var st=w.querySelector(".rg-st");if(st)st.textContent=n.stage})},20000);
+  /** the longest fast that started on a day, in hours (a running one counts as it is now) */
+  function fpDayHours(i,ds){var b=0;(i.fasts||[]).forEach(function(f){if(fmt(new Date(f.s))===ds){var h=fastHours(f);if(h>b)b=h}});return b}
+  function fpMonday(){var d=new Date(today()+"T00:00:00");return addDaysStr(today(),-((d.getDay()+6)%7))}
+  function fpWeekRow(i){var mon=fpMonday(),L=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+    return '<div class="rg-wk" aria-label="This week">'+L.map(function(l,k){var ds=addDaysStr(mon,k),h=fpDayHours(i,ds),fut=ds>today();
+      return '<div><i class="'+(h?"on":"n")+(ds===today()?" t":"")+'">'+(h?Math.round(h)+"h":fut?"":"rest")+'</i>'+l+'</div>'}).join("")+'</div>'}
+  function fpDays(i){var mon=addDaysStr(fpMonday(),-28),g="";
+    for(var k=0;k<35;k++){var ds=addDaysStr(mon,k),h=ds>today()?-1:fpDayHours(i,ds);g+='<i class="'+(h<0?"f":h>=24?"c":h>=16?"b":h>0?"a":"")+'" title="'+ds+'"></i>'}
+    return '<div class="card fp-card fd"><div class="fp-h"><h3>Last 5 weeks</h3></div><p class="fd-t">Fasting days</p>'+
+      '<div class="fd-k"><span><i></i>none</span><span><i class="a"></i>under 16h</span><span><i class="b"></i>16h+</span><span><i class="c"></i>24h+</span></div>'+
+      '<div class="fd-g">'+g+'</div><div class="fd-dl"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div></div>'}
+  function fpWeekAvg(i){var mon=fpMonday(),w=[],mx=0;
+    for(var b=4;b>=0;b--){var from=new Date(addDaysStr(mon,-7*b)+"T00:00:00").getTime(),to=from+7*FP_DAY,l=doneFasts(i).filter(function(f){return f.s>=from&&f.s<to}),av=fpAvg(l);w.push(av);if(av>mx)mx=av}
+    var nm=["4 wk","3 wk","2 wk","last","this"],th=w[4];
+    return '<div class="card fp-card fd"><div class="fp-h"><h3>Weekly average</h3></div><p class="fd-t">'+(th!=null?esc(fmtHM(th))+" this week":"No finished fasts this week yet")+'</p><div class="fb">'+
+      w.map(function(v,k){return '<div class="'+(k===4?"t":"")+'"><b>'+(v!=null?Math.round(v*10)/10:"")+'</b><i style="height:'+(v?Math.max(6,Math.round(v/Math.max(mx,1)*90)):0)+'px"></i>'+nm[k]+'</div>'}).join("")+'</div></div>'}
+  /* ===== Fasting screen (end) ===== */
   function viewFasting(){
     var i=fastItem();
     var h='<div class="day-h"><div class="d"><p class="kicker">Timer</p><h1 class="title" style="font-size:2rem">Fasting</h1></div></div>';
-    if(!i)return h+'<div class="card fp-card fp-first"><b class="fp-ft">Start your first fast</b><p class="fp-line">Pick a length. It starts now, and you can end it any time. Ending early still counts.</p>'+
-      '<div class="fp-fb">'+[14,16,18].map(function(n){return '<button class="cb-b'+(n===16?" pri":"")+'" data-fastbegin="'+n+'">'+n+' hours</button>'}).join("")+'</div>'+
-      '<p class="fp-care">If you take medication with food, or have a health condition, check with your doctor first.</p></div>';
+    if(!i)return h+fpRing(null)+'<p class="fp-care">If you take medication with food, or have a health condition, check with your doctor first.</p>';
     var a=activeFast(i);
-    if(a){var tgt=a.target||16,h0=fastHours(a);h+='<div class="fp-live">'+fastHomeCard()+'</div>'+fpStages(tgt,h0);if(h0>=20||tgt>=24)h+=careBox();}
-    else h+=fpIdleHero(i);
-    h+='<div class="fp-sec"><h2>Your fasting</h2>'+fpTabs()+'</div>'+fpStats(i)+fpWhen(i)+fpReach(i)+fpRecords(i)+fpRecent(i);
+    h+=fpRing(i)+fpWeekRow(i);if(a&&(fastHours(a)>=20||(a.target||16)>=24))h+=careBox();
+    h+='<div class="fp-sec"><h2>Your fasting</h2>'+fpTabs()+'</div>'+fpStats(i)+fpDays(i)+fpWeekAvg(i)+fpWhen(i)+fpReach(i)+fpRecords(i)+fpRecent(i);
     return h;
   }
   /* ===== Home: greeting, day scroller, Up next, Body / Mind / To-do cards, total, calendar ===== */
@@ -7072,6 +7144,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     ["e","Evening first","That\u2019s when I have more space.","moon","09:00","14:00","21:30"],["v","My days vary","I don\u2019t really follow one pattern.","shuffle","08:00","13:00","21:00"],["own","Build it myself","I\u2019ll place things myself.","plus","08:00","13:00","21:00"]];
   var DAY_CHIPS=[
     {k:"brush",n:"Brushing teeth",d:"morning and night",g:"Body",at:["m","e"],x:{t:"Brushing teeth",G:"c_hygiene"}},{k:"floss",n:"Flossing",d:"once a day",g:"Body",at:["e"],x:{t:"Flossing",G:"c_hygiene"}},
+    {k:"fast",n:"Fasting",d:"timer and your usual hours",g:"Body",x:{fast:1}},
     {k:"skin",n:"Skincare",d:"morning and night",g:"Body",at:["m","e"],x:{t:"Skincare",G:"c_hygiene"}},{k:"gym",n:"Workout",d:"3 times a week",g:"Body",at:{m:["m"],s:["e"],e:["e"]},x:{t:"Workout",G:"c_fitness",perWeek:3}},
     {k:"walk",n:"Walking",d:"a walk a day",g:"Body",at:{m:["m"],s:["d"],e:["e"]},x:{t:"Walking",G:"c_fitness"}},{k:"stretch",n:"Stretching",d:"a few minutes a day",g:"Body",at:{m:["m"],s:["m"],e:["e"]},x:{t:"Stretching",G:"c_fitness"}},
     {k:"water",n:"Water intake",d:"a daily goal you set",g:"Body",at:["d"],x:{lib:"Water"}},
@@ -7159,9 +7232,17 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       '<input id="su-name" class="su-inp yd-name" type="text" placeholder="Your name" value="'+esc(S.name)+'" autocomplete="given-name" enterkeyhint="next">'+
       '<div class="su-foot"><button class="su-skip" data-setup="ydskipname">Skip</button><button class="btn primary su-next" data-setup="ydnext">Continue</button></div></div>';
   }
+  /* Fasting in setup: the usual length and when you usually stop eating, saved on the fast item (protocol.fast, protocol.at) */
+  var FAST_LENS=[12,16,18,20,24,36,48,72];
+  function ydFastBox(){var S=setupS,h=S.fastH||16,own=S.fastOwn||FAST_LENS.indexOf(h)<0;
+    return '<div class="yd-fast"><p>How long do you usually fast?</p><div class="su-chips">'+FAST_LENS.map(function(x){var on=!own&&x===h;return '<button class="su-chip'+(on?" on":"")+'" data-setup="ydfh|'+x+'" aria-pressed="'+on+'">'+x+'h</button>'}).join("")+
+      '<button class="su-chip'+(own?" on":"")+'" data-setup="ydfown" aria-pressed="'+own+'">Your own</button></div>'+
+      (own?'<label>Hours<input type="number" inputmode="numeric" min="1" max="120" id="yd-fown" value="'+h+'"></label>':'')+
+      '<label>I usually stop eating at<input type="time" id="yd-fat" value="'+(S.fastAt||"20:00")+'"></label></div>'}
+  document.addEventListener("input",function(e){if(!setupS)return;if(e.target.id==="yd-fown"){var v=+e.target.value;if(v>=1&&v<=120)setupS.fastH=v}else if(e.target.id==="yd-fat"&&e.target.value)setupS.fastAt=e.target.value});
   function ydPick(){var S=setupS,n=0;Object.keys(S.picked).forEach(function(k){if(S.picked[k]&&dayChip(k))n++});
     var grp=function(g){var cs=allChips().concat(S.own).filter(function(c){return c.g===g});
-      return '<div class="yd-grp"><div class="yd-gl"><i class="yd-pd" style="background:var(--c-'+{Body:"body",Mind:"mind","To-do":"todo"}[g]+')"></i>'+g+'</div><div class="su-chips">'+cs.map(function(c,ix){var on=!!S.picked[c.k],hd=g==="To-do"&&c.sub&&(ix===0||cs[ix-1].sub!==c.sub)?'<p class="yd-sub">'+{Home:"Home",Money:"Money and admin",People:"People"}[c.sub]+'</p>':'';return hd+'<button class="su-chip'+(c.d?" yd-cb":"")+(on?" on":"")+'" data-setup="ydchip|'+c.k+'" aria-pressed="'+on+'">'+(c.d?'<span>'+esc(c.n)+'</span><small>'+esc(c.d)+'</small>':(on?CHECK_SVG:"")+esc(c.n))+'</button>'}).join("")+
+      return '<div class="yd-grp"><div class="yd-gl"><i class="yd-pd" style="background:var(--c-'+{Body:"body",Mind:"mind","To-do":"todo"}[g]+')"></i>'+g+'</div><div class="su-chips">'+cs.map(function(c,ix){var on=!!S.picked[c.k],hd=g==="To-do"&&c.sub&&(ix===0||cs[ix-1].sub!==c.sub)?'<p class="yd-sub">'+{Home:"Home",Money:"Money and admin",People:"People"}[c.sub]+'</p>':'';return hd+'<button class="su-chip'+(c.d?" yd-cb":"")+(on?" on":"")+'" data-setup="ydchip|'+c.k+'" aria-pressed="'+on+'">'+(c.d?'<span>'+esc(c.n)+'</span><small>'+esc(c.d)+'</small>':(on?CHECK_SVG:"")+esc(c.n))+'</button>'+(c.k==="fast"&&on?ydFastBox():"")}).join("")+
         (S.ownOpen===g?'':'<button class="su-chip yd-ownc" data-setup="ydownopen|'+g+'">+ Add your own</button>')+'</div>'+
         (S.ownOpen===g?'<div class="sp-inrow"><input id="yd-own" class="su-inp" type="text" placeholder="'+{Body:"Like cold shower",Mind:"Like call a friend",["To-do"]:"Like clean the car"}[g]+'" autocomplete="off" enterkeyhint="done"><button class="btn primary sm" data-setup="ydown|'+g+'">Add</button></div>':'')+'</div>'};
     return '<div class="welcome-card su yd">'+ydTop(3)+'<h1 class="su-title">What do you want to keep up with?</h1><p class="su-sub">Pick what matters to you. You can change anything later in the app.</p>'+
@@ -7391,6 +7472,9 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     Store.welcome=false;
     try{localStorage.setItem("ritsu_checkins",JSON.stringify(ci));if(S.pat)localStorage.setItem("ritsu_daypat",S.pat)}catch(e){}
     var ix=0;plan.forEach(function(p){var c=p.c;
+      if(c.k==="fast"){var fh=Math.max(1,Math.min(120,S.fastH||16));Store.add("items",{catId:Store.cache.cats.c_food?"c_food":"c_sleepfood",sub:"Fasting",title:"Fast",kind:"todo",stance:"fast",repeatEvery:0,priority:"low",
+        protocol:{fast:fh,eat:Math.max(0,24-fh),at:S.fastAt||"20:00"},fasts:[],markers:[],createdAt:new Date().toISOString(),createdDate:today(),order:ix++,owner:state.me||null});
+        try{localStorage.setItem("ritsu_logfast","1")}catch(e){}return}
       if(c.own&&!c.x){var td=packTodo({title:c.n,date:today(),time:null},ix++),gq=tyGroup(c.n,false);if(gq&&gq.card==="todo")td.list=gq.list;Store.add("items",td);return}
       (c.xs||[c.x]).forEach(function(x){if(x.cb){cbCreate(x.cb,"unsure",ix++);return}var d=packData(x,ix++);if(!d)return;
         if(p.at&&p.at.length){var tm=p.at.map(function(q){return ci[q]}).sort();d.parts=p.at.slice();
@@ -7446,6 +7530,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       if(a==="ydback"){ydKeep();if(S.step<=1||(S.keepWho&&S.step<=6)){setupS=null;try{localStorage.removeItem("ritsu_setup_draft")}catch(x){}render();}else go(S.step===8?6:S.step-1);return true;}
       if(a==="ydpat"){if(S.pat!==v[1]){S.pat=v[1];S.at={};S.ci=null;}render();setTimeout(function(){if(setupS===S&&S.step===3)go(4)},280);return true;}
       if(a==="ydchip"){S.picked[v[1]]=!S.picked[v[1]];render();return true;}
+      if(a==="ydfh"){S.fastH=+v[1];S.fastOwn=false;render();return true;}
+      if(a==="ydfown"){S.fastOwn=true;render();setTimeout(function(){var o=$("#yd-fown");if(o)o.focus()},40);return true;}
       if(a==="ydown"){var o=$("#yd-own");ydOwn(o?o.value:"",v[1]);render();return true;}
       if(a==="ydownopen"){S.ownOpen=v[1];render();setTimeout(function(){var o3=$("#yd-own");if(o3)o3.focus()},40);return true;}
       if(a==="ydback1"){S.back[v[1]]=!S.back[v[1]];render();return true;}
@@ -8487,7 +8573,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function logHide(id,off){var h=logHidden().filter(function(x){return x!==id});if(off)h.push(id);try{localStorage.setItem("ritsu_loghide",JSON.stringify(h))}catch(e){}}
   function logFastChip(){var i=fastItem(),a=i&&activeFast(i);
     if(a)return '<button type="button" class="lg-c fs on" data-nav="fasting" aria-label="Fasting, open the timer">'+phicon("timer")+'<span><b>Fasting</b><small><em data-qfm="'+a.s+'">'+qfClock(Date.now()-a.s).replace(/:\d\d$/,"")+'</em></small></span></button>';
-    return '<button type="button" class="lg-c fs" data-fastpick aria-label="Start a fast">'+phicon("timer")+'<span><b>Start a fast</b><small>pick hours</small></span></button>';}
+    return '<button type="button" class="lg-c fs" data-fastpick aria-label="Start a fast">'+phicon("timer")+'<span><b>Start a fast</b><small>set the times</small></span></button>';}
   /* v6: how often a log was used in the last 14 days, so the ones you use most come first */
   function logUse(i){var n=0;for(var k=0;k<14;k++){var d=addDaysStr(today(),-k);if(countOn(i,d)>0||(i.values||{})[d]!=null)n++}return n}
   /* v6: medicine that is due within two hours (or a little late) and not taken yet gets a tile, one tap takes it */
@@ -8564,23 +8650,45 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function logPickHtml(){var hid=logHidden(),row=function(id,t,sub,f){var on=f==null?hid.indexOf(id)<0:f;return '<label class="setrow"><div class="info"><b>'+esc(t)+'</b><small>'+esc(sub)+'</small></div><span class="lp-sw"><input type="checkbox" data-logshow="'+id+'"'+(on?" checked":"")+'><i></i></span></label>'};
     return '<div class="qcl"><div class="qcl-h"><h3>Your logs</h3><button class="qcl-x" data-qclclose aria-label="Close">&times;</button></div><p class="qcl-sub">Choose what shows in the Log box on Home.</p><div class="panel">'+
       logItems().map(function(i){return row(i.id,i.title,isEpisode(i)?"Start and end":i.kind==="measure"?"Type a number":"Tap to count")}).join("")+row("fast","Fasting","Start a fast from Home",fastShown())+'</div></div>'}
-  /* Start a fast: pick the hours and when it began, then the timer runs */
-  function fastPickHtml(h0){var o=[[12,"Gentle"],[16,"16:8"],[18,"18:6"]],t=h0||(fastItem()?targetOf(fastItem()):16),n=new Date(),hm=String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0");
+  /* Start a fast: hours (12, 16, 18 or your own), when it started and when it ends; change any one and the others follow */
+  var _fp={h:16,s:0};
+  function fpHM(ms){var d=new Date(ms);return p2(d.getHours())+":"+p2(d.getMinutes())}
+  function fpDay(ms){var d=new Date(ms),k=dCount(fmt(d));return k===0?"Today":k===-1?"Yesterday":k===1?"Tomorrow":DOW_LONG[d.getDay()]}
+  function fpHours(h){return (h%1?String(Math.round(h*100)/100):String(h))+(h===1?" hour":" hours")}
+  function fastPickHtml(h0){var o=[[16,"16:8"],[18,"18:6"],[24,"1 day"],[36,"1.5 days"]],fi=fastItem(),st=Math.floor(Date.now()/60000)*60000,at=fi&&fi.protocol&&fi.protocol.at;
+    if(at){var d0=new Date();d0.setHours(+at.split(":")[0],+at.split(":")[1],0,0);if(d0.getTime()<=Date.now()&&Date.now()-d0.getTime()<4*3600000)st=d0.getTime()}
+    _fp={h:h0||(fi?targetOf(fi):16),s:st};
     return '<div class="qcl fp"><div class="qcl-h"><h3>Start a fast</h3><button class="qcl-x" data-qclclose aria-label="Close">&times;</button></div><p class="qcl-sub">How long would you like to go?</p>'+
-      '<div class="fp-o" role="radiogroup" aria-label="Hours">'+o.map(function(x){return '<button role="radio" aria-checked="'+(t===x[0])+'" data-fph="'+x[0]+'"><b>'+x[0]+'h</b><small>'+x[1]+'</small></button>'}).join("")+
-      '<label class="fp-own'+(o.some(function(x){return x[0]===t})?"":" on")+'"><input type="number" inputmode="numeric" min="1" max="120" id="fp-own" placeholder="Custom" value="'+(o.some(function(x){return x[0]===t})?"":t)+'" aria-label="Custom hours"><small>hours</small></label></div>'+
-      '<label class="fp-w"><b>Started</b><input type="time" id="fp-at" value="'+hm+'"></label>'+
-      '<button class="big-done fp-go" data-fpgo>Start the Timer</button></div>'}
-  function fastPickOpen(){openModal(fastPickHtml());$("#modal").classList.add("qcl-modal");}
-  function fastPickGo(){var own=+(($("#fp-own")||{}).value||0),sel=document.querySelector('.fp-o [aria-checked="true"]'),h=own>0?own:sel?+sel.getAttribute("data-fph"):16;
-    var at=($("#fp-at")||{}).value,ms=Date.now();if(at){var d=new Date();d.setHours(+at.split(":")[0],+at.split(":")[1],0,0);if(d.getTime()>Date.now())d.setDate(d.getDate()-1);ms=d.getTime();}
-    beginFast(h);setTimeout(function(){var i=fastItem(),fs2=i&&(i.fasts||[]).slice(),a=fs2&&fs2.filter(function(x){return !x.e})[0];if(a&&ms<a.s){a.s=ms;Store.update("items",i.id,{fasts:fs2});}closeModal();render();},120);}
-  document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("[data-fastpick],[data-fph],[data-fpgo],[data-logpick]");if(!t)return;e.stopPropagation();e.preventDefault();
+      '<div class="fp-o" role="radiogroup" aria-label="Hours">'+o.map(function(x){return '<button role="radio" aria-checked="false" data-fph="'+x[0]+'"><b>'+x[0]+'h</b><small>'+x[1]+'</small></button>'}).join("")+'</div>'+
+      '<div class="fp-w fp-mt"><b>Your own</b><span class="fp-step"><button type="button" data-fpstep="-1" aria-label="One hour less">&minus;</button><b id="fp-h" aria-live="polite"></b><button type="button" data-fpstep="1" aria-label="One hour more">+</button></span></div>'+
+      '<label class="fp-w"><b>Started</b><span class="fp-d"><span id="fp-sd"></span><input type="time" id="fp-at" aria-label="Start time"></span></label>'+
+      '<label class="fp-w"><b>Ends</b><span class="fp-d"><span id="fp-ed"></span><input type="time" id="fp-end" aria-label="End time"></span></label>'+
+      '<p class="fp-sum" id="fp-sum"></p><button class="big-done fp-go" data-fpgo>Start the timer</button></div>'}
+  /* draw the sheet from _fp; skip the box being typed in */
+  function fpPaint(skip){var e=_fp.s+_fp.h*3600000;
+    [].forEach.call(document.querySelectorAll(".fp-o [data-fph]"),function(b){b.setAttribute("aria-checked",+b.getAttribute("data-fph")===_fp.h)});
+    var set=function(id,v){var el=$("#"+id);if(el&&id!==skip){if(el.tagName==="INPUT")el.value=v;else el.textContent=v}};
+    set("fp-h",fpHours(_fp.h));set("fp-at",fpHM(_fp.s));set("fp-sd",fpDay(_fp.s));set("fp-end",fpHM(e));set("fp-ed",fpDay(e));
+    var sm=$("#fp-sum");if(sm)sm.innerHTML=(e<=Date.now()?(_fp.edit?"Target reached at ":"That fast is already over: it ended at "):"You eat again at ")+"<b>"+esc(fmtTime(fpHM(e)))+" "+esc(fpDay(e).toLowerCase())+"</b>."}
+  function fastPickOpen(){openModal(fastPickHtml());$("#modal").classList.add("qcl-modal");fpPaint()}
+  function fpEditOpen(){var i=fastItem(),a=i&&activeFast(i);if(!a)return;fastPickOpen();_fp={h:a.target||16,s:a.s,edit:i.id};var t=$(".qcl.fp h3");if(t)t.textContent="Change times";var g=$("[data-fpgo]");if(g)g.textContent="Save";fpPaint()}
+  function fastPickGo(){var h=_fp.h,ms=_fp.s;
+    if(_fp.edit){var ie=Store.get("items",_fp.edit),fe=ie&&(ie.fasts||[]).map(function(x){return Object.assign({},x)}),ae=fe&&fe.filter(function(x){return !x.e})[0];
+      if(ae){ae.s=Math.min(ms,Date.now());ae.target=h;Store.update("items",ie.id,{fasts:fe});toast("Times changed: "+fmtHM(h)+" from "+fastClock(ae.s)+".")}closeModal();render();return}
+    if(ms+h*3600000<=Date.now()){toast("That fast has already ended. Change the start or end time.");return}
+    if(beginFast(h)===false)return;setTimeout(function(){var i=fastItem(),fs2=i&&(i.fasts||[]).slice(),a=fs2&&fs2.filter(function(x){return !x.e})[0];if(a&&ms<a.s){a.s=ms;Store.update("items",i.id,{fasts:fs2});}closeModal();render();},120);}
+  document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("[data-fastpick],[data-fpedit],[data-fph],[data-fpstep],[data-fpgo],[data-logpick]");if(!t)return;e.stopPropagation();e.preventDefault();
     if(t.hasAttribute("data-fastpick"))fastPickOpen();
+    else if(t.hasAttribute("data-fpedit"))fpEditOpen();
     else if(t.hasAttribute("data-logpick")){openModal(logPickHtml());$("#modal").classList.add("qcl-modal");}
-    else if(t.hasAttribute("data-fph")){[].forEach.call(document.querySelectorAll(".fp-o [data-fph]"),function(b){b.setAttribute("aria-checked",b===t)});var ow=$("#fp-own");if(ow){ow.value="";ow.parentNode.classList.remove("on")}}
+    else if(t.hasAttribute("data-fph")){_fp.h=+t.getAttribute("data-fph");fpPaint()}
+    else if(t.hasAttribute("data-fpstep")){_fp.h=Math.max(1,Math.min(120,Math.round(_fp.h)+(+t.getAttribute("data-fpstep"))));fpPaint()}
     else fastPickGo();},true);
-  document.addEventListener("input",function(e){if(e.target.id==="fp-own"){var on=!!e.target.value;e.target.parentNode.classList.toggle("on",on);if(on)[].forEach.call(document.querySelectorAll(".fp-o [data-fph]"),function(b){b.setAttribute("aria-checked","false")})}});
+  /* a start time later than now means yesterday; the end is the next time after the start */
+  document.addEventListener("input",function(e){var id=e.target.id,v=e.target.value;if((id!=="fp-at"&&id!=="fp-end")||!/^\d\d:\d\d$/.test(v))return;var hm=v.split(":"),d=new Date();d.setHours(+hm[0],+hm[1],0,0);
+    if(id==="fp-at"){if(d.getTime()>Date.now())d.setDate(d.getDate()-1);_fp.s=d.getTime()}
+    else{d=new Date(_fp.s);d.setHours(+hm[0],+hm[1],0,0);if(d.getTime()<=_fp.s)d.setDate(d.getDate()+1);_fp.h=Math.max(1,Math.min(120,Math.round((d.getTime()-_fp.s)/900000)/4))}
+    fpPaint(id)});
   document.addEventListener("change",function(e){var c=e.target.closest&&e.target.closest("[data-logshow]");if(!c)return;if(c.getAttribute("data-logshow")==="fast"){try{localStorage.setItem("ritsu_logfast",c.checked?"1":"0")}catch(x){}}else logHide(c.getAttribute("data-logshow"),!c.checked);if(state.view==="home")render();});
   function quickLog(id){var i=Store.get("items",id);if(!i)return;var undo=storeSnap();addEvent(i,today());toast("Logged "+i.title+" at "+fmtTime(nowHM())+".",undo)}
   function qaLogRow(){
@@ -8612,10 +8720,32 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(n>=3||state.view!=="home"||window.innerWidth>820||_tour||Store.welcome)return;try{localStorage.setItem("ritsu_fabtip",String(n+1))}catch(e){}
     var t=document.createElement("div");t.id="fabTip";t.className="fab-tip";t.setAttribute("aria-hidden","true");t.innerHTML="<b>Tap</b> to add<br><b>Hold</b> to talk";document.body.appendChild(t);setTimeout(function(){if(t.parentNode)t.remove()},6000)}
   document.addEventListener("pointerdown",function(e){if(e.target.closest&&e.target.closest("#fabPlus")){var o=$("#fabTip");if(o)o.remove();try{localStorage.setItem("ritsu_fabtip","9")}catch(x){}}},true);
-  var _holdT=null,_holdVoice=false;
+  /* ===== Hold to talk (start): hold + and the button becomes a mic with a small Listening bubble; let go and the + sheet opens with your words typed in ===== */
+  var _holdT=null,_holdVoice=false,_vh=null;
+  var MIC_FAB='<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>';
+  function holdTalkStart(btn){if(_vh)return;var box=document.createElement("div");box.className="talk-box";box.setAttribute("role","status");box.innerHTML='<small>Listening. Let go when you\u2019re done.</small><b>\u2026</b>';document.body.appendChild(box);
+    var svg0=btn.innerHTML,said="",sub=null,me={stop:null};_vh=me;btn.classList.add("talk");if(btn.id==="fabPlus")btn.innerHTML=MIC_FAB;
+    var show=function(t){if(t)said=t;box.querySelector("b").textContent=said?"\u201c"+said+"\u2026\u201d":"\u2026"};
+    var tidy=function(){if(_vh===me)_vh=null;btn.classList.remove("talk");if(btn.id==="fabPlus")btn.innerHTML=svg0;box.remove();if(sub)sub.then(function(h){h&&h.remove&&h.remove()})};
+    var done=function(txt){if(_vh!==me)return;tidy();txt=voiceClean(txt||said);if(!txt){toast("I didn\u2019t catch that. Hold + and try again.");return}
+      openAdd(addDay());setTimeout(function(){var t=$("#q-title");if(t){t.value=txt;t.dispatchEvent(new Event("input",{bubbles:true}));t.focus();t.setSelectionRange(txt.length,txt.length)}},80)};
+    var P=voicePlugin();
+    if(P){if(P.addListener)sub=Promise.resolve(P.addListener("partial",function(r){if(r&&r.text)show(r.text)}));me.stop=function(){P.stop()};
+      P.listen({prompt:"Say what to add"}).then(function(r){done(r&&r.text)}).catch(function(e){if(_vh!==me)return;tidy();toast(e&&e.code==="NO_MIC"?"Allow the microphone in your phone\u2019s Settings to speak to Daywell.":"Voice typing isn\u2019t available on this phone.")});return}
+    var SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){tidy();return}
+    var rec=new SR();rec.lang=navigator.language||"en-US";rec.interimResults=true;rec.maxAlternatives=1;
+    rec.onresult=function(e){var x="";for(var k=0;k<e.results.length;k++)x+=e.results[k][0].transcript;show(x)};
+    rec.onerror=function(e){if(e.error==="not-allowed"||e.error==="service-not-allowed"){tidy();toast("Allow the microphone to speak to Daywell.")}};
+    rec.onend=function(){done(said)};me.stop=function(){try{rec.stop()}catch(x){done(said)}};
+    try{rec.start()}catch(x){tidy()}}
+  function holdTalkEnd(){if(_vh&&_vh.stop)_vh.stop()}
   document.addEventListener("pointerdown",function(e){var b=e.target.closest&&e.target.closest("[data-qcplus]");if(!b||!voiceOk())return;clearTimeout(_holdT);
-    _holdT=setTimeout(function(){_holdVoice=true;openAdd(addDay());setTimeout(voiceStart,320)},450)});
-  ["pointerup","pointercancel","pointerleave"].forEach(function(ev){document.addEventListener(ev,function(){clearTimeout(_holdT)},true)});
+    _holdT=setTimeout(function(){_holdVoice=true;holdTalkStart(b)},400)});
+  ["pointerup","pointercancel"].forEach(function(ev){document.addEventListener(ev,function(){clearTimeout(_holdT);if(_vh)holdTalkEnd()},true)});
+  document.addEventListener("pointerleave",function(e){if(!_vh)clearTimeout(_holdT)},true);
+  /* a long press must not open the phone's own menu over the button */
+  document.addEventListener("contextmenu",function(e){if(e.target.closest&&e.target.closest("[data-qcplus]"))e.preventDefault()});
+  /* ===== Hold to talk (end) ===== */
   function qaAct(k,icon,label,set,extra){return '<button type="button" class="qa-act'+(set?" set":"")+'" data-qa="'+k+'"'+(extra||"")+'>'+qi(icon)+'<span>'+esc(label)+'</span></button>'}
   function paintAdd(){
     $("#qa-seg").innerHTML=[["todo","To-do"],["body","Body"],["mind","Mind"]].map(function(o){var on=qa.card===o[0];return '<button type="button" data-qa="card" data-v="'+o[0]+'" aria-pressed="'+on+'" class="'+(on?"on":"")+'">'+o[1]+'</button>'}).join("");
