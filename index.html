@@ -1953,6 +1953,22 @@ try{var _t=localStorage.getItem("ritsu_theme")||"dark";if(_t==="auto")_t=matchMe
   .qfe-t small{display:block;margin-top:8px;font-family:var(--ui);font-size:0.8125rem;font-weight:500;letter-spacing:0;color:var(--muted)}
   .qfe-b{display:block;width:100%;margin-top:10px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--rust-ink);font:600 15px/1.2 var(--ui);text-align:left;cursor:pointer}
   .qfe-b small{display:block;margin-top:3px;font-size:0.75rem;font-weight:500;color:var(--muted)}
+  .rt-c{background:var(--tile,var(--panel));border-radius:24px;padding:16px;margin:10px 0}
+  .rt-c b{font-weight:600}.rt-p{margin:6px 0 12px;font-size:.9375rem;line-height:1.45;color:color-mix(in srgb,var(--ink) 66%,transparent)}
+  .rt-h{display:flex;align-items:center;justify-content:space-between;gap:12px}.rt-h small{display:block;margin-top:3px;font-size:.8125rem;color:color-mix(in srgb,var(--ink) 62%,transparent)}
+  .rt-go{border:0;border-radius:999px;padding:9px 18px;min-height:44px;background:var(--btn,var(--ink));color:var(--btn-ink,var(--bg));font:600 .875rem/1 var(--ui);cursor:pointer}
+  .rt-go.off{background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--ink)}
+  .rt-bar{display:flex;gap:4px;margin-top:12px}.rt-bar i{flex:1;height:5px;border-radius:3px;background:color-mix(in srgb,var(--ink) 12%,transparent)}.rt-bar i.on{background:var(--c-body,#3E7D6C)}
+  .rt-chips{display:flex;gap:6px;margin-top:10px}.rt-chip{padding:3px 10px;border-radius:999px;font-size:.8125rem;background:color-mix(in srgb,var(--ink) 7%,transparent)}
+  .rt-chip.b{color:var(--c-body,#3E7D6C)}.rt-chip.m{color:var(--c-mind,#4D6596)}
+  .rt-btns{display:flex;flex-wrap:wrap;gap:8px}.rt-add{display:block;width:100%;margin:2px 0 10px;padding:12px;border:0;border-radius:999px;background:transparent;color:color-mix(in srgb,var(--ink) 66%,transparent);font:500 .875rem/1 var(--ui);cursor:pointer}
+  .rt-row{display:flex;align-items:center;gap:12px;width:100%;margin:0 0 8px;padding:12px 14px;border:0;border-radius:16px;background:var(--tile,var(--panel));color:var(--ink);text-align:left;font:inherit;cursor:pointer}
+  .rt-row b{display:block;font-weight:500;font-size:.9375rem}.rt-row small{display:block;font-size:.8125rem;color:color-mix(in srgb,var(--ink) 62%,transparent)}
+  .rt-tk{flex:none;width:26px;height:26px;border-radius:50%;border:1.6px solid color-mix(in srgb,var(--ink) 30%,transparent);display:grid;place-items:center}
+  .rt-row.on .rt-tk{background:var(--ink);border-color:var(--ink);color:var(--bg)}.rt-tk svg{width:14px;height:14px}
+  .rt-at{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0 4px;padding:10px 14px;border-radius:14px;background:var(--tile,var(--panel));font-size:.9375rem}
+  .rt-pack{display:block;width:100%;margin:0 0 10px;padding:14px 16px;border:0;border-radius:20px;background:var(--tile,var(--panel));color:var(--ink);text-align:left;font:inherit;cursor:pointer}
+  .rt-pack b{font-weight:600;font-size:1rem}.rt-pack small{margin-left:8px;color:color-mix(in srgb,var(--ink) 62%,transparent)}.rt-pack span{display:block;margin-top:6px;font-size:.875rem;line-height:1.5;color:color-mix(in srgb,var(--ink) 70%,transparent)}
   .qfe-k{display:block;width:100%;margin-top:10px;padding:13px;border:0;border-radius:999px;background:transparent;color:var(--ink);font:600 14px/1 var(--ui);cursor:pointer}
   .q7-split{grid-template-columns:auto minmax(0,1.9fr)!important;gap:16px!important}
   .q7-split .qc-num b{font-size:4.5rem!important}
@@ -2587,6 +2603,14 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   .yd-grp{margin-top:16px}.yd-gl{font-size:0.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
   .yd .su-chips{display:flex;flex-wrap:wrap;gap:7px}.yd .su-chip svg{width:14px;height:14px;margin:0 5px -2px -3px}
   .yd-hint{margin:8px 0 0;color:var(--muted);font-size:0.8125rem;line-height:1.45}
+  .yd-rr{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:10px 0;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+  .yd-box>.yd-rr+.yd-rr{border-top:1px solid var(--line)}
+  .yd-rr b{display:block;font-weight:500;font-size:.9375rem}.yd-rr small{display:block;color:var(--muted);font-size:.8125rem;margin-top:1px}
+  .yd-rk{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:999px;border:1.5px solid var(--line)}
+  .yd-rr.on .yd-rk{background:var(--btn,var(--ink));border-color:var(--btn,var(--ink));color:var(--btn-ink,#fff)}.yd-rk svg{width:14px;height:14px}
+  .yd-rtat{display:flex;align-items:center;gap:12px;margin-top:22px;padding:12px 14px;border-radius:14px;background:var(--panel-2)}
+  .yd-rtat span{flex:1}.yd-rtat b{display:block;font-weight:600;font-size:.9375rem}.yd-rtat small{display:block;color:var(--muted);font-size:.8125rem;margin-top:2px}
+  .yd-rtat input{font:500 15px var(--sans);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
   .yd-sec{margin-top:16px}.yd-sh{display:flex;align-items:center;gap:8px;margin-bottom:7px}.yd-sh .yd-i{color:var(--gold);width:19px;height:19px}.yd-sh b{font-size:0.8125rem;letter-spacing:.08em;text-transform:uppercase}
   .yd-ci{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:0.8125rem;color:var(--muted)}
   .yd-ci input{font:600 13px var(--sans);color:var(--ink);background:color-mix(in srgb,var(--gold) 12%,transparent);border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:999px;padding:3px 9px;color-scheme:light dark}
@@ -2833,6 +2857,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   html:root:not([data-theme="warm"]) .hm-hero.qc::before{--earn-c:#8A6630}
   html:root .hm-hero.qc.complete::before{--earn-c:#E9C46A;opacity:.62}
   html:root:not([data-theme="warm"]) .hm-hero.qc.complete::before{--earn-c:#A88434}
+  /* user 2026-10-16: no glow in the top card */
+  html:root .hm-hero.qc::before{display:none!important}
   html:root body{letter-spacing:-.004em}
   /* cards: soft, round, no outlines */
   html:root .card,html:root .panel,html:root[data-theme="warm"] .card,html:root[data-theme="warm"] .panel{border-color:transparent;box-shadow:none;border-radius:24px}
@@ -3958,10 +3984,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var fs=(i.fasts||[]).slice();fs.push({s:Date.now(),e:null,target:target||(i.protocol&&i.protocol.fast)||16});
     Store.update("items",i.id,{fasts:fs});
   }
-  function endFast(i){
+  function endFast(i,at){
     var fs=(i.fasts||[]).map(function(f){return Object.assign({},f)});
     var a=fs.filter(function(f){return !f.e})[0];if(!a)return 0;
-    a.e=Date.now();Store.update("items",i.id,{fasts:fs});return fastHours(a);
+    a.e=Math.min(Date.now(),Math.max(a.s,at||Date.now()));Store.update("items",i.id,{fasts:fs});return fastHours(a);
   }
   function fastAvg(i,n){var d=doneFasts(i).slice(0,n||14);if(!d.length)return null;
     var t=0;d.forEach(function(f){t+=fastHours(f)});return Math.round(t/d.length*10)/10}
@@ -4989,7 +5015,13 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function widgetPush(){clearTimeout(_wgT);_wgT=setTimeout(function(){var W=widgetBridge();if(!W||!Store.ready)return;
     var snap=widgetSnap(),set=LIGHT_SETS.filter(function(x){return x[0]===lights})[0]||LIGHT_SETS[0];
     snap.colors={dark:set[3],light:set[4],tintDark:"#8FC79E",tintLight:"#3D7A52"};
-    try{W.save({json:JSON.stringify(snap)}).catch(function(){})}catch(e){}},700)}
+    try{W.save({json:JSON.stringify(snap)}).catch(function(){})}catch(e){}
+    keepCopy(W)},700)}
+  /* for the native app (0.4.0): a full copy of everything saved on this phone, kept in the phone's own storage. Same shape as localStorage: {app, v, savedAt, ls:{ritsu_*: string}} */
+  var _keepLast="";
+  function keepCopy(W){if(!W||!W.keepData)return;var ls={};try{for(var k=0;k<localStorage.length;k++){var key=localStorage.key(k);if(key&&key.indexOf("ritsu_")===0)ls[key]=localStorage.getItem(key)}}catch(e){return}
+    var body=JSON.stringify(ls);if(body===_keepLast)return;_keepLast=body;
+    try{W.keepData({json:JSON.stringify({app:"daywell",v:1,savedAt:new Date().toISOString(),ls:ls})}).catch(function(){_keepLast=""})}catch(e){_keepLast=""}}
   /* ticks made on the widget wait in the phone; the app applies them when it opens */
   function widgetTicks(){var W=widgetBridge();if(!W||!Store.ready)return;
     try{W.takeTicks().then(function(r){var ids=(r&&r.ids)||[],n=0;ids.forEach(function(id){var i=Store.get("items",id);if(i&&!doneForNow(i)){toggleItem(id);n++}});if(n)toast(n===1?"Ticked from your home screen.":n+" ticked from your home screen.")}).catch(function(){})}catch(e){}}
@@ -5013,6 +5045,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function qfEndSheet(id){var i=Store.get("items",id),a=i&&activeFast(i);if(!a)return;var h0=fastHours(a);
     openModal('<div class="qcl"><div class="qcl-h"><h3>End your fast?</h3><button class="qcl-x" data-qclclose aria-label="Close">&times;</button></div>'+
       '<p class="qfe-t">'+esc(fmtHM(h0))+'<small>since '+qfDay(a.s).toLowerCase()+', '+esc(fastClock(a.s))+'</small></p>'+
+      '<label class="qfe-at" style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 14px;padding:10px 14px;border-radius:14px;background:var(--panel2,rgba(0,0,0,.05));font-size:15px"><span>It really ended at</span><input type="time" id="qfEndAt" value="'+(function(d){return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")})(new Date())+'"></label>'+
       '<button class="qcl-new" data-qfsave="'+id+'"><span class="qcl-ic">'+HM_CHECK+'</span><span><b>End and save</b><small>It counts toward your fasting history</small></span></button>'+
       '<button class="qfe-b" data-qfdiscard="'+id+'">Discard this fast<small>Started by mistake? It will not be saved.</small></button>'+
       '<button class="qfe-k" data-qclclose>Keep Fasting</button></div>');$("#modal").classList.add("qcl-modal");}
@@ -5020,7 +5053,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(t.hasAttribute("data-qftog")){state.qfOpen=!state.qfOpen;var w=t.closest(".qfw");if(w){var f=document.createElement("div");f.innerHTML=qfStrip();w.replaceWith(f.firstChild);}return;}
     if(t.hasAttribute("data-qfend")){qfEndSheet(t.getAttribute("data-qfend"));return;}
     var save=t.hasAttribute("data-qfsave"),i=Store.get("items",t.getAttribute(save?"data-qfsave":"data-qfdiscard"));if(!i){closeModal();return;}
-    if(save){var hrs=endFast(i);closeModal();render();toast("Saved, "+fmtHM(hrs),function(){undoEndFast(i.id)});}
+    if(save){var at=Date.now(),tf=$("#qfEndAt"),ta=tf&&tf.value;
+      if(ta){var a0=activeFast(i),d=new Date();d.setHours(+ta.slice(0,2),+ta.slice(3,5),0,0);if(d.getTime()>Date.now())d.setDate(d.getDate()-1);at=d.getTime();
+        if(a0&&at<a0.s){toast("That is before the fast began. Pick a later time.");return;}}
+      var hrs=endFast(i,at);closeModal();render();toast("Saved, "+fmtHM(hrs),function(){undoEndFast(i.id)});}
     else{var before=(i.fasts||[]).slice();Store.update("items",i.id,{fasts:before.filter(function(f){return f.e})});closeModal();render();toast("Fast discarded",function(){Store.update("items",i.id,{fasts:before});render();});}
   },true);
 
@@ -6137,7 +6173,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function glEarlier(){var i=leftovers()[0];if(!i)return "";var w=dueLabel(i.dueDate);
     return '<section class="gl-c" aria-label="From earlier"><p class="gl-k">From earlier, we kept it for you</p><p class="gl-t">'+esc(i.title)+'</p><p class="gl-s">'+esc(w.charAt(0).toUpperCase()+w.slice(1))+'. Still want it?</p><div class="gl-b"><button class="wk-b on" data-glle="today|'+i.id+'">Do it today</button><button class="wk-b" data-glle="go|'+i.id+'">Let it go</button></div></section>'}
   /* the Sunday card wins when it shows; then no noticed card the same day */
-  function glanceCards(noWk){return (glLearn()||(noWk?glNoticed():""))+glEarlier()}
+  function glanceCards(noWk){return rtHome()+(glLearn()||(noWk?glNoticed():""))+glEarlier()}
   document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-glle]");if(!b)return;var v=b.getAttribute("data-glle").split("|"),i=Store.get("items",v[1]);if(!i)return;var undo=storeSnap();
     if(v[0]==="today"){Store.update("items",i.id,{dueDate:today()});toast("Today: "+i.title,undo)}else{Store.del("items",i.id);toast("Let go: "+i.title,undo)}render()});
   /* ===== Glance cards (end) ===== */
@@ -7210,8 +7246,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     check:'<circle cx="12" cy="12" r="8.5"/><path class="yd-tick" d="m8 12.4 2.7 2.7L16.2 9.5"/>',chat:'<path d="M4 18.5V6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H8z"/>',
     clock:'<circle cx="12" cy="12" r="8.5"/><path class="yd-hand" d="M12 12V7.2"/><path d="M12 12h3.2"/>',chev:'<path d="m9 6 6 6-6 6"/>'};
   function ydI(n,cls){return '<svg class="yd-i'+(cls?" "+cls:"")+'" viewBox="0 0 24 24" aria-hidden="true">'+YDI[n]+'</svg>'}
-  function ydTop(n){var d="";for(var i=1;i<=5;i++)d+='<i class="'+(i<=n?"on":"")+'"></i>';
-    return '<div class="yd-top"><button class="su-skip" data-setup="ydback">Back</button><div class="su-steps" aria-hidden="true">'+d+'</div><span>'+n+' of 5</span></div>'}
+  function ydTop(n){var d="";for(var i=1;i<=7;i++)d+='<i class="'+(i<=n?"on":"")+'"></i>';
+    return '<div class="yd-top"><button class="su-skip" data-setup="ydback">Back</button><div class="su-steps" aria-hidden="true">'+d+'</div><span>'+n+' of 7</span></div>'}
   /* ===== opening cards (2026-10-15): how it works, privacy, Low day. Every line says what Daywell really does ===== */
   var YDC={tick:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',week:'<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/>',learn:'<path d="M4 17c3-6 5-9 8-9s5 3 8 9"/>',
     phone:'<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',no:'<circle cx="12" cy="12" r="8.5"/><path d="m8 8 8 8"/>',
@@ -7243,11 +7279,11 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   }
   /* Fasting in setup: the usual length and when you usually stop eating, saved on the fast item (protocol.fast, protocol.at) */
   var FAST_LENS=[12,16,18,20,24,36,48,72];
-  function ydFastBox(){var S=setupS,h=S.fastH||16,own=S.fastOwn||FAST_LENS.indexOf(h)<0;
-    return '<div class="yd-fast"><p>How long do you usually fast?</p><div class="su-chips">'+FAST_LENS.map(function(x){var on=!own&&x===h;return '<button class="su-chip'+(on?" on":"")+'" data-setup="ydfh|'+x+'" aria-pressed="'+on+'">'+x+'h</button>'}).join("")+
-      '<button class="su-chip'+(own?" on":"")+'" data-setup="ydfown" aria-pressed="'+own+'">Your own</button></div>'+
-      (own?'<label>Hours<input type="number" inputmode="numeric" min="1" max="120" id="yd-fown" value="'+h+'"></label>':'')+
-      '<label>I usually stop eating at<input type="time" id="yd-fat" value="'+(S.fastAt||"20:00")+'"></label></div>'}
+  /* fasting in setup (user, 2026-10-18): only the kind; the hours are picked each time you start a fast */
+  var FAST_KINDS=[["if","Intermittent fast","Under 24 hours, like 16:8"],["long","Long fast","24 hours or more"]];
+  function ydFastBox(){var S=setupS,ty=S.fastType||"if";
+    return '<div class="yd-fast"><p>What kind of fast?</p><div class="su-chips">'+FAST_KINDS.map(function(o){var on=ty===o[0];return '<button class="su-chip yd-cb'+(on?" on":"")+'" data-setup="ydfty|'+o[0]+'" aria-pressed="'+on+'"><span>'+o[1]+'</span><small>'+o[2]+'</small></button>'}).join("")+'</div>'+
+      (ty==='if'?'<label>I usually stop eating at<input type="time" id="yd-fat" value="'+(S.fastAt||"20:00")+'"></label>':'')+'<p class="yd-hint">You choose the hours each time you start a fast.</p></div>'}
   document.addEventListener("input",function(e){if(!setupS)return;if(e.target.id==="yd-fown"){var v=+e.target.value;if(v>=1&&v<=120)setupS.fastH=v}else if(e.target.id==="yd-fat"&&e.target.value)setupS.fastAt=e.target.value});
   function ydPick(){var S=setupS,n=0;Object.keys(S.picked).forEach(function(k){if(S.picked[k]&&dayChip(k))n++});
     var grp=function(g){var cs=allChips().concat(S.own).filter(function(c){return c.g===g});
@@ -7314,7 +7350,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function ydNextMd(md){var t=today(),d=t.slice(0,4)+"-"+md;return d<t?(+t.slice(0,4)+1)+"-"+md:d}
   function ydBackAll(){var S=setupS,cc=userCountry(),all=[];ydBackGroups(cc).forEach(function(g){all=all.concat(g.xs)});return all.concat(S.backOwn.map(function(o,j){return {k:"own:"+j,n:o.n,ev:rhythmLabel({every:o.m},1),grp:o.grp}}))}
   function ydBack(){var S=setupS,cc=userCountry(),n=Object.keys(S.back).filter(function(k){return S.back[k]}).length;
-    var h='<div class="welcome-card su yd">'+ydTop(4)+'<h1 class="su-title">And the things that come back.</h1><p class="su-sub">A dental check-up, a renewal, toothpaste running low. We\u2019ve filled in typical timings for most homes. Pick any, change any timing later, and Daywell reminds you when each one is due.</p>'+
+    var h='<div class="welcome-card su yd">'+ydTop(6)+'<h1 class="su-title">And the things that come back.</h1><p class="su-sub">A dental check-up, a renewal, toothpaste running low. We\u2019ve filled in typical timings for most homes. Pick any, change any timing later, and Daywell reminds you when each one is due.</p>'+
       '<p class="yd-hint">For homes in '+esc(countryName(cc))+'.</p>';
     ydBackGroups(cc).forEach(function(g){var xs=g.xs.concat(S.backOwn.map(function(o,j){return o.grp===g.id?{k:"own:"+j,n:o.n,ev:rhythmLabel({every:o.m},1)}:null}).filter(Boolean));if(!xs.length&&S.backOpen!==g.id)return;
       h+='<div class="yd-grp"><div class="yd-gl">'+g.n+'</div><p class="yd-hint" style="margin:0 0 8px">'+g.say+'</p><div class="su-chips">'+xs.map(function(x){var on=!!S.back[x.k];return '<button class="su-chip yd-cb'+(on?" on":"")+'" data-setup="ydback1|'+esc(x.k)+'" aria-pressed="'+on+'"><span>'+esc(x.n)+'</span><small>'+esc(x.ev)+'</small></button>'}).join("")+
@@ -7335,7 +7371,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       if(at===null){if(c.own)by.todo.push(c);else call.push(c);return}if(!at.length)by.any.push(c);else at.forEach(function(p){by[p].push(c)})});
     var sec=function(p,name,icon,time){return '<div class="yd-sec"><div class="yd-sh">'+(icon?ydI(icon):"")+'<b>'+name+'</b>'+(time?'<label class="yd-ci">Check in <input type="time" data-ci="'+p+'" value="'+time+'" aria-label="'+name+' check-in time"></label>':'')+'</div>'+
       '<div class="yd-box">'+(by[p].length?by[p].map(function(c){return ydLine(c,p)}).join(""):'<p class="yd-free">Free time.</p>')+'</div></div>'};
-    return '<div class="welcome-card su yd">'+ydTop(5)+'<h1 class="su-title">Here\u2019s your first day</h1><p class="su-sub">A starting point, made from what you picked. Make it feel like your day: tap anything to change it.</p>'+
+    return '<div class="welcome-card su yd">'+ydTop(7)+'<h1 class="su-title">Here\u2019s your first day</h1><p class="su-sub">A starting point, made from what you picked. Make it feel like your day: tap anything to change it.</p>'+
       DAYPARTS.map(function(p){return sec(p[0],p[1],p[2],ci[p[0]])}).join("")+(by.any.length?sec("any","Anytime"):"")+(by.todo.length?sec("todo","To-do today"):"")+
       (function(){var bx=ydBackAll().filter(function(x){return S.back[x.k]});return bx.length?'<div class="yd-call"><b>Comes back</b><span>'+bx.map(function(x){return esc(x.n)}).join(", ")+'</span><small>Daywell reminds you when each one is due. Change any timing later.</small></div>':''})()+
       (call.length?'<div class="yd-call"><b>On call</b><span>'+call.map(function(c){return esc(c.n)}).join(", ")+'</span><small>There when you need them. Never counted toward your day.</small></div>':'')+
@@ -7462,7 +7498,41 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(Date.now()-last>6*3600*1000)lbPush().catch(function(){})}
   document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")lbAuto()});
   /* locked backup (end) */
-  function setupHtml(){var s=setupS.step;try{localStorage.setItem("ritsu_setup_draft",JSON.stringify(setupS))}catch(e){}return s<=3?ydCard(Math.max(1,s)):s===4?ydName():s===5?ydCountry():s===6?ydPick():s===8?ydBack():ydDay()}
+  /* ===== routines in setup (start), user 2026-10-18: after "keep up with", Daywell groups what you picked into a morning
+     and an evening routine, offers a small upgrade and room for your own. Afternoons are left alone. Each routine is one
+     check-in at its part's check-in time (ritsu_checkins), with Yes, Some, Not today. Saved by ydRtMake at the end. ===== */
+  var RT_UP={m:[{t:"Glass of water",G:"c_food",d:"first thing"},{t:"Short walk",G:"c_fitness",not:"walk",d:"ten minutes outside"},{t:"Stretching",G:"c_fitness",not:"stretch",d:"a few minutes"},
+      {lib:"Bowel movement",t:"Bowel movement",d:"a body log, tap when you go"},{t:"Two quiet minutes",G:"c_calm",not:"calm",d:"before the day starts"},{t:"Plan the day in one line",G:"c_calm",d:"what matters today"}],
+    e:[{t:"Flossing",G:"c_hygiene",not:"floss",d:"with brushing"},{t:"Five quiet minutes",G:"c_calm",not:"calm",d:"to slow down"},{t:"Note of the day",G:"c_calm",not:"journal",d:"one line"},
+      {t:"Tidy for five minutes",G:"todo:home",not:"tidy",d:"a quick reset"},{t:"Phone away by bedtime",G:"c_sleepfood",d:"screens off"}]};
+  var RT_SKIP=["meds","fast","water","sleep","weight","mood","period","unwell"];
+  function ydRtS(p){var S=setupS;if(!S.rt)S.rt={};if(!S.rt[p])S.rt[p]={off:{},up:{},own:[]};return S.rt[p]}
+  function ydRtMine(p){var S=setupS;return Object.keys(S.picked).filter(function(k){var c=S.picked[k]&&dayChip(k);if(!c||RT_SKIP.indexOf(k)>=0||(c.own&&!c.x))return false;var at=dayAt(k);return !!at&&(at.indexOf(p)>=0||(p==="m"&&c.own&&!at.length))}).map(dayChip)}
+  function ydRtUps(p){var S=setupS;return RT_UP[p].filter(function(u){return !(u.not&&S.picked[u.not])}).slice(0,4)}
+  function ydRtCount(p){var R=ydRtS(p);return ydRtMine(p).filter(function(c){return !R.off[c.k]}).length+ydRtUps(p).filter(function(u){return R.up[u.t]}).length+R.own.length}
+  function ydRt(p){var S=setupS,R=ydRtS(p);R.no=false;var ci=dayCi(),m=p==="m",mine=ydRtMine(p),ups=ydRtUps(p),n=ydRtCount(p),word=m?"morning":"evening";
+    var row=function(on,act,name,sub){return '<button class="yd-rr'+(on?" on":"")+'" data-setup="'+act+'" aria-pressed="'+on+'"><span class="yd-rk">'+(on?CHECK_SVG:"")+'</span><span><b>'+esc(name)+'</b>'+(sub?'<small>'+esc(sub)+'</small>':'')+'</span></button>'};
+    return '<div class="welcome-card su yd">'+ydTop(m?4:5)+'<h1 class="su-title">Your '+word+' routine</h1>'+
+      '<p class="su-sub">'+(m?'Daywell checks in with you twice a day, morning and evening. Afternoons are left alone, since that\u2019s when most people work.':'The same for the end of the day: one check-in, and your evening stays calm.')+'</p>'+
+      (mine.length?'<div class="yd-grp"><div class="yd-gl">From what you picked</div><div class="yd-box">'+mine.map(function(c){return row(!R.off[c.k],"ydrtoff|"+p+"|"+c.k,c.n,c.d||"yours")}).join("")+'</div></div>':'')+
+      (ups.length?'<div class="yd-grp"><div class="yd-gl">A small upgrade</div><p class="yd-hint" style="margin:0 0 8px">Small things that fit '+(m?'a morning':'an evening')+'. Tap any you like.</p><div class="yd-box">'+ups.map(function(u){return row(!!R.up[u.t],"ydrtup|"+p+"|"+u.t,u.t,u.d)}).join("")+'</div></div>':'')+
+      '<div class="yd-grp"><div class="yd-gl">Anything else?</div>'+(R.own.length?'<div class="yd-box">'+R.own.map(function(o,j){return row(true,"ydrtownrm|"+p+"|"+j,o,"yours, tap to take it out")}).join("")+'</div>':'')+
+        (R.ownOpen?'<div class="sp-inrow"><input id="yd-rtown" class="su-inp" type="text" placeholder="'+(m?'Like make coffee':'Like lay out clothes')+'" autocomplete="off" enterkeyhint="done"><button class="btn primary sm" data-setup="ydrtown|'+p+'">Add</button></div>'
+          :'<div class="su-chips"><button class="su-chip yd-ownc" data-setup="ydrtownopen|'+p+'">+ Add your own</button></div>')+'</div>'+
+      '<div class="yd-rtat"><span><b>Check in at</b><small>One question: did you finish your '+word+' routine?</small></span><input type="time" data-ci="'+p+'" value="'+ci[p]+'" aria-label="'+word+' check-in time"></div>'+
+      '<div class="su-foot"><button class="su-skip" data-setup="ydrtno|'+p+'">Not now</button><button class="btn primary su-next" data-setup="ydnext">'+(n?"Next, "+n+" in it":"Next")+'</button></div></div>'}
+  /* at the end of setup: the routines, from the items just made (ids by chip key) */
+  function ydRtMake(S,ids,ci){var a=[],ix=0,saved=setupS;setupS=S;
+    ["m","e"].forEach(function(p){var R=S.rt&&S.rt[p];if(!R||R.no)return;var steps=[];
+      var put=function(id){if(id&&steps.indexOf(id)<0)steps.push(id)};
+      var mk=function(x){var d=packData(x,500+ix++);if(!d)return;d.parts=[p];if(!d.reminder)d.reminder=ci[p];d.tpl=1;Store.add("items",d);put(d.id)};
+      ydRtMine(p).forEach(function(c){if(!R.off[c.k])(ids[c.k]||[]).forEach(put)});
+      ydRtUps(p).forEach(function(u){if(R.up[u.t])mk(u.lib?{lib:u.lib}:{t:u.t,G:u.G})});
+      R.own.forEach(function(o){var g=tyGroup(o,false);mk({t:cap1(o),G:g&&g.cat?g.cat:"c_calm"})});
+      if(steps.length)a.push({id:"rt"+Date.now().toString(36)+p,name:p==="e"?"Evening routine":"Morning routine",kind:p,time:ci[p],steps:steps})});
+    setupS=saved;if(a.length)rtSave(a)}
+  /* ===== routines in setup (end) ===== */
+  function setupHtml(){var s=setupS.step;try{localStorage.setItem("ritsu_setup_draft",JSON.stringify(setupS))}catch(e){}return s<=3?ydCard(Math.max(1,s)):s===4?ydName():s===5?ydCountry():s===6?ydPick():s===8?ydBack():s===10?ydRt("m"):s===11?ydRt("e"):ydDay()}
   function suItem(x,ix){
     var t=today(),tag=[];
     var it={catId:x.cat,sub:"",title:x.it,akind:"activity",kind:"todo",notes:"",priority:"none",tags:tag,assignees:[],private:false,done:false,dueDate:null,repeatEvery:1,perDay:1,reminder:x.rem||null,duration:null,stance:"routine",markers:[],expect:null,
@@ -7480,18 +7550,19 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     GROUP_CATS.forEach(function(c){if(!S.keepWho||!Store.cache.cats[c[0]])Store.cache.cats[c[0]]=groupCat(c);});
     Store.welcome=false;
     try{localStorage.setItem("ritsu_checkins",JSON.stringify(ci));if(S.pat)localStorage.setItem("ritsu_daypat",S.pat)}catch(e){}
-    var ix=0;plan.forEach(function(p){var c=p.c;
-      if(c.k==="fast"){var fh=Math.max(1,Math.min(120,S.fastH||16));Store.add("items",{catId:Store.cache.cats.c_food?"c_food":"c_sleepfood",sub:"Fasting",title:"Fast",kind:"todo",stance:"fast",repeatEvery:0,priority:"low",
-        protocol:{fast:fh,eat:Math.max(0,24-fh),at:S.fastAt||"20:00"},fasts:[],markers:[],createdAt:new Date().toISOString(),createdDate:today(),order:ix++,owner:state.me||null});
+    var ix=0,rtIds={};plan.forEach(function(p){var c=p.c;
+      if(c.k==="fast"){var fty=S.fastType||(S.fastH>=24?"long":"if"),fh=fty==="long"?24:16;Store.add("items",{catId:Store.cache.cats.c_food?"c_food":"c_sleepfood",sub:"Fasting",title:"Fast",kind:"todo",stance:"fast",repeatEvery:0,priority:"low",
+        protocol:Object.assign({type:fty,fast:fh,eat:Math.max(0,24-fh)},fty==="if"?{at:S.fastAt||"20:00"}:{}),fasts:[],markers:[],createdAt:new Date().toISOString(),createdDate:today(),order:ix++,owner:state.me||null});
         try{localStorage.setItem("ritsu_logfast","1")}catch(e){}return}
       if(c.own&&!c.x){var td=packTodo({title:c.n,date:today(),time:null},ix++),gq=tyGroup(c.n,false);if(gq&&gq.card==="todo")td.list=gq.list;Store.add("items",td);return}
-      (c.xs||[c.x]).forEach(function(x){if(x.cb){cbCreate(x.cb,"unsure",ix++);return}var d=packData(x,ix++);if(!d)return;
+      (c.xs||[c.x]).forEach(function(x){if(x.cb){cbCreate(x.cb,"unsure",ix++);return}var d=packData(x,ix++);if(!d)return;d._k=c.k;
         if(p.at&&p.at.length){var tm=p.at.map(function(q){return ci[q]}).sort();d.parts=p.at.slice();
           if(!x.rem){d.reminder=tm[0];if(tm.length>1&&d.kind==="todo"){d.times=tm;d.perDay=tm.length;}}}
         var n=+p.often;if(n>1&&n<7)d.perWeek=n;else delete d.perWeek;
         if(d.stance==="routine"&&d.kind==="todo"&&d.repeatEvery>0)d.normal={min:d.perDay,max:d.perDay,maxGapDays:d.repeatEvery,maxPerWeek:null};
-        d.tpl=1;Store.add("items",d);});
+        var dk=d._k;delete d._k;d.tpl=1;Store.add("items",d);if(d.id)(rtIds[dk]=rtIds[dk]||[]).push(d.id);});
     });
+    ydRtMake(S,rtIds,ci);
     /* the things that come back you picked */
     BX.forEach(function(x){var p=x.k.split(":");
       if(p[0]==="cb"){var d=cbDef(p[1]);if(d&&!cbFind(p[1])){var d2=Object.assign({},d,{name:x.n});if(x.every)d2.every=x.every;if(x.md)d2.md=x.md;
@@ -7532,13 +7603,20 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       if(a==="start"){setupStart();render();window.scrollTo(0,0);return true;}
       if(!setupS)return true;
       var S=setupS,go=function(n){S.step=n;S.open="";render();window.scrollTo(0,0)};
-      if(a==="ydnext"){ydKeep();go(S.step===6?8:S.step+1);return true;}
+      if(a==="ydnext"){ydKeep();go({6:10,10:11,11:8}[S.step]||S.step+1);return true;}
+      if(a==="ydrtoff"){var R1=ydRtS(v[1]);R1.off[v[2]]=!R1.off[v[2]];render();return true;}
+      if(a==="ydrtup"){var R2=ydRtS(v[1]);R2.up[v[2]]=!R2.up[v[2]];render();return true;}
+      if(a==="ydrtownopen"){ydRtS(v[1]).ownOpen=true;render();setTimeout(function(){var o6=$("#yd-rtown");if(o6)o6.focus()},40);return true;}
+      if(a==="ydrtown"){var R3=ydRtS(v[1]),t6=(($("#yd-rtown")||{}).value||"").trim();if(t6)R3.own.push(cap1(t6));R3.ownOpen=false;render();return true;}
+      if(a==="ydrtownrm"){ydRtS(v[1]).own.splice(+v[2],1);render();return true;}
+      if(a==="ydrtno"){ydRtS(v[1]).no=true;S.step=v[1]==="m"?11:8;S.open="";render();window.scrollTo(0,0);if(v[1]==="m")ydRtS("m").no=true;return true;}
       if(a==="ydskipname"){S.name="";go(5);return true;}
       if(a==="ydgo"){go(+v[1]);return true;}
       if(a==="ydcc"){try{localStorage.setItem("ritsu_country",v[1])}catch(x){}S.back={};render();return true;}
-      if(a==="ydback"){ydKeep();if(S.step<=1||(S.keepWho&&S.step<=6)){setupS=null;try{localStorage.removeItem("ritsu_setup_draft")}catch(x){}render();}else go(S.step===8?6:S.step-1);return true;}
+      if(a==="ydback"){ydKeep();if(S.step<=1||(S.keepWho&&S.step<=6)){setupS=null;try{localStorage.removeItem("ritsu_setup_draft")}catch(x){}render();}else go({8:11,11:10,10:6}[S.step]||S.step-1);return true;}
       if(a==="ydpat"){if(S.pat!==v[1]){S.pat=v[1];S.at={};S.ci=null;}render();setTimeout(function(){if(setupS===S&&S.step===3)go(4)},280);return true;}
       if(a==="ydchip"){S.picked[v[1]]=!S.picked[v[1]];render();return true;}
+      if(a==="ydfty"){S.fastType=v[1];render();return true;}
       if(a==="ydfh"){S.fastH=+v[1];S.fastOwn=false;render();return true;}
       if(a==="ydfown"){S.fastOwn=true;render();setTimeout(function(){var o=$("#yd-fown");if(o)o.focus()},40);return true;}
       if(a==="ydown"){var o=$("#yd-own");ydOwn(o?o.value:"",v[1]);render();return true;}
@@ -7566,7 +7644,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(t.getAttribute&&t.getAttribute("data-ci")&&setupS&&t.value){var c0=dayCi(),cc={m:c0.m,d:c0.d,e:c0.e};cc[t.getAttribute("data-ci")]=t.value;setupS.ci=cc;}
     if(t.id==="cb-when"){var P=parseTyped(t.value,new Date()),r=$("#cb-read");if(r)r.textContent=P.date?"Read as: "+dayShort(P.date)+(P.time?", "+fmtTime(P.time):""):"Friday 10am, tomorrow at 5, 25 sep...";}
   });
-  document.addEventListener("keydown",function(e){var id=e.key==="Enter"&&e.target&&e.target.id,to={"yd-own":"ydown","yd-bown":"ydbackadd","su-name":"ydnext"}[id];if(to){e.preventDefault();var sb=document.querySelector('[data-setup^="'+to+'"]');if(sb)sb.click();}});
+  document.addEventListener("keydown",function(e){var id=e.key==="Enter"&&e.target&&e.target.id,to={"yd-own":"ydown","yd-bown":"ydbackadd","su-name":"ydnext","yd-rtown":"ydrtown"}[id];if(to){e.preventDefault();var sb=document.querySelector('[data-setup^="'+to+'"]');if(sb)sb.click();}});
   document.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target&&e.target.id==="cb-when"){e.preventDefault();var b=document.querySelector("[data-cbsave]");if(b)b.click();}});
   /* typed: "renew passport every 2 years" makes one that comes back */
   var CB_EVERY_RE=/\bevery\s+(\d+|a|one|two|three|four|six|twelve)?\s*(months?|years?)\b/i;
@@ -8088,6 +8166,94 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   return {mount:mount,react:react,sync:sync,temp:temp,cfg:cfg,set:setCfg,apply:apply};
 })();
 
+  /* ===== Routines (start) =====
+     A routine groups things that happen together (a morning, an evening) under ONE time and ONE reminder.
+     Saved in ritsu_routines: [{id,name,kind:"m"|"e",time:"HH:MM",steps:[itemId]}]. The things keep their own pages and history;
+     inside a routine they send no reminder of their own (medicine always keeps its own). The one notification asks
+     "Did you finish?" with Yes, Some, Not today. Nothing is ever called missed. */
+  var RT_PACKS={
+    m:[{k:"easy",n:"Easy morning",at:"07:30",s:[["Glass of water","c_food"],["Brushing teeth","c_hygiene"],["Skincare","c_hygiene"],["Two quiet minutes","c_calm"],["Plan the day in one line","c_calm"]]},
+       {k:"active",n:"Active morning",at:"07:00",s:[["Glass of water","c_food"],["Stretch","c_fitness"],["Brushing teeth","c_hygiene"],["Read ten pages","c_reading"]]}],
+    e:[{k:"easy",n:"Easy evening",at:"21:30",s:[["Brushing teeth","c_hygiene"],["Skincare","c_hygiene"],["Five quiet minutes","c_calm"],["Note of the day","c_calm"]]},
+       {k:"full",n:"Full evening",at:"21:00",s:[["Stretch","c_fitness"],["Brushing teeth","c_hygiene"],["Skincare","c_hygiene"],["Read ten pages","c_reading"],["Bedtime check","c_sleepfood"]]}]};
+  function rtList(){try{var a=JSON.parse(localStorage.getItem("ritsu_routines")||"[]");return Array.isArray(a)?a:[]}catch(e){return []}}
+  function rtSave(a){try{localStorage.setItem("ritsu_routines",JSON.stringify(a))}catch(e){}remSync()}
+  function rtGet(id){return rtList().filter(function(r){return r.id===id})[0]||null}
+  function rtItems(r){return (r.steps||[]).map(function(id){return Store.get("items",id)}).filter(function(i){return i&&!i.archived})}
+  /* item id -> routine id, for every thing that sits inside a routine */
+  function rtMap(){var m={};rtList().forEach(function(r){(r.steps||[]).forEach(function(id){if(!m[id])m[id]=r.id})});return m}
+  function rtNeed(r,i){var pd=perDayOf(i);return (r&&r.kind==="m"&&pd>1)?1:pd}
+  function rtStepDone(r,i){if(i.kind==="todo"&&isRepeat(i))return countOn(i,today())>=rtNeed(r,i);return doneForNow(i)}
+  function rtDone(r){var its=rtItems(r);return {n:its.length,d:its.filter(function(i){return rtStepDone(r,i)}).length}}
+  function rtTick(i,r){if(i.kind==="todo"&&isRepeat(i)){var nd=rtNeed(r,i);if(countOn(i,today())<nd)setDayCount(i,today(),nd);return}if(doneForNow(i))return;if(i.kind==="todo")tapTodo(i)}
+  function rtTickAll(r){rtItems(r).forEach(function(i){rtTick(Store.get("items",i.id)||i,r)})}
+  function rtDom(i){return areaDomain(i.catId)}
+  function rtWord(r){return r.kind==="e"?"evening":"morning"}
+  function rtStepsLine(r){var its=rtItems(r),b=its.filter(function(i){return rtDom(i)==="body"}).length,m=its.filter(function(i){return rtDom(i)==="mind"}).length;
+    return (b?'<span class="rt-chip b">Body '+b+'</span>':'')+(m?'<span class="rt-chip m">Mind '+m+'</span>':'')}
+  function rtCard(r){var x=rtDone(r),its=rtItems(r),all=x.n>0&&x.d>=x.n;
+    return '<div class="rt-c"><div class="rt-h"><div><b>'+esc(r.name)+'</b><small>'+x.n+' steps \u00b7 '+esc(fmtTime(r.time))+(x.d?' \u00b7 '+x.d+' done':'')+'</small></div>'+
+      '<button class="rt-go'+(all?" off":"")+'" data-rtopen="'+r.id+'">'+(all?"Done":"Start")+'</button></div>'+
+      '<div class="rt-bar">'+its.map(function(i){return '<i class="'+(rtStepDone(r,i)?"on":"")+'"></i>'}).join("")+'</div><div class="rt-chips">'+rtStepsLine(r)+'</div></div>'}
+  function rtHome(){
+    if(state.view!=="home")return "";var L=rtList(),off="";try{off=localStorage.getItem("ritsu_rt_off")||""}catch(e){}
+    if(!L.length){if(off==="1")return "";
+      return '<div class="rt-c"><b>Make it one routine</b><p class="rt-p">Brushing, skincare, a quiet minute: keep them together and get one reminder, not five.</p><div class="rt-btns"><button class="btn primary sm" data-rtpick="m">Morning routine</button><button class="btn ghost sm" data-rtpick="e">Evening routine</button><button class="btn ghost sm" data-rtno="1">Not for me</button></div></div>'}
+    var has=function(k){return L.some(function(r){return r.kind===k})};
+    L=L.slice().sort(function(a,b){return minsOf(a.time)-minsOf(b.time)});
+    return '<div class="lg-h"><b>Your routines</b></div>'+L.map(rtCard).join("")+
+      ((has("m")&&has("e"))?"":'<button class="rt-add" data-rtpick="'+(has("m")?"e":"m")+'">+ Add '+(has("m")?"an evening":"a morning")+' routine</button>')}
+  function rtSheet(id){var r=rtGet(id);if(!r){closeModal();return}
+    var its=rtItems(r),x=rtDone(r);
+    openModal('<div class="qcl"><div class="qcl-h"><h3>'+esc(r.name)+'</h3><button class="qcl-x" data-qclclose aria-label="Close">&times;</button></div>'+
+      '<p class="qcl-sub">'+x.d+' of '+x.n+' done today</p>'+
+      its.map(function(i){var on=rtStepDone(r,i),dm=rtDom(i);return '<button class="rt-row'+(on?" on":"")+'" data-rtstep="'+i.id+'" data-rtid="'+r.id+'"><span class="rt-tk">'+(on?CHECK_SVG:"")+'</span><span><b>'+esc(i.title)+'</b><small>'+(dm==="mind"?"Mind":"Body")+(i.sub?' \u00b7 '+esc(i.sub):"")+'</small></span></button>'}).join("")+
+      '<button class="qcl-new" data-rtall="'+r.id+'"><span><b>Did the whole routine</b></span></button>'+
+      '<label class="rt-at"><span>Reminder at</span><input type="time" id="rtTime" data-rttime="'+r.id+'" value="'+esc(r.time)+'"></label>'+
+      '<button class="qfe-k" data-rtremove="'+r.id+'">Remove this routine<small style="display:block;font-weight:400;margin-top:4px;opacity:.7">The things stay. They just remind you on their own again.</small></button></div>');
+    $("#modal").classList.add("qcl-modal")}
+  function rtPickSheet(kind){
+    var P=RT_PACKS[kind],ex=Store.all("items").filter(function(i){return !i.archived&&!isTracker(i)&&i.kind!=="med"&&!isFast(i)&&i.kind==="todo"&&isRepeat(i)});
+    openModal('<div class="qcl"><div class="qcl-h"><h3>Start with a '+rtWord({kind:kind})+' routine</h3><button class="qcl-x" data-qclclose aria-label="Close">&times;</button></div><p class="qcl-sub">Pick one. You can change every step later.</p>'+
+      P.map(function(p){return '<button class="rt-pack" data-rtuse="'+kind+':'+p.k+'"><b>'+esc(p.n)+'</b><small>'+esc(fmtTime(p.at))+'</small><span>'+p.s.map(function(t){return esc(t[0])}).join(" \u00b7 ")+'</span></button>'}).join("")+
+      (ex.length?'<button class="rt-pack" data-rtownopen="'+kind+'"><b>Build my own</b><small>From things you already have</small></button>':"")+'</div>');
+    $("#modal").classList.add("qcl-modal")}
+  function rtOwnSheet(kind){
+    var ex=Store.all("items").filter(function(i){return !i.archived&&!isTracker(i)&&i.kind==="todo"&&isRepeat(i)&&!isFast(i)}),m=rtMap();
+    openModal('<div class="qcl"><div class="qcl-h"><h3>Build my '+rtWord({kind:kind})+' routine</h3><button class="qcl-x" data-qclclose aria-label="Close">&times;</button></div><p class="qcl-sub">Tick what belongs in it.</p>'+
+      ex.map(function(i){return '<label class="rt-row"><input type="checkbox" data-rtown="'+i.id+'"'+(m[i.id]?" disabled":"")+'><span><b>'+esc(i.title)+'</b><small>'+(rtDom(i)==="mind"?"Mind":"Body")+(m[i.id]?" \u00b7 already in a routine":"")+'</small></span></label>'}).join("")+
+      '<button class="qcl-new" data-rtownsave="'+kind+'"><span><b>Make the routine</b></span></button></div>');
+    $("#modal").classList.add("qcl-modal")}
+  function rtFindItem(t,G){var k=t.toLowerCase(),f=null;Store.all("items").forEach(function(i){if(!f&&!i.archived&&i.kind==="todo"&&isRepeat(i)&&i.title&&i.title.toLowerCase()===k)f=i});return f}
+  function rtMake(kind,pk){var p=RT_PACKS[kind].filter(function(x){return x.k===pk})[0];if(!p)return;
+    var undo=storeSnap(),ids=[],ix=0,m=rtMap();
+    p.s.forEach(function(t){var i=rtFindItem(t[0]);if(!i){var d=packData({t:t[0],G:t[1]},ix++);if(!d)return;d.tpl=1;Store.add("items",d);i=Store.get("items",d.id)}
+      if(i&&i.id&&ids.indexOf(i.id)<0&&(!m[i.id]||perDayOf(i)>1))ids.push(i.id)});
+    var a=rtList().filter(function(r){return r.kind!==kind});a.push({id:"rt"+Date.now().toString(36),name:kind==="e"?"Evening routine":"Morning routine",kind:kind,time:p.at,steps:ids});
+    rtSave(a);closeModal();render();toast(p.n+" is ready. One reminder at "+fmtTime(p.at)+".",undo)}
+  function rtAct(act,id){var r=rtGet(id);if(!r)return;var out=remFromOutside();
+    if(act==="yes"){var undo=storeSnap();rtTickAll(r);toast(r.name+" done. Lovely.",undo);if(out)remAway()}
+    else if(act==="no"){if(out)remAway()}
+    else setTimeout(function(){state._navRoot=true;go("home");rtSheet(id)},450)}
+  document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("[data-rtopen],[data-rtpick],[data-rtno],[data-rtstep],[data-rtall],[data-rtremove],[data-rtuse],[data-rtownopen],[data-rtownsave]");if(!t)return;e.stopPropagation();e.preventDefault();
+    var g=function(k){return t.getAttribute(k)};
+    if(t.hasAttribute("data-rtopen")){rtSheet(g("data-rtopen"));return}
+    if(t.hasAttribute("data-rtpick")){rtPickSheet(g("data-rtpick"));return}
+    if(t.hasAttribute("data-rtno")){try{localStorage.setItem("ritsu_rt_off","1")}catch(x){}render();return}
+    if(t.hasAttribute("data-rtstep")){var i=Store.get("items",g("data-rtstep")),rr=rtGet(g("data-rtid"));if(!i)return;if(rtStepDone(rr,i)){if(i.kind==="todo"&&isRepeat(i))setDayCount(i,today(),rtNeed(rr,i)-1);else tapTodo(i)}else rtTick(i,rr);render();rtSheet(g("data-rtid"));return}
+    if(t.hasAttribute("data-rtall")){var r=rtGet(g("data-rtall"));if(!r)return;var undo=storeSnap();rtTickAll(r);closeModal();render();toast(r.name+" done. Lovely.",undo);return}
+    if(t.hasAttribute("data-rtremove")){var r2=rtGet(g("data-rtremove")),u2=storeSnap();rtSave(rtList().filter(function(q){return q.id!==g("data-rtremove")}));closeModal();render();toast((r2?r2.name:"Routine")+" removed.",u2);return}
+    if(t.hasAttribute("data-rtuse")){var v=g("data-rtuse").split(":");rtMake(v[0],v[1]);return}
+    if(t.hasAttribute("data-rtownopen")){rtOwnSheet(g("data-rtownopen"));return}
+    if(t.hasAttribute("data-rtownsave")){var kind=g("data-rtownsave"),ids=[].map.call(document.querySelectorAll("[data-rtown]:checked"),function(c){return c.getAttribute("data-rtown")});
+      if(!ids.length){toast("Tick at least one thing.");return}
+      var a=rtList().filter(function(q){return q.kind!==kind});a.push({id:"rt"+Date.now().toString(36),name:kind==="e"?"Evening routine":"Morning routine",kind:kind,time:kind==="e"?"21:30":"07:30",steps:ids});
+      rtSave(a);closeModal();render();toast("Routine made. One reminder.",null);return}
+  },true);
+  document.addEventListener("change",function(e){var t=e.target;if(!t||!t.hasAttribute||!t.hasAttribute("data-rttime"))return;var v=t.value;if(!/^\d\d:\d\d$/.test(v))return;
+    rtSave(rtList().map(function(r){if(r.id===t.getAttribute("data-rttime"))r.time=v;return r}));render();toast("Reminder moved to "+fmtTime(v)+".",null)});
+  /* ===== Routines (end) ===== */
+
   /* ===== reminders (start) =====
      Android app only (the web page cannot ring a closed phone). A reminder is an item's own time (reminder, times[] or
      every N hours) on a day the item is planned and not yet done. The next 7 days are handed to Android as local
@@ -8098,9 +8264,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function remOn(){try{return localStorage.getItem("ritsu_remind")!=="0"}catch(e){return true}}   /* on from the start, like most apps; off only if you turned it off */
   function remHash(s){var h=7;for(var k=0;k<s.length;k++)h=(h*31+s.charCodeAt(k))%2147483000;return h+1}
   function remPlan(items,nowMs,days,max){
-    var out=[],t0=today();
+    var out=[],t0=today(),RM=(typeof rtMap==="function")?rtMap():{};
     items.forEach(function(i){
       if(i.archived||i.mark==="count"||!(i.reminder||(i.times&&i.times.length)))return;
+      if(RM[i.id]&&!isMedish(i))return;   /* inside a routine: the routine sends one reminder instead */
       for(var d=0;d<days;d++){
         var ds=addDaysStr(t0,d);
         if(!dueOnDate(i,ds,d))continue;
@@ -8115,14 +8282,20 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
         }
       }
     });
+    if(typeof rtList==="function")rtList().forEach(function(r){
+      for(var d=0;d<days;d++){var ds=addDaysStr(t0,d);
+        if(d===0){var x=rtDone(r);if(x.n&&x.d>=x.n)continue}
+        if(isLowDay(ds))continue;
+        var ms=new Date(ds+"T"+r.time+":00").getTime();if(!(ms>nowMs+3000))continue;
+        out.push({id:remHash("rt|"+r.id+"|"+ds),at:ms,title:r.name,body:"Did you finish your "+(r.kind==="e"?"evening":"morning")+" routine?",item:"",rt:r.id,med:false});}});
     out.sort(function(a,b){return a.at-b.at});
     return out.slice(0,max||60);
   }
   var _remT=null,REM_CH="daywell-reminders",REM_MED="daywell-medicine";
   /* like the best reminder apps: Done and a snooze right on the notification, matched to the kind; medicine pops up as a banner.
      Never repeated on its own: a snooze only happens when you ask for one. */
-  var REM_TYPES=[{id:"rem",actions:[{id:"done",title:"Done"},{id:"later",title:"In an hour"}]},{id:"rem-med",actions:[{id:"done",title:"Taken"},{id:"later",title:"In 15 min"}]}];
-  function remShape(n){return {id:n.id,title:n.title,body:n.body,channelId:n.med?REM_MED:REM_CH,actionTypeId:n.med?"rem-med":"rem",extra:{item:n.item,med:n.med},smallIcon:"ic_stat_daywell",iconColor:"#34D399",schedule:{at:new Date(n.at),allowWhileIdle:true}}}
+  var REM_TYPES=[{id:"rem-rt",actions:[{id:"yes",title:"Yes"},{id:"some",title:"Some"},{id:"no",title:"Not today"}]},{id:"rem",actions:[{id:"done",title:"Done"},{id:"later",title:"In an hour"}]},{id:"rem-med",actions:[{id:"done",title:"Taken"},{id:"later",title:"In 15 min"}]}];
+  function remShape(n){return {id:n.id,title:n.title,body:n.body,channelId:n.med?REM_MED:REM_CH,actionTypeId:n.rt?"rem-rt":(n.med?"rem-med":"rem"),extra:{item:n.item||"",med:n.med,rt:n.rt||""},smallIcon:"ic_stat_daywell",iconColor:"#34D399",schedule:{at:new Date(n.at),allowWhileIdle:true}}}
   /* snoozes live outside the 30-day plan, so a re-plan never cancels them */
   function remSnz(){try{var a=JSON.parse(localStorage.getItem("ritsu_snz")||"[]");return a.filter(function(x){return x.at>Date.now()})}catch(e){return []}}
   /* "In an hour" never lands in the night: between 10pm and 7am it waits for 8am */
@@ -8139,7 +8312,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function remFromOutside(){return (typeof document!=="undefined"&&document.hidden)||Date.now()-_remWake<3000||(window.performance&&performance.now()<10000)}
   function remAway(){setTimeout(function(){try{var A=window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.App;if(A&&A.minimizeApp)A.minimizeApp()}catch(e){}},900)}
   function remAct(a){if(!Store.ready){setTimeout(function(){remAct(a)},300);return}
-    var x=(a&&a.notification&&a.notification.extra)||{},i=x.item&&Store.get("items",x.item);if(!i)return;
+    var x=(a&&a.notification&&a.notification.extra)||{};if(x.rt)return rtAct(a.actionId,x.rt);var i=x.item&&Store.get("items",x.item);if(!i)return;
     var out=remFromOutside();
     if(a.actionId==="done"){if(!doneForNow(i))toggleItem(i.id);else toast("Already done. Lovely.");if(out)remAway()}
     else if(a.actionId==="later"){remSnooze(i,!!x.med);if(out)remAway()}
@@ -8651,7 +8824,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /* Start a fast is off until chosen in Your logs; people who already fasted keep it */
   function fastShown(){var v=null;try{v=localStorage.getItem("ritsu_logfast")}catch(e){}if(v!=null)return v==="1";return logHidden().indexOf("fast")<0&&!!fastItem()}
   /* no logs chosen: the spot shows the next few things today instead */
-  function upNext(){var t=today(),p=[];HM_DOMS.forEach(function(d){hmItems(d[0],t).forEach(function(i){if(!hmDone(i,t)&&p.indexOf(i)<0)p.push(i)})});if(!p.length)return "";
+  function upNext(){var t=today(),p=[];HM_DOMS.forEach(function(d){hmItems(d[0],t).forEach(function(i){if(!hmDone(i,t)&&p.indexOf(i)<0&&!rtMap()[i.id])p.push(i)})});if(!p.length)return "";
     p.sort(function(a,b){var x=a.reminder?minsOf(a.reminder):1e4,y=b.reminder?minsOf(b.reminder):1e4;return x-y||hmPrio(a,b)});
     var cap=window.innerWidth<=820?(nowPick()?1:4):6;
     return '<div class="lg-strip"><div class="lg-h"><b>Up next</b><span>Tap to open.</span></div><div class="lg-box"><div class="lg-row" role="group" aria-label="Up next">'+p.slice(0,cap).map(function(i){return '<button type="button" class="lg-c" data-open="'+i.id+'" aria-label="Open '+esc(i.title)+'">'+qcTIcon(i)+'<span><b>'+esc(i.title)+'</b><small>'+esc(qcAt(i,t)||"any time")+'</small></span></button>'}).join("")+'</div><button class="lg-more" data-logpick aria-label="Choose logs to show here">'+phicon("caretr")+'</button></div></div>'}
@@ -8664,7 +8837,9 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function fpHM(ms){var d=new Date(ms);return p2(d.getHours())+":"+p2(d.getMinutes())}
   function fpDay(ms){var d=new Date(ms),k=dCount(fmt(d));return k===0?"Today":k===-1?"Yesterday":k===1?"Tomorrow":DOW_LONG[d.getDay()]}
   function fpHours(h){return (h%1?String(Math.round(h*100)/100):String(h))+(h===1?" hour":" hours")}
-  function fastPickHtml(h0){var o=[[16,"16:8"],[18,"18:6"],[24,"1 day"],[36,"1.5 days"]],fi=fastItem(),st=Math.floor(Date.now()/60000)*60000,at=fi&&fi.protocol&&fi.protocol.at;
+  function fastKind(fi){var p=fi&&fi.protocol;return p&&p.type?p.type:(p&&p.fast>=24?"long":"if")}
+  var FAST_OPTS={"if":[[14,"14:10"],[16,"16:8"],[18,"18:6"],[20,"20:4"]],long:[[24,"1 day"],[36,"1.5 days"],[48,"2 days"],[72,"3 days"]]};
+  function fastPickHtml(h0){var fi=fastItem(),o=FAST_OPTS[fastKind(fi)],st=Math.floor(Date.now()/60000)*60000,at=fi&&fi.protocol&&fi.protocol.at;
     if(at){var d0=new Date();d0.setHours(+at.split(":")[0],+at.split(":")[1],0,0);if(d0.getTime()<=Date.now()&&Date.now()-d0.getTime()<4*3600000)st=d0.getTime()}
     _fp={h:h0||(fi?targetOf(fi):16),s:st};
     return '<div class="qcl fp"><div class="qcl-h"><h3>Start a fast</h3><button class="qcl-x" data-qclclose aria-label="Close">&times;</button></div><p class="qcl-sub">How long would you like to go?</p>'+
