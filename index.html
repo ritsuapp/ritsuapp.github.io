@@ -3312,6 +3312,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   .gd .gd-typ{font-size:.9375rem;font-weight:600;color:var(--ink);border-bottom:2px solid var(--ink);padding-bottom:3px;display:inline-block}
   .gd .gd-chips{display:flex;gap:6px;flex-wrap:wrap;position:relative}.gd .gd-chips span{font-size:.8125rem;padding:5px 11px;border-radius:999px;border:1.5px solid var(--line);color:var(--muted)}
   .gd .gd-chips span.on{border-color:var(--ink);color:var(--ink)}
+  .gd .gd-mic{display:flex;align-items:center;gap:10px;font-size:.8125rem;color:var(--muted)}.gd .gd-mb{width:34px;height:34px;border-radius:50%;background:var(--btn);color:var(--btn-ink);display:grid;place-items:center;flex:none}.gd .gd-mb svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2}
   .gd .gd-say{font-size:.875rem;color:var(--ink);margin-bottom:6px}.gd .gd-say i{font-style:normal;font-size:.75rem;color:var(--faint);padding:0 3px}
   .gd .gd-tap{display:inline-block;width:22px;height:22px;border-radius:50%;background:color-mix(in srgb,var(--c-body) 35%,transparent);box-shadow:0 0 0 6px color-mix(in srgb,var(--c-body) 15%,transparent);vertical-align:middle;margin-left:8px}
   .gd .gd-u{text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
@@ -6648,8 +6649,12 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   var GUIDE=[
     ["Add steps to a to-do",[
       ["Tap + and type the to-do",'<span class="gd-typ">Pack for the trip</span>'],
-      ["Tap Steps, type one, press Enter for the next",'<div class="gd-chips"><span>Today</span><span>Time</span><span class="on">Steps</span>'+GT+'</div>'+GQ(0,"Passport")+GQ(0,"Charger")+GQ(0,"Tickets")],
-      ["Or tap the mic and say them, with a pause between each",'<div class="gd-say">\u201cPassport\u201d <i>pause</i> \u201cCharger\u201d <i>pause</i> \u201cTickets\u201d</div><div class="gd-chips"><span class="on">Passport</span><span class="on">Charger</span><span class="on">Tickets</span></div>']]],
+      ["Tap Steps",'<div class="gd-chips"><span>Today</span><span>Time</span><span class="on">Steps</span>'+GT+'</div>'],
+      ["Type one, press Enter for the next",GQ(0,"Passport")+GQ(0,"Charger")+'<div class="gd-r gd-s"><i class="gd-q"></i><span class="gd-typ">Tickets</span></div>']]],
+    ["Or just say them",[
+      ["On the Steps screen, tap the mic",'<div class="gd-mic"><span class="gd-mb">{MIC}</span><span>Or talk: say each step, and pause.</span>'+GT+'</div>'],
+      ["Say each step, with a short pause between",'<div class="gd-say">\u201cPassport\u201d <i>pause</i> \u201cCharger\u201d <i>pause</i> \u201cTickets\u201d</div>'],
+      ["Each pause makes a new step",'<div class="gd-chips"><span class="on">Passport</span><span class="on">Charger</span><span class="on">Tickets</span></div><div class="gd-cap" style="margin:8px 0 0">\u201cand\u201d and \u201cthen\u201d work too: \u201cpassport, charger and tickets\u201d</div>']]],
     ["Tick them off",[
       ["On your Day list, tap \u201c0 of 3 steps\u201d",'<div class="gd-r"><i class="gd-c"></i><div>Pack for the trip<small class="gd-u">0 of 3 steps'+GT+'</small></div></div>'],
       ["Tick each box as you go",'<div class="gd-r"><i class="gd-c"></i><div>Pack for the trip<small>1 of 3 steps</small></div></div>'+GQ(1,"Passport")+GQ(0,"Charger")+GQ(0,"Tickets")],
@@ -6660,7 +6665,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       ["Type it and press Enter. Add as many as you like",'<b class="gd-b">Steps</b>'+GQ(0,"List what we spend on")+GQ(0,"Share the sheet")]]]
   ];
   function guideHtml(k){var g=GUIDE[k],n=GUIDE.length,last=k===n-1;
-    var fr=g[1].map(function(f,i){return '<div class="gd-f" style="--i:'+i+'"><span class="gd-n">'+(i+1)+'</span><div class="gd-box"><div class="gd-cap">'+f[0]+'</div>'+f[1]+'</div></div>'}).join("");
+    var fr=g[1].map(function(f,i){return '<div class="gd-f" style="--i:'+i+'"><span class="gd-n">'+(i+1)+'</span><div class="gd-box"><div class="gd-cap">'+f[0]+'</div>'+f[1].replace("{MIC}",MIC_SVG)+'</div></div>'}).join("");
     return '<div class="modal-b gd"><div class="gd-top"><b>New: steps</b><span>'+(k+1)+' of '+n+'</span></div><h3 class="gd-h">'+g[0]+'</h3><div class="gd-fr">'+fr+'</div>'+
       '<div class="gd-foot"><button type="button" class="gd-skip" data-gd="skip"'+(last?' style="visibility:hidden"':'')+'>Skip</button><span class="gd-dots" aria-hidden="true">'+GUIDE.map(function(x,i){return '<i class="'+(i===k?"on":"")+'"></i>'}).join("")+'</span><button type="button" class="gd-go" data-gd="'+(last?"done":"next")+'" data-v="'+(k+1)+'">'+(last?"Got it":"Next")+'</button></div></div>'}
   function openNews(k){openModal(guideHtml(k||0));try{localStorage.setItem("ritsu_seen_ver",APP_VER);localStorage.setItem("ritsu_guide","1")}catch(e){}}
