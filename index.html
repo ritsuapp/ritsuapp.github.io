@@ -3258,6 +3258,16 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   .back{min-height:44px;display:inline-flex;align-items:center}
   .back .chev{font-size:1.7em;line-height:.6;font-weight:300;margin-right:4px;position:relative;top:-.05em}
   .sxt{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;min-height:24px}
+  /* By time (user chose A, 2026-10-19): the time sits quietly on the right, the next one in sage; Earlier today folds; Done last */
+  .rtm{font-size:.9375rem;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:.01em}
+  .rtm i{font-style:normal;font-size:.75rem;margin-left:2px;letter-spacing:.04em}
+  .rtm.soon{color:var(--c-body);font-weight:500}
+  .rtrow .rtb{font-weight:500}
+  .er-f{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;margin:12px 0 6px;padding:0 6px;background:none;border:0;font:inherit;font-size:.9375rem;color:var(--muted);cursor:pointer;text-align:left}
+  .er-f b{font-weight:600;color:var(--ink);font-size:1rem}
+  .er-f i{margin-left:auto;font-style:normal;font-size:1.25rem;color:var(--faint);transition:transform .2s var(--ease-out,ease-out)}
+  .er-f[aria-expanded="true"] i{transform:rotate(90deg)}
+  .er-dh{font-size:.8125rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:16px 8px 8px}
   .sx{display:flex;flex-direction:column;margin:4px 0 0}
   .sx.sxl{border-left:1.5px solid var(--line);padding-left:4px;margin-left:2px}
   .sx .s{display:flex;align-items:center;gap:6px;min-height:44px;font-size:.9375rem;color:var(--ink)}
@@ -5488,10 +5498,30 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var c=Store.get("cats",i.catId);return [(c&&c.order)||0,(c&&c.name)||"Other"];
   }
   /* By time: one list from morning to night (the next time for things done several times a day), untimed ones after, done ones last */
+  /* (user, 2026-10-19) today: what comes next first; open things whose time passed over an hour ago fold into "Earlier today";
+     two or more things of one routine become one row that opens to its things; done ones go last under Done */
+  function tmHtml(t,soon){var f=fmtTime(t),m=f.match(/^(.*?)(am|pm)$/);return '<span class="rtm'+(soon?" soon":"")+'">'+(m?m[1]+'<i>'+m[2].toUpperCase()+'</i>':f)+'</span>'}
+  function rtOnDay(r,i,ds){return ds===today()?rtStepDone(r,i):hmDone(i,ds)}
+  function qcEntries(its,ds){
+    var rm=rtMap(),rg={},out=[];its.forEach(function(i){var r=rm[i.id];if(r)(rg[r]=rg[r]||[]).push(i)});
+    Object.keys(rg).forEach(function(k){var r=rtGet(k);if(r&&rg[k].length>1)out.push({r:r,its:rg[k],t:r.time||null,done:rg[k].every(function(i){return rtOnDay(r,i,ds)})});else delete rg[k]});
+    its.forEach(function(i){if(!rg[rm[i.id]])out.push({i:i,t:itemTime(i,ds),done:hmDone(i,ds)&&i.id!==_justDone})});
+    return out.sort(function(a,b){return bodyLast(a.i,b.i)||(a.t?minsOf(a.t):1500)-(b.t?minsOf(b.t):1500)||(a.r?-1:b.r?1:hmPrio(a.i,b.i))})}
   function qcByTime(its,ds){
-    var key=function(i){var t=itemTime(i,ds);return (hmDone(i,ds)&&i.id!==_justDone?3000:0)+(t?minsOf(t):1500)};
-    return '<div class="card">'+its.slice().sort(function(a,b){return bodyLast(a,b)||key(a)-key(b)||hmPrio(a,b)}).map(function(i){return itemRow(i,{ds:ds,topic:1})}).join("")+'</div>';
+    var es=qcEntries(its,ds),d=new Date(),nm=d.getHours()*60+d.getMinutes(),isT=ds===today(),soon=false;
+    var one=function(e){var sn=false;if(isT&&!soon&&!e.done&&e.t){soon=sn=true}return e.r?rtDayRow(e.r,e.its,ds,sn):itemRow(e.i,{ds:ds,topic:1,soon:sn})};
+    if(!isT)return '<div class="card">'+es.filter(function(e){return !e.done}).concat(es.filter(function(e){return e.done})).map(one).join("")+'</div>';
+    var early=es.filter(function(e){return !e.done&&e.t&&minsOf(e.t)<nm-60}),dn=es.filter(function(e){return e.done}),nx=es.filter(function(e){return early.indexOf(e)<0&&dn.indexOf(e)<0});
+    var h=nx.length?'<div class="card">'+nx.map(one).join("")+'</div>':'';soon=true;
+    if(early.length)h+='<button class="er-f" data-erl aria-expanded="'+!!state.erOpen+'"><b>Earlier today</b><span>'+early.length+' still open</span><i aria-hidden="true">\u203a</i></button>'+(state.erOpen?'<div class="card">'+early.map(one).join("")+'</div>':'');
+    if(dn.length)h+='<div class="er-dh">Done</div><div class="card">'+dn.map(one).join("")+'</div>';
+    return h;
   }
+  /* a routine as one row: the round tick does all of it (Undo), the name opens its things */
+  function rtDayRow(r,list,ds,soon){var isT=ds===today(),d=list.filter(function(i){return rtOnDay(r,i,ds)}).length,n=list.length,all=d>=n,open=state.rtOpen&&state.rtOpen[r.id];
+    var tk=isT?'<button class="tick round '+(all?"on":d?"part":"")+'" data-rtrow="'+r.id+'" aria-label="'+esc((all?"Open ":"Mark all done: ")+r.name)+'">'+(all?CHECK_SVG:d?d:"")+'</button>':'<span class="tick round '+(all?"on":"")+'">'+(all?CHECK_SVG:"")+'</span>';
+    var st='<div class="sx sxl">'+list.map(function(i){var on=rtOnDay(r,i,ds);return '<div class="s'+(on?" on":"")+'">'+(isT?'<button class="sqb" data-rtsx="'+r.id+'|'+i.id+'" aria-pressed="'+on+'" aria-label="'+esc((on?"Not done: ":"Done: ")+i.title)+'"><i class="sq"></i></button>':'<span class="sqb"><i class="sq"></i></span>')+'<span>'+esc(i.title)+'</span></div>'}).join("")+'</div>';
+    return '<div class="row rtrow'+(all?" done":"")+'">'+tk+'<div class="rb"><div class="rt"><button class="rtb" data-rtexp="'+r.id+'" aria-expanded="'+!!open+'">'+esc(r.name)+'</button></div><div class="rmeta rline"><span class="rln">'+d+' of '+n+'</span></div>'+(open?st:'')+'</div><div class="rright">'+(r.time?tmHtml(r.time,soon):'')+'</div></div>'}
   function qcGrouped(its,ds){
     var h="";
     HM_DOMS.forEach(function(d){
@@ -5870,10 +5900,11 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     h+='<div class="rb"><div class="rt"><button class="rtb" data-open="'+i.id+'">'+esc(cbTitle(i))+'</button>'+(i.private?LOCK:"")+'</div><div class="rmeta rline">';
     /* calm rows (2026-10-13): one plain line with only what helps right now; totals, Daily, usual and stock live on the thing's page */
     var sN=isRepeat(i)?0:subsOf(i).length,sOpen=sN&&state.subOpen&&state.subOpen[i.id];
-    var rlT=rowLine(i,dsR,isT,complete,cc,pd)+(opts.area&&Store.get("cats",i.catId)?' \u00b7 '+esc(Store.get("cats",i.catId).name):'');if(sN)h+='<button class="sxt" data-subopen="'+i.id+'" aria-expanded="'+!!sOpen+'">'+subsDone(i,complete)+' of '+sN+(sN===1?' step':' steps')+(rlT?' \u00b7 ':'')+'</button>';if(rlT)h+=(opts.topic?'<i class="rdot" style="--c:var(--c-'+(areaDomain(i.catId)||"todo")+')" title="'+esc(qcGroupOf(i)[1])+'"></i>':'')+'<span class="rln">'+rlT+'</span>';
+    var nt=!!opts.topic,rlT=rowLine(i,dsR,isT,complete,cc,pd,nt)+(opts.area&&Store.get("cats",i.catId)?' \u00b7 '+esc(Store.get("cats",i.catId).name):'');if(sN)h+='<button class="sxt" data-subopen="'+i.id+'" aria-expanded="'+!!sOpen+'">'+subsDone(i,complete)+' of '+sN+(sN===1?' step':' steps')+(rlT?' \u00b7 ':'')+'</button>';if(rlT)h+='<span class="rln">'+rlT+'</span>';
     if(i.kind==="todo"&&isRepeat(i)&&stepsOf(i))h+=stepsHtml(i,cc);
     h+=flagPills(i,today());
     h+='</div>'+(sOpen?subsHtml(i,complete,false):'')+'</div><div class="rright">';
+    if(nt){var tR=complete?(isRoutine(i)?completionTime(i,dsR):null):itemTime(i,dsR);h+=tR?tmHtml(tR,opts.soon):(!complete&&isRoutine(i)&&/^(todo|measure|med)$/.test(i.kind)?'<span class="rtm">Anytime</span>':'')}
     if(isEpisode(i)){h+='<button class="mini-btn" data-ep="'+i.id+'">'+(activeEp(i)?"It\'s over":"Start")+'</button>';}
     else if(i.kind==="upkeep"&&isRoutine(i)){var d4=dCount(nextDue(i));h+='<button class="mini-btn" data-reset="'+i.id+'">'+(i.mode==="rebuy"?"Bought":"Mark done")+'</button>';}
     else if(i.kind==="med"&&isRoutine(i))h+='<button class="mini-btn" data-restock="'+i.id+'">Restock</button>';
@@ -5888,32 +5919,32 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /* ===== Row line (start): the one line under a thing on any list ===== */
   function tShort(t){return fmtTime(t).replace(":00","")}
   /** several a day: "4 today · first at 8am", "3 more · next at 12pm", "Last one at 8pm" */
-  function multiLine(i,N,cc,ds){var nx=nextSlot(i,ds),at=nx&&nx.at?tShort(nx.at):"",left=N-cc;
+  function multiLine(i,N,cc,ds,nt){var nx=nextSlot(i,ds),at=!nt&&nx&&nx.at?tShort(nx.at):"",left=N-cc;
     if(cc<=0)return N+" today"+(at?" \u00b7 first at "+at:"");
     if(left<=1)return "Last one"+(at?" at "+at:"");
     return left+" more"+(at?" \u00b7 next at "+at:"")}
-  function rowLine(i,ds,isT,complete,cc,pd){var G=function(x){return '<span class="g">'+x+'</span>'},out=[],cap=function(x){return x?x.charAt(0).toUpperCase()+x.slice(1):x};
-    var ct=(complete&&isRoutine(i))?completionTime(i,ds):null,when=i.reminder?tShort(i.reminder):"";
+  function rowLine(i,ds,isT,complete,cc,pd,nt){var G=function(x){return '<span class="g">'+x+'</span>'},out=[],cap=function(x){return x?x.charAt(0).toUpperCase()+x.slice(1):x};
+    var ct=(!nt&&complete&&isRoutine(i))?completionTime(i,ds):null,when=!nt&&i.reminder?tShort(i.reminder):"";
     if(isEpisode(i)){var ea=activeEp(i);if(ea)return G("Day "+epDays(ea));var el=epsOf(i)[0];return el?"Last one lasted "+epDays(el)+" days":"Tap Start when it begins"}
     if(isLimit(i)){if(cc>0)return G(cc+" today");var cs=cleanStreak(i);return cs+" day"+(cs===1?"":"s")+" without"}
     if(isBody(i)){anomaliesOn(i,today()).forEach(function(x){if(x.type==="gap")out.push(G("None for "+x.n+" days"));else if(x.type==="high")out.push(G("Over usual"))});out.unshift(cc+" today");return out.join(" \u00b7 ")}
     if(i.kind==="med"){var mN=timesN(i);
-      if(complete)out.push("Taken"+(ct?" "+tShort(ct):""));else if(isT&&mN>1)out.push(multiLine(i,mN,countOn(i,today()),ds));else if(when)out.push(when);
+      if(complete){if(!nt)out.push("Taken"+(ct?" "+tShort(ct):""))}else if(isT&&mN>1)out.push(multiLine(i,mN,countOn(i,today()),ds,nt));else if(when)out.push(when);
       var dl=medDaysLeft(i);if(dl<=0)out.push(G("Out of pills"));else if(medLow(i))out.push(G((i.stock||0)+" pills left"));
-      if(!out.length)out.push("Anytime");return out.join(" \u00b7 ")}
+      if(!out.length&&!nt)out.push("Anytime");return out.join(" \u00b7 ")}
     if(i.kind==="todo"){
-      if(complete){out.push("Done"+(ct?" "+tShort(ct):""))}
+      if(complete){if(!nt)out.push("Done"+(ct?" "+tShort(ct):""))}
       else if(isRepeat(i)){
         if((i.smallDays||{})[ds])out.push("Done small");
         else if(i.mark==="count")out.push(cc+" today");
-        else if(pd>1&&isT)out.push(multiLine(i,pd,cc,ds));
-        else out.push(when||"Anytime");
+        else if(pd>1&&isT)out.push(multiLine(i,pd,cc,ds,nt));
+        else if(!nt)out.push(when||"Anytime");
         if(i.mark!=="count"&&countOn(i,today())>pd)out.push(G("Over usual"))}
       else if(i.addMed)out.push("Tap to add details");
       else{if(i.dueDate&&i.dueDate!==ds)out.push(cap(dueLabel(i.dueDate)));if(when)out.push(when)}
       if(i.priority==="high"&&!complete)out.push(G("High"));
       return out.join(" \u00b7 ")}
-    if(i.kind==="measure"){if(complete)return "Done"+(ct?" "+tShort(ct):"");
+    if(i.kind==="measure"){if(complete)return nt?"":"Done"+(ct?" "+tShort(ct):"");
       if(isT&&tapCount(i))out.push("Tap adds "+tapAmount(i)+(i.unit?" "+esc(i.unit):""));
       else if(i.mark==="number")out.push("Tap to type it");
       else out.push("Goal "+esc((i.target||0)+(i.unit?" "+i.unit:"")));
@@ -10198,6 +10229,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if((el=e.target.closest("[data-dwhen]"))){e.stopPropagation();var dw=el.getAttribute("data-dwhen").split("|");doneWhen(dw[0],dw[1]);return;}
     if((el=e.target.closest("[data-dtab]"))){var dsw=$("#sw");if(dsw)dsw.scrollTo({left:(+el.getAttribute("data-dtab"))*dsw.clientWidth,behavior:"smooth"});return;}
     if((el=e.target.closest("[data-pbtaken]"))){e.stopPropagation();pbTakenSay(el.getAttribute("data-pbtaken"));return;}
+    if(e.target.closest("[data-erl]")){state.erOpen=!state.erOpen;render();return;}
+    if((el=e.target.closest("[data-rtexp]"))){e.stopPropagation();var rx=el.getAttribute("data-rtexp");state.rtOpen=state.rtOpen||{};state.rtOpen[rx]=!state.rtOpen[rx];render();return;}
+    if((el=e.target.closest("[data-rtrow]"))){e.stopPropagation();var rq=rtGet(el.getAttribute("data-rtrow"));if(!rq)return;var rqx=rtDone(rq);if(rqx.n&&rqx.d>=rqx.n){rtSheet(rq.id);return}var rqu=storeSnap();rtTickAll(rq);render();toast(rq.name+" done. Lovely.",rqu);return;}
+    if((el=e.target.closest("[data-rtsx]"))){e.stopPropagation();var rp=el.getAttribute("data-rtsx").split("|"),ri=Store.get("items",rp[1]),rr=rtGet(rp[0]);if(!ri||!rr)return;if(rtStepDone(rr,ri)){if(ri.kind==="todo"&&isRepeat(ri))setDayCount(ri,today(),rtNeed(rr,ri)-1);else tapTodo(ri)}else rtTick(ri,rr);render();return;}
     if((el=e.target.closest("[data-subopen]"))){e.stopPropagation();var so=el.getAttribute("data-subopen");state.subOpen=state.subOpen||{};state.subOpen[so]=!state.subOpen[so];render();return;}
     if((el=e.target.closest("[data-sub]"))){e.stopPropagation();var sb=el.getAttribute("data-sub").split("|");subToggle(sb[0],sb[1]);return;}
     if((el=e.target.closest("[data-subdel]"))){e.stopPropagation();var sd2=el.getAttribute("data-subdel").split("|");subDel(sd2[0],sd2[1]);return;}
