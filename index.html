@@ -3342,6 +3342,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   .gd .gd-dots{display:flex;gap:6px}.gd .gd-dots i{width:7px;height:7px;border-radius:9px;background:var(--line)}.gd .gd-dots i.on{width:20px;background:var(--ink)}
   .gd .gd-go{font:inherit;font-size:.9375rem;font-weight:700;min-height:44px;padding:0 26px;border-radius:999px;border:0;background:var(--btn);color:var(--btn-ink);cursor:pointer}
   .gd .gd-skip{font:inherit;font-size:.9375rem;font-weight:600;color:var(--muted);min-height:44px;padding:0 6px;border:0;background:none;cursor:pointer}
+  .gd .gd-tm{margin-left:auto;font-size:.8125rem;color:var(--faint);white-space:nowrap}
   .gd .gd-r{display:flex;align-items:center;gap:10px;font-size:.9375rem;color:var(--ink);min-height:38px}.gd .gd-r small{display:block;font-size:.8125rem;color:var(--muted)}
   .gd .gd-c{width:24px;height:24px;border-radius:50%;border:1.6px solid var(--faint);flex:none}
   .gd .gd-s{padding-left:34px}.gd .gd-q{width:18px;height:18px;border-radius:5px;border:1.6px solid var(--faint);flex:none;position:relative}
@@ -6700,11 +6701,15 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     ["Add steps to one you already have",[
       ["Tap the to-do\u2019s name",'<div class="gd-r"><i class="gd-c"></i><span class="gd-u">Draft the trip budget'+GT+'</span></div>'],
       ["In Steps, tap Add a step",'<b class="gd-b">Steps</b><div class="gd-r gd-s"><i class="gd-q gd-dash"></i><span class="gd-fa">Add a step</span>'+GT+'</div>'],
-      ["Type it and press Enter. Add as many as you like",'<b class="gd-b">Steps</b>'+GQ(0,"List what we spend on")+GQ(0,"Share the sheet")]]]
+      ["Type it and press Enter. Add as many as you like",'<b class="gd-b">Steps</b>'+GQ(0,"List what we spend on")+GQ(0,"Share the sheet")]]],
+    ["A routine is one row",[
+      ["Your morning things sit together in one row",'<div class="gd-r"><i class="gd-c"></i><div>Morning routine<small>0 of 3</small></div><span class="gd-tm">8:00 AM</span></div>'],
+      ["Tap its name to see what is in it",'<div class="gd-r"><i class="gd-c"></i><div><span class="gd-u">Morning routine'+GT+'</span><small>1 of 3</small></div><span class="gd-tm">8:00 AM</span></div>'+GQ(1,"Brushing")+GQ(0,"Stretching")+GQ(0,"Glass of water")],
+      ["Tick the circle to do them all at once",'<div class="gd-r"><i class="gd-c on"></i><span class="gd-x">Morning routine</span><span class="gd-tm">8:00 AM</span></div><div class="gd-cap" style="margin:8px 0 0">You get one reminder for the whole routine, not one for each thing.</div>']]]
   ];
   function guideHtml(k){var g=GUIDE[k],n=GUIDE.length,last=k===n-1;
     var fr=g[1].map(function(f,i){return '<div class="gd-f" style="--i:'+i+'"><span class="gd-n">'+(i+1)+'</span><div class="gd-box"><div class="gd-cap">'+f[0]+'</div>'+f[1].replace("{MIC}",MIC_SVG)+'</div></div>'}).join("");
-    return '<div class="modal-b gd"><div class="gd-top"><b>New: steps</b><span>'+(k+1)+' of '+n+'</span></div><h3 class="gd-h">'+g[0]+'</h3><div class="gd-fr">'+fr+'</div>'+
+    return '<div class="modal-b gd"><div class="gd-top"><b>New in Daywell</b><span>'+(k+1)+' of '+n+'</span></div><h3 class="gd-h">'+g[0]+'</h3><div class="gd-fr">'+fr+'</div>'+
       '<div class="gd-foot"><button type="button" class="gd-skip" data-gd="skip"'+(last?' style="visibility:hidden"':'')+'>Skip</button><span class="gd-dots" aria-hidden="true">'+GUIDE.map(function(x,i){return '<i class="'+(i===k?"on":"")+'"></i>'}).join("")+'</span><button type="button" class="gd-go" data-gd="'+(last?"done":"next")+'" data-v="'+(k+1)+'">'+(last?"Got it":"Next")+'</button></div></div>'}
   function openNews(k){openModal(guideHtml(k||0));try{localStorage.setItem("ritsu_seen_ver",APP_VER);localStorage.setItem("ritsu_guide","1")}catch(e){}}
   document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-gd]");if(!b)return;var a=b.getAttribute("data-gd");
