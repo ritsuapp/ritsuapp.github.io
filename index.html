@@ -3051,6 +3051,13 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   html:root .main:has(.qf-arc){--c-mind:var(--c-todo)}
   html:root .qf-arc .tr,html:root .qf-arc .pr{stroke-width:4px!important}
   html:root .qf-arc .pr{filter:none!important}
+  /* welcome (user chose G, 2026-10-19): the companion floats just above the headline, one short line, the rest arrives a moment later, the button sits closer */
+  html:root .welcome-card .welcome-blob{margin:0 auto -14px;animation:wFloat 3.6s ease-in-out infinite}
+  @keyframes wFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  html:root .welcome-card .w-sub{margin:14px 0 6px;font-size:1.0625rem;line-height:1.45;color:var(--ink)}
+  html:root .welcome-card .w-more{margin:0 0 26px;font-size:.9375rem;line-height:1.45;color:var(--muted);animation:wMore .5s var(--ease-out,ease-out) .5s both}
+  @keyframes wMore{from{opacity:0;transform:translateY(4px)}}
+  @media (prefers-reduced-motion:reduce){html:root .welcome-card .welcome-blob,html:root .welcome-card .w-more{animation:none}}
   html:root .welcome-card .hm-greet{font-size:min(3.25rem,14vw)!important;font-weight:200!important;letter-spacing:-.04em!important;line-height:1.02!important}
   /* text inside drawings stays inside them at any text size */
   html:root .hm-gauge.thin{position:relative;display:flex;flex-direction:column;align-items:center}
@@ -6888,7 +6895,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(!setupS)try{var dr=JSON.parse(localStorage.getItem("ritsu_setup_draft")||"null");if(dr&&dr.step)setupS=dr}catch(e){}
     if(setupS)return setupHtml();
     var prev=false;try{prev=!!localStorage.getItem("ritsu_prev_backup")}catch(e){}
-    return '<div class="welcome-card"><div class="blob-host welcome-blob" id="welcomeBlob"></div><h1 class="hm-greet">A well-kept day.</h1><p class="w-sub">Gentle habits for body and mind, and a tidy list for everything else. Never pushy, never preachy. Miss a day? Perfectly fine. Private by default, shared only when you choose.</p><p class="w-status" id="wStatus" role="status"></p>'+
+    return '<div class="welcome-card"><div class="blob-host welcome-blob" id="welcomeBlob"></div><h1 class="hm-greet">We remember, so you don\u2019t have to.</h1><p class="w-sub">Gentle reminders for body, mind and home. Never pushy, never preachy.</p><p class="w-more">Miss a day? Perfectly fine. Private by default.</p><p class="w-status" id="wStatus" role="status"></p>'+
       (prev?'<button class="w-opt" data-welcome="back"><b>Bring back what was here</b><small>You wiped this phone a moment ago. The copy is still here.</small></button>':'')+'<button class="w-opt pri" data-setup="start"><b>Set me up</b><small>About a minute. Pick what matters, and we lay out your day.</small></button>'+
       '<label class="w-link" for="welcome-file">Already use Daywell? <u>Restore a backup</u></label><input type="file" id="welcome-file" accept=".json,application/json" hidden></div>';
   }
