@@ -3378,6 +3378,40 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   html:root #modal.qa .qa-log{display:none}
   html:root #modal.qk-board .qa-place,html:root #modal.qk-board .qa-pick,html:root #modal.qk-board .qa-acts,html:root #modal.qk-board #qa-panel,html:root #modal.qk-board .qa-more,html:root #modal.qk-board .qa-hint,html:root #modal.qk-board .qa-sg{display:none!important}
   html:root #modal.qk-med .qa-place,html:root #modal.qk-med .qa-pick,html:root #modal.qk-log .qa-place,html:root #modal.qk-log .qa-pick,html:root #modal.qk-log .qa-acts,html:root #modal.qk-log .qa-go,html:root #modal.qk-log .qa-more{display:none!important}
+  /* laptop Home views (2026-10-22): Areas and Week */
+  html:root .hv-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}html:root .hv-top h3{font-size:1.375rem;font-weight:600;letter-spacing:-.02em;margin:0}html:root .hv-top.hv-list{margin:0 0 10px}
+  html:root .hv-seg{display:inline-flex;padding:4px;border-radius:999px;background:color-mix(in srgb,var(--ink) 7%,transparent)}
+  html:root .hv-seg button{border:0;background:none;color:var(--muted);font:inherit;font-size:.875rem;font-weight:500;padding:7px 16px;border-radius:999px;cursor:pointer;min-height:36px}
+  html:root .hv-seg button[aria-pressed="true"]{background:var(--btn);color:var(--btn-ink)}
+  @media(min-width:1400px){
+    .home-grid.solo.hv-areas,.home-grid.solo.hv-week{max-width:1560px;grid-template-columns:minmax(320px,.8fr) minmax(0,2.4fr)!important}
+    .home-grid.hv-areas .home-week,.home-grid.hv-week .home-week{display:none}
+    .home-grid.hv-week .home-side{position:static}
+  }
+  html:root .hv-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+  html:root .hv-card{border-radius:28px;background:color-mix(in srgb,var(--raise) 82%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 55%,transparent),inset 0 0 0 .5px color-mix(in srgb,var(--ink) 7%,transparent);padding:20px 20px 8px}
+  html:root .hv-ch{display:flex;align-items:center;gap:12px}html:root .hv-ch h3{font-size:1.1875rem;font-weight:600;letter-spacing:-.018em;margin:0;line-height:1.1}html:root .hv-ch p{font-size:.84rem;color:var(--muted);margin:2px 0 0}
+  html:root .hv-bd{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 15%,transparent);color:color-mix(in srgb,var(--c) 78%,var(--ink));flex:none}html:root .hv-bd .phi{width:20px;height:20px;fill:currentColor}
+  html:root .hv-m{height:4px;border-radius:2px;background:color-mix(in srgb,var(--ink) 8%,transparent);margin:16px 0 6px;overflow:hidden}html:root .hv-m i{display:block;height:100%;border-radius:2px;background:var(--c)}
+  html:root .hv-g{display:flex;flex-wrap:wrap;gap:0 10px;justify-content:space-between;align-items:center;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:12px 0 2px}html:root .hv-g em{font-style:normal;text-transform:none;letter-spacing:0;font-weight:400}
+  html:root .hv-none{margin:14px 2px 16px;color:var(--muted);font-size:.9rem}
+  html:root .hv-rows .row{background:transparent;box-shadow:none;border-radius:0;flex-wrap:wrap}html:root .hv-rows .rtb{overflow-wrap:normal;word-break:normal;hyphens:none;flex:1 1 110px;min-width:0}
+  html:root .hv-more{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px;align-items:start}
+  html:root .hv-wk{border-radius:30px;background:color-mix(in srgb,var(--raise) 82%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 55%,transparent),inset 0 0 0 .5px color-mix(in srgb,var(--ink) 7%,transparent);overflow:hidden}
+  html:root .hv-wh{display:flex;align-items:center;gap:12px;padding:16px 20px 8px}html:root .hv-wh b{font-size:1.25rem;font-weight:600;letter-spacing:-.02em}
+  html:root .hv-rb{width:32px;height:32px;border:0;border-radius:50%;background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink);display:grid;place-items:center;cursor:pointer}html:root .hv-rb .phi{width:14px;height:14px;fill:currentColor}
+  html:root .hv-tb{border:0;border-radius:999px;height:32px;padding:0 14px;background:transparent;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 18%,transparent);color:var(--muted);font:inherit;font-size:.8125rem;cursor:pointer}
+  html:root .hv-lg{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);white-space:nowrap}html:root .hv-lg i{display:inline-block;width:12px;height:4px;border-radius:2px;background:var(--c);margin:0 2px 0 8px}html:root .hv-lg .phi{width:12px;height:12px;fill:currentColor;vertical-align:-1px}
+  html:root .hv-g7{display:grid;grid-template-columns:56px repeat(7,minmax(0,1fr))}
+  html:root .hv-dh{border:0;background:none;color:var(--muted);font:inherit;height:58px;padding-top:6px;cursor:pointer;text-align:center}html:root .hv-dh small{display:block;font-size:.78rem}html:root .hv-dh b{display:grid;place-items:center;margin:2px auto 0;width:34px;height:34px;border-radius:50%;font-size:1.25rem;font-weight:400;color:var(--ink)}html:root .hv-dh.now b{background:var(--btn);color:var(--btn-ink);font-weight:500}
+  html:root .hv-gut{position:relative;font-size:.75rem;color:var(--faint);text-align:right;padding:8px 8px 0 0;border-top:1px solid color-mix(in srgb,var(--ink) 9%,transparent)}html:root .hv-gut span{position:absolute;right:8px;transform:translateY(-8px)}
+  html:root .hv-anyc{min-height:40px;padding:4px;border-top:1px solid color-mix(in srgb,var(--ink) 9%,transparent);border-left:.5px solid color-mix(in srgb,var(--ink) 9%,transparent);display:flex;flex-direction:column;gap:3px}
+  html:root .hv-anyc button{border:0;font:inherit;font-size:.78rem;text-align:left;background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink);border-radius:8px;padding:3px 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}html:root .hv-anyc small{font-size:.72rem;color:var(--faint)}
+  html:root .hv-col{position:relative;border-top:1px solid color-mix(in srgb,var(--ink) 9%,transparent);border-left:.5px solid color-mix(in srgb,var(--ink) 9%,transparent);background:repeating-linear-gradient(transparent 0 35px,color-mix(in srgb,var(--ink) 7%,transparent) 35px 36px)}html:root .hv-col.now{background-color:color-mix(in srgb,var(--ink) 4%,transparent)}
+  html:root .hv-ev{position:absolute;border:0;border-radius:11px;box-shadow:inset 3px 0 0 var(--c);padding:4px 8px 4px 10px;background:color-mix(in srgb,var(--c) 16%,transparent);color:color-mix(in srgb,var(--c) 40%,var(--ink));font:inherit;font-size:.8125rem;line-height:1.2;text-align:left;overflow:hidden;cursor:pointer}html:root .hv-ev b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}html:root .hv-ev small{display:block;font-size:.72rem;opacity:.8}
+  html:root .hv-ev.done{opacity:.5}html:root .hv-ev.done b{text-decoration:line-through}
+  html:root .hv-md{position:absolute;height:20px;border:0;border-radius:999px;box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--ink) 25%,transparent);background:transparent;color:var(--muted);font:inherit;font-size:.72rem;display:flex;align-items:center;gap:5px;padding:0 8px;white-space:nowrap;overflow:hidden;cursor:pointer}html:root .hv-md .phi{width:12px;height:12px;fill:currentColor;flex:none}html:root .hv-md.done{opacity:.5}
+  html:root .hv-now{position:absolute;left:0;right:0;border-top:1.6px solid var(--ink);z-index:3;pointer-events:none}html:root .hv-now:before{content:"";position:absolute;left:-4px;top:-5px;width:8px;height:8px;border-radius:50%;background:var(--ink)}
   /* ===== v6 look (end) ===== */
 </style>
 </head>
@@ -4990,6 +5024,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
      tap anywhere else to turn the card. The card "switches on" when the whole day is done. ===== */
   var _qcWasFull={},_qcDayWas=null,_qcNumWas=null;
   try{state.hmSort=localStorage.getItem("ritsu_hmsort")||"time"}catch(e){state.hmSort="time"}
+  try{state.hmView=localStorage.getItem("ritsu_hmview")||"areas"}catch(e){state.hmView="areas"}state.hvWk=0;
   function qcBar(dom,s,off){
     var p=s.tot?s.done/s.tot:0,full=!!s.tot&&s.done===s.tot,bloom=false;
     if(off===0){bloom=full&&_qcWasFull[dom]===false;_qcWasFull[dom]=full;}   /* glow once, only when it fills while Home is open */
@@ -5324,6 +5359,54 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   var SUPP_RE=/\b(vitamins?|supplements?|multivitamin|omega|fish oil|magnesium|zinc|iron|calcium|probiotics?|b12|d3|creatine|collagen|protein|electrolytes?|ashwagandha|melatonin)\b/i;
   function isSupp(i){var c=Store.get("cats",i.catId);return SUPP_RE.test(i.title||"")||SUPP_RE.test((c&&c.name)||"")}
   function medsTitle(list){var sp=list.filter(isSupp).length;return sp===0?"Medicine":sp===list.length?"Supplements":"Medicine and supplements"}
+  /* ===== Home views on wide screens (start), user 2026-10-22: List (as before), Areas (To-do, Body, Mind as three cards)
+     and Week (a timeline like a calendar). Only from 1400px wide; phones and small laptops keep the list. ===== */
+  function hvOn(){return window.innerWidth>=HM_THREE}
+  function hvView(){return hvOn()?(state.hmView||"areas"):"list"}
+  var HV_DOMS=[["todo","To-do","checklist"],["body","Body","barbell"],["mind","Mind","brain"]];
+  function hvSeg(){var v=hvView();return '<div class="hv-seg" role="group" aria-label="How to see Home">'+[["areas","Areas"],["list","List"],["week","Week"]].map(function(o){return '<button type="button" data-hmview="'+o[0]+'" aria-pressed="'+(v===o[0])+'">'+o[1]+'</button>'}).join("")+'</div>'}
+  function hvDayDom(i){return areaDomain(i.catId)||"todo"}
+  function hvAreas(ds){
+    var off=dCount(ds),h='<div class="hv-top"><h3 aria-level="2">'+(off===0?"Today":hmLabel(ds))+'</h3>'+hvSeg()+'</div><div class="hv-cards">';
+    HV_DOMS.forEach(function(d){
+      var its=hmItems(d[0],ds).slice().sort(hmListSort),dn=its.filter(function(i){return hmDone(i,ds)}).length,pct=its.length?Math.round(dn*100/its.length):0,rows="",md="";
+      if(d[0]==="body"){var meds=visibleItems().filter(function(i){return i.kind==="med"&&!i.archived&&dueOnDate(i,ds,off)});
+        if(meds.length){md='<div class="hv-g"><span>'+medsTitle(meds)+'</span><em>not counted in your day</em></div>';meds.forEach(function(i){md+=itemRow(i,{ds:ds})+(off===0&&isMedItem(i)?pillBoxHtml(i,true):"")})}}
+      its.forEach(function(i){rows+=itemRow(i,{ds:ds})});
+      h+='<section class="hv-card" style="--c:var(--c-'+d[0]+')" aria-label="'+d[1]+'"><div class="hv-ch"><span class="hv-bd">'+phicon(d[2])+'</span><div><h3>'+d[1]+'</h3><p>'+(its.length?dn+" of "+its.length+" done":"Nothing planned")+'</p></div></div><div class="hv-m"><i style="width:'+pct+'%"></i></div><div class="hv-rows">'+md+rows+(its.length||md?"":'<p class="hv-none">Nothing here today.</p>')+'</div></section>'});
+    h+='</div>';
+    var m1=off===0?weekAheadHtml():"",m2=off===0?leftoverHtml():"";
+    return h+((m1||m2)?'<div class="hv-more">'+(m1?"<div>"+m1+"</div>":"")+(m2?"<div>"+m2+"</div>":"")+"</div>":"");
+  }
+  function hvMins(t){var p=String(t).split(":");return (+p[0])*60+(+p[1]||0)}
+  function hvWeek(){
+    var base=hmDay(),d0=new Date(base+"T00:00:00"),mon=addDaysStr(base,-((d0.getDay()+6)%7)+7*(state.hvWk||0)),t=today(),days=[],k,lo=7*60,hi=20*60,H=36;
+    for(k=0;k<7;k++){var ds=addDaysStr(mon,k),off=dCount(ds),evs=[],any=[],meds=[],seen=[];
+      HV_DOMS.forEach(function(dm){hmItems(dm[0],ds).forEach(function(i){if(seen.indexOf(i)>-1)return;seen.push(i);
+        if(i.reminder){var s0=hvMins(i.reminder),e0=s0+(i.duration||30);evs.push({i:i,s:s0,e:e0,d:dm[0]});lo=Math.min(lo,Math.floor(s0/60)*60);hi=Math.max(hi,Math.ceil(e0/60)*60)}else any.push(i)})});
+      visibleItems().forEach(function(i){if(i.kind!=="med"||i.archived||!dueOnDate(i,ds,off))return;var ts=(i.times&&i.times.length)?i.times:(i.reminder?[i.reminder]:[]);
+        if(!ts.length){any.push(i);return}ts.forEach(function(x){meds.push({i:i,s:hvMins(x)})})});
+      meds.sort(function(p,q){return p.s-q.s});var gp=null;meds.forEach(function(m){if(gp&&m.s-gp.s<34){gp.names.push(m.i.title);gp.count++;return}
+        gp={i:m.i,s:m.s,e:m.s+34,med:1,names:[m.i.title],count:1};evs.push(gp);lo=Math.min(lo,Math.floor(m.s/60)*60);hi=Math.max(hi,Math.ceil((m.s+34)/60)*60)});
+      days.push({ds:ds,evs:evs,any:any,meds:meds})}
+    lo=Math.max(0,lo);hi=Math.min(24*60,hi);var rows=(hi-lo)/60,a=new Date(mon+"T00:00:00"),b=new Date(addDaysStr(mon,6)+"T00:00:00");
+    var rng=(a.getMonth()===b.getMonth()?a.getDate()+" to "+b.getDate()+" "+MONFULL[b.getMonth()]:a.getDate()+" "+MON[a.getMonth()]+" to "+b.getDate()+" "+MON[b.getMonth()]);
+    var h='<div class="hv-top"><h3 aria-level="2">Week</h3>'+hvSeg()+'</div><div class="hv-wk"><div class="hv-wh"><b>'+rng+'</b><button type="button" class="hv-rb" data-hvwk="-1" aria-label="Previous week">'+phicon("caretl")+'</button><button type="button" class="hv-rb" data-hvwk="1" aria-label="Next week">'+phicon("caretr")+'</button><button type="button" class="hv-tb" data-hvwk="0">Today</button>'+
+      '<span class="hv-lg"><i style="--c:var(--c-todo)"></i>To-do<i style="--c:var(--c-body)"></i>Body<i style="--c:var(--c-mind)"></i>Mind<span>'+phicon("pill")+' Medicine, not counted</span></span></div><div class="hv-g7"><div></div>';
+    days.forEach(function(d){var x=new Date(d.ds+"T00:00:00");h+='<button type="button" class="hv-dh'+(d.ds===t?" now":"")+'" data-hmgo="'+d.ds+'"><small>'+DOW[x.getDay()]+'</small><b>'+x.getDate()+'</b></button>'});
+    h+='<div class="hv-gut hv-any">Anytime</div>';
+    days.forEach(function(d){h+='<div class="hv-anyc">'+d.any.slice(0,3).map(function(i){return '<button type="button" data-open="'+i.id+'">'+esc(i.title)+'</button>'}).join("")+(d.any.length>3?'<small>+'+(d.any.length-3)+' more</small>':"")+'</div>'});
+    h+='<div class="hv-gut" style="height:'+(rows*H)+'px">';for(k=1;k<rows;k++){var hh=(lo/60+k);h+='<span style="top:'+(k*H)+'px">'+(hh%12||12)+(hh<12?"am":"pm")+'</span>'}h+='</div>';
+    days.forEach(function(d){var lanes=[],ends=[];d.evs.sort(function(p,q){return p.s-q.s});
+      d.evs.forEach(function(e){var l=0;while(ends[l]!==undefined&&ends[l]>e.s)l++;ends[l]=e.e;e.l=l});var nl=Math.max(1,ends.length);
+      h+='<div class="hv-col'+(d.ds===t?" now":"")+'" style="height:'+(rows*H)+'px">';
+            d.evs.forEach(function(e){var done=hmDone(e.i,d.ds),top=((e.s-lo)/60)*H+1,ht=Math.max(23,((e.e-e.s)/60)*H-3),ln='left:calc('+(e.l*100/nl)+'% + 3px);width:calc('+(100/nl)+'% - 6px)';
+        if(e.med){var many=e.count>1,mdone=many?false:done;h+='<button type="button" class="hv-md'+(mdone?" done":"")+'" '+(many?'data-hmgo="'+d.ds+'" aria-label="'+esc(e.names.join(", "))+'. Open the day"':'data-open="'+e.i.id+'"')+' style="top:'+(top+2)+'px;'+ln+'">'+phicon("pill")+esc(many?e.count+" medicines":e.i.title)+'</button>';return}
+        h+='<button type="button" class="hv-ev'+(done?" done":"")+'" data-open="'+e.i.id+'" style="--c:var(--c-'+e.d+');top:'+top+'px;height:'+ht+'px;left:calc('+(e.l*100/nl)+'% + 3px);width:calc('+(100/nl)+'% - 6px)"><b>'+esc(e.i.title)+'</b>'+(ht>=40?'<small>'+fmtTime(e.i.reminder)+'</small>':"")+'</button>'});
+      if(d.ds===t){var nw=new Date(Date.now()),nm=nw.getHours()*60+nw.getMinutes();if(nm>=lo&&nm<=hi)h+='<div class="hv-now" style="top:'+(((nm-lo)/60)*H)+'px"></div>'}
+      h+='</div>'});
+    return h+'</div></div>';
+  }
   function qcListsFill(ds){qcListFill(ds);hmSideFill(ds);swSync()}
   function qcListFill(ds,el0){
     var el=el0||$("#hmList");if(!el)return;
@@ -5338,7 +5421,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     /* the whole list, phones too (user, 2026-10-12: no "See all" tap); a long list scrolls inside its page */
     var show=its,meds=extra.filter(function(i){return i.kind==="med"}),also=extra.filter(function(i){return i.kind!=="med"});
     var xBlock=function(list,title){var b='<div class="qc-lh qc-xh"><h3 aria-level="2">'+title+'</h3><span>not counted in your day</span></div><div class="card">';list.forEach(function(i){b+=itemRow(i,{ds:ds})+(off===0&&isMedItem(i)?pillBoxHtml(i,true):"")});return b+'</div>'};
-    var dn=state.qcDom?HM_DOMS.filter(function(d){return d[0]===state.qcDom})[0][1]:"";var h='<div class="qc-lh"><h3 aria-level="2">'+(off===0?"Today":hmLabel(ds))+'</h3><span class="qc-st">'+(off===0?'<button class="low-t'+(isLowDay(ds)?" on":"")+'" data-low aria-pressed="'+isLowDay(ds)+'">'+PI("moon")+'Low day</button>':'')+(its.length?(left?left+" left":"All done"):"")+'</span></div>'+
+    var dn=state.qcDom?HM_DOMS.filter(function(d){return d[0]===state.qcDom})[0][1]:"";var h=(el0&&el0.id==="hmSide"&&hvOn()?'<div class="hv-top hv-list">'+hvSeg()+'</div>':"")+'<div class="qc-lh"><h3 aria-level="2">'+(off===0?"Today":hmLabel(ds))+'</h3><span class="qc-st">'+(off===0?'<button class="low-t'+(isLowDay(ds)?" on":"")+'" data-low aria-pressed="'+isLowDay(ds)+'">'+PI("moon")+'Low day</button>':'')+(its.length?(left?left+" left":"All done"):"")+'</span></div>'+
       '<div class="qc-ctl">'+(its.length?'<div class="hm-sort" role="group" aria-label="Sort the list"><button data-hmsort="time" aria-pressed="'+(state.hmSort!=="topic")+'">By time</button><button data-hmsort="topic" aria-pressed="'+(state.hmSort==="topic")+'">By topic</button></div>':'')+
       (dn?'<button class="qc-fchip" data-qcall aria-label="Showing '+dn+' only. Show all">'+dn+' only<span aria-hidden="true">&times;</span></button>':'')+
       '</div>';
@@ -5687,7 +5770,10 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var b=e.target.closest&&e.target.closest("[data-wr]");if(b){e.preventDefault();wrapAct(b.getAttribute("data-wr").split("|"))}
   });
   function hmSideFill(ds){
-    var el=$("#hmSide");if(el&&window.innerWidth>=940)qcListFill(ds,el);
+    var el=$("#hmSide");
+    var hg=el&&el.closest(".home-grid");if(hg){var hv=hvView();hg.classList.toggle("hv-areas",hv==="areas");hg.classList.toggle("hv-week",hv==="week")}
+    if(el&&hvOn()&&hvView()!=="list"){el.innerHTML=hvView()==="week"?hvWeek():hvAreas(ds);var w3=$("#hmWeekSide");if(w3)w3.innerHTML="";return}
+    if(el&&window.innerWidth>=940)qcListFill(ds,el);
   }
   window.addEventListener("resize",function(){var el=$("#hmSide");if(el&&!el.firstChild&&state.view==="home")hmSideFill(hmDay())});
   /* the day strip lights: 0 nothing (or nothing due), 1 partly done, 2 all done; same numbers as the card */
@@ -10381,6 +10467,8 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if((el=e.target.closest("[data-area]"))&&!e.target.closest("[data-action]")){state._navRoot=!!el.closest("#bottomnav,.sidebar");go("area",el.getAttribute("data-area"));return;}
     if((el=e.target.closest("[data-mplus]"))){e.stopPropagation();var mi=Store.get("items",el.getAttribute("data-mplus"));if(mi){var mu=storeSnap(),mv=Object.assign({},mi.values||{}),t1=today();mv[t1]=Math.round(((+mv[t1]||0)+tapAmount(mi))*100)/100;if(mv[t1]>=(mi.target||1)){_justDone=mi.id;setTimeout(jdClear,1400);}Store.update("items",mi.id,{values:mv});toast(mi.title+": "+mv[t1]+" "+(mi.unit||"")+" today",mu);}return;}
     if((el=e.target.closest("[data-small]"))){e.stopPropagation();var si=Store.get("items",el.getAttribute("data-small"));if(si&&si.small){var su=storeSnap(),sc=Object.assign({},si.counts||{}),sd=Object.assign({},si.smallDays||{}),stt=Object.assign({},si.logTimes||{}),t0=today();sc[t0]=Math.max(sc[t0]||0,perDayOf(si));sd[t0]=1;stt[t0]=stt[t0]||nowHM();var sp={counts:sc,smallDays:sd,logTimes:stt};if((si.events||{})[t0]){var se=Object.assign({},si.events);se[t0]=se[t0].concat(Array(Math.max(0,perDayOf(si)-se[t0].length)).fill(nowHM()));sp.events=se;}_justDone=si.id;setTimeout(jdClear,1400);Store.update("items",si.id,sp);toast("Small one done: "+si.small+". It counts.",su);}return;}
+    if((el=e.target.closest("[data-hmview]"))){state.hmView=el.getAttribute("data-hmview");try{localStorage.setItem("ritsu_hmview",state.hmView)}catch(x){}state.hvWk=0;qcListsFill(hmDay());return;}
+    if((el=e.target.closest("[data-hvwk]"))){var wv=+el.getAttribute("data-hvwk");state.hvWk=wv===0?0:(state.hvWk||0)+wv;hmSideFill(hmDay());return;}
     if((el=e.target.closest("[data-hmsort]"))){state.hmSort=el.getAttribute("data-hmsort");try{localStorage.setItem("ritsu_hmsort",state.hmSort)}catch(x){}qcListsFill(hmDay());return;}
     if((el=e.target.closest("#i-when button"))){syncItem();ms.data.everyH=el.getAttribute("data-v")==="every"?(ms.data.everyH||6):null;renderItemModal();return;}
     if((el=e.target.closest("[data-low]"))){var lo=!isLowDay(today());setLowDay(today(),lo);render();toast(lo?"A low day. Only what matters stays.":"The day is back as planned.");return;}
