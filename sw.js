@@ -1,7 +1,7 @@
 /* Daywell service worker.
    Cache-first for the app shell so it opens instantly and works offline.
    Bump CACHE when you deploy, or people keep the old version. */
-const CACHE = "daywell-v97";
+const CACHE = "daywell-v98";
 const SHELL = [
   "./",
   "./index.html",
@@ -37,7 +37,7 @@ self.addEventListener("fetch", (e) => {
   const url = new URL(req.url);
 
   /* Fonts: use the cache if we have it, otherwise fetch and keep a copy.
-     Offline without them, the page falls back to the system font — still readable. */
+     Offline without them, the page falls back to the system font â€” still readable. */
   if (url.hostname.endsWith("googleapis.com") || url.hostname.endsWith("gstatic.com")) {
     e.respondWith(
       caches.match(req).then((hit) =>

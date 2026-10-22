@@ -2721,6 +2721,11 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   .big-done{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:14px 0 8px;padding:15px;border:0;border-radius:14px;background:var(--accent);color:#05281b;font-size:1.0625rem;font-weight:600}
   .big-done.on{background:var(--panel-2);color:var(--ink);border:1px solid var(--line)}
   .it-line{margin:2px 2px 12px;font-size:0.9375rem;color:var(--muted)}
+  .hp summary{list-style:none;cursor:pointer}.hp summary::-webkit-details-marker{display:none}
+  .hp+.hp>summary{border-top:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+  .hp[open]>summary .chev{transform:rotate(135deg)}
+  .hp-b{padding:0 14px 14px}.hp-b p{margin:0;font-size:0.9375rem;line-height:1.45;color:var(--ink)}
+  .hp-eg{margin-top:8px!important;font-size:0.8125rem!important;color:var(--muted)!important}
   .it-more{margin:10px 0}
   .it-more>summary{display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;cursor:pointer;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
   .it-more>summary::-webkit-details-marker{display:none}
@@ -3351,6 +3356,28 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   .gd .gd-rc{border-radius:16px;background:rgba(128,128,128,.12);padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:6px}
   .gd .gd-rc b{display:block;font-size:.9375rem;color:var(--ink)}.gd .gd-rc span{font-size:.8125rem;color:var(--muted)}
   .gd .gd-rc em{margin-left:auto;font-style:normal;font-size:.8125rem;font-weight:700;padding:8px 14px;border-radius:999px;background:var(--btn);color:var(--btn-ink);white-space:nowrap}
+  /* the kind you are adding (2026-10-22): a board of six, one big Adding as row, one plain question */
+  html:root .qk-h{margin:2px 4px 8px;font-size:.875rem;color:var(--muted)}
+  html:root .qk-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:6px}
+  html:root .qk-t{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;min-height:108px;padding:12px;border:0;border-radius:22px;background:color-mix(in srgb,var(--ink) 5%,var(--panel));box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 40%,transparent),inset 0 0 0 .5px color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:transform .16s var(--ease-out,ease-out)}
+  html:root .qk-t:active,html:root .qk-as:active{transform:scale(.97)}
+  html:root .qk-t b{display:block;font-size:.9375rem;font-weight:600;letter-spacing:-.01em}html:root .qk-t small{display:block;font-size:.75rem;color:var(--muted);line-height:1.25;margin-top:1px}
+  html:root .qk-t.on{background:var(--btn);color:var(--btn-ink);box-shadow:none}html:root .qk-t.on small{color:inherit;opacity:.75}
+  html:root .qk-i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--raise);color:var(--ink);flex:none}html:root .qk-i .phi{width:18px;height:18px;fill:currentColor}
+  html:root .qk-t.on .qk-i{background:color-mix(in srgb,var(--btn-ink) 18%,transparent);color:inherit}
+  html:root .qk-as{display:flex;align-items:center;gap:12px;width:100%;min-height:68px;padding:12px 12px 12px 14px;border:0;border-radius:22px;background:color-mix(in srgb,var(--ink) 5%,var(--panel));box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:transform .16s var(--ease-out,ease-out)}
+  html:root .qk-as .qk-i{width:42px;height:42px}
+  html:root .qk-tx{flex:1;min-width:0;line-height:1.25}html:root .qk-tx small{display:block;font-size:.75rem;color:var(--muted)}html:root .qk-tx b{display:block;font-size:1.0625rem;font-weight:600;letter-spacing:-.012em}html:root .qk-tx span{display:block;font-size:.8125rem;color:var(--muted)}
+  html:root .qk-ch{display:flex;align-items:center;gap:2px;height:36px;padding:0 8px 0 14px;border-radius:999px;background:color-mix(in srgb,var(--ink) 8%,transparent);font-size:.875rem;font-weight:500;flex:none}html:root .qk-ch .qi{width:16px;height:16px}
+  html:root .qk-note{margin:8px 6px 4px;font-size:.8125rem;color:var(--muted);line-height:1.4}
+  html:root .qk-ask{margin:10px 0 4px;padding:14px;border-radius:22px;background:color-mix(in srgb,var(--ink) 5%,var(--panel));box-shadow:inset 0 0 0 .5px color-mix(in srgb,var(--ink) 9%,transparent)}
+  html:root .qk-ask b{display:block;font-size:1rem;font-weight:600}html:root .qk-ask small{display:block;font-size:.8125rem;color:var(--muted);margin:2px 0 10px}
+  html:root .qk-ask div{display:grid;grid-template-columns:1fr 1fr;gap:8px}html:root .qk-ask button{min-height:46px;border:0;border-radius:999px;background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink);font:inherit;font-weight:500;cursor:pointer}
+  html:root .qk-logs{margin:10px 0 4px}html:root .qk-logs .qa-logk{display:none}html:root .qk-logs .qa-logs{flex-wrap:wrap;overflow:visible;margin:0;padding:0}
+  html:root .qk-more{margin:6px 0 0;border:0;background:none;color:var(--ink);font:inherit;font-size:.875rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:10px 4px}
+  html:root #modal.qa .qa-log{display:none}
+  html:root #modal.qk-board .qa-place,html:root #modal.qk-board .qa-pick,html:root #modal.qk-board .qa-acts,html:root #modal.qk-board #qa-panel,html:root #modal.qk-board .qa-more,html:root #modal.qk-board .qa-hint,html:root #modal.qk-board .qa-sg{display:none!important}
+  html:root #modal.qk-med .qa-place,html:root #modal.qk-med .qa-pick,html:root #modal.qk-log .qa-place,html:root #modal.qk-log .qa-pick,html:root #modal.qk-log .qa-acts,html:root #modal.qk-log .qa-go,html:root #modal.qk-log .qa-more{display:none!important}
   /* ===== v6 look (end) ===== */
 </style>
 </head>
@@ -6745,14 +6772,14 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if($("#overlay").classList.contains("show"))return;   /* something else is open; try on the next screen */
     _wnTried=true;openNews()}
   /* You: one short list like the iPhone's Settings; each row opens its own small page (view "yousub", state.youSub) */
-  var YOU_SUBS={name:"Your name",rem:"Reminders",areas:"Your areas",family:"Family",away:"Away days",look:"Appearance",buddy:"Companion",data:"Backup and privacy",flags:"Your flags"};
+  var YOU_SUBS={name:"Your name",rem:"Reminders",areas:"Your areas",family:"Family",away:"Away days",look:"Appearance",buddy:"Companion",data:"Backup and privacy",flags:"Your flags",help:"Help"};
   /* v6: thin line icons for the You list */
   var YOUI={user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>',
     bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20h4"/>',list:'<path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/>',timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4M9 2h6"/>',
     grid:'<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>',
     copy:'<rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',people:'<circle cx="9" cy="9" r="3.5"/><path d="M3 20c1-3.5 3.5-5 6-5s5 1.5 6 5M16 5.5a3 3 0 0 1 0 6M17.5 15c2 .7 3 2.3 3.5 5"/>',
     home:'<path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-5h4v5"/>',smile:'<circle cx="12" cy="12" r="8"/><path d="M9 10h.01M15 10h.01M8.5 14c1.8 2 5.2 2 7 0"/>',key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/>',
-    lock:'<rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',star:'<path d="M12 4l2.4 5 5.6.6-4.2 3.8 1.2 5.6L12 16.3 7 19l1.2-5.6L4 9.6 9.6 9z"/>'};
+    lock:'<rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',help:'<circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.2 1-1.2 1.8M12 16.6h.01"/>',star:'<path d="M12 4l2.4 5 5.6.6-4.2 3.8 1.2 5.6L12 16.3 7 19l1.2-5.6L4 9.6 9.6 9z"/>'};
   function youIcon(k){return YOUI[k]?'<span class="yr-i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+YOUI[k]+'</svg></span>':''}
   function youRow(attr,label,val,ic){return '<button class="yr" '+attr+'>'+youIcon(ic)+'<span class="yr-t">'+label+'</span>'+(val!=null&&val!==""?'<em>'+esc(String(val))+'</em>':'')+'<span class="chev" aria-hidden="true">&rsaquo;</span></button>'}
   function youStrip(x){return String(x||"").replace(/^<div class="sec-h">((?!<div|<button)[\s\S])*?<\/div>/,"")}   /* the page title already says it */
@@ -6765,10 +6792,12 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       youRow('data-logpick',"Your logs","","list")+youRow('data-nav="fasting"',"Fasting","","timer")+'</div>';
     h+='<div class="ylist">'+youRow('data-yous="areas"',"Your areas",cats().filter(function(c){return c.id!==TODO_CAT}).length,"grid")+youRow('data-action="library"',"Ideas","","copy")+youRow('data-nav="people"',"People","","people")+youRow('data-yous="family"',"Family",familyOn()?"On":"Off","home")+'</div>';
     h+='<div class="ylist">'+youRow('data-yous="buddy"',"Companion",Buddy.cfg.show?"On":"Off","smile")+
-      (remNative()?'':acct.user?youRow('data-acct="manage"',"Account","Signed in","key"):youRow('data-acct="open"',"Sign in","","key"))+youRow('data-yous="data"',"Backup and privacy","","lock")+youRow('data-yous="flags"',"Your flags","","flag")+youRow('data-tour',"Home tour","","star")+youRow('data-news',"What\u2019s new",APP_VER,"star")+'</div>';
+      (remNative()?'':acct.user?youRow('data-acct="manage"',"Account","Signed in","key"):youRow('data-acct="open"',"Sign in","","key"))+youRow('data-yous="data"',"Backup and privacy","","lock")+youRow('data-yous="flags"',"Your flags","","flag")+youRow('data-yous="help"',"Help","","help")+youRow('data-tour',"Home tour","","star")+youRow('data-news',"What\u2019s new",APP_VER,"star")+'</div>';
     if(opensList().length>=2)h+='<p style="color:var(--muted);font-size:0.8125rem;text-align:center;margin-top:18px">Days you opened Daywell: '+openedCount(7)+' of the last 7</p>';
     h+='<p style="color:var(--faint);font-size:0.75rem;text-align:center;margin-top:22px">Daywell'+(Store.local?' · prototype, saved on this device':'')+'</p>';return h;
   }
+  var HELP_TOPICS=[["Add something fast","Tap + and type it like a sentence. Daywell fills in the date, the time and how long.","“call alex tom at 5 in the evening”"],["Say it instead","Tap the mic in the + sheet, or hold the + button, and just say it.","Hold +, say “vitamins”, let go."],["Add steps to a to-do","Tap + and type the to-do, then tap Steps. Type one, press Enter for the next.","Pack for the trip: Passport, Charger, Tickets"],["A routine is one row","Your morning things sit together in one row. Tap its name to see what is in it, tick the circle to do them all. You get one reminder for the whole routine.","Morning routine, 8:00 AM"],["Away days","Going away? Pick the dates. Daywell rests with you, and nothing in those days counts for or against you.","You, then Away days"],["Changed your mind","Most one-tap changes show an Undo at the bottom for a few seconds.","Ticked the wrong thing? Tap Undo."],["Keeping your diary safe","Your diary is kept on this phone. Save a backup to keep somewhere safe, so a lost phone does not lose it.","You, then Backup and privacy"]];
+  function helpPage(){return '<p class="it-line">Short answers. Tap one to open it.</p><div class="ylist hp-list">'+HELP_TOPICS.map(function(t){return '<details class="hp"><summary class="yr"><span class="yr-t">'+t[0]+'</span><span class="chev" aria-hidden="true">&rsaquo;</span></summary><div class="hp-b"><p>'+t[1]+'</p><p class="hp-eg">'+t[2]+'</p></div></details>'}).join('')+'</div><div class="ylist" style="margin-top:14px">'+youRow('data-news','Show the guide again','','star')+'</div>'}
   function youSub(k,me){
     var h='<div class="day-h"><div class="d"><p class="kicker">You</p><h1 class="title" style="font-size:2rem">'+(YOU_SUBS[k]||"You")+'</h1></div></div>';
     if(k==="name"){
@@ -6783,6 +6812,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
         +'<div class="ylist" style="padding:14px 16px"><label style="display:block;font-size:0.8125rem;color:var(--muted)">From<input type="date" id="awA" value="'+today()+'" style="display:block;width:100%;margin:4px 0 12px;min-height:44px"></label><label style="display:block;font-size:0.8125rem;color:var(--muted)">Until<input type="date" id="awB" value="'+addDaysStr(today(),2)+'" style="display:block;width:100%;margin:4px 0 14px;min-height:44px"></label><button class="btn primary" data-away-save>Save these days</button></div>';
       if(al.length)h+='<div class="ylist">'+al.map(function(r,ix){return '<div class="yr"><span class="yr-t">'+esc(awayTxt(r))+'</span><button class="btn ghost sm" data-away-del="'+ix+'">Remove</button></div>'}).join("")+'</div>';
     }
+    else if(k==="help")h+=helpPage();
     else if(k==="rem")h+=youStrip(remindPanel())+youStrip(cbPanel());
     else if(k==="areas")h+=areasPanel();
     else if(k==="family")h+=youStrip(familyPanel());
@@ -8837,6 +8867,37 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     for(var k=0;k<TY_GROUPS.length;k++){var r=TY_GROUPS[k];if(r[0]==="family"&&!family)continue;if(r[4].test(t)){var card=r[1],nm={body:"Body",mind:"Mind",todo:"To-do"}[card];return {card:card,cat:card==="todo"?null:r[2],list:card==="todo"?r[2]:null,label:nm+", "+r[3],once:!!r[5]};}}
     return null;
   }
+  /* ===== Medicine guess (start): reads only the typed words, no network, never a dose (2026-10-22).
+     Your own medicines first (spaces ignored, so voice "met for min" still finds Metformin), then answers you gave,
+     then a small list of common names, then clues (mg, ml, tab, syrup, drops). With a medicine in it, buy, order,
+     refill or pick up make it an errand. A word and a number nobody knows ("Zinc 50") asks once. ===== */
+  var MED_NAMES=("paracetamol dolo crocin calpol metformin glycomet glimepiride amaryl insulin thyroxine eltroxin thyronorm levothyroxine "+
+    "amlodipine telmisartan losartan atenolol metoprolol atorvastatin rosuvastatin aspirin ecosprin clopidogrel pantoprazole pantocid omeprazole "+
+    "rabeprazole ranitidine famotidine domperidone ondansetron montelukast cetirizine levocetirizine fexofenadine allegra azithromycin amoxicillin "+
+    "augmentin ibuprofen combiflam diclofenac salbutamol asthalin budecort seroflo foracort multivitamin becosules limcee shelcal folic b12 d3").split(" ");
+  var MED_CLUE=/\b\d+(\.\d+)?\s?(mg|mcg|ml|iu)\b|\b(tabs?|tablets?|capsules?|syrup|drops|inhaler|puffs?|injection|pills?|meds?|medicines?|medication|vitamins?|supplements?|sachets?)\b/;
+  var MED_ERRAND=/\b(buy|order|refill|restock|pick up|collect)\b|^(get|book|call|pay|find|bring)\b/;
+  var MED_STOP=/^(morning|evening|night|afternoon|daily|my|the|a|an|take|vitamin|vitamins|meds|medicine|tablet|tablets|pills?)$/;
+  function medSquash(x){return String(x||"").toLowerCase().replace(/[^a-z0-9]/g,"")}
+  function medKey(n){var w=String(n||"").toLowerCase().split(/\s+/).filter(Boolean);return (MED_STOP.test(w[0]||"")?w[1]:w[0])||""}
+  function medGuess(text,mine,answers){
+    var t=String(text||"").toLowerCase().trim();if(!t)return {kind:""};
+    var w=t.split(/\s+/),sq=medSquash(t),sig=null,k,j;
+    for(k=0;k<(mine||[]).length&&!sig;k++){var f=medKey(mine[k]);if(f.length<3)continue;
+      if(w.indexOf(f)>-1)sig={why:"yours",name:mine[k],exact:true};
+      else{var fq=medSquash(f);if(fq.length>=5&&sq.indexOf(fq)>-1)sig={why:"yours",name:mine[k],exact:false}}}
+    var ans=(answers||{})[w[0]];
+    if(!sig&&ans)return {kind:ans==="med"?"med":"",why:"answer"};
+    for(j=0;j<w.length&&!sig;j++)if(MED_NAMES.indexOf(w[j].replace(/[^a-z0-9]/g,""))>-1)sig={why:"list",name:w[j]};
+    if(!sig&&MED_CLUE.test(t))sig={why:"clue"};
+    var errand=MED_ERRAND.test(t);
+    if(sig)return errand?{kind:"task",why:"errand",name:sig.name}:{kind:"med",why:sig.why,name:sig.name,exact:sig.exact};
+    if(errand)return {kind:""};
+    var m=/^([a-z]{3,})\s?(\d{2,4})(?!\s*(am|pm|min|mins|minutes?|hours?|hrs?|pages?|km|kg|times?|glasses?|l|steps|days?|weeks?|%))\b/.exec(t);
+    if(m&&w.length<=4)return {kind:"ask",word:m[1],label:t.split(/\s+(at|every|daily|in the)\b/)[0]};
+    return {kind:""};
+  }
+  /* ===== Medicine guess (end) ===== */
   /* run on every keystroke in the add sheet; a tapped card, group or list always wins. Returns true when the sheet changed. */
   function qaSuggest(){
     if(qa.whereTouched)return false;
@@ -8936,13 +8997,13 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var card="todo",area=null;
     if(cat&&cat!==TODO_CAT){card=areaDomain(cat)==="mind"?"mind":"body";area=cat}
     else if(!cat&&state.view==="day"&&(state.dayDomain==="body"||state.dayDomain==="mind"))card=state.dayDomain;
-    qa={card:card,cat:area,list:todoList,date:date||today(),time:null,dur:null,prio:"none",rep:card==="todo"?0:1,tags:[],notes:"",subs:[],open:"",touched:false,timeTouched:false,durTouched:false};
+    qa={card:card,cat:area,list:todoList,date:date||today(),time:null,dur:null,prio:"none",rep:card==="todo"?0:1,tags:[],notes:"",subs:[],open:"",touched:false,timeTouched:false,durTouched:false,kind:"",kindTouched:false,boardOpen:false,mg:null};
     qaFixCat();qa.init={card:qa.card,cat:qa.cat,list:qa.list,rep:qa.rep};ms={type:"quick"};renderAdd();
   }
   function renderAdd(){
     var h='<div class="qa-top"><input type="text" class="qa-title" id="q-title" autocomplete="off" enterkeyhint="done" aria-label="What are you adding?">'+(voiceOk()?'<button type="button" class="qa-mic" data-qa="mic" aria-label="Speak instead of typing">'+MIC_SVG+'</button>':'')+'<button type="button" class="qa-x" data-close aria-label="Close">'+qi("x")+'</button></div>'+
       '<p class="qa-hint" id="qa-hint" aria-live="polite" hidden></p><p class="qa-sg" id="qa-sg" hidden></p>'+'<div class="qa-log" id="qa-log">'+qaLogRow()+'</div>'+
-      '<div class="modal-b qa-b"><div class="qa-place" id="qa-place"></div><div class="qa-pick" id="qa-pick" hidden><div class="qa-seg" id="qa-seg" role="group" aria-label="Add to"></div><div class="qa-where" id="qa-where"></div></div><div class="qa-acts" id="qa-acts"></div><div id="qa-panel"></div></div>'+
+      '<div class="modal-b qa-b"><div class="qk" id="qk"></div><div id="qk-q"></div><div class="qa-place" id="qa-place"></div><div class="qa-pick" id="qa-pick" hidden><div class="qa-seg" id="qa-seg" role="group" aria-label="Add to"></div><div class="qa-where" id="qa-where"></div></div><div class="qa-acts" id="qa-acts"></div><div id="qa-panel"></div></div>'+
       '<div class="qa-foot"><button type="button" class="qa-more" data-qa="more">More Details</button><span class="spacer"></span><button type="button" class="qa-go" id="qa-go" data-qa="go"></button></div>';
     openModal(h);$("#modal").classList.add("qa");paintAdd();paintPanel();
     var dr=_qaDraft;_qaDraft=null;if(dr&&Date.now()-dr.at<6e5){var t0=$("#q-title");if(t0){t0.value=dr.v;if(qaSuggest())paintAdd();else paintActs()}}
@@ -9091,7 +9152,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var its=logItems();if(!its.length)return "";
     return '<span class="qa-logk">Or log</span><div class="qa-logs" role="group" aria-label="Log something">'+its.map(function(i){return logChip(i,"qa-logc")}).join("")+'</div>';
   }
-  document.addEventListener("click",function(e){var c=e.target.closest&&e.target.closest(".qa-logc");if(!c)return;setTimeout(function(){var el=$("#qa-log");if(el)el.innerHTML=qaLogRow();},60);});
+  document.addEventListener("click",function(e){var c=e.target.closest&&e.target.closest(".qa-logc");if(!c)return;setTimeout(function(){var el=$("#qa-log");if(el)el.innerHTML=qaLogRow();if(qa&&qa.kind==="log")paintKind();},60);});
   var MIC_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>';
   function voicePlugin(){return window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.VoiceInput}
   function voiceOk(){return !!(voicePlugin()||window.SpeechRecognition||window.webkitSpeechRecognition)}
@@ -9193,7 +9254,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   }
   /* the row of chips and the line under the title: repainted on every keystroke, so they always show what was read */
   function paintActs(){
-    var e=qaEff(),a="",sg=qaSg(e),sgOn=!!(sg&&qa.sgOn===sg.key),qb=$(".qa-b");
+    qaMedRead();var e=qaEff(),a="",sg=qaSg(e),sgOn=!!(sg&&qa.sgOn===sg.key),qb=$(".qa-b");
     if(qb)qb.style.display=sgOn?"none":"";   /* a thing that comes back picks its own group and asks its date on Home */
     if(qa.rep===0&&!e.rh)a+=qaAct("date","cal",qaDateLabel(e.date),true);
     a+=qaAct("time","clock",e.time?fmtTime(e.time):"Time",!!e.time);
@@ -9202,8 +9263,9 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     a+=qaAct("rep","rep",e.rh?planLabel(rhythmPlan(e.rh)):qa.rep?qaRepLabel(qa.rep):"Repeat",qa.rep>0||!!e.rh);
     a+=qaAct("notes","note",qa.notes?"Note added":"Note",!!qa.notes,' aria-expanded="'+(qa.open==="notes")+'"');
     if(qa.card==="todo"&&qa.rep===0&&!e.rh&&!e.every)a+=qaAct("subs","list",qa.subs.length?"Steps "+qa.subs.length:"Steps",qa.subs.length>0);
+    if(qa.kind==="med")a=qaAct("time","clock",e.time?fmtTime(e.time):"Time",!!e.time)+qaAct("notes","note",qa.notes?"Note added":"Note",!!qa.notes,' aria-expanded="'+(qa.open==="notes")+'"');
     $("#qa-acts").innerHTML=a;
-    $("#qa-go").textContent=sgOn?"Add":(qa.rep>0||e.rh)?"Add Habit":"Add Task";
+    $("#qa-go").textContent=sgOn?"Add":qaGoLabel(e);
     var bits=[];
     if(e.use.date&&!qa.touched)bits.push(qaDateLabel(e.date));
     if(e.P.parts.time.length&&!qa.timeTouched&&e.time)bits.push(fmtTime(e.time));
@@ -9223,7 +9285,42 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
         '<button type="button" data-qa="sgcustom">Custom</button><button type="button" data-qa="sgno">Just Once</button>';}
     }
     var h=$("#qa-hint");if(h){if(bits.length){h.textContent="Read as: "+bits.join(", ");h.hidden=false}else h.hidden=true}
+    paintKind();
   }
+  /* ===== Adding as (start), user 2026-10-22: a board of six kinds while the box is empty, then one big "Adding as" row.
+     Change opens the board again. When a word and a number could be a medicine, one plain question with two big buttons. ===== */
+  var QK=[["task","Task","Call mum at 7pm","checklist"],["med","Medicine","Pills, drops, vitamins","pill"],["habit","Habit","Walk, read, stretch","repeat"],
+    ["log","Log","Water, sleep, weight","pulse"],["checkup","Check-up","Dentist, eye test","heartbeat"],["ideas","Ideas","Ready-made ones","target"]];
+  function medMine(){return visibleItems().filter(function(i){return i.kind==="med"&&!i.archived}).map(function(i){return i.title})}
+  function medAns(){try{return JSON.parse(localStorage.getItem("ritsu_medans")||"{}")||{}}catch(e){return {}}}
+  function medAnsSet(w,v){var a=medAns();a[w]=v;try{localStorage.setItem("ritsu_medans",JSON.stringify(a))}catch(e){}}
+  function qaMedRead(){if(!qa||qa.kindTouched)return;var t=$("#q-title"),g=medGuess(t?t.value:"",medMine(),medAns());qa.mg=g;qa.kind=g.kind==="med"?"med":""}
+  function qaKindNow(e){if(qa.kind==="med"||qa.kind==="log")return qa.kind;if(qa.card==="body"&&qa.cat==="c_health"&&qa.rep===0)return "checkup";return (qa.rep>0||(e&&e.rh))?"habit":"task"}
+  function qaGoLabel(e){var t=$("#q-title");if(!(t&&t.value.trim())&&!qa.kindTouched)return "Add";return {med:"Add Medicine",habit:"Add Habit",checkup:"Add Check-up",log:"Done",task:"Add Task"}[qaKindNow(e)]}
+  function qaAsRow(k){var e=qaEff(),g=qa.mg||{},sub="",note="",o=QK.filter(function(x){return x[0]===k})[0];
+    if(k==="med"){sub=e.rh?planLabel(rhythmPlan(e.rh)):"Every day";if(e.time)sub+=" at "+fmtTime(e.time);
+      note=g.why==="yours"?(g.exact?"I know "+esc(g.name)+" from your list.":"I heard \u201c"+esc(e.title)+"\u201d. Saving it as "+esc(g.name)+"."):g.why==="list"?"A medicine I know.":"New to me. It goes into your medicines, so next time it is one tap.";}
+    else if(k==="habit")sub=e.rh?planLabel(rhythmPlan(e.rh)):qaRepLabel(qa.rep||1);
+    else if(k==="log")sub="Tap one to log it";
+    else sub=qaDateLabel(e.date)+(e.time?" at "+fmtTime(e.time):"");
+    if(k==="task"&&g.why==="errand")note="Sounds like an errand, so it stays a task.";
+    return '<button type="button" class="qk-as" data-qa="kopen" aria-label="Adding as '+o[1]+'. Change"><span class="qk-i">'+phicon(o[3])+'</span><span class="qk-tx"><small>Adding as</small><b>'+o[1]+'</b><span>'+esc(sub)+'</span></span><span class="qk-ch">Change'+qi("nx")+'</span></button>'+(note?'<p class="qk-note">'+note+'</p>':"")}
+  function paintKind(){var box=$("#qk"),q=$("#qk-q"),m=$("#modal"),t=$("#q-title");if(!box||!q||!qa)return;
+    var empty=!(t&&t.value.trim()),board=qa.boardOpen||(empty&&!qa.kindTouched),k=qaKindNow(qaEff());
+    m.classList.toggle("qk-board",board);m.classList.toggle("qk-med",!board&&k==="med");m.classList.toggle("qk-log",!board&&k==="log");
+    if(board){box.innerHTML='<p class="qk-h">'+(qa.boardOpen?"Pick what it is":"Or pick one")+'</p><div class="qk-tiles" role="group" aria-label="What are you adding">'+QK.map(function(o){var on=qa.boardOpen&&o[0]===k;return '<button type="button" class="qk-t'+(on?" on":"")+'" data-qa="kind" data-v="'+o[0]+'" aria-pressed="'+on+'"><span class="qk-i">'+phicon(o[3])+'</span><span><b>'+o[1]+'</b><small>'+o[2]+'</small></span></button>'}).join("")+'</div>';q.innerHTML="";return}
+    if(k==="log"){box.innerHTML=qaAsRow("log")+'<div class="qk-logs">'+(qaLogRow()||'<p class="qa-none">No logs yet.</p>')+'</div><button type="button" class="qk-more" data-action="library">Choose more from Ideas</button>';q.innerHTML="";return}
+    box.innerHTML=qaAsRow(k);
+    var g=qa.mg||{},ask=!qa.kindTouched&&g.kind==="ask"&&k!=="med";
+    q.innerHTML=ask?'<div class="qk-ask"><b>Is '+esc(cap1(g.label||g.word))+' a medicine?</b><small>Tell me once and I will remember.</small><div><button type="button" data-qa="askyes" data-v="'+esc(g.word)+'">Yes, a medicine</button><button type="button" data-qa="askno" data-v="'+esc(g.word)+'">No, a task</button></div></div>':"";
+  }
+  function qaPickKind(v){if(v==="ideas"){closeModal();openLibrary();return}
+    qa.kindTouched=true;qa.boardOpen=false;qa.kind=(v==="med"||v==="log")?v:"";qa.whereTouched=true;qa.autoLabel="";
+    if(v==="task"){qa.card="todo";if(!qa.repTouched)qa.rep=0}
+    else if(v==="habit"){if(qa.card==="todo")qa.card="body";qa.rep=qa.rep||1;qa.repTouched=true}
+    else if(v==="checkup"){qa.card="body";if(Store.get("cats","c_health"))qa.cat="c_health";qa.rep=0;qa.repTouched=true}
+    qaFixCat();paintAdd();var t=$("#q-title");if(t&&v!=="log")t.focus()}
+  /* ===== Adding as (end) ===== */
   /* offer the usual gap only when nothing else was typed: no date, no time, no "every ...", not for someone else, and not one you already have */
   function qaSg(e){
     if(e.use.date||e.time||e.every||e.who)return null;
@@ -9290,6 +9387,16 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(!title){toast("It needs a name, please.");var t=$("#q-title");if(t)t.focus();return}
     var sgd=qa.sgOn?qaSg(e):null;
     if(sgd&&sgd.key===qa.sgOn){closeModal();lifeAdd(sgd.key,qa.sgR||{every:sgd.every});return;}
+    if(qa.kind==="log")return;
+    if(qa.kind==="med"){var mc=Store.get("cats","c_medicine")?"c_medicine":((cats().filter(function(c){return c.id!==TODO_CAT&&areaDomain(c.id)==="body"})[0])||{}).id;
+      if(!mc){toast("Please choose an area first.");return}
+      var mg=qa.mg||{},mt=(mg.why==="yours"&&!mg.exact)?mg.name:title;
+      var md={catId:mc,sub:"",title:mt,akind:"med",kind:"med",notes:qa.notes||"",priority:"none",tags:[],assignees:qaWho(e.who),private:false,done:false,dueDate:null,repeatEvery:1,perDay:1,
+        reminder:e.time,duration:null,stance:"routine",count:false,list:null,markers:[],expect:null,normal:{min:1,max:1,maxGapDays:1,maxPerWeek:null}};
+      if(e.rh){md.days=e.rh.days||null;md.perWeek=e.rh.perWeek||null;}
+      ms={type:"item",mode:"area",id:null,data:md};var snapM=JSON.stringify({cache:Store.cache,priv:Store._priv,me:state.me});
+      saveItem(true);
+      toast("Added "+mt+": "+(e.rh?planLabel(rhythmPlan(e.rh)).toLowerCase():"every day")+(e.time?" at "+fmtTime(e.time):"")+".",function(){var p=JSON.parse(snapM);Store.cache=p.cache;Store._priv=p.priv||{};Store._save();Store._savePriv();Store._emit();});return;}
     var isTodo=qa.card==="todo",cat=isTodo?TODO_CAT:qa.cat;
     if(!cat){toast("Please choose an area first.");return}
     var rep=e.rh?(e.rh.every||1):qa.rep,date=rep>0?null:e.date;
@@ -9450,6 +9557,9 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       else if(k==="subs")stpOpen();
       else if(k==="tag"){var ix=qa.tags.indexOf(val2);if(ix>-1)qa.tags.splice(ix,1);else qa.tags.push(val2);paintActs();paintPanel()}
       else if(k==="more")qaMore();
+      else if(k==="kind")qaPickKind(val2);
+      else if(k==="kopen"){qa.boardOpen=!qa.boardOpen;paintAdd()}
+      else if(k==="askyes"||k==="askno"){medAnsSet(val2,k==="askyes"?"med":"task");qa.mg=null;qa.kindTouched=true;qa.kind=k==="askyes"?"med":"";paintAdd()}
       else if(k==="go")saveAdd();
       else if(k==="sgyes"||k==="sgno"||k==="sgoff"||k==="sgcustom"){var sgd=qaSg(qaEff());if(k==="sgoff"){qa.sgOn=null;qa.sgR=null}else if(sgd){if(k==="sgyes"){qa.sgOn=sgd.key;qa.sgR={every:+val2||sgd.every}}else if(k==="sgcustom"){var sk=sgd.key;qpCustom(qa.sgR,function(r){qa.sgOn=sk;qa.sgR=r;paintActs()});return}else qa.sgNo=sgd.key;}paintActs();}
     }
