@@ -4485,13 +4485,13 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     _initDb(){var self=this;["cats","items","people","tags","markers"].forEach(function(c){try{self.db.collection(c).onSnapshot(function(snap){var m={};snap.docs.forEach(function(d){if(d.exists){var v=Object.assign({},d.data()||{});v.id=d.id;if(c==="items")normalizeItem(v);m[d.id]=v;}});self.cache[c]=m;self._emit();},function(err){if(err&&err.code!=="unavailable")console.warn("db",c,err.code);self._emit();});}catch(e){console.warn(e);}});setTimeout(function(){if(!self.ready)self._emit();},1200);},
     _lsKey:"ritsu_local",
     _initLocal(){try{var raw=localStorage.getItem(this._lsKey);if(raw)this.cache=JSON.parse(raw);else this.fresh=true;}catch(e){}var self=this;Object.keys(this.cache.items||{}).forEach(function(k){normalizeItem(self.cache.items[k])});if(!this.cache.tags)this.cache.tags={};if(!this.cache.markers)this.cache.markers={};if(Object.keys(this.cache.cats||{}).length>0){GROUP_CATS.forEach(function(c){if(!self.cache.cats[c[0]])self.cache.cats[c[0]]=groupCat(c);});migrateAreas1(this);migrateTree1(this);}if(Object.keys(this.cache.cats||{}).length===0){this.welcome=true;}this._emit();},
-    _save(){if(this.local){try{localStorage.setItem(this._lsKey,JSON.stringify(this.cache))}catch(e){}}},
+    _save(){if(this.local){try{localStorage.setItem(this._lsKey,JSON.stringify(this.cache))}catch(e){}try{localStorage.setItem("ritsu_mod",new Date().toISOString())}catch(e){}if(typeof syncSoon==="function")syncSoon();}},
     /* ---- device-only items never touch the shared database. Not hidden from friends -
        genuinely absent from the data they can reach. Retires once real logins exist. ---- */
     _priv:{}, _privKey:"ritsu_private_items",
     _loadPriv(){try{var raw=localStorage.getItem(this._privKey);this._priv=raw?JSON.parse(raw):{};}catch(e){this._priv={};}
       var self=this;Object.keys(this._priv).forEach(function(k){normalizeItem(self._priv[k]);});},
-    _savePriv(){try{localStorage.setItem(this._privKey,JSON.stringify(this._priv))}catch(e){}},
+    _savePriv(){try{localStorage.setItem(this._privKey,JSON.stringify(this._priv))}catch(e){}try{localStorage.setItem("ritsu_mod",new Date().toISOString())}catch(e){}if(typeof syncSoon==="function")syncSoon();},
     isPriv(id){return !!this._priv[id]},
 
     all(c){var m=this.cache[c]||{};var out=Object.keys(m).map(function(k){return m[k]});
@@ -6256,7 +6256,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(i.kind==="todo"&&!isRepeat(i)&&!isEpisode(i)){h+='<div class="panel" style="display:flex;align-items:center;gap:14px;margin-top:14px"><button class="tick '+(i.done?"on":"")+'" data-toggle="'+i.id+'" aria-label="'+esc(tickLabel(i))+'">'+CHECK_SVG+'</button><div style="flex:1"><b>'+(i.done?"Completed"+(i.completedAt?" · "+esc(fmtTime(completedLocal(i).slice(11,16))):""):"Not done yet")+'</b>'+(i.dueDate||subsOf(i).length?'<div class="kicker" style="color:var(--muted);margin-top:3px">'+[i.dueDate?'Due '+esc(dueLabel(i.dueDate)):'',subsOf(i).length?subsDone(i,i.done)+' of '+subsOf(i).length+(subsOf(i).length===1?' step':' steps'):''].filter(Boolean).join(' \u00b7 ')+'</div>':'')+'</div></div>';
       h+='<div class="panel sxp"><div class="sxh">Steps'+(subsOf(i).length?'<small>'+subsDone(i,i.done)+' of '+subsOf(i).length+' done</small>':'')+'</div>'+subsHtml(i,i.done,true)+'</div>';h+=assignPanel(i);return h;}
     if(i.kind==="upkeep"){var dl=dCount(nextDue(i));h+='<div class="stat-row"><div class="statbox"><b>'+dl+'</b><small>days left</small></div><div class="statbox"><b>'+(i.intervalDays||30)+'</b><small>every (d)</small></div><div class="statbox"><b>'+esc(dueLabel(nextDue(i)))+'</b><small>'+(i.mode==="rebuy"?"rebuy":"replace")+'</small></div></div><div class="panel" style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><b>Last done:</b> '+(i.lastDone||"-")+'</div><button class="mini-btn" data-reset="'+i.id+'">'+(i.mode==="rebuy"?"Bought today":"Replaced today")+'</button></div>';h+=assignPanel(i);return h;}
-    if(i.kind==="med"){var mdl=medDaysLeft(i),mcl=medCourseLeft(i);var mc=mdl<=0?"var(--rust)":medLow(i)?"var(--gold)":"var(--good)";h+='<div class="stat-row">'+(medTracked(i)?'<div class="statbox"><b style="color:'+mc+'">'+mdl+'</b><small>days of pills</small></div><div class="statbox"><b>'+(i.stock||0)+'</b><small>pills on hand</small></div>':"")+'<div class="statbox"><b>'+(i.dosesPerDay||1)+'</b><small>per day</small></div></div><div class="panel" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><b>'+(didOn(i,today())?"Taken today"+(completionTime(i,today())?" · "+esc(fmtTime(completionTime(i,today()))):""):"Not taken yet")+'</b><div class="kicker" style="color:var(--muted);margin-top:3px">'+(medTracked(i)?'Reorder at\u2264'+(i.reorderTablets||0)+' pills or \u2264'+(i.reorderAt||0)+'d':"")+(mcl!=null?(medTracked(i)?' \u00b7 ':"")+'course '+(mcl>=0?mcl+"d left":"done"):'')+'</div></div><div style="display:flex;gap:8px"><button class="btn '+(didOn(i,today())?"ghost":"primary")+' sm" data-toggle="'+i.id+'">'+(didOn(i,today())?"Undo":"Take now")+'</button>'+(medTracked(i)?'<button class="mini-btn" data-restock="'+i.id+'">Restock</button>':"")+'</div></div>';}
+    if(i.kind==="med"){var mdl=medDaysLeft(i),mcl=medCourseLeft(i);var mc=mdl<=0?"var(--rust)":medLow(i)?"var(--gold)":"var(--good)";h+='<div class="stat-row">'+(medTracked(i)?'<div class="statbox"><b style="color:'+mc+'">'+mdl+'</b><small>days of pills</small></div><div class="statbox"><b>'+(i.stock||0)+'</b><small>pills on hand</small></div>':"")+'<div class="statbox"><b>'+(i.dosesPerDay||1)+'</b><small>per day</small></div></div><div class="panel" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><b>'+(didOn(i,today())?"Taken today"+(completionTime(i,today())?" · "+esc(fmtTime(completionTime(i,today()))):""):"Not taken yet")+'</b><div class="kicker" style="color:var(--muted);margin-top:3px">'+(medTracked(i)?'Reorder at\u2264'+(i.reorderTablets||0)+' pills or \u2264'+(i.reorderAt||0)+'d':"")+(mcl!=null?(medTracked(i)?' \u00b7 ':"")+'course '+(mcl>=0?mcl+"d left":"done"):'')+'</div></div><div style="display:flex;gap:8px"><button class="btn '+(didOn(i,today())?"ghost":"primary")+' sm" data-toggle="'+i.id+'">'+(didOn(i,today())?"Undo":"Take now")+'</button>'+(evOn(i,today()).length===1?'<button class="mini-btn" data-retime="'+i.id+'|0">Change time</button>':"")+(medTracked(i)?'<button class="mini-btn" data-restock="'+i.id+'">Restock</button>':"")+'</div></div>'+dosesPanelHtml(i);}
     /* ---- a fasting item: the live window plus its history ---- */
     if(isFast(i)){
       var fa=activeFast(i),ftg=targetOf(i),dn=doneFasts(i);
@@ -6905,7 +6905,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function viewSettings(){
     var me=state.me?personById(state.me):null,h;
     if(state.view==="yousub")return youSub(state.youSub,me);
-    h='<div class="day-h you-h"><div class="d"><h1 class="title" style="font-size:2rem">You</h1><p class="kicker you-kick">'+(!acct.user?"Kept on this phone":!lbOn()?"Signed in. Locked backup is off":lbLastTxt()==="not yet"?"Locked backup needs a look":"Backed up, locked. Last "+lbLastTxt())+'</p></div><span class="buddy-slot" id="buddySlot"></span></div>';
+    h='<div class="day-h you-h"><div class="d"><h1 class="title" style="font-size:2rem">You</h1><p class="kicker you-kick">'+(!acct.user?"Kept on this phone":!lbOn()?"Signed in. Sync is off":lbLastTxt()==="not yet"?"Sync needs a look":"In step, locked. Last synced "+lbLastTxt())+'</p></div><span class="buddy-slot" id="buddySlot"></span></div>';
     if(!acct.user)h+=remNative()?'<button class="you-safe" data-yous="data"><span><b>Keep your day safe</b><small>Save a backup of your diary to keep somewhere safe.</small></span><i aria-hidden="true">'+youIcon("lock")+'</i></button>':'<button class="you-safe" data-acct="open"><span><b>Keep your day safe</b><small>Sign in, and your diary is backed up locked.</small></span><i aria-hidden="true">'+youIcon("key")+'</i></button>';
     h+='<div class="ylist">'+youRow('data-yous="name"',"Your name",me?me.name.split(" ")[0]:"Tap to set","user")+youRow('data-yous="look"',"Appearance",{warm:"Light",dark:"Dark",auto:"Auto"}[theme]||"","sun")+youRow('data-yous="rem"',"Reminders",remNative()?(remOn()?"On":"Off"):"","bell")+youRow('data-yous="away"',"Away days",awayList().some(function(r){return r.b>=today()})?"Planned":"","home")+
       youRow('data-logpick',"Your logs","","list")+youRow('data-nav="fasting"',"Fasting","","timer")+'</div>';
@@ -6982,7 +6982,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   }
 
   /* backup to a file, restore from a file, one step back */
-  function backupData(){return {app:"ritsu",version:1,exportedAt:new Date().toISOString(),me:state.me||null,cache:{cats:Store.cache.cats||{},items:Store.cache.items||{},people:Store.cache.people||{},tags:Store.cache.tags||{},markers:Store.cache.markers||{}},priv:Store._priv||{},opens:opensList(),away:awayList()}}
+  function backupData(){return {app:"ritsu",version:1,exportedAt:new Date().toISOString(),me:state.me||null,cache:{cats:Store.cache.cats||{},items:Store.cache.items||{},people:Store.cache.people||{},tags:Store.cache.tags||{},markers:Store.cache.markers||{}},priv:Store._priv||{},opens:opensList(),away:awayList(),devices:syncDevicesOut()}}
   function backupName(){return "daywell-backup-"+today()+".json"}
   function backupMarked(msg){try{localStorage.setItem("ritsu_last_backup",today())}catch(e){}
     var bl=document.getElementById("bk-last");if(bl)bl.textContent="Last backup: "+today()+". A backup file keeps everything safe.";toast(msg,null,"love");Buddy.react("love");}
@@ -7000,14 +7000,14 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(P){P.share({name:name,text:text,title:"Share your Daywell backup"}).then(function(){backupMarked("Backup ready to share")}).catch(fail);return}
     try{navigator.share({files:[new File([text],name,{type:"application/json"})],title:"Daywell backup"}).then(function(){backupMarked("Backup shared")}).catch(fail)}catch(e){fail(e)}
   }
-  function restoreBackup(text,skipConfirm){
+  function restoreBackup(text,skipConfirm,after){
     var bad=function(){var ws=document.getElementById("wStatus");if(ws)ws.textContent="Sorry, that file couldn\'t be read. Nothing has changed.";toast("Sorry, that file isn\'t a Daywell backup")};
     var b;try{b=JSON.parse(text)}catch(e){bad();return}
     var c=b&&b.cache;
     if(!b||b.app!=="ritsu"||!c||!c.items||!c.cats){bad();return}
     if(!Store.local){toast("Restore works with this device only");return}
     var when=(b.exportedAt||"").slice(0,10)||"an earlier day";
-    if(!skipConfirm){askSheet({t:"Use this backup?",b:"Everything on this phone is replaced with your backup from "+(b.exportedAt?hmLabel(when):when)+". You can undo it once.",yes:"Use backup",go:function(){restoreBackup(text,"asked")}});return}
+    if(!skipConfirm){askSheet({t:"Use this backup?",b:"Everything on this phone is replaced with your backup from "+(b.exportedAt?hmLabel(when):when)+". You can undo it once.",yes:"Use backup",go:function(){restoreBackup(text,"asked",after)}});return}
     if(skipConfirm==="asked")skipConfirm=false;
     if(!skipConfirm){try{localStorage.setItem("ritsu_prev_backup",JSON.stringify({cache:Store.cache,priv:Store._priv}))}catch(e){}}
     Store.cache={cats:c.cats||{},items:c.items||{},people:c.people||{},tags:c.tags||{},markers:c.markers||{}};
@@ -7019,7 +7019,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var was=Store.welcome;Store.welcome=false;
     if(was){try{localStorage.setItem("ritsu_first_seen",today())}catch(e){}state.view="home";}
     var nItems=Object.keys(Store.cache.items).length+Object.keys(Store._priv||{}).length,whenTxt=(b.exportedAt||"").slice(0,10);
-    toast("Restored "+nItems+(nItems===1?" item":" items")+(whenTxt?" from the "+hmLabel(whenTxt)+" backup":""));Buddy.react("restored");Store._emit();
+    if(!syncQuiet){toast("Restored "+nItems+(nItems===1?" item":" items")+(whenTxt?" from the "+hmLabel(whenTxt)+" backup":""));Buddy.react("restored")}Store._emit();if(after)after(b);
   }
   function undoRestore(){
     var raw=null;try{raw=localStorage.getItem("ritsu_prev_backup")}catch(e){}
@@ -7765,12 +7765,14 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       '<p class="ac-fine" style="text-align:left">Write it down or keep it in a password manager. If you lose it, nobody can open your backup, including us. On a new phone you type it once.</p>'+
       '<label class="ac-ck"><input type="checkbox" id="lb-ok"'+(A.lbok?" checked":"")+'> I have saved my key</label>'+err+
       '<button class="btn primary ac-go" data-acct="lbsave"'+(A.busy?" disabled":"")+'>'+(A.busy?"Locking\u2026":"Turn on locked backup")+'</button><button class="ac-later" data-acct="close">Not now</button></div>'}
-    if(A.step==="lbdone")return '<div class="modal-h"><h3>Locked backup</h3>'+x+'</div><div class="modal-b ac ac-c"><span class="ac-ok">'+ydI("lock")+'</span><h2 class="ac-big">Locked and backed up.</h2><p class="ac-sub">Your day stays here. A locked copy is in the cloud, and Daywell keeps it up to date.</p><button class="btn primary ac-go" data-acct="close">Done</button></div>';
+    if(A.step==="lbdone")return '<div class="modal-h"><h3>Sync</h3>'+x+'</div><div class="modal-b ac ac-c"><span class="ac-ok">'+ydI("lock")+'</span><h2 class="ac-big">Sync is on.</h2><p class="ac-sub">Your day stays here. A locked copy is in the cloud, and Daywell keeps your devices in step.</p><button class="btn primary ac-go" data-acct="close">Done</button></div>';
     if(A.step==="lbfound")return '<div class="modal-h"><h3>We found your day</h3>'+x+'</div><div class="modal-b ac"><div class="lb-found"><div class="lb-k">Locked backup</div><b>'+esc(lbWhenTxt(A.lbWhen))+'</b><small>It is locked. Type your key to open it.</small></div>'+
       '<label class="ac-l" for="lb-input">Your key</label><input id="lb-input" class="su-inp lb-input" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX">'+err+
       '<button class="btn primary ac-go" data-acct="lbrestore"'+(A.busy?" disabled":"")+'>'+(A.busy?"Opening\u2026":"Restore my day")+'</button><button class="ac-later" data-acct="lbskip">Start fresh instead</button><p class="ac-fine">Lost your key? Then this backup cannot be opened. You can start fresh and make a new one.</p></div>';
+    if(A.step==="sync")return '<div class="modal-h"><h3>Sync</h3>'+x+'</div><div class="modal-b ac"><p class="ac-sub">Your day stays in step on every phone and computer you sign in on. It is locked, so only your key opens it.</p>'+err+'<div class="lb-found"><div class="lb-k">Sync is on</div><b>'+esc(syncStateTxt())+'</b><small>Last synced '+esc(lbLastTxt())+'</small></div><div style="font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px">Your devices</div>'+syncDevsHtml()+'<button class="btn primary ac-go" data-acct="lbnow"'+(A.busy?' disabled':'')+'>'+(A.busy?'Syncing\u2026':'Sync now')+'</button><button class="btn ghost ac-go" data-acct="syncadd">Add another device</button><button class="ac-later" data-acct="lboff">Turn off sync</button><p class="ac-fine">Turning off keeps your day on each device. It only stops them matching.</p><button class="ac-later" data-acct="syncback">Back</button></div>';
+    if(A.step==="syncadd"){var kq=String(A.lbkey||"").split("-");return '<div class="modal-h"><h3>Add another device</h3>'+x+'</div><div class="modal-b ac"><p class="ac-sub">On the other phone or computer, open Daywell and sign in with <b>'+esc(A.user?A.user.email:"")+'</b>. When it asks, type this key.</p><div class="lb-key" id="lb-key">'+esc(kq.slice(0,3).join("-"))+'<br>'+esc(kq.slice(3).join("-"))+'</div><div class="ac-row" style="justify-content:center"><button class="ac-later" data-acct="lbcopy">Copy the key</button></div><p class="ac-fine" style="text-align:left">Keep it to yourself. It opens your locked day.</p><button class="btn primary ac-go" data-acct="syncback">Done</button></div>'}
     if(A.step==="manage")return '<div class="modal-h"><h3>Account</h3>'+x+'</div><div class="modal-b ac"><p class="ac-sub">Signed in as <b>'+esc(A.user?A.user.email:"")+'</b>.</p>'+err+
-      '<div class="lb-status"><b>'+(lbOn()?'Locked backup is on':'Locked backup is off')+'</b><small>'+(lbOn()?'Last backup: '+esc(lbLastTxt()):'Keep a locked copy in the cloud. Only you can open it.')+'</small></div>'+(lbOn()?'<button class="btn ghost ac-go" data-acct="lbnow"'+(A.busy?' disabled':'')+'>Back up now</button><button class="ac-later" data-acct="lboff">Turn off locked backup</button>':'<button class="btn primary ac-go" data-acct="lbstart">Turn on locked backup</button><button class="ac-later" data-acct="lbfindgo">Restore from a locked backup</button>')+'<button class="btn ghost ac-go" data-acct="signout"'+(A.busy?" disabled":"")+'>Sign out</button><button class="ac-later ac-del" data-acct="delete">Delete my account</button><p class="ac-fine">Deleting removes your sign-in for good. Your day stays on this phone.</p></div>';
+      '<div class="lb-status"><b>'+(lbOn()?'Sync is on':'Sync is off')+'</b><small>'+(lbOn()?esc(syncStateTxt())+'. Last synced '+esc(lbLastTxt()):'Keep your day in step on all your devices. It is locked, so only you can open it.')+'</small></div>'+(lbOn()?'<button class="btn ghost ac-go" data-acct="syncopen">Sync and devices</button>':'<button class="btn primary ac-go" data-acct="lbstart">Turn on sync</button><button class="ac-later" data-acct="lbfindgo">Restore from a locked backup</button>')+'<button class="btn ghost ac-go" data-acct="signout"'+(A.busy?" disabled":"")+'>Sign out</button><button class="ac-later ac-del" data-acct="delete">Delete my account</button><p class="ac-fine">Deleting removes your sign-in for good. Your day stays on this phone.</p></div>';
     h='<div class="modal-h"><h3>Keep your day safe</h3>'+x+'</div><div class="modal-b ac"><p class="ac-sub">One link by email. No password to remember.</p><div class="ac-why">'+
       [["lock","Your own account","Only you can sign in to it."],["phone","Any phone, soon","Moving your day to a new phone comes next."],["users","Grow with friends","When groups arrive, you\u2019re ready."]].map(function(r){return '<div>'+ydI(r[0])+'<span><b>'+r[1]+'</b>'+r[2]+'</span></div>'}).join("")+'</div>'+
       '<label class="ac-l" for="ac-email">Your email</label><input id="ac-email" class="su-inp" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" value="'+esc(A.email)+'">'+err+
@@ -7792,16 +7794,19 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(a==="lbsave"){var ok=$("#lb-ok");A.lbok=!!(ok&&ok.checked);if(!A.lbok){A.err="Tick the box once your key is saved.";acctDraw();return}
       A.busy=true;A.err="";acctDraw();try{localStorage.setItem("ritsu_lbkey",A.lbkey)}catch(e){A.busy=false;A.err="This browser would not keep the key, so backup stays off.";acctDraw();return}
       lbPush().then(function(){A.step="lbdone";A.lbkey=""}).catch(function(e){try{localStorage.removeItem("ritsu_lbkey")}catch(x){}A.err=acctMsg(e)}).then(function(){A.busy=false;acctDraw()});return}
-    if(a==="lbnow"){A.busy=true;A.err="";acctDraw();lbPush().then(function(){toast("Backed up. Your day is safe.")}).catch(function(e){A.err=acctMsg(e)}).then(function(){A.busy=false;acctDraw()});return}
-    if(a==="lboff"&&!A.asked){askSheet({t:"Turn off locked backup?",b:"The cloud copy is deleted. Your day stays on this phone.",yes:"Turn it off",danger:1,keep:1,back:function(){openModal(acctHtml())},go:function(){openModal(acctHtml());A.asked=1;acctAct("lboff");A.asked=0}});return}
+    if(a==="syncopen"){A.step="sync";A.err="";acctDraw();return}
+    if(a==="syncback"){A.step=A.step==="syncadd"?"sync":"manage";A.lbkey="";acctDraw();return}
+    if(a==="syncadd"){A.lbkey=lbNorm(lbGetKey()).replace(/(.{4})(?=.)/g,"$1-");A.step="syncadd";acctDraw();return}
+    if(a==="lbnow"){A.busy=true;A.err="";acctDraw();syncRun().then(function(){if(syncErr)A.err=syncErrTxt();else toast("In step.")}).then(function(){A.busy=false;acctDraw()});return}
+    if(a==="lboff"&&!A.asked){askSheet({t:"Turn off sync?",b:"The locked copy in the cloud is deleted and your devices stop matching. Your day stays on each device.",yes:"Turn it off",danger:1,keep:1,back:function(){openModal(acctHtml())},go:function(){openModal(acctHtml());A.asked=1;acctAct("lboff");A.asked=0}});return}
     if(a==="lboff"){
-      A.busy=true;acctDraw();sbLoad().then(function(sb){return sb.from("backups").delete().eq("user_id",A.user.id)}).catch(function(){}).then(function(){try{localStorage.removeItem("ritsu_lbkey");localStorage.removeItem("ritsu_lb_last")}catch(e){}A.busy=false;A.step="manage";acctDraw();toast("Locked backup is off.")});return}
+      A.busy=true;acctDraw();sbLoad().then(function(sb){return sb.from("backups").delete().eq("user_id",A.user.id)}).catch(function(){}).then(function(){syncOffHere();A.busy=false;A.step="manage";acctDraw();toast("Sync is off.")});return}
     if(a==="lbfindgo"){A.busy=true;A.err="";acctDraw();lbFind().then(function(w){A.busy=false;if(w){A.lbWhen=w;A.step="lbfound"}else A.err="No locked backup found for this account yet.";acctDraw()}).catch(function(e){A.busy=false;A.err=acctMsg(e);acctDraw()});return}
     if(a==="lbskip"){try{localStorage.setItem("ritsu_lb_skip",today())}catch(e){}closeModal();render();return}
     if(a==="lbrestore"){var iv=$("#lb-input"),kk=lbNorm(iv?iv.value:"");if(kk.length!==24){A.err="The key has 24 letters and numbers.";acctDraw();return}
       A.busy=true;A.err="";acctDraw();
       lbPull(kk).then(function(text){var has=Object.keys(Store.cache.items||{}).length+Object.keys(Store._priv||{}).length>0;
-        try{localStorage.setItem("ritsu_lbkey",kk)}catch(e){}A.busy=false;closeModal();restoreBackup(text,!has)})
+        A.busy=false;closeModal();restoreBackup(text,!has,function(b){try{localStorage.setItem("ritsu_lbkey",kk)}catch(e){}syncDevicesIn(b.devices);syncMark(lbPulledAt,syncMod0());lbPush().catch(function(){})})})
         .catch(function(e){A.busy=false;A.err=e&&e.message==="wrong key"?"That key does not open this backup. Check every character.":(e&&e.message==="none"?"No locked backup found.":acctMsg(e));acctDraw()});return}
     if(a==="signout"){A.busy=true;acctDraw();sbLoad().then(function(sb){return sb.auth.signOut()}).catch(function(){}).then(function(){A.user=null;A.busy=false;try{localStorage.removeItem("ritsu_acct")}catch(e){}closeModal();render();toast("Signed out. Your day stays on this phone.")});return}
     if(a==="delete"&&!A.asked){askSheet({t:"Delete your account?",b:"This removes your sign-in for good. Your day stays on this phone.",yes:"Delete account",danger:1,keep:1,back:function(){openModal(acctHtml())},go:function(){openModal(acctHtml());A.asked=1;acctAct("delete");A.asked=0}});return}
@@ -7835,12 +7840,12 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function lbGetKey(){try{return localStorage.getItem("ritsu_lbkey")||""}catch(e){return ""}}
   function lbOn(){return !!lbGetKey()}
   /* lock the whole backup and put it in the cloud, replacing the last copy */
-  function lbPush(){var key=lbGetKey();if(!key||!acct.user)return Promise.reject(new Error("not ready"));
-    return lbEnc(key,JSON.stringify(backupData())).then(function(env){return sbLoad().then(function(sb){return sb.from("backups").upsert({user_id:acct.user.id,payload:env,updated_at:new Date().toISOString()})})})
-      .then(function(r){if(r.error)throw r.error;try{localStorage.setItem("ritsu_lb_last",new Date().toISOString())}catch(e){}})}
+  function lbPush(){var key=lbGetKey();if(!key||!acct.user)return Promise.reject(new Error("not ready"));var mod=syncMod0(),at=new Date().toISOString();
+    return lbEnc(key,JSON.stringify(backupData())).then(function(env){return sbLoad().then(function(sb){return sb.from("backups").upsert({user_id:acct.user.id,payload:env,updated_at:at})})})
+      .then(function(r){if(r.error)throw r.error;syncMark(at,mod)})}
   /* fetch the cloud copy, unlock it with the key typed in, and hand it to the normal restore */
   function lbPull(secret){return sbLoad().then(function(sb){return sb.from("backups").select("payload,updated_at").maybeSingle()})
-    .then(function(r){if(r.error)throw r.error;if(!r.data)throw new Error("none");return lbDec(secret,r.data.payload)})}
+    .then(function(r){if(r.error)throw r.error;if(!r.data)throw new Error("none");lbPulledAt=r.data.updated_at;return lbDec(secret,r.data.payload)})}
   function lbFind(){return sbLoad().then(function(sb){return sb.from("backups").select("updated_at").maybeSingle()}).then(function(r){if(r.error)throw r.error;return r.data?r.data.updated_at:null})}
   function lbWhenTxt(iso){var d=new Date(iso);if(isNaN(d))return "an earlier day";var p=function(n){return (n<10?"0":"")+n};
     return hmLabel(d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate()))+", "+fmtTime(p(d.getHours())+":"+p(d.getMinutes()))}
@@ -7849,10 +7854,52 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function lbOffer(){if(lbOn())return;var sk="";try{sk=localStorage.getItem("ritsu_lb_skip")||""}catch(e){}if(sk===today())return;
     lbFind().then(function(w){if(!w||lbOn())return;acct.lbWhen=w;acct.step="lbfound";acct.err="";if($(".ac"))acctDraw();else openModal(acctHtml())}).catch(function(){})}
   /* keep the cloud copy fresh: when the app opens or goes away, and the last copy is over six hours old */
-  function lbAuto(){if(!lbOn()||!acct.user)return;var last=0;try{last=Date.parse(localStorage.getItem("ritsu_lb_last")||"")||0}catch(e){}
-    if(Date.now()-last>6*3600*1000)lbPush().catch(function(){})}
+  function lbAuto(){syncRun()}
   document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")lbAuto()});
   /* locked backup (end) */
+  /* ===== sync (start): the locked backup doubles as the meeting point for every device you sign in on.
+     Each device remembers the cloud copy it last matched (ritsu_sync_cloud) and the time of its own last change (ritsu_mod vs ritsu_sync_mod).
+     Cloud changed and this device did not: take the cloud copy. This device changed and the cloud did not: send ours.
+     A device with nothing in it never overwrites the cloud. Both changed: the newer one wins whole, and the replaced copy is kept for one undo (ritsu_prev_backup). ===== */
+  function syncPlan(s){
+    if(!s.cloudAt)return s.syncedCloud?"off":"push";
+    if(s.cloudAt<=s.syncedCloud)return s.dirty?"push":"none";
+    if(!s.dirty||s.empty)return "pull";
+    return s.modMs>s.cloudAt?"push":"pull"}
+  /* sync plan (end) */
+  var syncBusy=false,syncErr="",syncQuiet=false,syncTimer=0,lbPulledAt="";
+  function syncGet(k){try{return localStorage.getItem(k)||""}catch(e){return ""}}
+  function syncSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  function syncMod0(){return syncGet("ritsu_mod")}
+  function syncMark(cloudAt,mod){syncSet("ritsu_sync_cloud",cloudAt);syncSet("ritsu_sync_mod",mod);syncSet("ritsu_lb_last",new Date().toISOString())}
+  function syncOffHere(){["ritsu_lbkey","ritsu_lb_last","ritsu_sync_cloud","ritsu_sync_mod","ritsu_devices"].forEach(function(k){try{localStorage.removeItem(k)}catch(e){}})}
+  function syncDevId(){var d=syncGet("ritsu_devid");if(!d){d="d"+Math.random().toString(36).slice(2,10);syncSet("ritsu_devid",d)}return d}
+  function syncDevName(){var u=navigator.userAgent||"";return /Android/i.test(u)?"Android phone":/iPhone|iPad/i.test(u)?"iPhone":/Windows/i.test(u)?"Windows computer":/Mac/i.test(u)?"Mac":"This device"}
+  function syncDevList(){try{return JSON.parse(syncGet("ritsu_devices")||"{}")||{}}catch(e){return {}}}
+  function syncDevicesOut(){var m=syncDevList();m[syncDevId()]={name:syncDevName(),at:new Date().toISOString()};syncSet("ritsu_devices",JSON.stringify(m));return m}
+  function syncDevicesIn(o){if(!o||typeof o!=="object")return;var m=syncDevList(),me=syncDevId();Object.keys(o).forEach(function(k){if(k===me||!o[k]||!o[k].at)return;if(!m[k]||o[k].at>m[k].at)m[k]=o[k]});syncSet("ritsu_devices",JSON.stringify(m))}
+  function syncAgo(iso){var t=Date.parse(iso);if(isNaN(t))return "a while ago";var m=Math.floor((Date.now()-t)/60000);if(m<1)return "just now";if(m<60)return m+(m===1?" minute ago":" minutes ago");return lbWhenTxt(iso)}
+  function syncDevsHtml(){var m=syncDevList(),me=syncDevId(),own=syncGet("ritsu_lb_last");m[me]={name:syncDevName(),at:own||new Date().toISOString()};
+    return Object.keys(m).sort(function(a,b){return a===me?-1:b===me?1:(m[b].at>m[a].at?1:-1)}).map(function(k){var d=m[k];
+      return '<div class="lb-status" style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span><b>'+esc(d.name||"Device")+'</b><small>Synced '+esc(syncAgo(d.at))+'</small></span><small style="margin:0">'+(k===me?"This one":"")+'</small></div>'}).join("")}
+  function syncErrTxt(){return syncErr==="key"?"This key does not open the cloud copy. Check it is the same key as on your other device.":"Could not reach the cloud. It will try again."}
+  function syncStateTxt(){return syncErr==="key"?"Key does not match":syncErr?"Waiting for a connection":"In step"}
+  /* one round: ask the cloud when its copy last changed, then push, pull or leave alone */
+  function syncRun(){if(syncBusy||!lbOn()||!acct.user)return Promise.resolve();syncBusy=true;var key=lbGetKey(),mod=syncMod0();
+    return lbFind().then(function(w){
+      var p=syncPlan({cloudAt:w?Date.parse(w):0,syncedCloud:Date.parse(syncGet("ritsu_sync_cloud"))||0,dirty:mod!==syncGet("ritsu_sync_mod"),modMs:Date.parse(mod)||0,empty:Object.keys(Store.cache.items||{}).length+Object.keys(Store._priv||{}).length===0});
+      if(p==="push")return lbPush();
+      if(p==="pull"){if($("#overlay.show"))return;
+        return lbPull(key).then(function(text){var b=JSON.parse(text);syncQuiet=true;try{restoreBackup(text,"asked")}finally{syncQuiet=false}
+          syncDevicesIn(b.devices);syncMark(lbPulledAt,syncMod0());toast("Updated from your other device")})}
+      if(p==="off"){syncOffHere();toast("Sync was turned off on another device.");return}
+      syncSet("ritsu_lb_last",new Date().toISOString())})
+    .then(function(){syncErr=""},function(e){syncErr=e&&e.message==="wrong key"?"key":"net"})
+    .then(function(){syncBusy=false;if($(".ac")&&(acct.step==="sync"||acct.step==="manage")&&!acct.busy)acctDraw()})}
+  function syncSoon(){if(!lbOn())return;clearTimeout(syncTimer);syncTimer=setTimeout(syncRun,15000)}
+  document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")syncRun()});
+  setTimeout(syncRun,4000);setInterval(function(){if(document.visibilityState==="visible")syncRun()},90000);
+  /* sync (end) */
   /* ===== routines in setup (start), user 2026-10-18: after "keep up with", Daywell groups what you picked into a morning
      and an evening routine, offers a small upgrade and room for your own. Afternoons are left alone. Each routine is one
      check-in at its part's check-in time (ritsu_checkins), with Yes, Some, Not today. Saved by ydRtMake at the end. ===== */
@@ -10525,6 +10572,13 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function savePerson(){var d=ms.data;var n=$("#pp-name");if(n)d.name=n.value;if(!(d.name||"").trim()){toast("Name them");return;}var nmL=d.name.trim().toLowerCase();if(!ms.dupOk&&people().some(function(p){return (p.name||"").trim().toLowerCase()===nmL})){ms.dupOk=true;toast("There is already someone called "+d.name.trim()+". Tap Add again to add another.");return;}Store.add("people",{name:d.name.trim(),emoji:d.emoji,color:d.color,createdAt:new Date().toISOString()}).then(function(id){if(id&&!state.me){state.me=id;try{localStorage.setItem("ritsu_me",id)}catch(x){}}});closeModal();}
   function openMePicker(){var ppl=people();var h='<div class="modal-h"><h3>Who are you?</h3><button class="x" data-close>×</button></div><div class="modal-b">';if(!ppl.length)h+='<p class="kicker" style="color:var(--muted);margin-bottom:12px">No people yet.</p><button class="btn primary" data-action="add-person">＋ Add a person</button>';else{h+='<div class="pick-wrap">'+ppl.map(function(p){return '<button type="button" class="pick '+(p.id===state.me?"on":"")+'" data-setme="'+p.id+'">'+avatar(p,"sm")+esc(p.name)+'</button>'}).join("")+'</div>';}h+='</div><div class="modal-f"><span class="spacer"></span><button class="btn ghost" data-close>Close</button></div>';openModal(h);}
 
+  /* change the time a dose was taken (today only): the same time wheel as everywhere, never a time that has not come yet */
+  function dosesPanelHtml(i){var ev=evOn(i,today());if(ev.length<2)return"";
+    return '<div class="panel"><b>Doses today</b>'+ev.map(function(e,k){return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(128,128,128,.2);margin-top:'+(k?0:8)+'px"><span>Dose '+(k+1)+'</span><button class="mini-btn" style="margin-left:auto" data-retime="'+i.id+'|'+k+'" aria-label="Change the time of dose '+(k+1)+'">'+(e.t?esc(fmtTime(e.t)):"No time")+' \u270e</button></div>'}).join("")+'</div>'}
+  function retimeDose(id,k){var i=Store.get("items",id);if(!i||!evOn(i,today())[k])return;
+    qpTime(evOn(i,today())[k].t||"",function(v){var fi=Store.get("items",id);if(!fi||!v)return;
+      if(v>nowHM()){toast("That time has not come yet today");return}
+      var c=cloneEvents(fi),d=c[today()];if(!d||!d[k])return;d[k].t=v;writeEvents(fi,c);toast("Taken at "+fmtTime(v)+": "+fi.title)})}
   function cloneEvents(i){var o={};Object.keys(i.events||{}).forEach(function(d){o[d]=(i.events[d]||[]).map(function(e){return {t:e.t,flags:(e.flags||[]).slice(),scale:e.scale==null?null:e.scale,note:e.note||""}})});return o}
   function newEvent(ds){return {t:ds===today()?nowHM():null,flags:[],scale:null,note:""}}
 
@@ -10736,6 +10790,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if((el=e.target.closest("[data-measure]"))){e.stopPropagation();openMeasure(el.getAttribute("data-measure"));return;}
     if((el=e.target.closest("[data-shop]"))){openShop();return;}
     if((el=e.target.closest("[data-reset]"))){e.stopPropagation();if(ms&&ms.type==="shop")setTimeout(function(){if(ms&&ms.type==="shop")openShop()},60);var rid=el.getAttribute("data-reset"),ri=Store.get("items",rid),prevLd=ri?(ri.lastDone||null):null;Store.update("items",rid,{lastDone:today()});toast((ri&&ri.mode==="rebuy"?"Bought: ":"Done: ")+(ri?ri.title:""),function(){Store.update("items",rid,{lastDone:prevLd})});return;}
+    if((el=e.target.closest("[data-retime]"))){e.stopPropagation();var rp=el.getAttribute("data-retime").split("|");retimeDose(rp[0],+rp[1]);return;}
     if((el=e.target.closest("[data-restock]"))){e.stopPropagation();openRestock(el.getAttribute("data-restock"));return;}
     if((el=e.target.closest("[data-backfill]"))){e.stopPropagation();var p=el.getAttribute("data-backfill").split("|");backfillDate(Store.get("items",p[0]),p[1]);return;}
     if((el=e.target.closest("[data-ep]"))){e.stopPropagation();var epi=Store.get("items",el.getAttribute("data-ep"));if(epi){if(activeEp(epi)){var dd0=epDays(activeEp(epi));endEpisode(epi);state.mstrip=null;toast("Ended after "+dd0+" days");}else{startEpisode(epi);openStrip(epi.id);}}return;}
