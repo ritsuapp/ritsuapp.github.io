@@ -2644,6 +2644,13 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   .ac-ck{display:flex;gap:10px;align-items:center;margin-top:14px;font-size:0.9375rem}.ac-ck input{width:20px;height:20px;accent-color:var(--accent);flex:none}
   .lb-found{margin:2px 0 14px;padding:14px;border-radius:14px;background:var(--panel-2);border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line))}
   .lb-found .lb-k{font-size:0.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.lb-found b{display:block;font-size:1.0625rem;margin-top:4px}.lb-found small{display:block;color:var(--muted);font-size:0.8125rem;margin-top:3px}
+  .bl-b{padding-top:6px}.bl-as{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--panel-2);margin:2px 0 6px}.bl-as b{display:block;font-weight:600}.bl-as small{color:var(--muted);font-size:0.875rem}.bl-i{width:38px;height:38px;border-radius:50%;background:var(--panel);display:grid;place-items:center;color:var(--muted)}.bl-i .phi{width:20px;height:20px}
+  .bl-k{margin:14px 0 6px;font-size:0.875rem;color:var(--muted);font-weight:500;display:block}.bl-amt{display:flex;align-items:center;gap:8px;padding:0 6px 0 14px;height:48px;border-radius:14px;background:var(--panel-2);font-size:1.0625rem}.bl-amt input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;outline:none}
+  .bl-ab,.bl-ch,.bl-chip{font:inherit;color:var(--muted);background:transparent;border:0;cursor:pointer}.bl-ab{padding:8px 12px;border-radius:999px;font-size:0.8125rem}.bl-ab.on{color:var(--ink);box-shadow:inset 0 0 0 1.4px var(--ink)}
+  .bl-row{display:flex;flex-wrap:wrap;gap:8px}.bl-chip{height:40px;padding:0 15px;border-radius:999px;background:var(--panel-2);font-size:0.9375rem}.bl-chip.on{color:var(--ink);box-shadow:inset 0 0 0 1.4px var(--ink)}.bl-sub{margin-top:8px}
+  .bl-sum{margin:12px 4px 4px;font-size:0.875rem;line-height:1.5;color:var(--muted)}.bl-ch{color:var(--ink);text-decoration:underline;text-underline-offset:3px;padding:0 2px}
+  .bl-more{margin:8px 0 4px;padding:6px 14px;border-radius:16px;background:var(--panel-2)}.bl-more label{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:48px;border-top:1px solid var(--line);font-size:0.9375rem}.bl-more label:first-child{border:0}.bl-more select,.bl-more input{max-width:55%;border:0;background:transparent;color:var(--ink);font:inherit;text-align:right;outline:none}
+  .bl-sw{display:flex;align-items:center;justify-content:space-between;padding:14px 4px 0;font-size:0.9375rem}.bl-tg{width:46px;height:28px;border-radius:99px;border:0;background:var(--line);position:relative;cursor:pointer}.bl-tg:after{content:"";position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:var(--panel);transition:left .15s}.bl-tg.on{background:var(--ink)}.bl-tg.on:after{left:21px}
   .lb-status{margin:2px 0 12px;padding:12px 14px;border-radius:14px;background:var(--panel-2)}.lb-status b{display:block;font-size:0.9375rem}.lb-status small{display:block;color:var(--muted);font-size:0.8125rem;margin-top:2px}
   /* ===== the dock: glass tiles, a dot under the open page; on a mouse, tiles near the pointer grow (--d from the dock script) ===== */
   body .bottomnav.fnav{height:auto;padding:9px;gap:8px;border-radius:20px;align-items:flex-end;justify-content:center}
@@ -3894,6 +3901,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   if(_mq&&_mq.addEventListener)_mq.addEventListener("change",function(){if(theme==="auto"){document.documentElement.setAttribute("data-theme",effTheme("auto"));_tc(effTheme("auto"))}});
 
   function normalizeItem(v){
+    if(v.kind==="bill"){if(!v.paid||typeof v.paid!=="object")v.paid={};if(!v.skip||typeof v.skip!=="object")v.skip={};}
     if(v.kind==="habit")v.kind="todo";
     if(v.kind==="countdown"){v.kind="upkeep";v.mode="replace";}
     if(v.kind==="replace"){v.kind="upkeep";if(!v.mode)v.mode="replace";}
@@ -4006,9 +4014,9 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function metOn(i,ds){if(i.mark==="count")return false;if(i.kind==="todo"&&isRepeat(i))return countOn(i,ds)>=perDayOf(i);if(i.kind==="med"&&(i.timesADay||1)>1)return countOn(i,ds)>=i.timesADay;return didOn(i,ds)}
   function abnormalOn(i,ds){return i.mark!=="count"&&i.kind==="todo"&&isRepeat(i)&&countOn(i,ds)>perDayOf(i)}
   function lastDoneOf(i){if(i.kind==="todo"){var ks=Object.keys(i.counts||{}).filter(function(k){return i.counts[k]>0});ks.sort();return ks.length?ks[ks.length-1]:null;}if(i.kind==="med"){var l=(i.log||[]).slice().sort();return l.length?l[l.length-1]:null;}return i.lastDone||null}
-  function nextDue(i){if(i.kind==="todo"){if(isRepeat(i)){var ld=lastDoneOf(i);return ld?addDaysStr(ld,i.repeatEvery):today();}return i.dueDate||null;}if(i.kind==="measure"||i.kind==="med"){var ld2=lastDoneOf(i);return ld2?addDaysStr(ld2,i.repeatEvery||1):(i.kind==="med"&&i.startDate&&dCount(i.startDate)>0?i.startDate:today());}return addDaysStr(i.lastDone||i.createdDate||today(),i.intervalDays||30)}
-  function doneForNow(i){if(i.kind==="measure")return measureHit(i,today());if(i.kind==="med")return metOn(i,today());if(i.kind==="todo"){if(isRepeat(i))return metOn(i,today());return !!i.done;}return dCount(nextDue(i))>0}
-  function onToday(i){if(isLimit(i)||isEpisode(i)||isFast(i))return false;if(hasRhythm(i))return planOn(i,today());if(i.kind==="measure"||i.kind==="med")return (i.repeatEvery||1)===1||didOn(i,today())||dCount(nextDue(i))<=0;if(i.kind!=="todo")return false;if(isRepeat(i))return countOn(i,today())>0||dCount(nextDue(i))<=0;return i.dueDate!=null&&dCount(i.dueDate)<=0}
+  function nextDue(i){if(i.kind==="bill")return blState(i,today()).due;if(i.kind==="todo"){if(isRepeat(i)){var ld=lastDoneOf(i);return ld?addDaysStr(ld,i.repeatEvery):today();}return i.dueDate||null;}if(i.kind==="measure"||i.kind==="med"){var ld2=lastDoneOf(i);return ld2?addDaysStr(ld2,i.repeatEvery||1):(i.kind==="med"&&i.startDate&&dCount(i.startDate)>0?i.startDate:today());}return addDaysStr(i.lastDone||i.createdDate||today(),i.intervalDays||30)}
+  function doneForNow(i){if(i.kind==="bill")return !blState(i,today()).due;if(i.kind==="measure")return measureHit(i,today());if(i.kind==="med")return metOn(i,today());if(i.kind==="todo"){if(isRepeat(i))return metOn(i,today());return !!i.done;}return dCount(nextDue(i))>0}
+  function onToday(i){if(i.kind==="bill")return false;if(isLimit(i)||isEpisode(i)||isFast(i))return false;if(hasRhythm(i))return planOn(i,today());if(i.kind==="measure"||i.kind==="med")return (i.repeatEvery||1)===1||didOn(i,today())||dCount(nextDue(i))<=0;if(i.kind!=="todo")return false;if(isRepeat(i))return countOn(i,today())>0||dCount(nextDue(i))<=0;return i.dueDate!=null&&dCount(i.dueDate)<=0}
   function medLow(i){return medTracked(i)&&((i.reorderTablets>0&&(i.stock||0)<=i.reorderTablets)||(i.reorderAt>0&&medDaysLeft(i)<=i.reorderAt))}
   function attention(i){
     if(isLimit(i)||isBody(i)||isEpisode(i)||isFast(i))return null; /* these are never "overdue", nothing was promised */
@@ -4026,6 +4034,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   function weekDoneBut(i,ds){var d=new Date(ds+"T00:00:00"),st=addDaysStr(ds,-((d.getDay()+6)%7)),n=0;
     for(var k=0;k<7;k++){var x=addDaysStr(st,k);if(x!==ds&&didOn(i,x))n++;}return n}
   function planOn(i,ds){
+    if(i.kind==="bill")return false;
     var mv=i.moves||{};if(mv[ds])return didOn(i,ds);          /* moved away, still counts if done anyway */
     for(var f in mv)if(mv[f]===ds)return true;               /* moved here */
     if(i.perWeek){if(didOn(i,ds))return true;if(dCount(ds)<0)return false;return weekDoneBut(i,ds)<i.perWeek;}   /* a skipped day never counts */
@@ -5462,6 +5471,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(off===0&&!visibleItems().some(function(i){return !i.archived}));   /* an empty app gets blankHome under the greeting instead */
     else if(!its.length&&!extra.length)h+='<div class="cat-empty">'+(off===0?"Nothing planned yet. Tap + whenever you\'re ready.":off>0?"Nothing planned for this day yet.":"Nothing was on the list this day.")+'</div>';
     if(meds.length)h+=off===0?medCard(meds,ds):xBlock(meds,medsTitle(meds));   /* medicine first: time matters most there */
+    if(off===0)h+=billsCard();
     if(off===0&&!el0)h+=shopChip();   /* the shop sits under the medicine (2026-10-19) */
     if(its.length)h+=state.hmSort==="topic"?qcGrouped(show,ds):qcByTime(show,ds);
     if(also.length)h+=xBlock(also,"Also today");
@@ -6051,7 +6061,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     if(i.kind==="med")return d?"Taken, tap to undo: "+t:"Mark "+t+" taken";
     return d?"Done, tap to undo: "+t:"Mark "+t+" done";
   }
-  function itemRow(i,opts){opts=opts||{};var dsR=opts.ds||today(),isT=dsR===today(),pastR=dCount(dsR)<0;var complete=isT?doneForNow(i):(pastR?creditOn(i,dsR)>=1:false);var cc=isT?countOn(i,today()):(pastR?countOn(i,dsR):0);var st;
+  function itemRow(i,opts){opts=opts||{};if(i.kind==="bill")return blRow(i);var dsR=opts.ds||today(),isT=dsR===today(),pastR=dCount(dsR)<0;var complete=isT?doneForNow(i):(pastR?creditOn(i,dsR)>=1:false);var cc=isT?countOn(i,today()):(pastR?countOn(i,dsR):0);var st;
     var stance=stanceOf(i);var pd=Math.max(1,normOf(i).max||perDayOf(i));
     var isDone=complete&&isRoutine(i)&&(i.kind==="todo"||i.kind==="measure"||i.kind==="med");
     var h='<div class="row '+(isDone?"done":"")+(i.cb?" cbrow":"")+'" data-open="'+i.id+'">';
@@ -6222,6 +6232,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
       (its.length?'<div class="card">'+its.map(function(i){return itemRow(i)}).join("")+'</div>':'<p class="tp-none">Nothing to restock. Add soap, toothpaste and more from Ideas.</p>')+'</div>')}
   /* ===== At the shop (end) ===== */
   function dueOnDate(i,ds,off){
+    if(i.kind==="bill")return false;
     if(isLimit(i)||isEpisode(i)||isFast(i))return false;
     if(i.kind==="med"&&medOut(i,ds))return false; /* nothing is "due", it lives in its own strip */
     if(hasRhythm(i))return planOn(i,ds);
@@ -8664,6 +8675,115 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     rtSave(rtList().map(function(r){if(r.id===t.getAttribute("data-rttime"))r.time=v;return r}));render();toast("Reminder moved to "+fmtTime(v)+".",null)});
   /* ===== Routines (end) ===== */
 
+  /* ===== bills (start), 2026-11-09: things to pay (rent, power, phone). Own kind "bill", shown in its own Bills card on Home,
+     never counted in your day (like medicine), no red and no "overdue". A bill is a rule (every month on the 5th, every N days,
+     every year, once) and a list of due dates; each due date is paid, skipped or open. Paid is one tap. ===== */
+  function blFmt(d){return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)}
+  function blAdd(ds,n){var d=new Date(ds+"T00:00:00");d.setDate(d.getDate()+n);return blFmt(d)}
+  function blDim(y,m){return new Date(y,m,0).getDate()}
+  /* day 0 means the last day; a day past the end of a short month lands on its last day */
+  function blMake(y,m,d){var dim=blDim(y,m);return y+"-"+("0"+m).slice(-2)+"-"+("0"+(d<1||d>dim?dim:d)).slice(-2)}
+  function blDays(a,b){return Math.round((new Date(b+"T00:00:00")-new Date(a+"T00:00:00"))/864e5)}
+  /* every due date from the start up to limit (a bill that ends after N payments stops there) */
+  function blOcc(b,limit){var out=[],st=b.start||"1970-01-01",cap=b.endAfter>0?+b.endAfter:1000;
+    if(b.rule==="once"){if(b.date&&b.date<=limit)out.push(b.date);return out}
+    if(b.rule==="days"){var n=Math.max(1,+b.n||14),d=st;while(d<=limit&&out.length<cap&&out.length<1000){out.push(d);d=blAdd(d,n)}return out}
+    var y=+st.slice(0,4),m=+st.slice(5,7);
+    if(b.rule==="year"){var mm=+b.month||m,dd=+b.day||1;if(blMake(y,mm,dd)<st)y++;while(out.length<cap&&out.length<100){var c=blMake(y,mm,dd);if(c>limit)break;out.push(c);y++}return out}
+    var dd2=b.day==null?1:+b.day;
+    while(out.length<cap&&out.length<400){var c2=blMake(y,m,dd2);if(c2>limit)break;if(c2>=st)out.push(c2);m++;if(m>12){m=1;y++}}
+    return out}
+  /* where a bill stands today: the open due date (a missed one stays for 45 days, plain, never red), days to it, the last payment */
+  function blState(b,t){
+    var occ=blOcc(b,blAdd(t,400)),old=blAdd(t,-45),due=null,paid=b.paid||{},skip=b.skip||{};
+    var res=function(d){return !!(paid[d]||skip[d]||(b.auto&&d<=t))};
+    for(var k=0;k<occ.length;k++){if(!res(occ[k])&&occ[k]>=old){due=occ[k];break}}
+    var lp=null;Object.keys(paid).forEach(function(d){var p=paid[d];if(p&&(!lp||p.on>lp.on))lp={on:p.on,due:d,amt:p.amt}});
+    return {due:due,n:due?blDays(t,due):null,last:lp,paidN:Object.keys(paid).length,total:+b.endAfter||0}}
+  /* what Home shows: "open" (due within 14 days or missed), "auto" (auto-pay, due within 14 days), "done" (paid in the last 7 days), or "" */
+  function blShow(b,st,t){
+    if(st.due&&st.n<=14)return b.auto?"auto":"open";
+    if(st.last&&blDays(st.last.on,t)<=7&&blDays(st.last.on,t)>=0)return "done";
+    return ""}
+  /* bills pure (end) */
+  function blOrd(d){if(!d)return "last day of the month";var j=d%10,k=d%100;return d+(j===1&&k!==11?"st":j===2&&k!==12?"nd":j===3&&k!==13?"rd":"th")}
+  function blCur(){return {IN:"\u20b9",GB:"\u00a3",US:"$"}[userCountry()]||""}
+  function blMoney(b){if(b.amount==null||b.amount==="")return "";var n=+b.amount;if(isNaN(n))return "";var s;try{s=n.toLocaleString(userCountry()==="IN"?"en-IN":"en",{maximumFractionDigits:2})}catch(e){s=String(n)}return (b.approx?"about ":"")+blCur()+s}
+  function blLine(b,st){var p=[];
+    if(b.auto&&st.due){p.push("Auto-pay "+(b.rule==="month"?"on the "+blOrd(b.day==null?1:+b.day):"on "+hmLabel(st.due)))}
+    else if(st.due){var n=st.n;p.push(n<0?"Due "+hmLabel(st.due):n===0?"Due today":n===1?"Due tomorrow":n<=14?"Due "+hmLabel(st.due)+", in "+n+" days":"Due "+hmLabel(st.due))}
+    else if(st.last)p.push("Paid "+hmLabel(st.last.on));
+    var m=blMoney(b);if(m)p.push(m);if(b.endAfter>0)p.push(st.paidN+" of "+b.endAfter+" paid");return p.join(" \u00b7 ")}
+  function blRowHtml(b,st,how){
+    var T=esc(b.title);
+    if(how==="done")return '<div class="m done" data-blopen="'+b.id+'"><button type="button" class="tick round on" data-blunpay="'+b.id+'" aria-label="Paid. Tap to undo">'+CHECK_SVG+'</button><button type="button" class="rtb" data-blopen="'+b.id+'">'+T+'</button><span class="when">Paid '+hmLabel(st.last.on)+'</span></div>';
+    if(how==="auto")return '<div class="m" data-blopen="'+b.id+'"><span class="tick round" style="border-style:dashed;opacity:.45" aria-hidden="true"></span><div class="tx"><button type="button" class="rtb" data-blopen="'+b.id+'">'+T+'</button><div class="sb">'+esc(blLine(b,st))+'</div></div></div>';
+    return '<div class="m" data-blopen="'+b.id+'"><button type="button" class="tick round" data-blpay="'+b.id+'" aria-label="Mark '+T+' paid"></button><div class="tx"><button type="button" class="rtb" data-blopen="'+b.id+'">'+T+'</button><div class="sb">'+esc(blLine(b,st))+'</div></div></div>'}
+  function blRow(b){var st=blState(b,today()),how=blShow(b,st,today());return blRowHtml(b,st,how||(st.due?(b.auto?"auto":"open"):"auto"))}
+  function billsCard(){var t=today(),all=visibleItems().filter(function(i){return i.kind==="bill"&&!i.archived});if(!all.length)return "";
+    var rows=[],open=0,ord={open:0,auto:1,done:2};
+    all.forEach(function(b){var st=blState(b,t),how=blShow(b,st,t);if(how)rows.push({b:b,st:st,how:how})});
+    if(!rows.length)return "";
+    rows.sort(function(a,c){return ord[a.how]-ord[c.how]||(a.st.due||"9").localeCompare(c.st.due||"9")});
+    rows.forEach(function(r){if(r.how==="open")open++});
+    return '<div class="qc-lh qc-xh"><h3 aria-level="2">Bills</h3><span>'+(open?open+" coming up":"all paid")+'</span></div><div class="card mx">'+rows.map(function(r){return blRowHtml(r.b,r.st,r.how)}).join("")+'</div>'}
+  function blPay(id){var b=Store.get("items",id);if(!b)return;var st=blState(b,today());if(!st.due)return;var undo=storeSnap(),paid=Object.assign({},b.paid);
+    paid[st.due]={on:today(),amt:b.amount==null||b.amount===""?null:+b.amount};Store.update("items",id,{paid:paid});toast("Paid. "+b.title+".",undo,"love")}
+  function blUnpay(id){var b=Store.get("items",id);if(!b)return;var st=blState(b,today());if(!st.last)return;var undo=storeSnap(),paid=Object.assign({},b.paid);delete paid[st.last.due];Store.update("items",id,{paid:paid});toast("Back to not paid.",undo)}
+  function blSkip(id){var b=Store.get("items",id);if(!b)return;var st=blState(b,today());if(!st.due)return;var undo=storeSnap(),skip=Object.assign({},b.skip);skip[st.due]=1;Store.update("items",id,{skip:skip});closeModal();toast("Skipped this one. "+b.title+" is back next time.",undo)}
+  /* the add / edit sheet */
+  var bs=null;
+  function blRemind(n){return n<=0?"on the day":n===1?"1 day before":n+" days before"}
+  function blSummary(){var x=bs,r="Remind me "+blRemind(+x.remind)+".";
+    if(x.rule==="month")return "Due on the "+blOrd(+x.day)+", every month. "+r;
+    if(x.rule==="days")return "Due every "+(+x.n)+" days from "+hmLabel(x.start)+". "+r;
+    if(x.rule==="year")return "Due every year on "+hmLabel(x.date).replace(/^\w+ /,"")+". "+r;
+    return "Due once, on "+hmLabel(x.date)+". "+r}
+  function blMoreHtml(){var x=bs,h='<div class="bl-more">';
+    if(x.rule==="month"){var o='';for(var d=1;d<=31;d++)o+='<option value="'+d+'"'+(+x.day===d?" selected":"")+'>'+blOrd(d)+'</option>';o+='<option value="0"'+(+x.day===0?" selected":"")+'>Last day of the month</option>';h+='<label>Due on<select id="bl-d">'+o+'</select></label>'}
+    else if(x.rule==="days")h+='<label>First due date<input type="date" id="bl-s" value="'+x.start+'"></label>';
+    else h+='<label>'+(x.rule==="year"?"Due on (every year)":"Due on")+'<input type="date" id="bl-y" value="'+x.date+'"></label>';
+    var ro='';[0,1,2,3,7].forEach(function(n){ro+='<option value="'+n+'"'+(+x.remind===n?" selected":"")+'>'+blRemind(n)+'</option>'});
+    h+='<label>Remind me<select id="bl-r">'+ro+'</select></label>';
+    if(x.rule!=="once")h+='<label>Ends after (times)<input type="number" min="0" id="bl-e" value="'+(x.endAfter>0?x.endAfter:"")+'" placeholder="Never"></label>';
+    h+='<label>Note<input type="text" id="bl-n" value="'+esc(x.note)+'" placeholder="Account no., link"></label></div>';return h}
+  function blHtml(){var x=bs,e=!!x.id,chips=[["month","Every month"],["days","Every few weeks"],["year","Every year"],["once","Just once"]],cur=blCur();
+    return '<div class="qa-top"><input type="text" class="qa-title" id="bl-t" value="'+esc(x.t)+'" placeholder="Rent, electricity, phone" autocomplete="off" aria-label="Name of the bill"><button type="button" class="qa-x" data-close aria-label="Close">'+qi("x")+'</button></div>'+
+      '<div class="modal-b qa-b bl-b"><div class="bl-as"><span class="bl-i">'+phicon("receipt")+'</span><span><b>Bill</b><small>Goes to Money</small></span></div>'+
+      '<label class="bl-k" for="bl-a">Amount (optional)</label><div class="bl-amt">'+(cur?'<span>'+cur+'</span>':'')+'<input id="bl-a" type="text" inputmode="decimal" value="'+esc(x.amt)+'" placeholder="0"><button type="button" class="bl-ab'+(x.approx?" on":"")+'" data-bl="approx" aria-pressed="'+x.approx+'">about</button></div>'+
+      '<p class="bl-k">How often is it due?</p><div class="bl-row">'+chips.map(function(c){return '<button type="button" class="bl-chip'+(x.rule===c[0]?" on":"")+'" data-bl="rule" data-v="'+c[0]+'">'+c[1]+'</button>'}).join("")+'</div>'+
+      (x.rule==="days"?'<div class="bl-row bl-sub">'+[7,14,21,28].map(function(n){return '<button type="button" class="bl-chip'+(+x.n===n?" on":"")+'" data-bl="n" data-v="'+n+'">Every '+n+' days</button>'}).join("")+'</div>':'')+
+      '<p class="bl-sum">'+esc(blSummary())+' <button type="button" class="bl-ch" data-bl="more">'+(x.more?"Done":"Change")+'</button></p>'+(x.more?blMoreHtml():'')+
+      '<div class="bl-sw"><span>Paid automatically (auto-pay)</span><button type="button" class="bl-tg'+(x.auto?" on":"")+'" role="switch" aria-checked="'+x.auto+'" aria-label="Auto-pay" data-bl="auto"></button></div>'+
+      (e?'<div class="bl-row" style="margin-top:14px"><button type="button" class="bl-chip" data-bl="skip">Skip this time</button></div>':'')+'</div>'+
+      '<div class="qa-foot">'+(e?'<button type="button" class="qa-more" data-bl="del">Delete</button>':'')+'<span class="spacer"></span><button type="button" class="qa-go" data-bl="save">'+(e?"Save":"Add Bill")+'</button></div>'}
+  function blRead(){if(!bs)return;var g=function(id){var e=$("#"+id);return e?e.value:null},v;
+    if((v=g("bl-t"))!=null)bs.t=v;if((v=g("bl-a"))!=null)bs.amt=v;if((v=g("bl-d"))!=null)bs.day=+v;if((v=g("bl-s"))!=null&&v)bs.start=v;if((v=g("bl-y"))!=null&&v)bs.date=v;if((v=g("bl-r"))!=null)bs.remind=+v;if((v=g("bl-e"))!=null)bs.endAfter=Math.max(0,parseInt(v,10)||0);if((v=g("bl-n"))!=null)bs.note=v}
+  function blPaint(){blRead();var m=$("#modal");m.innerHTML=blHtml();m.classList.add("qa")}
+  function openBill(id,title){var t=today(),b=id?Store.get("items",id):null;
+    bs=b?{id:b.id,t:b.title,amt:b.amount==null?"":String(b.amount),approx:!!b.approx,rule:b.rule||"month",day:b.day==null?1:+b.day,n:+b.n||14,start:b.start||t,date:b.date||t,remind:b.remind==null?2:+b.remind,auto:!!b.auto,endAfter:+b.endAfter||0,note:b.note||"",more:false}
+      :{id:null,t:title||"",amt:"",approx:false,rule:"month",day:+t.slice(8,10),n:14,start:t,date:t,remind:2,auto:false,endAfter:0,note:"",more:false};
+    openModal(blHtml());$("#modal").classList.add("qa");ms={type:"bill"};setTimeout(function(){var e=$("#bl-t");if(e&&!b)e.focus()},60)}
+  function blSave(){blRead();var x=bs;if(!x.t.trim()){toast("Give the bill a name first.");return}
+    var amt=String(x.amt).replace(/[^0-9.]/g,""),a=amt===""?null:parseFloat(amt),t=today();
+    var f={kind:"bill",catId:TODO_CAT,sub:"Money",title:x.t.trim(),amount:isNaN(a)?null:a,approx:!!x.approx,rule:x.rule,remind:+x.remind,auto:!!x.auto,endAfter:x.rule==="once"?0:(+x.endAfter||0),note:x.note.trim(),
+      day:x.rule==="month"?+x.day:(x.rule==="year"?+x.date.slice(8,10):null),month:x.rule==="year"?+x.date.slice(5,7):null,n:x.rule==="days"?+x.n:null,date:x.rule==="once"?x.date:null,
+      start:x.rule==="days"?x.start:(x.rule==="once"?x.date:(x.id?(Store.get("items",x.id)||{}).start||t:t))};
+    if(x.id){Store.update("items",x.id,f);closeModal();toast("Saved.",null)}
+    else{f.createdDate=t;f.createdAt=String(Date.now());f.order=Object.keys(Store.cache.items||{}).length+1;f.priority="none";f.paid={};f.skip={};Store.add("items",f);closeModal();toast("Added. "+f.title+" is in your Bills.",null,"love")}
+    bs=null}
+  document.addEventListener("click",function(e){var t=e.target.closest&&e.target.closest("[data-blpay],[data-blunpay],[data-blopen],[data-bl]");if(!t)return;
+    if(t.hasAttribute("data-bl")){e.preventDefault();e.stopPropagation();var k=t.getAttribute("data-bl"),v=t.getAttribute("data-v");if(!bs)return;blRead();
+      if(k==="rule"){bs.rule=v;blPaint();return}if(k==="n"){bs.n=+v;blPaint();return}if(k==="approx"){bs.approx=!bs.approx;blPaint();return}if(k==="auto"){bs.auto=!bs.auto;blPaint();return}if(k==="more"){bs.more=!bs.more;blPaint();return}
+      if(k==="save"){blSave();return}if(k==="skip"){blSkip(bs.id);return}
+      if(k==="del"){var id=bs.id,ti=bs.t;askSheet({t:"Delete this bill?",b:ti+" and its paid days are removed. You can undo it once.",yes:"Delete",danger:1,keep:1,back:function(){openBill(id)},go:function(){var u=storeSnap();Store.del("items",id);closeModal();bs=null;toast("Bill deleted.",u)}});return}return}
+    e.preventDefault();e.stopPropagation();
+    if(t.hasAttribute("data-blpay")){blPay(t.getAttribute("data-blpay"));return}
+    if(t.hasAttribute("data-blunpay")){blUnpay(t.getAttribute("data-blunpay"));return}
+    openBill(t.getAttribute("data-blopen"))},true);
+  document.addEventListener("change",function(e){var t=e.target;if(!bs||!t||!t.id||!/^bl-[dsyrae]$/.test(t.id))return;blRead();var p=$(".bl-sum");if(p&&p.firstChild&&p.firstChild.nodeType===3)p.firstChild.nodeValue=blSummary()+" "});
+  /* bills (end) */
+
   /* ===== reminders (start) =====
      Android app only (the web page cannot ring a closed phone). A reminder is an item's own time (reminder, times[] or
      every N hours) on a day the item is planned and not yet done. The next 7 days are handed to Android as local
@@ -9460,7 +9580,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   /* ===== Adding as (start), user 2026-10-22: a board of six kinds while the box is empty, then one big "Adding as" row.
      Change opens the board again. When a word and a number could be a medicine, one plain question with two big buttons. ===== */
   var QK=[["task","Task","Call mum at 7pm","checklist"],["med","Medicine","Pills, drops, vitamins","pill"],["habit","Habit","Walk, read, stretch","repeat"],
-    ["log","Log","Water, sleep, weight","pulse"],["checkup","Check-up","Dentist, eye test","heartbeat"],["ideas","Ideas","Ready-made ones","target"]];
+    ["log","Log","Water, sleep, weight","pulse"],["checkup","Check-up","Dentist, eye test","heartbeat"],["bill","Bill","Rent, power, phone","receipt"],["ideas","Ideas","Ready-made ones","target"]];
   function medMine(){return visibleItems().filter(function(i){return i.kind==="med"&&!i.archived}).map(function(i){return i.title})}
   function medAns(){try{return JSON.parse(localStorage.getItem("ritsu_medans")||"{}")||{}}catch(e){return {}}}
   function medAnsSet(w,v){var a=medAns();a[w]=v;try{localStorage.setItem("ritsu_medans",JSON.stringify(a))}catch(e){}}
@@ -9484,7 +9604,7 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     var g=qa.mg||{},ask=!qa.kindTouched&&g.kind==="ask"&&k!=="med";
     q.innerHTML=ask?'<div class="qk-ask"><b>Is '+esc(cap1(g.label||g.word))+' a medicine?</b><small>Tell me once and I will remember.</small><div><button type="button" data-qa="askyes" data-v="'+esc(g.word)+'">Yes, a medicine</button><button type="button" data-qa="askno" data-v="'+esc(g.word)+'">No, a task</button></div></div>':(k==="med"?mqHtml(qaEff()):"");
   }
-  function qaPickKind(v){if(v==="ideas"){closeModal();openLibrary();return}
+  function qaPickKind(v){if(v==="ideas"){closeModal();openLibrary();return}if(v==="bill"){var tt=($("#q-title")||{}).value||"";closeModal();openBill(null,tt.trim());return}
     qa.kindTouched=true;qa.boardOpen=false;qa.kind=(v==="med"||v==="log")?v:"";qa.whereTouched=true;qa.autoLabel="";
     if(v==="task"){qa.card="todo";if(!qa.repTouched)qa.rep=0}
     else if(v==="habit"){if(qa.card==="todo")qa.card="body";qa.rep=qa.rep||1;qa.repTouched=true}
