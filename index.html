@@ -2644,6 +2644,11 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
   .ac-ck{display:flex;gap:10px;align-items:center;margin-top:14px;font-size:0.9375rem}.ac-ck input{width:20px;height:20px;accent-color:var(--accent);flex:none}
   .lb-found{margin:2px 0 14px;padding:14px;border-radius:14px;background:var(--panel-2);border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line))}
   .lb-found .lb-k{font-size:0.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.lb-found b{display:block;font-size:1.0625rem;margin-top:4px}.lb-found small{display:block;color:var(--muted);font-size:0.8125rem;margin-top:3px}
+  body.widget #bottomnav,body.widget #fabTip,body.widget .sidebar,body.widget .hm-top,body.widget .hm-mhead,body.widget .hm-strip,body.widget .hm-tabs,body.widget .sw-dots,body.widget #nowBar{display:none!important}
+  body.widget .sw{display:block!important;overflow:visible!important;transform:none!important;width:auto!important}
+  body.widget .sw-p{display:none!important}body.widget .sw-p:nth-child(2){display:block!important;width:auto!important;min-width:0!important;padding-top:6px}
+  body.widget .app{padding-top:8px;padding-bottom:84px}
+  #wgIn{display:none}body.widget.welcome #wgIn{display:block;position:fixed;inset:0;z-index:5;padding:40px 24px;background:var(--bg);text-align:center}body.widget.welcome #wgIn h1{font-size:1.75rem;margin:0 0 8px}body.widget.welcome #wgIn p{color:var(--muted);margin:0 0 18px}body.widget.welcome .app,body.widget.welcome #fabPlus{display:none!important}
   .bl-b{padding-top:6px}.bl-as{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--panel-2);margin:2px 0 6px}.bl-as b{display:block;font-weight:600}.bl-as small{color:var(--muted);font-size:0.875rem}.bl-i{width:38px;height:38px;border-radius:50%;background:var(--panel);display:grid;place-items:center;color:var(--muted)}.bl-i .phi{width:20px;height:20px}
   .bl-k{margin:14px 0 6px;font-size:0.875rem;color:var(--muted);font-weight:500;display:block}.bl-amt{display:flex;align-items:center;gap:8px;padding:0 6px 0 14px;height:48px;border-radius:14px;background:var(--panel-2);font-size:1.0625rem}.bl-amt input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;outline:none}
   .bl-ab,.bl-ch,.bl-chip{font:inherit;color:var(--muted);background:transparent;border:0;cursor:pointer}.bl-ab{padding:8px 12px;border-radius:999px;font-size:0.8125rem}.bl-ab.on{color:var(--ink);box-shadow:inset 0 0 0 1.4px var(--ink)}
@@ -8783,6 +8788,16 @@ body.welcome .fab,body.welcome #fab,body.welcome #fabMenu,body.welcome #bottomna
     openBill(t.getAttribute("data-blopen"))},true);
   document.addEventListener("change",function(e){var t=e.target;if(!bs||!t||!t.id||!/^bl-[dsyrae]$/.test(t.id))return;blRead();var p=$(".bl-sum");if(p&&p.firstChild&&p.firstChild.nodeType===3)p.firstChild.nodeValue=blSummary()+" "});
   /* bills (end) */
+  /* ===== widget mode (start), 2026-11-09: the Windows desktop widget is this page opened as ?widget=1 in a small window
+     (windows-widget/). It shows today's list only. It picks up changes made in another window of the same browser (storage event);
+     changes from your other devices arrive through sync, which keeps running here. ===== */
+  (function(){
+    if(!/[?&]widget=1/.test(location.search))return;
+    document.body.classList.add("widget");document.title="Daywell widget";
+    document.body.insertAdjacentHTML("beforeend",'<div id="wgIn"><h1>Daywell</h1><p>Sign in once to bring your day here.</p><button type="button" class="btn primary" data-acct="open">Sign in</button><p style="margin-top:18px;font-size:0.875rem">Already signed in to Daywell in this browser? This window fills in by itself.</p></div>');
+    window.addEventListener("storage",function(e){if(e.key==="ritsu_local"||e.key==="ritsu_private_items"){Store._loadPriv();Store._initLocal()}});
+  })();
+  /* widget mode (end) */
 
   /* ===== reminders (start) =====
      Android app only (the web page cannot ring a closed phone). A reminder is an item's own time (reminder, times[] or
